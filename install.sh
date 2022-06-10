@@ -4,9 +4,11 @@
 # Modified by : Xavatar (https://github.com/xavatar/yiimp_install_scrypt)
 # Web: https://www.xavatar.com    
 #
+# Current modified by : Afiniel
+# web: https://www.afiniel.xyz
 # Program:
-#   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.2
-#   v0.2 (update Avril, 2020)
+#   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.3
+#   v0.3 (Update to php7.3 2022-06-06)
 # 
 ################################################################################
     
@@ -42,13 +44,7 @@
     source /etc/functions.sh
 
 
-    clear
-    echo
-    echo -e "$GREEN************************************************************************$COL_RESET"
-    echo -e "$GREEN Yiimp Install Script v0.2 $COL_RESET"
-    echo -e "$GREEN Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.4 $COL_RESET"
-    echo -e "$GREEN************************************************************************$COL_RESET"
-    echo
+    term_art
     sleep 3
 
 
@@ -115,7 +111,7 @@
     sudo apt-get -y --purge autoremove
     fi
 
-    sudo apt -y install nginx
+    sudo apt-get install nginx -y
     sudo rm /etc/nginx/sites-enabled/default
     sudo systemctl start nginx.service
     sudo systemctl enable nginx.service
@@ -160,10 +156,10 @@
     echo -e "$GREEN Done...$COL_RESET"
 
     
-    # Installing Installing php7.4
+    # Installing Installing php7.3
     echo
     echo
-    echo -e "$CYAN => Installing php7.4 : $COL_RESET"
+    echo -e "$CYAN => Installing php7.3 : $COL_RESET"
     echo
     sleep 3
     
@@ -174,20 +170,20 @@
     sudo apt -y update
 
     if [[ ("$DISTRO" == "16") ]]; then
-    sudo apt -y install php7.2-fpm php7.2-opcache php7.2 php7.2-common php7.2-gd php7.2-mysql php7.2-imap php7.2-cli \
-    php7.2-cgi php-pear php-auth imagemagick libruby php7.2-curl php7.2-intl php7.2-pspell mcrypt\
-    php7.2-recode php7.2-sqlite3 php7.2-tidy php7.2-xmlrpc php7.2-xsl memcached php-memcache php-imagick php-gettext php7.2-zip php7.2-mbstring
+    sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
+    php7.3-cgi php-pear php-auth imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
+    php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring
     #sudo phpenmod mcrypt
     #sudo phpenmod mbstring
     else
-    sudo apt -y install php7.2-fpm php7.2-opcache php7.2 php7.2-common php7.2-gd php7.2-mysql php7.2-imap php7.2-cli \
-    php7.2-cgi php-pear imagemagick libruby php7.2-curl php7.2-intl php7.2-pspell mcrypt\
-    php7.2-recode php7.2-sqlite3 php7.2-tidy php7.2-xmlrpc php7.2-xsl memcached php7.2-memcache php7.2-memcached php-imagick php-gettext php7.2-zip php7.2-mbstring \
+    sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
+    php7.3-cgi php-pear imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
+    php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php7.3-memcache php7.3-memcached php-imagick php-gettext php7.3-zip php7.3-mbstring \
     libpsl-dev libnghttp2-dev
     fi
     sleep 5
-    sudo systemctl start php7.2-fpm
-    sudo systemctl status php7.2-fpm | sed -n "1,3p"
+    sudo systemctl start php7.3-fpm
+    sudo systemctl status php7.3-fpm | sed -n "1,3p"
     sleep 15
     echo
     echo -e "$GREEN Done...$COL_RESET"
@@ -374,7 +370,7 @@
     
     # Compil Blocknotify
     cd ~
-    git clone https://github.com/Kudaraidee/yiimp.git
+    git clone https://github.com/afiniel/yiimp.git
     cd $HOME/yiimp/blocknotify
     sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
     make -j$((`nproc`+1))
@@ -491,7 +487,7 @@
     
         location ~ ^/index\.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -523,7 +519,7 @@
             deny all;
       }
         location ~ /phpmyadmin/(.+\.php)$ {
-            fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+            fastcgi_pass unix:/run/php/php7.3-fpm.sock;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
             include snippets/fastcgi-php.conf;
@@ -534,7 +530,7 @@
 
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
-    sudo systemctl reload php7.2-fpm.service
+    sudo systemctl reload php7.3-fpm.service
     sudo systemctl restart nginx.service
     echo -e "$GREEN Done...$COL_RESET"
         
@@ -616,7 +612,7 @@
         
             location ~ ^/index\.php$ {
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+                fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
                 fastcgi_index index.php;
                 include fastcgi_params;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -647,7 +643,7 @@
             deny all;
     }
         location ~ /phpmyadmin/(.+\.php)$ {
-            fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+            fastcgi_pass unix:/run/php/php7.3-fpm.sock;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
             include snippets/fastcgi-php.conf;
@@ -658,7 +654,7 @@
     ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
     fi
     
-    sudo systemctl reload php7.2-fpm.service
+    sudo systemctl reload php7.3-fpm.service
     sudo systemctl restart nginx.service
     echo -e "$GREEN Done...$COL_RESET"
     
@@ -701,7 +697,7 @@
     
         location ~ ^/index\.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -733,7 +729,7 @@
             deny all;
     }
         location ~ /phpmyadmin/(.+\.php)$ {
-            fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+            fastcgi_pass unix:/run/php/php7.3-fpm.sock;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
             include snippets/fastcgi-php.conf;
@@ -744,7 +740,7 @@
 
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
-    sudo systemctl reload php7.2-fpm.service
+    sudo systemctl reload php7.3-fpm.service
     sudo systemctl restart nginx.service
     echo -e "$GREEN Done...$COL_RESET"
    
@@ -827,7 +823,7 @@
         
             location ~ ^/index\.php$ {
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                fastcgi_pass unix:/var/run/php/php7.2-fpm.sock;
+                fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
                 fastcgi_index index.php;
                 include fastcgi_params;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -858,7 +854,7 @@
             deny all;
     }
         location ~ /phpmyadmin/(.+\.php)$ {
-            fastcgi_pass unix:/run/php/php7.2-fpm.sock;
+            fastcgi_pass unix:/run/php/php7.3-fpm.sock;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
             include fastcgi_params;
             include snippets/fastcgi-php.conf;
@@ -871,7 +867,7 @@
     echo -e "$GREEN Done...$COL_RESET"
 
     fi
-    sudo systemctl reload php7.2-fpm.service
+    sudo systemctl reload php7.3-fpm.service
     sudo systemctl restart nginx.service
     fi
     
@@ -972,7 +968,6 @@
     sudo mysql --defaults-group-suffix=host1 --force < 2016-11-23-coins.sql
     sudo mysql --defaults-group-suffix=host1 --force < 2017-02-05-benchmarks.sql
     sudo mysql --defaults-group-suffix=host1 --force < 2017-03-31-earnings_index.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2020-06-03-blocks.sql
     sudo mysql --defaults-group-suffix=host1 --force < 2017-05-accounts_case_swaptime.sql
     sudo mysql --defaults-group-suffix=host1 --force < 2017-06-payouts_coinid_memo.sql
     sudo mysql --defaults-group-suffix=host1 --force < 2017-09-notifications.sql
@@ -982,6 +977,7 @@
     sudo mysql --defaults-group-suffix=host1 --force < 2018-01-stratums_ports.sql
     sudo mysql --defaults-group-suffix=host1 --force < 2018-02-coins_getinfo.sql
     sudo mysql --defaults-group-suffix=host1 --force < 2019-03-coins_thepool_life.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2020-06-03-blocks.sql
     echo -e "$GREEN Done...$COL_RESET"
         
     
@@ -1175,43 +1171,12 @@
     sudo systemctl status mysql | sed -n "1,3p"
     sudo systemctl restart nginx.service
     sudo systemctl status nginx | sed -n "1,3p"
-    sudo systemctl restart php7.2-fpm.service
-    sudo systemctl status php7.2-fpm | sed -n "1,3p"
+    sudo systemctl restart php7.3-fpm.service
+    sudo systemctl status php7.3-fpm | sed -n "1,3p"
 
 
     echo
     echo -e "$GREEN Done...$COL_RESET"
-    sleep 3
-
     echo
-    echo
-    echo
-    echo -e "$GREEN***************************$COL_RESET"
-    echo -e "$GREEN Yiimp Install Script v0.2 $COL_RESET"
-    echo -e "$GREEN Finish !!! $COL_RESET"
-    echo -e "$GREEN***************************$COL_RESET"
-    echo 
-    echo
-    echo
-    echo -e "$CYAN Whew that was fun, just some reminders. $COL_RESET" 
-    echo -e "$RED Your mysql information is saved in ~/.my.cnf. $COL_RESET"
-    echo
-    echo -e "$RED Yiimp at : http://"$server_name" (https... if SSL enabled)"
-    echo -e "$RED Yiimp Admin at : http://"$server_name"/site/AdminPanel (https... if SSL enabled)"
-    echo -e "$RED Yiimp phpMyAdmin at : http://"$server_name"/phpmyadmin (https... if SSL enabled)"
-    echo
-    echo -e "$RED If you want change 'AdminPanel' to access Panel Admin : Edit this file : /var/web/yaamp/modules/site/SiteController.php"
-    echo -e "$RED Line 11 => change 'AdminPanel' and use the new address"
-    echo
-    echo -e "$CYAN Please make sure to change your public keys / wallet addresses in the /var/web/serverconfig.php file. $COL_RESET"
-    echo -e "$CYAN Please make sure to change your private keys in the /etc/yiimp/keys.php file. $COL_RESET"
-    echo
-    echo -e "$CYAN TUTO Youtube : https://www.youtube.com/watch?v=qE0rhfJ1g2k $COL_RESET"
-    echo -e "$CYAN Xavatar WebSite : https://www.xavatar.com $COL_RESET"
-    echo
-    echo
-    echo -e "$RED***************************************************$COL_RESET"
-    echo -e "$RED YOU MUST REBOOT NOW  TO FINALIZE INSTALLATION !!! $COL_RESET"
-    echo -e "$RED***************************************************$COL_RESET"
-    echo
+    install_end_message
     echo

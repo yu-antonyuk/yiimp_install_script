@@ -3,6 +3,7 @@
 # Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
 # Updated by cryptopool.builders for crypto use...
 # Modified by Xavatar
+# Current Modified by Afiniel (2022-06-06)
 #####################################################
 
 ESC_SEQ="\x1b["
@@ -46,6 +47,81 @@ function hide_output {
 		rm -f $OUTPUT
 }
 
+# terminal art end screen.
+
+function install_end_message {
+
+	clear
+    echo                                                                                                                          
+	clear
+    echo                                                                                                                          
+	echo -e "$YELLOW  __     _______ _____ __  __ _____                       $COL_RESET"
+    echo -e "$YELLOW  \ \   / /_   _|_   _|  \/  |  __ \                      $COL_RESET"
+    echo -e "$YELLOW   \ \_/ /  | |   | | | \  / | |__) |                     $COL_RESET"
+    echo -e "$YELLOW    \   /   | |   | | | |\/| |  ___/                      $COL_RESET"
+    echo -e "$YELLOW     | |   _| |_ _| |_| |  | | |                          $COL_RESET"
+    echo -e "$YELLOW     |_|  |_____|_____|_|  |_|_|                          $COL_RESET"    
+	echo -e "$YELLOW -----------------------------------------------          $COL_RESET"
+    echo -e "$GREEN Yiimp-Install Script by Afiniel                           $COL_RESET"
+    echo -e "$GREEN	Donations are welcome at wallets below:					  $COL_RESET"
+    echo -e "$YELLOW -----------------------------------------------		  $COL_RESET"
+    #echo -e "$YELLOW BTC:$CYAN bc1q338jnjdl6dky7ka88ln8qmcekal48uw072n9v9          $COL_RESET"
+    echo -e "$YELLOW -----------------------------------------------	      $COL_RESET"
+   # echo -e "$YELLOW LTC:$CYAN LW4iFgCTQAVWoxe4VF7nFy2WLHdR6xNkjK					  $COL_RESET"
+    echo -e "$YELLOW -----------------------------------------------		  $COL_RESET"
+    #echo -e "$YELLOW DOGE:$CYAN DSpy3taXqkbWSkhM4GMtsXftxyYHX2Gt3r				  $COL_RESET"
+    echo -e "$YELLOW -----------------------------------------------		  $COL_RESET"
+    echo
+	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
+	echo -e "$CYAN 	https://github.com/afiniel/yiimp-kawpow-installer							$COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
+    echo -e "$GREEN Finish! Sussessfully installed YIIMP. . .                                   $COL_RESET"
+    echo -e "$GREEN 		    																$COL_RESET"
+    echo -e "$CYAN  Just some reminders.      								$COL_RESET" 
+    echo -e "$RED   Your mysql information is saved in ~/.my.cnf. 								$COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
+    echo -e "$RED   Your pool: http://"$server_name" (https... if SSL enabled)"
+    echo -e "$RED   Access your "$admin_panel" at : http://"$server_name"/site/"$admin_panel" 			$COL_RESET"
+    echo -e "$RED   yiimp phpMyAdmin at : http://"$server_name"/phpmyadmin (https... if SSL enabled)"
+	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
+    echo -e "$RED   If you want change '$admin_panel' Edid file in:	 						$COL_RESET"
+    echo -e "$RED   /var/web/yaamp/modules/site/SiteController.php 								$COL_RESET"
+    echo -e "$RED   Line 11 => change '$admin_panel' to your preference. 						$COL_RESET"
+    echo
+    echo -e "$CYAN  Please make sure to change your public keys / wallet addresses in the, 		 $COL_RESET"
+    echo -e "$RED   /var/web/serverconfig.php file. 											 $COL_RESET"
+    echo -e "$CYAN  Please make sure to change your private keys in the /etc/yiimp/keys.php file.$COL_RESET"
+	echo -e "$CYAN  ---------------------------------------------------------------------------  $COL_RESET"
+
+	echo -e "$CYAN  --------------------------------------------------------- 					 $COL_RESET"
+    echo -e "$RED   YOU MUST REBOOT NOW  TO FINALIZE INSTALLATION Thanks you!					 $COL_RESET"
+    echo -e "$CYAN  ---------------------------------------------------------   			     $COL_RESET"
+    echo -e "$GREEN 𝐻𝒶𝓅𝓅𝓎 𝑀𝒾𝓃𝒾𝓃𝑔! 							                                 $COL_RESET"
+    echo
+}
+
+# terminal art start screen.
+function term_art {
+	clear
+    echo                                                                                                                          
+	echo -e "$YELLOW  __     _______ _____ __  __ _____                       $COL_RESET"
+    echo -e "$YELLOW  \ \   / /_   _|_   _|  \/  |  __ \                      $COL_RESET"
+    echo -e "$YELLOW   \ \_/ /  | |   | | | \  / | |__) |                     $COL_RESET"
+    echo -e "$YELLOW    \   /   | |   | | | |\/| |  ___/                      $COL_RESET"
+    echo -e "$YELLOW     | |   _| |_ _| |_| |  | | |                          $COL_RESET"
+    echo -e "$YELLOW     |_|  |_____|_____|_|  |_|_|                          $COL_RESET"    
+	echo -e "$YELLOW -----------------------------------------------          $COL_RESET"
+    echo -e "$GREEN Yiimp-Install Script by Afiniel                           $COL_RESET"
+    echo -e "$GREEN	Donations are welcome at wallets below:					  $COL_RESET"
+   # echo -e "$YELLOW -----------------------------------------------		  $COL_RESET"
+   # echo -e "$YELLOW BTC:$CYAN bc1q338jnjdl6dky7ka88ln8qmcekal48uw072n9v9          $COL_RESET"
+    echo -e "$YELLOW -----------------------------------------------	      $COL_RESET"
+    #echo -e "$YELLOW LTC:$CYAN LW4iFgCTQAVWoxe4VF7nFy2WLHdR6xNkjK					  $COL_RESET"
+    echo -e "$YELLOW -----------------------------------------------		  $COL_RESET"
+    #echo -e "$YELLOW DOGE:$CYAN DSpy3taXqkbWSkhM4GMtsXftxyYHX2Gt3r				  $COL_RESET"
+    echo -e "$YELLOW -----------------------------------------------		  $COL_RESET"
+    echo
+}
 
 function apt_get_quiet {
 		DEBIAN_FRONTEND=noninteractive hide_output sudo apt -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" "$@"

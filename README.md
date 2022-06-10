@@ -1,36 +1,43 @@
-# Yiimp_install_scrypt v0.2 (update Avril, 2020)
+# Yiimp_install_scrypt (update 2022-06-06)<a href="https://discord.gg/GVZ4tchkKc"><img src="https://img.shields.io/discord/904564600354254898.svg?style=flat&label=Discord %3C3%20&color=7289DA%22" alt="Join Community Badge"/></a>
 
-Site : https://www.xavatar.com
+[Afiniel-Website](https://www.afiniel.xyz/)  
 
-Discord : https://discord.gg/zcCXjkQ
+### Forks used.
+[Yiimp](https://github.com/Kudaraidee/yiimp.git)
 
-TUTO Youtube (16.04 / 18.04 - Without SSL) : https://www.youtube.com/watch?v=qE0rhfJ1g2k
-
-Official Yiimp (used in this script for Yiimp Installation): https://github.com/tpruvot/yiimp
-
-Original Yiimp Installer : https://github.com/cryptopool-builders/multipool_original_yiimp_installer
+[Orginal-Installer](https://github.com/cryptopool-builders/multipool_original_yiimp_installer)
 
 
-***********************************
+###
 
-## Install script for yiimp on Ubuntu Server 16.04 / 18.04 (use Tpruvot's Yiimp)
+## Install script for yiimp on Ubuntu Server 16.04 / 18.04
 
-USE THIS SCRIPT ON FRESH INSTALL UBUNTU Server 16.04 / 18.04 !
+Use this script on fresh install ubuntu Server 16.04 / 18.04. ``` No other version is currently supported. ``` This install script will get you 95% ready to go with yiimp. There are a few things you need to do after the main install is finished.
 
 Connect on your VPS =>
-- apt update
-- apt upgrade
-- reboot
-- adduser pool (pool it's just an example...)
-- adduser pool sudo
-- su - pool
-- exit 
-- su - pool
-- sudo apt -y install git
-- git clone https://github.com/eskal/yiimp_install_scrypt.git
-- cd yiimp_install_scrypt/
-- bash install.sh (DO NOT RUN THE SCRIPT AS ROOT or SUDO)
-- At the end, you MUST REBOOT to finalize installation...
+
+```
+git clone https://github.com/afiniel/yiimp_install_script.git
+```
+### cd to the installer map.
+```
+cd yiimp_install_script
+```
+
+### Now just execute update-and-create-user.sh
+⚠️ REMEMBER the script create user with pool as name, if you want to change it ⚠️
+```
+sudo nano update-and-create-user.sh
+```
+
+### If you dont mind it will be named pool just countinue.
+```
+bash update-and-create-user.sh
+```
+### Now it's time to start the installation.
+```
+bash install.sh
+```
 
 Finish !
 - Go http://xxx.xxx.xxx.xxx or https://xxx.xxx.xxx.xxx (if you have chosen LetsEncrypt SSL). Enjoy !
@@ -65,15 +72,6 @@ If you are issue after installation (nginx,mariadb... not found), use this scrip
 
 ***********************************
 
-**This install script will get you 95% ready to go with yiimp. There are a few things you need to do after the main install is finished.**
-
 While I did add some server security to the script, it is every server owners responsibility to fully secure their own servers. After the installation you will still need to customize your serverconfig.php file to your liking, add your API keys, and build/add your coins to the control panel. 
 
-There will be several wallets already in yiimp. These have nothing to do with the installation script and are from the database import from the yiimp github. 
-
-If you need further assistance we have a small but growing discord channel at https://discord.gg/zcCXjkQ
-
-If this helped you or you feel giving please donate : 
-- BTC Donation : 1C1hnjk3WhuAvUN6Ny6LTxPD3rwSZwapW7
-- BCH Donation : 1PqjApUdjwU9k4v1RDWf6XveARyEXaiGUz
-- ETH Donation : 0xc23E6902fF8Cd8878EDADE18Dc49B3505395F0a1
+There will be several wallets already in yiimp. These have nothing to do with the installation script and are from the database import from the yiimp github.
