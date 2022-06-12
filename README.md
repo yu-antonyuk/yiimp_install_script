@@ -1,4 +1,4 @@
-# Yiimp_install_scrypt (update 2022-06-06)<a href="https://discord.gg/GVZ4tchkKc"><img src="https://img.shields.io/discord/904564600354254898.svg?style=flat&label=Discord %3C3%20&color=7289DA%22" alt="Join Community Badge"/></a>
+# Yiimp_install_scrypt (update 2022-06-12)<a href="https://discord.gg/GVZ4tchkKc"><img src="https://img.shields.io/discord/904564600354254898.svg?style=flat&label=Discord %3C3%20&color=7289DA%22" alt="Join Community Badge"/></a>
 
 [Afiniel-Website](https://www.afiniel.xyz/)  
 
