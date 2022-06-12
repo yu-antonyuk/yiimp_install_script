@@ -55,11 +55,11 @@
     echo 
     sleep 3
         
-    sudo apt -y update 
-    sudo apt -y upgrade
-    sudo apt -y autoremove
-    sudo apt-get install -y software-properties-common
-    sudo apt -y install dialog python3 python3-pip acl nano apt-transport-https
+    hide_output sudo apt -y update 
+    hide_output sudo apt -y upgrade
+    hide_output sudo apt -y autoremove
+    hide_output sudo apt-get -y software-properties-common
+    hide_output sudo apt -y install dialog python3 python3-pip acl nano apt-transport-https
     echo -e "$GREEN Done...$COL_RESET"
 
 
@@ -111,7 +111,7 @@
     sudo apt-get -y --purge autoremove
     fi
 
-    sudo apt-get install nginx -y
+    hide_output sudo apt-get nginx -y
     sudo rm /etc/nginx/sites-enabled/default
     sudo systemctl start nginx.service
     sudo systemctl enable nginx.service
@@ -146,7 +146,7 @@
     # Create random password
     rootpasswd=$(openssl rand -base64 12)
     export DEBIAN_FRONTEND="noninteractive"
-    sudo apt -y install mariadb-server
+    hide_output hide_output sudo apt -y install mariadb-server
     sudo systemctl enable mariadb.service
     sudo systemctl start mariadb.service
     sleep 5
@@ -170,13 +170,13 @@
     sudo apt -y update
 
     if [[ ("$DISTRO" == "16") ]]; then
-    sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
+    hide_output sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
     php7.3-cgi php-pear php-auth imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
     php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring
     #sudo phpenmod mcrypt
     #sudo phpenmod mbstring
     else
-    sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
+    hide_output sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
     php7.3-cgi php-pear imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
     php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php7.3-memcache php7.3-memcached php-imagick php-gettext php7.3-zip php7.3-mbstring \
     libpsl-dev libnghttp2-dev
@@ -197,9 +197,9 @@
     echo
     sleep 3
     
-    sudo apt -y install libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
+    hide_output sudo apt -y install libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
     librtmp-dev sendmail mutt screen git
-    sudo apt -y install pwgen -y
+    hide_output sudo apt -y install pwgen -y
     echo -e "$GREEN Done...$COL_RESET"
     sleep 3
 
@@ -211,14 +211,14 @@
     echo
     sleep 3
     
-    sudo apt -y install software-properties-common build-essential
-    sudo apt -y install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
-    sudo apt -y install libminiupnpc10 libzmq5
-    sudo apt -y install libcanberra-gtk-module libqrencode-dev libzmq3-dev
-    sudo apt -y install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
+    hide_output sudo apt -y install software-properties-common build-essential
+    hide_output sudo apt -y install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
+    hide_output sudo apt -y install libminiupnpc10 libzmq5
+    hide_output sudo apt -y install libcanberra-gtk-module libqrencode-dev libzmq3-dev
+    hide_output sudo apt -y install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
     sudo add-apt-repository -y ppa:bitcoin/bitcoin
-    sudo apt -y update
-    sudo apt -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
+    hide_output sudo apt -y update
+    hide_output sudo apt -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
     echo -e "$GREEN Done...$COL_RESET"
        
     
@@ -261,73 +261,73 @@
     
     
     if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
-    sudo apt -y install fail2ban
+    hide_output sudo apt -y install fail2ban
     sleep 5
     sudo systemctl status fail2ban | sed -n "1,3p"
         fi
 
 
     if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
-    sudo apt -y install ufw
+    hide_output sudo apt -y install ufw
     sudo ufw default deny incoming
     sudo ufw default allow outgoing
-    sudo ufw allow ssh
-    sudo ufw allow http
-    sudo ufw allow https
-    sudo ufw allow 3333/tcp
-    sudo ufw allow 3339/tcp
-    sudo ufw allow 3334/tcp
-    sudo ufw allow 3433/tcp
-    sudo ufw allow 3555/tcp
-    sudo ufw allow 3556/tcp
-    sudo ufw allow 3573/tcp
-    sudo ufw allow 3535/tcp
-    sudo ufw allow 3533/tcp
-    sudo ufw allow 3553/tcp
-    sudo ufw allow 3633/tcp
-    sudo ufw allow 3733/tcp
-    sudo ufw allow 3636/tcp
-    sudo ufw allow 3737/tcp
-    sudo ufw allow 3739/tcp
-    sudo ufw allow 3747/tcp
-    sudo ufw allow 3833/tcp
-    sudo ufw allow 3933/tcp
-    sudo ufw allow 4033/tcp
-    sudo ufw allow 4133/tcp
-    sudo ufw allow 4233/tcp
-    sudo ufw allow 4234/tcp
-    sudo ufw allow 4333/tcp
-    sudo ufw allow 4433/tcp
-    sudo ufw allow 4533/tcp
-    sudo ufw allow 4553/tcp
-    sudo ufw allow 4633/tcp
-    sudo ufw allow 4733/tcp
-    sudo ufw allow 4833/tcp
-    sudo ufw allow 4933/tcp
-    sudo ufw allow 5033/tcp
-    sudo ufw allow 5133/tcp
-    sudo ufw allow 5233/tcp
-    sudo ufw allow 5333/tcp
-    sudo ufw allow 5433/tcp
-    sudo ufw allow 5533/tcp
-    sudo ufw allow 5733/tcp
-    sudo ufw allow 5743/tcp
-    sudo ufw allow 3252/tcp
-    sudo ufw allow 5755/tcp
-    sudo ufw allow 5766/tcp
-    sudo ufw allow 5833/tcp
-    sudo ufw allow 5933/tcp
-    sudo ufw allow 6033/tcp
-    sudo ufw allow 5034/tcp
-    sudo ufw allow 6133/tcp
-    sudo ufw allow 6233/tcp
-    sudo ufw allow 6333/tcp
-    sudo ufw allow 6433/tcp
-    sudo ufw allow 7433/tcp
-    sudo ufw allow 8333/tcp
-    sudo ufw allow 8463/tcp
-    sudo ufw allow 8433/tcp
-    sudo ufw allow 8533/tcp
+    hide_output sudo ufw allow ssh
+    hide_output sudo ufw allow http
+    hide_output sudo ufw allow https
+    hide_output sudo ufw allow 3333/tcp
+    hide_output sudo ufw allow 3339/tcp
+    hide_output sudo ufw allow 3334/tcp
+    hide_output sudo ufw allow 3433/tcp
+    hide_output sudo ufw allow 3555/tcp
+    hide_output sudo ufw allow 3556/tcp
+    hide_output sudo ufw allow 3573/tcp
+    hide_output sudo ufw allow 3535/tcp
+    hide_output sudo ufw allow 3533/tcp
+    hide_output sudo ufw allow 3553/tcp
+    hide_output sudo ufw allow 3633/tcp
+    hide_output sudo ufw allow 3733/tcp
+    hide_output sudo ufw allow 3636/tcp
+    hide_output sudo ufw allow 3737/tcp
+    hide_output sudo ufw allow 3739/tcp
+    hide_output sudo ufw allow 3747/tcp
+    hide_output sudo ufw allow 3833/tcp
+    hide_output sudo ufw allow 3933/tcp
+    hide_output sudo ufw allow 4033/tcp
+    hide_output sudo ufw allow 4133/tcp
+    hide_output sudo ufw allow 4233/tcp
+    hide_output sudo ufw allow 4234/tcp
+    hide_output sudo ufw allow 4333/tcp
+    hide_output sudo ufw allow 4433/tcp
+    hide_output sudo ufw allow 4533/tcp
+    hide_output sudo ufw allow 4553/tcp
+    hide_output sudo ufw allow 4633/tcp
+    hide_output sudo ufw allow 4733/tcp
+    hide_output sudo ufw allow 4833/tcp
+    hide_output sudo ufw allow 4933/tcp
+    hide_output sudo ufw allow 5033/tcp
+    hide_output sudo ufw allow 5133/tcp
+    hide_output sudo ufw allow 5233/tcp
+    hide_output sudo ufw allow 5333/tcp
+    hide_output sudo ufw allow 5433/tcp
+    hide_output sudo ufw allow 5533/tcp
+    hide_output sudo ufw allow 5733/tcp
+    hide_output sudo ufw allow 5743/tcp
+    hide_output sudo ufw allow 3252/tcp
+    hide_output sudo ufw allow 5755/tcp
+    hide_output sudo ufw allow 5766/tcp
+    hide_output sudo ufw allow 5833/tcp
+    hide_output sudo ufw allow 5933/tcp
+    hide_output sudo ufw allow 6033/tcp
+    hide_output sudo ufw allow 5034/tcp
+    hide_output sudo ufw allow 6133/tcp
+    hide_output sudo ufw allow 6233/tcp
+    hide_output sudo ufw allow 6333/tcp
+    hide_output sudo ufw allow 6433/tcp
+    hide_output sudo ufw allow 7433/tcp
+    hide_output sudo ufw allow 8333/tcp
+    hide_output sudo ufw allow 8463/tcp
+    hide_output sudo ufw allow 8433/tcp
+    hide_output sudo ufw allow 8533/tcp
     sudo ufw --force enable
     sleep 5
     sudo systemctl status ufw | sed -n "1,3p"   
@@ -351,7 +351,7 @@
     echo "phpmyadmin phpmyadmin/mysql/admin-pass password $rootpasswd" | sudo debconf-set-selections
     echo "phpmyadmin phpmyadmin/mysql/app-pass password $AUTOGENERATED_PASS" | sudo debconf-set-selections
     echo "phpmyadmin phpmyadmin/app-password-confirm password $AUTOGENERATED_PASS" | sudo debconf-set-selections
-    sudo apt -y install phpmyadmin
+    hide_output sudo apt -y install phpmyadmin
     echo -e "$GREEN Done...$COL_RESET"
     
     
@@ -360,7 +360,7 @@
     echo
     echo -e "$CYAN => Installing Yiimp $COL_RESET"
     echo
-    echo -e "Grabbing yiimp fron Github, building files and setting file structure."
+    echo -e "$CYAN => Grabbing yiimp fron Github, building files and setting file structure."
     echo
     sleep 3
     
@@ -542,7 +542,7 @@
     echo -e "Install LetsEncrypt and setting SSL (with SubDomain)"
     echo
     
-    sudo apt -y install letsencrypt
+    hide_output sudo apt -y install letsencrypt
     sudo letsencrypt certonly -a webroot --webroot-path=/var/web --email "$EMAIL" --agree-tos -d "$server_name"
     sudo rm /etc/nginx/sites-available/$server_name.conf
     sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
@@ -753,7 +753,7 @@
     echo
     sleep 3
     
-    sudo apt -y install letsencrypt
+    hide_output sudo apt -y install letsencrypt
     sudo letsencrypt certonly -a webroot --webroot-path=/var/web --email "$EMAIL" --agree-tos -d "$server_name" -d www."$server_name"
     sudo rm /etc/nginx/sites-available/$server_name.conf
     sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
@@ -947,7 +947,7 @@
     echo
     echo -e "$CYAN => Database 'yiimpfrontend' and users 'panel' and 'stratum' created with password $password and $password2, will be saved for you $COL_RESET"
     echo
-    echo -e "Performing the SQL import"
+    echo -e "$RED =>Dumping SQL Schemas...$COL_RESET"
     echo
     sleep 3
     
@@ -1028,7 +1028,7 @@
     
     define('"'"'YAAMP_SITE_URL'"'"', '"'"''"${server_name}"''"'"');
     define('"'"'YAAMP_STRATUM_URL'"'"', YAAMP_SITE_URL); // change if your stratum server is on a different host
-    define('"'"'YAAMP_SITE_NAME'"'"', '"'"'YAAMP_SITE_URL'"'"');
+    define('"'"'YAAMP_SITE_NAME'"'"', '"'"'YIIMP'"'"');
     define('"'"'YAAMP_ADMIN_EMAIL'"'"', '"'"''"${EMAIL}"''"'"');
     define('"'"'YAAMP_ADMIN_IP'"'"', '"'"''"${Public}"''"'"'); // samples: "80.236.118.26,90.234.221.11" or "10.0.0.1/8"
     
@@ -1146,9 +1146,9 @@
     sudo chmod 775 /var/yiimp -R
 
 
-    #Add to contrab screen-scrypt
+    #Add to contrab screen-scrypt && screen-stratum
     (crontab -l 2>/dev/null; echo "@reboot sleep 20 && /etc/screen-scrypt.sh") | crontab -
-
+    (crontab -l 2>/dev/null; echo "@reboot sleep 20 && /etc/screen-stratum.sh") | crontab -
     #fix error screen main "service"
     sudo sed -i 's/service $webserver start/sudo service $webserver start/g' /var/web/yaamp/modules/thread/CronjobController.php
     sudo sed -i 's/service nginx stop/sudo service nginx stop/g' /var/web/yaamp/modules/thread/CronjobController.php
