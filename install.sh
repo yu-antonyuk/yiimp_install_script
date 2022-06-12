@@ -35,8 +35,13 @@
     ' | sudo -E tee /etc/sudoers.d/${whoami} >/dev/null 2>&1
     
     #Copy needed files
+    cd
+    sudo mkdir buildcoin
+    cd $HOME/yiimp_install_script
     sudo cp -r conf/functions.sh /etc/
     sudo cp -r utils/screen-scrypt.sh /etc/
+    sudo cp -r utils/screen-stratum.sh /etc/
+    sudo cp -r utils/builder.sh $HOME/buildcoin
     sudo cp -r conf/editconf.py /usr/bin/
     sudo chmod +x /usr/bin/editconf.py
     sudo chmod +x /etc/screen-scrypt.sh
@@ -107,11 +112,11 @@
     
     if [ -f /usr/sbin/apache2 ]; then
     echo -e "Removing apache..."
-    sudo apt-get -y purge apache2 apache2-*
-    sudo apt-get -y --purge autoremove
+    hide_outout sudo apt-get -y purge apache2 apache2-*
+    hide_output sudo apt-get -y --purge autoremove
     fi
 
-    hide_output sudo apt-get nginx -y
+    hide_output sudo apt-get -y install nginx
     sudo rm /etc/nginx/sites-enabled/default
     sudo systemctl start nginx.service
     sudo systemctl enable nginx.service
@@ -146,7 +151,7 @@
     # Create random password
     rootpasswd=$(openssl rand -base64 12)
     export DEBIAN_FRONTEND="noninteractive"
-    hide_output hide_output sudo apt -y install mariadb-server
+    hide_output sudo apt -y install mariadb-server
     sudo systemctl enable mariadb.service
     sudo systemctl start mariadb.service
     sleep 5
@@ -165,9 +170,9 @@
     
     source conf/pool.conf
     if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
-    sudo add-apt-repository -y ppa:ondrej/php
+    hide_output sudo add-apt-repository -y ppa:ondrej/php
     fi
-    sudo apt -y update
+    hide_output sudo apt -y update
 
     if [[ ("$DISTRO" == "16") ]]; then
     hide_output sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
@@ -198,7 +203,7 @@
     sleep 3
     
     hide_output sudo apt -y install libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
-    librtmp-dev sendmail mutt screen git
+    librtmp-dev sendmail mutt screen git figlet
     hide_output sudo apt -y install pwgen -y
     echo -e "$GREEN Done...$COL_RESET"
     sleep 3
@@ -216,7 +221,7 @@
     hide_output sudo apt -y install libminiupnpc10 libzmq5
     hide_output sudo apt -y install libcanberra-gtk-module libqrencode-dev libzmq3-dev
     hide_output sudo apt -y install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-    sudo add-apt-repository -y ppa:bitcoin/bitcoin
+    hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
     hide_output sudo apt -y update
     hide_output sudo apt -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
     echo -e "$GREEN Done...$COL_RESET"
