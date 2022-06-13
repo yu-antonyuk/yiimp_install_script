@@ -22,9 +22,9 @@ When you can create your user you need to add the new user to sudo group.
 ```
 adduser pool sudo
 
+```
 ### Now do a quick reboot and log back in to your pool user.
 
-```
 Now when you have created your new user and added it to sudo group and reboot and log back in you are ready to start the installation.
 
 ```
