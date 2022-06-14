@@ -3,7 +3,7 @@
 [Afiniel-Website](https://www.afiniel.xyz/)  
 
 ### Forks used.
-[Yiimp](https://github.com/Kudaraidee/yiimp.git)
+[Yiimp] (https://github.com/Kudaraidee/yiimp.git)
 
 [Orginal-Installer](https://github.com/cryptopool-builders/multipool_original_yiimp_installer)
 
@@ -14,7 +14,7 @@
 
 Use this script on fresh install ubuntu Server 16.04 / 18.04. ``` No other version is currently supported. ``` This install script will get you 95% ready to go with yiimp. There are a few things you need to do after the main install is finished.
 
-## First of all you need to create a need user i use pool.
+## First of all you need to create a new user i use pool.
 ```
 adduser pool
 ```
