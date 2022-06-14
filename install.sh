@@ -124,7 +124,7 @@
     sudo systemctl enable cron.service
     sleep 5
     sudo systemctl status nginx | sed -n "1,3p"
-    sleep 15
+    sleep 10
     echo
     echo -e "$GREEN Done...$COL_RESET"
     
@@ -156,7 +156,7 @@
     sudo systemctl start mariadb.service
     sleep 5
     sudo systemctl status mariadb | sed -n "1,3p"
-    sleep 15
+    sleep 10
     echo
     echo -e "$GREEN Done...$COL_RESET"
 
@@ -189,7 +189,7 @@
     sleep 5
     sudo systemctl start php7.3-fpm
     sudo systemctl status php7.3-fpm | sed -n "1,3p"
-    sleep 15
+    sleep 10
     echo
     echo -e "$GREEN Done...$COL_RESET"
 
