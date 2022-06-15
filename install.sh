@@ -4,19 +4,23 @@
 # Modified by : Xavatar (https://github.com/xavatar/yiimp_install_scrypt)
 # Web: https://www.xavatar.com    
 #
+#   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.3
+#   v0.2 (update Avril, 2020)
+#
 # Current modified by : Afiniel
 # web: https://www.afiniel.xyz
 # Program:
 #   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.3
-#   v0.3 (Update to php7.3 2022-06-06)
+#   v0.3 (2022-06-14 Fixed solo fee in serverconfig.php)
+#        (2022-06-14 added block.sql and coins_thepool_life.sql dump)
 # 
 ################################################################################
-    
+	
 
     output() {
     printf "\E[0;33;40m"
     echo $1
-    printf "\E[0m"ku
+    printf "\E[0m"
     }
 
     displayErr() {
@@ -34,7 +38,7 @@
     '""''"${whoami}"''""' ALL=(ALL) NOPASSWD:ALL
     ' | sudo -E tee /etc/sudoers.d/${whoami} >/dev/null 2>&1
     
-    #Copy needed files
+     #Copy needed files
     cd
     sudo mkdir buildcoin
     cd $HOME/yiimp_install_script
@@ -50,7 +54,6 @@
 
 
     term_art
-    sleep 3
 
 
     # Update package and Upgrade Ubuntu
@@ -63,8 +66,8 @@
     hide_output sudo apt -y update 
     hide_output sudo apt -y upgrade
     hide_output sudo apt -y autoremove
-    hide_output sudo apt-get -y software-properties-common
-    hide_output sudo apt -y install dialog python3 python3-pip acl nano apt-transport-https
+    hide_output sudo apt-get install -y software-properties-common
+    apt_install dialog python3 python3-pip acl nano apt-transport-https figlet
     echo -e "$GREEN Done...$COL_RESET"
 
 
@@ -83,7 +86,7 @@
     echo -e "$RED Make sure you double check before hitting enter! Only one shot at these! $COL_RESET"
     echo
     #read -e -p "Enter time zone (e.g. America/New_York) : " TIME
-    read -e -p "Domain Name (no http:// or www. just : example.com or pool.example.com or 185.22.24.26) : " server_name
+    read -e -p "Domain Name (Enter Domain name: example.com or ip of your server) : " server_name
     read -e -p "Are you using a subdomain (mycryptopool.example.com?) [y/N] : " sub_domain
     read -e -p "Enter support email (e.g. admin@example.com) : " EMAIL
     read -e -p "Set Pool to AutoExchange? i.e. mine any coin with BTC address? [y/N] : " BTC
@@ -91,7 +94,7 @@
     read -e -p "Enter the Public IP of the system you will use to access the admin panel (http://www.whatsmyip.org/) : " Public
     read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
     read -e -p "Install UFW and configure ports? [Y/n] : " UFW
-    read -e -p "Install LetsEncrypt SSL? IMPORTANT! You MUST have your domain name pointed to this server prior to running the script!! [Y/n]: " ssl_install
+    read -e -p "Install LetsEncrypt SSL? IMPORTANT! You MUST have your domain name pointed to this server  [Y/n]: " ssl_install
     
     
     # Switch Aptitude
@@ -99,7 +102,7 @@
     #echo -e "$CYAN Switching to Aptitude $COL_RESET"
     #echo 
     #sleep 3
-    #sudo apt -y install aptitude
+    #apt_install aptitude
     #echo -e "$GREEN Done...$COL_RESET $COL_RESET"
 
 
@@ -112,22 +115,21 @@
     
     if [ -f /usr/sbin/apache2 ]; then
     echo -e "Removing apache..."
-    hide_outout sudo apt-get -y purge apache2 apache2-*
-    hide_output sudo apt-get -y --purge autoremove
+    hide_output apt-get -y purge apache2 apache2-*
+    hide_output apt-get -y --purge autoremove
     fi
 
-    hide_output sudo apt-get -y install nginx
-    sudo rm /etc/nginx/sites-enabled/default
-    sudo systemctl start nginx.service
-    sudo systemctl enable nginx.service
-    sudo systemctl start cron.service
-    sudo systemctl enable cron.service
+    apt_install nginx
+    hide_output sudo rm /etc/nginx/sites-enabled/default
+    hide_output sudo systemctl start nginx.service
+    hide_output sudo systemctl enable nginx.service
+    hide_output sudo systemctl start cron.service
+    hide_output sudo systemctl enable cron.service
     sleep 5
     sudo systemctl status nginx | sed -n "1,3p"
-    sleep 10
     echo
     echo -e "$GREEN Done...$COL_RESET"
-    
+	
 
     # Making Nginx a bit hard
     echo 'map $http_user_agent $blockedagent {
@@ -151,12 +153,11 @@
     # Create random password
     rootpasswd=$(openssl rand -base64 12)
     export DEBIAN_FRONTEND="noninteractive"
-    hide_output sudo apt -y install mariadb-server
-    sudo systemctl enable mariadb.service
-    sudo systemctl start mariadb.service
+    apt_install mariadb-server
+    hide_output sudo systemctl start mysql
+    hide_output sudo systemctl enable mysql
     sleep 5
-    sudo systemctl status mariadb | sed -n "1,3p"
-    sleep 10
+    sudo systemctl status mysql | sed -n "1,3p"
     echo
     echo -e "$GREEN Done...$COL_RESET"
 
@@ -175,24 +176,22 @@
     hide_output sudo apt -y update
 
     if [[ ("$DISTRO" == "16") ]]; then
-    hide_output sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
+    apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
     php7.3-cgi php-pear php-auth imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
-    php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring
-    #sudo phpenmod mcrypt
-    #sudo phpenmod mbstring
+    php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php7.3-memcache php7.3-memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring
+    #hide_output sudo phpenmod mcrypt
+    #hide_output sudo phpenmod mbstring
     else
-    hide_output sudo apt -y install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
+    apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
     php7.3-cgi php-pear imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
-    php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php7.3-memcache php7.3-memcached php-imagick php-gettext php7.3-zip php7.3-mbstring \
+    php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php7.3-memcache php7.3-memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring \
     libpsl-dev libnghttp2-dev
     fi
     sleep 5
-    sudo systemctl start php7.3-fpm
+    hide_output sudo systemctl start php7.3-fpm
     sudo systemctl status php7.3-fpm | sed -n "1,3p"
-    sleep 10
     echo
     echo -e "$GREEN Done...$COL_RESET"
-
 
     
     # Installing other needed files
@@ -202,11 +201,11 @@
     echo
     sleep 3
     
-    hide_output sudo apt -y install libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
-    librtmp-dev sendmail mutt screen git figlet
-    hide_output sudo apt -y install pwgen -y
+    apt_install libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
+    librtmp-dev sendmail mutt screen git
+    apt_install pwgen -y
     echo -e "$GREEN Done...$COL_RESET"
-    sleep 3
+	sleep 3
 
     
     # Installing Package to compile crypto currency
@@ -216,14 +215,14 @@
     echo
     sleep 3
     
-    hide_output sudo apt -y install software-properties-common build-essential
-    hide_output sudo apt -y install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
-    hide_output sudo apt -y install libminiupnpc10 libzmq5
-    hide_output sudo apt -y install libcanberra-gtk-module libqrencode-dev libzmq3-dev
-    hide_output sudo apt -y install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
+    apt_install build-essential
+    apt_install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
+    apt_install libminiupnpc10 libzmq5
+    apt_install libcanberra-gtk-module libqrencode-dev libzmq3-dev
+    apt_install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
     hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
     hide_output sudo apt -y update
-    hide_output sudo apt -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
+    apt_install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
     echo -e "$GREEN Done...$COL_RESET"
        
     
@@ -266,16 +265,16 @@
     
     
     if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
-    hide_output sudo apt -y install fail2ban
+    apt_install fail2ban
     sleep 5
     sudo systemctl status fail2ban | sed -n "1,3p"
         fi
 
 
     if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
-    hide_output sudo apt -y install ufw
-    sudo ufw default deny incoming
-    sudo ufw default allow outgoing
+    apt_install ufw
+    hide_output sudo ufw default deny incoming
+    hide_output sudo ufw default allow outgoing
     hide_output sudo ufw allow ssh
     hide_output sudo ufw allow http
     hide_output sudo ufw allow https
@@ -333,7 +332,7 @@
     hide_output sudo ufw allow 8463/tcp
     hide_output sudo ufw allow 8433/tcp
     hide_output sudo ufw allow 8533/tcp
-    sudo ufw --force enable
+    hide_output sudo ufw --force enable
     sleep 5
     sudo systemctl status ufw | sed -n "1,3p"   
     fi
@@ -356,16 +355,16 @@
     echo "phpmyadmin phpmyadmin/mysql/admin-pass password $rootpasswd" | sudo debconf-set-selections
     echo "phpmyadmin phpmyadmin/mysql/app-pass password $AUTOGENERATED_PASS" | sudo debconf-set-selections
     echo "phpmyadmin phpmyadmin/app-password-confirm password $AUTOGENERATED_PASS" | sudo debconf-set-selections
-    hide_output sudo apt -y install phpmyadmin
+    apt_install phpmyadmin
     echo -e "$GREEN Done...$COL_RESET"
-    
-    
+	
+	
     # Installing Yiimp
     echo
     echo
     echo -e "$CYAN => Installing Yiimp $COL_RESET"
     echo
-    echo -e "$CYAN => Grabbing yiimp fron Github, building files and setting file structure."
+    echo -e "Grabbing yiimp fron Github, building files and setting file structure."
     echo
     sleep 3
     
@@ -375,23 +374,21 @@
     
     # Compil Blocknotify
     cd ~
-    git clone https://github.com/afiniel/yiimp.git
+    hide_output git clone https://github.com/afiniel/yiimp
     cd $HOME/yiimp/blocknotify
     sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
-    make -j$((`nproc`+1))
+    hide_output sudo make -j8
+    
+    # Compil iniparser
+    cd $HOME/yiimp/stratum/iniparser
+    hide_output sudo make -j8
     
     # Compil Stratum
-    cd $HOME/yiimp/stratum/
-    git submodule init && git submodule update 
-    make -C algos
-    make -C sha3
-    make -C iniparser
-    cd secp256k1 && chmod +x autogen.sh && ./autogen.sh && ./configure --enable-experimental --enable-module-ecdh --with-bignum=no --enable-endomorphism && make
-    cd $HOME/yiimp/stratum/
+    cd $HOME/yiimp/stratum
     if [[ ("$BTC" == "y" || "$BTC" == "Y") ]]; then
     sudo sed -i 's/CFLAGS += -DNO_EXCHANGE/#CFLAGS += -DNO_EXCHANGE/' $HOME/yiimp/stratum/Makefile
     fi
-    make -j$((`nproc`+1))
+    hide_output sudo make -j8
     
     # Copy Files (Blocknotify,iniparser,Stratum)
     cd $HOME/yiimp
@@ -456,8 +453,8 @@
 
     if [[ ("$sub_domain" == "y" || "$sub_domain" == "Y") ]]; then
     echo 'include /etc/nginx/blockuseragents.rules;
-    server {
-    if ($blockedagent) {
+	server {
+	if ($blockedagent) {
                 return 403;
         }
         if ($request_method !~ ^(GET|HEAD|POST)$) {
@@ -484,7 +481,7 @@
         error_log /var/log/nginx/'"${server_name}"'.app-error.log;
     
         # allow larger file uploads and longer script runtimes
-    client_body_buffer_size  50k;
+ 	client_body_buffer_size  50k;
         client_header_buffer_size 50k;
         client_max_body_size 50k;
         large_client_header_buffers 2 50k;
@@ -502,43 +499,43 @@
             fastcgi_connect_timeout 300;
             fastcgi_send_timeout 300;
             fastcgi_read_timeout 300;
-        try_files $uri $uri/ =404;
+	    try_files $uri $uri/ =404;
         }
-        location ~ \.php$ {
-            return 404;
+		location ~ \.php$ {
+        	return 404;
         }
-        location ~ \.sh {
-        return 404;
+		location ~ \.sh {
+		return 404;
         }
-        location ~ /\.ht {
-        deny all;
+		location ~ /\.ht {
+		deny all;
         }
-        location ~ /.well-known {
-        allow all;
+		location ~ /.well-known {
+		allow all;
         }
-        location /phpmyadmin {
-        root /usr/share/;
-        index index.php;
-        try_files $uri $uri/ =404;
-        location ~ ^/phpmyadmin/(doc|sql|setup)/ {
-            deny all;
-      }
-        location ~ /phpmyadmin/(.+\.php)$ {
-            fastcgi_pass unix:/run/php/php7.3-fpm.sock;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            include fastcgi_params;
-            include snippets/fastcgi-php.conf;
-        }
+		location /phpmyadmin {
+  		root /usr/share/;
+  		index index.php;
+  		try_files $uri $uri/ =404;
+  		location ~ ^/phpmyadmin/(doc|sql|setup)/ {
+    		deny all;
+  	  }
+  		location ~ /phpmyadmin/(.+\.php)$ {
+    		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+    		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    		include fastcgi_params;
+    		include snippets/fastcgi-php.conf;
+  	    }
       }
     }
     ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
 
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
-    sudo systemctl reload php7.3-fpm.service
-    sudo systemctl restart nginx.service
+    hide_output sudo systemctl reload php7.3-fpm.service
+    hide_output sudo systemctl restart nginx.service
     echo -e "$GREEN Done...$COL_RESET"
-        
+    	
     if [[ ("$ssl_install" == "y" || "$ssl_install" == "Y" || "$ssl_install" == "") ]]; then
 
     
@@ -547,14 +544,14 @@
     echo -e "Install LetsEncrypt and setting SSL (with SubDomain)"
     echo
     
-    hide_output sudo apt -y install letsencrypt
+    apt_install letsencrypt
     sudo letsencrypt certonly -a webroot --webroot-path=/var/web --email "$EMAIL" --agree-tos -d "$server_name"
     sudo rm /etc/nginx/sites-available/$server_name.conf
     sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
     # I am SSL Man!
-    echo 'include /etc/nginx/blockuseragents.rules;
-    server {
-    if ($blockedagent) {
+	echo 'include /etc/nginx/blockuseragents.rules;
+	server {
+	if ($blockedagent) {
                 return 403;
         }
         if ($request_method !~ ^(GET|HEAD|POST)$) {
@@ -563,12 +560,12 @@
         listen 80;
         listen [::]:80;
         server_name '"${server_name}"';
-        # enforce https
+    	# enforce https
         return 301 https://$server_name$request_uri;
-    }
-    
-    server {
-    if ($blockedagent) {
+	}
+	
+	server {
+	if ($blockedagent) {
                 return 403;
         }
         if ($request_method !~ ^(GET|HEAD|POST)$) {
@@ -585,7 +582,7 @@
             error_log  /var/log/nginx/'"${server_name}"'.app-error.log;
         
             # allow larger file uploads and longer script runtimes
-    client_body_buffer_size  50k;
+ 	client_body_buffer_size  50k;
         client_header_buffer_size 50k;
         client_max_body_size 50k;
         large_client_header_buffers 2 50k;
@@ -628,46 +625,46 @@
                 fastcgi_send_timeout 300;
                 fastcgi_read_timeout 300;
                 include /etc/nginx/fastcgi_params;
-            try_files $uri $uri/ =404;
+	    	try_files $uri $uri/ =404;
         }
-        location ~ \.php$ {
-            return 404;
+		location ~ \.php$ {
+        	return 404;
         }
-        location ~ \.sh {
-        return 404;
+		location ~ \.sh {
+		return 404;
         }
         
             location ~ /\.ht {
                 deny all;
             }
-        location /phpmyadmin {
-        root /usr/share/;
-        index index.php;
-        try_files $uri $uri/ =404;
-        location ~ ^/phpmyadmin/(doc|sql|setup)/ {
-            deny all;
-    }
-        location ~ /phpmyadmin/(.+\.php)$ {
-            fastcgi_pass unix:/run/php/php7.3-fpm.sock;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            include fastcgi_params;
-            include snippets/fastcgi-php.conf;
-       }
+	    location /phpmyadmin {
+  		root /usr/share/;
+  		index index.php;
+  		try_files $uri $uri/ =404;
+  		location ~ ^/phpmyadmin/(doc|sql|setup)/ {
+    		deny all;
+  	}
+  		location ~ /phpmyadmin/(.+\.php)$ {
+    		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+    		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    		include fastcgi_params;
+    		include snippets/fastcgi-php.conf;
+  	   }
      }
     }
         
     ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
-    fi
-    
-    sudo systemctl reload php7.3-fpm.service
-    sudo systemctl restart nginx.service
-    echo -e "$GREEN Done...$COL_RESET"
-    
-    
-    else
-    echo 'include /etc/nginx/blockuseragents.rules;
-    server {
-    if ($blockedagent) {
+	fi
+	
+	hide_output sudo systemctl reload php7.3-fpm.service
+	hide_output sudo systemctl restart nginx.service
+	echo -e "$GREEN Done...$COL_RESET"
+	
+	
+	else
+	echo 'include /etc/nginx/blockuseragents.rules;
+	server {
+	if ($blockedagent) {
                 return 403;
         }
         if ($request_method !~ ^(GET|HEAD|POST)$) {
@@ -694,7 +691,7 @@
         error_log /var/log/nginx/'"${server_name}"'.app-error.log;
     
         # allow larger file uploads and longer script runtimes
-    client_body_buffer_size  50k;
+ 	client_body_buffer_size  50k;
         client_header_buffer_size 50k;
         client_max_body_size 50k;
         large_client_header_buffers 2 50k;
@@ -712,44 +709,44 @@
             fastcgi_connect_timeout 300;
             fastcgi_send_timeout 300;
             fastcgi_read_timeout 300;
-        try_files $uri $uri/ =404;
+	    try_files $uri $uri/ =404;
         }
-        location ~ \.php$ {
-            return 404;
+		location ~ \.php$ {
+        	return 404;
         }
-        location ~ \.sh {
-        return 404;
+		location ~ \.sh {
+		return 404;
         }
-        location ~ /\.ht {
-        deny all;
+		location ~ /\.ht {
+		deny all;
         }
-        location ~ /.well-known {
-        allow all;
+		location ~ /.well-known {
+		allow all;
         }
-        location /phpmyadmin {
-        root /usr/share/;
-        index index.php;
-        try_files $uri $uri/ =404;
-        location ~ ^/phpmyadmin/(doc|sql|setup)/ {
-            deny all;
-    }
-        location ~ /phpmyadmin/(.+\.php)$ {
-            fastcgi_pass unix:/run/php/php7.3-fpm.sock;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            include fastcgi_params;
-            include snippets/fastcgi-php.conf;
-        }
+		location /phpmyadmin {
+  		root /usr/share/;
+  		index index.php;
+  		try_files $uri $uri/ =404;
+  		location ~ ^/phpmyadmin/(doc|sql|setup)/ {
+    		deny all;
+  	}
+  		location ~ /phpmyadmin/(.+\.php)$ {
+    		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+    		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    		include fastcgi_params;
+    		include snippets/fastcgi-php.conf;
+  	    }
       }
     }
     ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
 
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
-    sudo systemctl reload php7.3-fpm.service
-    sudo systemctl restart nginx.service
+    hide_output sudo systemctl reload php7.3-fpm.service
+    hide_output sudo systemctl restart nginx.service
     echo -e "$GREEN Done...$COL_RESET"
    
-    
+	
     if [[ ("$ssl_install" == "y" || "$ssl_install" == "Y" || "$ssl_install" == "") ]]; then
     
     # Install SSL (without SubDomain)
@@ -758,14 +755,14 @@
     echo
     sleep 3
     
-    hide_output sudo apt -y install letsencrypt
+    apt_install letsencrypt
     sudo letsencrypt certonly -a webroot --webroot-path=/var/web --email "$EMAIL" --agree-tos -d "$server_name" -d www."$server_name"
     sudo rm /etc/nginx/sites-available/$server_name.conf
     sudo openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
     # I am SSL Man!
-    echo 'include /etc/nginx/blockuseragents.rules;
-    server {
-    if ($blockedagent) {
+	echo 'include /etc/nginx/blockuseragents.rules;
+	server {
+	if ($blockedagent) {
                 return 403;
         }
         if ($request_method !~ ^(GET|HEAD|POST)$) {
@@ -774,12 +771,12 @@
         listen 80;
         listen [::]:80;
         server_name '"${server_name}"';
-        # enforce https
+    	# enforce https
         return 301 https://$server_name$request_uri;
-    }
-    
-    server {
-    if ($blockedagent) {
+	}
+	
+	server {
+	if ($blockedagent) {
                 return 403;
         }
         if ($request_method !~ ^(GET|HEAD|POST)$) {
@@ -796,7 +793,7 @@
             error_log  /var/log/nginx/'"${server_name}"'.app-error.log;
         
             # allow larger file uploads and longer script runtimes
-    client_body_buffer_size  50k;
+ 	client_body_buffer_size  50k;
         client_header_buffer_size 50k;
         client_max_body_size 50k;
         large_client_header_buffers 2 50k;
@@ -839,41 +836,41 @@
                 fastcgi_send_timeout 300;
                 fastcgi_read_timeout 300;
                 include /etc/nginx/fastcgi_params;
-            try_files $uri $uri/ =404;
+	    	try_files $uri $uri/ =404;
         }
-        location ~ \.php$ {
-            return 404;
+		location ~ \.php$ {
+        	return 404;
         }
-        location ~ \.sh {
-        return 404;
+		location ~ \.sh {
+		return 404;
         }
         
             location ~ /\.ht {
                 deny all;
             }
-        location /phpmyadmin {
-        root /usr/share/;
-        index index.php;
-        try_files $uri $uri/ =404;
-        location ~ ^/phpmyadmin/(doc|sql|setup)/ {
-            deny all;
-    }
-        location ~ /phpmyadmin/(.+\.php)$ {
-            fastcgi_pass unix:/run/php/php7.3-fpm.sock;
-            fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-            include fastcgi_params;
-            include snippets/fastcgi-php.conf;
-        }
+	    location /phpmyadmin {
+  		root /usr/share/;
+  		index index.php;
+  		try_files $uri $uri/ =404;
+  		location ~ ^/phpmyadmin/(doc|sql|setup)/ {
+    		deny all;
+  	}
+  		location ~ /phpmyadmin/(.+\.php)$ {
+    		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
+    		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    		include fastcgi_params;
+    		include snippets/fastcgi-php.conf;
+  	    }
       }
     }
         
     ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
 
-    echo -e "$GREEN Done...$COL_RESET"
+	echo -e "$GREEN Done...$COL_RESET"
 
     fi
-    sudo systemctl reload php7.3-fpm.service
-    sudo systemctl restart nginx.service
+    hide_output sudo systemctl reload php7.3-fpm.service
+    hide_output sudo systemctl restart nginx.service
     fi
     
     
@@ -944,7 +941,7 @@
     define('"'"'EXCH_YOBIT_SECRET'"'"', '"'"''"'"');
     ' | sudo -E tee /etc/yiimp/keys.php >/dev/null 2>&1
 
-    echo -e "$GREEN Done...$COL_RESET"
+ 	echo -e "$GREEN Done...$COL_RESET"
 
  
     # Peforming the SQL import
@@ -952,7 +949,7 @@
     echo
     echo -e "$CYAN => Database 'yiimpfrontend' and users 'panel' and 'stratum' created with password $password and $password2, will be saved for you $COL_RESET"
     echo
-    echo -e "$RED =>Dumping SQL Schemas...$COL_RESET"
+    echo -e "Performing the SQL import"
     echo
     sleep 3
     
@@ -996,7 +993,7 @@
     # Make config file
     echo '
     <?php
-    ini_set('"'"'date.timezone'"'"', '"'"'CET'"'"');
+    ini_set('"'"'date.timezone'"'"', '"'"'UTC'"'"');
     define('"'"'YAAMP_LOGS'"'"', '"'"'/var/log/yiimp'"'"');
     define('"'"'YAAMP_HTDOCS'"'"', '"'"'/var/web'"'"');
         
@@ -1029,7 +1026,7 @@
     define('"'"'YIIMP_FIAT_ALTERNATIVE'"'"', '"'"'USD'"'"'); // USD is main
     define('"'"'YAAMP_USE_NICEHASH_API'"'"', false);
     
-    define('"'"'YAAMP_BTCADDRESS'"'"', '"'"'1C1hnjk3WhuAvUN6Ny6LTxPD3rwSZwapW7'"'"');
+    define('"'"'YAAMP_BTCADDRESS'"'"', '"'"'bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r'"'"');
     
     define('"'"'YAAMP_SITE_URL'"'"', '"'"''"${server_name}"''"'"');
     define('"'"'YAAMP_STRATUM_URL'"'"', YAAMP_SITE_URL); // change if your stratum server is on a different host
@@ -1041,7 +1038,7 @@
     define('"'"'YAAMP_CREATE_NEW_COINS'"'"', false);
     define('"'"'YAAMP_NOTIFY_NEW_COINS'"'"', false);
     
-    define('"'"'YAAMP_DEFAULT_ALGO'"'"', '"'"'all'"'"');
+    define('"'"'YAAMP_DEFAULT_ALGO'"'"', '"'"'x11'"'"');
     
     define('"'"'YAAMP_USE_NGINX'"'"', true);
     
@@ -1072,7 +1069,7 @@
     define('"'"'NICEHASH_DEPOSIT_AMOUNT'"'"','"'"'0.01'"'"');
     
     $cold_wallet_table = array(
-	'"'"'1PqjApUdjwU9k4v1RDWf6XveARyEXaiGUz'"'"' => 0.10,
+	'"'"'bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r'"'"' => 0.10,
     );
     
     // Sample fixed pool fees
@@ -1151,16 +1148,18 @@
     sudo chmod 775 /var/yiimp -R
 
 
-    #Add to contrab screen-scrypt && screen-stratum
+    #Add to contrab screen-scrypt
     (crontab -l 2>/dev/null; echo "@reboot sleep 20 && /etc/screen-scrypt.sh") | crontab -
     (crontab -l 2>/dev/null; echo "@reboot sleep 20 && /etc/screen-stratum.sh") | crontab -
+
     #fix error screen main "service"
     sudo sed -i 's/service $webserver start/sudo service $webserver start/g' /var/web/yaamp/modules/thread/CronjobController.php
     sudo sed -i 's/service nginx stop/sudo service nginx stop/g' /var/web/yaamp/modules/thread/CronjobController.php
 
     #fix error screen main "backup sql frontend"
     sudo sed -i "s|/root/backup|/var/yiimp/sauv|g" /var/web/yaamp/core/backend/system.php
-    sudo sed -i '14d' /var/web/yaamp/defaultconfig.php
+    #no need for Kudaraidee yiimp repo
+    #sudo sed -i '14d' /var/web/yaamp/defaultconfig.php
 
     #Misc
     sudo mv $HOME/yiimp/ $HOME/yiimp-install-only-do-not-run-commands-from-this-folder
@@ -1182,6 +1181,9 @@
 
     echo
     echo -e "$GREEN Done...$COL_RESET"
+    sleep 3
+
     echo
     install_end_message
+    echo
     echo

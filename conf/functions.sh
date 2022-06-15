@@ -6,6 +6,7 @@
 # Current Modified by Afiniel (2022-06-06)
 #####################################################
 
+
 ESC_SEQ="\x1b["
 COL_RESET=$ESC_SEQ"39;49;00m"
 RED=$ESC_SEQ"31;01m"
@@ -15,10 +16,10 @@ BLUE=$ESC_SEQ"34;01m"
 MAGENTA=$ESC_SEQ"35;01m"
 CYAN=$ESC_SEQ"36;01m"
 
-
-function spinner {
+function spinner
+ {
  		local pid=$!
- 		local delay=0.75
+ 		local delay=0.35
  		local spinstr='|/-\'
  		while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
  				local temp=${spinstr#?}
@@ -30,6 +31,65 @@ function spinner {
  		printf "    \b\b\b\b"
  }
 
+
+# terminal art end screen.
+
+function install_end_message {
+
+	clear
+    echo                                                                                                                          
+	clear
+    echo                                                                                                                          
+	figlet -f slant -w 100 "Complete!"  
+	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
+    echo -e "$YELLOW Yiimp Installer Script Fork By Afiniel                          			$COL_RESET"
+	echo -e "$GREEN	Donations are welcome at wallets below:					  					$COL_RESET"
+	echo -e "$YELLOW  --------------------------------------------------------------------------- $COL_RESET"
+	echo -e "$YELLOW BTC:$RESTORE bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r 					$COL_RESET"
+	echo -e "$YELLOW BCH:$RESTORE qpy2ehcxtddkfrrxqyq5skrvace66wvuqyuyzc87sc 					$COL_RESET"
+	echo -e "$YELLOW ETH:$RESTORE 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB 					$COL_RESET"
+	echo -e "$YELLOW DOGE:$RESTORE DCj73fKJbHeDTJx7arz4z7bbknWkSDpD8h        					$COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
+	echo -e "$CYAN 	https://github.com/afiniel/yiimp_install_script								$COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
+    echo -e "$GREEN	You find your mySQL info below												$COL_RESET"
+    echo -e "$CYAN      																		$COL_RESET" 
+    echo -e "$RED   Your mysql information is saved in ~/.my.cnf. 								$COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
+    echo -e "$RED   Your pool  at : http://"$server_name" 										$COL_RESET"
+    echo -e "$RED   Admin area at : http://"$server_name"/site/AdminPanel						$COL_RESET"
+    echo -e "$RED   phpMyAdmin at : http://"$server_name"/phpmyadmin 							$COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
+    echo -e "$RED   If you want change '$admin_panel' Edid file in:	 							$COL_RESET"
+    echo -e "$RED   /var/web/yaamp/modules/site/SiteController.php 								$COL_RESET"
+    echo -e "$RED   Line 11 => change it to your preference. 									$COL_RESET"
+    echo
+    echo -e "$CYAN  Please make sure to change your public keys / wallet addresses in the, 		 $COL_RESET"
+    echo -e "$RED   /var/web/serverconfig.php file. 											 $COL_RESET"
+    echo -e "$CYAN  Please make sure to change your private keys in the$RED /etc/yiimp/keys.php file. $COL_RESET"
+	echo -e "$CYAN  ---------------------------------------------------------------------------  $COL_RESET"
+	echo
+	echo -e "$CYAN  --------------------------------------------------------- 					 $COL_RESET"
+    echo -e "$RED   YOU MUST REBOOT NOW  TO FINALIZE INSTALLATION Thanks you!					 $COL_RESET"
+    echo -e "$CYAN  ---------------------------------------------------------   			     $COL_RESET"
+    echo
+}
+
+# terminal art start screen.
+function term_art {
+	clear
+    echo
+	echo -e "$CYAN------------------------------------------------		 $COL_RESET"
+    echo -e "$GREEN Yiimp Install Script Afiniel fork					                         $COL_RESET"
+    echo -e "$YELLOW Donations are welcome at: 												 $COL_RESET"
+	echo -e "$CYAN------------------------------------------------		 $COL_RESET"
+	echo -e "$YELLOW BTC:$RESTORE bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r $COL_RESET" 
+	echo -e "$YELLOW BCH:$RESTORE qpy2ehcxtddkfrrxqyq5skrvace66wvuqyuyzc87sc $COL_RESET"
+	echo -e "$YELLOW ETH:$RESTORE 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB $COL_RESET"
+	echo -e "$YELLOW DOGE:$RESTORE DCj73fKJbHeDTJx7arz4z7bbknWkSDpD8h        $COL_RESET"
+	echo -e "$CYAN------------------------------------------------			 $COL_RESET"
+    echo
+}
 
 function hide_output {
 		OUTPUT=$(tempfile)
@@ -47,85 +107,14 @@ function hide_output {
 		rm -f $OUTPUT
 }
 
-# terminal art end screen.
-
-function install_end_message {
-
-	clear
-    echo                                                                                                                          
-	clear
-    echo                                                                                                                          
-	figlet -f slant -w 100 "Complete!"  
-	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
-    echo -e "$YELLOW Yiimp Installer Script Fork By Afiniel                          			$COL_RESET"
-	echo -e "$GREEN	Donations are welcome at wallets below:					  					$COL_RESET"
-    echo -e "$CYAN------------------------------------------------								$COL_RESET"
-	echo -e "$YELLOW BTC:$RESTORE bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r 					$COL_RESET"
-	echo -e "$YELLOW BCH:$RESTORE qpy2ehcxtddkfrrxqyq5skrvace66wvuqyuyzc87sc 					$COL_RESET"
-	echo -e "$YELLOW ETH:$RESTORE 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB 					$COL_RESET"
-	echo -e "$YELLOW DOGE:$RESTORE DCj73fKJbHeDTJx7arz4z7bbknWkSDpD8h        					$COL_RESET"
-	echo -e "$CYAN------------------------------------------------ 								$COL_RESET"
-    echo
-	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
-	echo -e "$CYAN 	https://github.com/afiniel/yiimp_install_script								$COL_RESET"
-	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
-    echo -e "$GREEN Finish! Sussessfully installed YIIMP. . .                                   $COL_RESET"
-    echo -e "$GREEN 		    																$COL_RESET"
-    echo -e "$CYAN  Just some reminders.      													$COL_RESET" 
-    echo -e "$RED   Your mysql information is saved in ~/.my.cnf. 								$COL_RESET"
-	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
-    echo -e "$RED   Your pool: http://"$server_name" (https... if SSL enabled)"
-    echo -e "$RED   Access your "$admin_panel" at : http://"$server_name"/site/"$admin_panel" 	$COL_RESET"
-    echo -e "$RED   yiimp phpMyAdmin at : http://"$server_name"/phpmyadmin (https... if SSL enabled)"
-	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
-    echo -e "$RED   If you want change '$admin_panel' Edid file in:	 							$COL_RESET"
-    echo -e "$RED   /var/web/yaamp/modules/site/SiteController.php 								$COL_RESET"
-    echo -e "$RED   Line 11 => change '$admin_panel' to your preference. 						$COL_RESET"
-    echo
-    echo -e "$CYAN  Please make sure to change your public keys / wallet addresses in the, 		 $COL_RESET"
-    echo -e "$RED   /var/web/serverconfig.php file. 											 $COL_RESET"
-    echo -e "$CYAN  Please make sure to change your private keys in the$RED /etc/yiimp/keys.php file. $COL_RESET"
-	echo -e "$CYAN  ---------------------------------------------------------------------------  $COL_RESET"
-	echo
-	echo -e "$CYAN  --------------------------------------------------------- 					 $COL_RESET"
-    echo -e "$RED   YOU MUST REBOOT NOW  TO FINALIZE INSTALLATION Thanks you!					 $COL_RESET"
-    echo -e "$CYAN  ---------------------------------------------------------   			     $COL_RESET"
-    echo
-}
-
-# terminal art start screen.
-function term_art {
-	clear
-    echo -e "$YELLOW    ___  ________   ________  _________  ________  ___       ___       ___  ________   ________     	$COL_RESET"
-	echo -e "$YELLOW   |\  \|\   ___  \|\   ____\|\___   ___\\   __  \|\  \     |\  \     |\  \|\   ___  \|\   ____\    	$COL_RESET"
-	echo -e "$YELLOW   \ \  \ \  \\ \  \ \  \___|\|___ \  \_\ \  \|\  \ \  \    \ \  \    \ \  \ \  \\ \  \ \  \___|    	$COL_RESET"
- 	echo -e "$YELLOW    \ \  \ \  \\ \  \ \_____  \   \ \  \ \ \   __  \ \  \    \ \  \    \ \  \ \  \\ \  \ \  \  ___  	$COL_RESET"
-  	echo -e "$YELLOW     \ \  \ \  \\ \  \|____|\  \   \ \  \ \ \  \ \  \ \  \____\ \  \____\ \  \ \  \\ \  \ \  \|\  \ 	$COL_RESET"
-    echo -e "$YELLOW      \ \__\ \__\\ \__\____\_\  \   \ \__\ \ \__\ \__\ \_______\ \_______\ \__\ \__\\ \__\ \_______\	$COL_RESET"
-    echo -e "$YELLOW       \|__|\|__| \|__|\_________\   \|__|  \|__|\|__|\|_______|\|_______|\|__|\|__| \|__|\|_______|	$COL_RESET"
-    echo -e "$YELLOW                      \|_________|                                                                      $COL_RESET"
-	echo -e "$CYAN  ---------------------------------------------------------------------------  							$COL_RESET"
-    echo -e "$GREEN Yiimp-Install Script Afiniel fork					                         							$COL_RESET"
-    echo -e "$YELLOW Donations are welcomed at: 																			$COL_RESET"
-		echo -e "$CYAN------------------------------------------------		 $COL_RESET"
-	echo -e "$YELLOW BTC:$RESTORE bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r $COL_RESET" 
-	echo -e "$YELLOW BCH:$RESTORE qpy2ehcxtddkfrrxqyq5skrvace66wvuqyuyzc87sc $COL_RESET"
-	echo -e "$YELLOW ETH:$RESTORE 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB $COL_RESET"
-	echo -e "$YELLOW DOGE:$RESTORE DCj73fKJbHeDTJx7arz4z7bbknWkSDpD8h        $COL_RESET"
-	echo -e "$CYAN------------------------------------------------			 $COL_RESET"
-    echo
-}
-
 function apt_get_quiet {
-		DEBIAN_FRONTEND=noninteractive hide_output sudo apt -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" "$@"
+		DEBIAN_FRONTEND=noninteractive hide_output sudo apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" "$@"
 }
-
 
 function apt_install {
 		PACKAGES=$@
 		apt_get_quiet install $PACKAGES
 }
-
 
 function ufw_allow {
 		if [ -z "$DISABLE_FIREWALL" ]; then
