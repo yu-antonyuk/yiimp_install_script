@@ -9,5 +9,4 @@
  screen -dmS blocks bash $WEB_DIR/blocks.sh
  screen -dmS debug tail -f $LOG_DIR/debug.log
  
-
  

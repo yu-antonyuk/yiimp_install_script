@@ -44,11 +44,6 @@ function install_end_message {
 	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
     echo -e "$YELLOW Yiimp Installer Script Fork By Afiniel                          			$COL_RESET"
 	echo -e "$GREEN	Donations are welcome at wallets below:					  					$COL_RESET"
-	echo -e "$YELLOW  --------------------------------------------------------------------------- $COL_RESET"
-	echo -e "$YELLOW BTC:$RESTORE bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r 					$COL_RESET"
-	echo -e "$YELLOW BCH:$RESTORE qpy2ehcxtddkfrrxqyq5skrvace66wvuqyuyzc87sc 					$COL_RESET"
-	echo -e "$YELLOW ETH:$RESTORE 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB 					$COL_RESET"
-	echo -e "$YELLOW DOGE:$RESTORE DCj73fKJbHeDTJx7arz4z7bbknWkSDpD8h        					$COL_RESET"
 	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
 	echo -e "$CYAN 	https://github.com/afiniel/yiimp_install_script								$COL_RESET"
 	echo -e "$CYAN  --------------------------------------------------------------------------- $COL_RESET"
@@ -80,14 +75,10 @@ function term_art {
 	clear
     echo
 	echo -e "$CYAN------------------------------------------------		 $COL_RESET"
-    echo -e "$GREEN Yiimp Install Script Afiniel fork					                         $COL_RESET"
-    echo -e "$YELLOW Donations are welcome at: 												 $COL_RESET"
+    echo -e "$GREEN *Yiimp Install Script Afiniel fork*					 $COL_RESET"
+	echo -e "$YELLOW mariadb , PHP7.3 , nginx							 $COL_RESET"
 	echo -e "$CYAN------------------------------------------------		 $COL_RESET"
-	echo -e "$YELLOW BTC:$RESTORE bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r $COL_RESET" 
-	echo -e "$YELLOW BCH:$RESTORE qpy2ehcxtddkfrrxqyq5skrvace66wvuqyuyzc87sc $COL_RESET"
-	echo -e "$YELLOW ETH:$RESTORE 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB $COL_RESET"
-	echo -e "$YELLOW DOGE:$RESTORE DCj73fKJbHeDTJx7arz4z7bbknWkSDpD8h        $COL_RESET"
-	echo -e "$CYAN------------------------------------------------			 $COL_RESET"
+
     echo
 }
 
