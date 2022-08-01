@@ -107,10 +107,18 @@ function install_end_message {
 function term_art {
 	clear
 	echo
-	echo -e "$CYAN------------------------------------------------		 $COL_RESET"
-	echo -e "$GREEN *Yiimp Install Script Afiniel fork*					 $COL_RESET"
-	echo -e "$YELLOW mariadb , PHP7.3 , nginx							 $COL_RESET"
-	echo -e "$CYAN------------------------------------------------		 $COL_RESET"
+	echo -e "$GREEN version v0.4 $COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
+	echo -e "$GREEN  Welcome to the Yiimp Installer Script , Fork By Afiniel!								$COL_RESET"
+	echo -e "$YELLOW Version: v0.4 																		    $COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
+	echo -e "$YELLOW This script will install all the dependencies and will install Yiimp.					$COL_RESET"
+	echo -e "$YELLOW It will also install a MySQL database and a Web server.								$COL_RESET"
+	echo -e "$YELLOW MariaDB is used for the database: MariaDB Version:	v									$COL_RESET"
+	echo -e "$YELLOW Nginx is used for the Web server, PHP 7.3 is also installed.							$COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
+	echo -e "$YELLOW Yiimp Installer Script Fork By Afiniel https://github.com/afiniel/yiimp_install_script $COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
 
 	echo
 }
