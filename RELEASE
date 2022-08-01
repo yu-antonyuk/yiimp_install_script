@@ -9,6 +9,7 @@ Database.
     -> Create function: database_import_sql
 
 Other.
+    -> Edit end message.
     -> Remove old folder from the repo.
     -> Remove unused code.
     -> Code cleanup.
