@@ -81,6 +81,7 @@
     DISTRO='"${DISTRO}"'
     PRIVATE_IP='"${PRIVATE_IP}"'' | sudo -E tee conf/pool.conf >/dev/null 2>&1
 
+    term_art
     echo
     echo
     echo -e "$RED Make sure you double check before hitting enter! Only one shot at these! $COL_RESET"
@@ -93,7 +94,8 @@
     read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
     read -e -p "Install UFW and configure ports? [Y/n] : " UFW
     read -e -p "Install LetsEncrypt SSL? IMPORTANT! You MUST have your domain name pointed to this server  [Y/n]: " ssl_install
-    clear
+    echo
+    term_art
     # Installing Nginx
     echo
     echo
