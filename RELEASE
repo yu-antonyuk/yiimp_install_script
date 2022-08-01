@@ -1,12 +1,18 @@
 0.4v Release 2022-08-01 @afiniel
 
+
+
+Update Readme.md
+    -> Update the release date and version number.
+    -> Rewrite most of the readme.md file.
+
 Database.
     -> Create function: database_import_sql
 
 Other.
-    ->
-    -> Create update and upgrade function
-    -> Remove unused code
+    -> Remove old folder from the repo.
+    -> Remove unused code.
+    -> Code cleanup.
 -----------------------------------------------------------------
 
 0.3v Release 2022-06-14 @afiniel
