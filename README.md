@@ -35,7 +35,7 @@ sudo su pool
 Just copy and past the command below and the install will start.
 
 ```
-git clone https://github.com/afiniel/yiimp_install_script.git && bash $HOME/yiimp_install_script/install.sh
+sudo git clone https://github.com/afiniel/yiimp_install_script.git && bash $HOME/yiimp_install_script/install.sh
 ```
 
 - It will take some time for the installation to be finnished.

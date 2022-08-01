@@ -108,8 +108,8 @@ function term_art {
 	clear
 	echo
 	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
-	echo -e "$YELLOW   Welcome to the Yiimp Installer Script , Fork By Afiniel!								$COL_RESET"
-	echo -e "$GREEN	   Version: v0.4 																		$COL_RESET"
+	echo -e "$YELLOW  Welcome to the Yiimp Installer Script , Fork By Afiniel!								$COL_RESET"
+	echo -e "$GREEN Version: v0.4 																			$COL_RESET"
 	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
 	echo -e "$YELLOW  This script will install all the dependencies and will install Yiimp.					$COL_RESET"
 	echo -e "$YELLOW  It will also install a MySQL database and a Web server.								$COL_RESET"
