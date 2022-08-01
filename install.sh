@@ -59,7 +59,7 @@
     # Update package and Upgrade Ubuntu
     echo
     echo
-    echo -e "$CYAN => Updating system and installing required packages :$COL_RESET"
+    echo -e "$CYAN => Updating system and installing required packages $COL_RESET"
     echo 
     sleep 3
         
@@ -99,7 +99,7 @@
     # Installing Nginx
     echo
     echo
-    echo -e "$CYAN => Installing Nginx server : $COL_RESET"
+    echo -e "$CYAN => Installing Nginx server $COL_RESET"
     echo
     sleep 3
     
@@ -136,7 +136,7 @@
     # Installing Mariadb
     echo
     echo
-    echo -e "$CYAN => Installing Mariadb Server : $COL_RESET"
+    echo -e "$CYAN => Installing Mariadb Server $COL_RESET"
     echo
     sleep 3
         
@@ -155,7 +155,7 @@
     # Installing Installing php7.3
     echo
     echo
-    echo -e "$CYAN => Installing php7.3 : $COL_RESET"
+    echo -e "$CYAN => Installing php7.3  $COL_RESET"
     echo
     sleep 3
     
@@ -186,7 +186,7 @@
     # Installing other needed files
     echo
     echo
-    echo -e "$CYAN => Installing other needed files : $COL_RESET"
+    echo -e "$CYAN => Installing other needed files $COL_RESET"
     echo
     sleep 3
     
@@ -257,13 +257,13 @@
     apt_install fail2ban
     sleep 3
     sudo systemctl status fail2ban | sed -n "1,3p"
-        fi
+    fi
 
 
     if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
+    
     apt_install ufw
-    hide_output sudo ufw default deny incoming
-    hide_output sudo ufw default allow outgoing
+    
     hide_output sudo ufw allow ssh
     hide_output sudo ufw allow http
     hide_output sudo ufw allow https
@@ -311,7 +311,7 @@
     
     # Compil Blocknotify
     cd ~
-    hide_output git clone https://github.com/Kudaraidee/yiimp.git -b next
+    hide_output git clone https://github.com/afiniel/yiimp.git -b next
     cd $HOME/yiimp/blocknotify
     sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
     hide_output sudo make -j8
@@ -371,7 +371,7 @@
     # Update Timezone
     echo
     echo
-    echo -e "$CYAN => Update default timezone. $COL_RESET"
+    echo -e "$CYAN => Update default timezone $COL_RESET"
     echo
     
     echo -e " Setting TimeZone to UTC...$COL_RESET"
@@ -486,7 +486,7 @@
     
     # Install SSL (with SubDomain)
     echo
-    echo -e "Install LetsEncrypt and setting SSL (with SubDomain)"
+    echo -e "$CYAN => Install LetsEncrypt and setting SSL (with SubDomain) $COL_RESET"
     echo
     
     apt_install letsencrypt
@@ -696,7 +696,7 @@
     
     # Install SSL (without SubDomain)
     echo
-    echo -e "Install LetsEncrypt and setting SSL (without SubDomain)"
+    echo -e "$GREEN Install LetsEncrypt and setting SSL (without SubDomain) $COL_RESET"
     echo
     sleep 3
     
@@ -822,7 +822,7 @@
     # Database Setup
     echo
     echo
-    echo -e "$CYAN => Setting up the Database... $COL_RESET"
+    echo -e "$CYAN => Setting up the Database $COL_RESET"
     echo
     sleep 2
     
@@ -970,21 +970,36 @@
     define('"'"'YAAMP_USE_NGINX'"'"', true);
     
     // Exchange public keys (private keys are in a separate config file)
-    define('"'"'EXCH_CRYPTOPIA_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_POLONIEX_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_BITTREX_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_BLEUTRADE_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_BTER_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_YOBIT_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_CCEX_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_COINMARKETS_USER'"'"', '"'"''"'"');
-    define('"'"'EXCH_COINMARKETS_PIN'"'"', '"'"''"'"');
-    define('"'"'EXCH_BITSTAMP_ID'"'"','"'"''"'"');
-    define('"'"'EXCH_BITSTAMP_KEY'"'"','"'"''"'"');
-    define('"'"'EXCH_HITBTC_KEY'"'"','"'"''"'"');
-    define('"'"'EXCH_KRAKEN_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_LIVECOIN_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_NOVA_KEY'"'"', '"'"''"'"');
+    define('"'"'EXCH_ALCUREX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_ALTILLY_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_BIBOX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_BINANCE_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_BITTREX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_BITSTAMP_SECRET'"'"','"'"''"'"');
+    define('"'"'EXCH_BLEUTRADE_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_BTER_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_CEXIO_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_CREX24_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_CCEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_COINMARKETS_PASS'"'"', '"'"''"'"');
+    define('"'"'EXCH_CRYPTOHUB_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_CRYPTOWATCH_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_DELIONDEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_EMPOEX_SECKEY'"'"', '"'"''"'"');
+    define('"'"'EXCH_ESCODEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_GATEIO_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_GRAVIEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_HITBTC_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_JUBI_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_KRAKEN_SECRET'"'"','"'"''"'"');
+    define('"'"'EXCH_KUCOIN_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_LIVECOIN_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_POLONIEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_SHAPESHIFT_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_STOCKSEXCHANGE_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_SWIFTEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_TRADEOGRE_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_YOBIT_SECRET'"'"', '"'"''"'"');
     
     // Automatic withdraw to Yaamp btc wallet if btc balance > 0.3
     define('"'"'EXCH_AUTO_WITHDRAW'"'"', 0.3);
@@ -1031,7 +1046,7 @@
     # Updating stratum config files with database connection info
     echo
     echo
-    echo -e "$CYAN => Updating stratum config files with database connection info. $COL_RESET"
+    echo -e "$CYAN => Updating stratum config files with database connection info $COL_RESET"
     echo
     sleep 3
  
