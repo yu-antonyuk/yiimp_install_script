@@ -4,6 +4,7 @@
 # Updated by cryptopool.builders for crypto use...
 # Modified by Xavatar
 # Current Modified by Afiniel (2022-06-06)
+# Updated by Afiniel (2022-08-01)
 #####################################################
 
 ESC_SEQ="\x1b["
