@@ -1,6 +1,14 @@
+0.4v Release 2022-06-14 @afiniel
+
+
+other.
+    -> Create update and upgrade function
+    -> Remove unused code
+-----------------------------------------------------------------
+
 0.3v Release 2022-06-14 @afiniel
 
-php fixes.
+code clean up
     -> added missing php7.3-memcache php7.3-memcached
 
 SQL fixes.
