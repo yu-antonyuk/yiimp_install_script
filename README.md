@@ -73,7 +73,7 @@ sudo nano /etc/yiimp/keys.php
 ```
 ### Change AdminRights
 
-- > **If you want change your AdminRights to something else :** Edit this file "/SiteController.php" and Line 11 => change 'AdminPanel'
+- > **If you want change your AdminRights to something else :** Edit this file "/SiteController.php" and Line 11 = > change 'AdminPanel'
 
 ```
 sudo nano /var/web/yaamp/modules/site/SiteController.php
