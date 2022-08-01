@@ -13,7 +13,7 @@
 #   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.3
 #   v0.3 (2022-06-14 Fixed solo fee in serverconfig.php)
 #        (2022-06-14 added block.sql and coins_thepool_life.sql dump)
-# 
+#   
 ################################################################################
 	
 
@@ -93,7 +93,7 @@
     read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
     read -e -p "Install UFW and configure ports? [Y/n] : " UFW
     read -e -p "Install LetsEncrypt SSL? IMPORTANT! You MUST have your domain name pointed to this server  [Y/n]: " ssl_install
-    
+    clear
     # Installing Nginx
     echo
     echo
