@@ -1,6 +1,23 @@
+0.4v Release 2022-08-01 @afiniel
+
+
+Update Readme.md
+    -> Update the release date and version number.
+    -> Rewrite most of the readme.md file.
+
+Database.
+    -> Create function: database_import_sql
+
+Other.
+    -> Edit end message.
+    -> Remove old folder from the repo.
+    -> Remove unused code.
+    -> Code cleanup.
+-----------------------------------------------------------------
+
 0.3v Release 2022-06-14 @afiniel
 
-php fixes.
+Code clean up
     -> added missing php7.3-memcache php7.3-memcached
 
 SQL fixes.

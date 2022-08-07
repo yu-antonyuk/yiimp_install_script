@@ -13,7 +13,7 @@
 #   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.3
 #   v0.3 (2022-06-14 Fixed solo fee in serverconfig.php)
 #        (2022-06-14 added block.sql and coins_thepool_life.sql dump)
-# 
+#   
 ################################################################################
 	
 
@@ -38,7 +38,7 @@
     '""''"${whoami}"''""' ALL=(ALL) NOPASSWD:ALL
     ' | sudo -E tee /etc/sudoers.d/${whoami} >/dev/null 2>&1
     
-     #Copy needed files
+    #Copy needed files
     cd
     sudo mkdir buildcoin
     cd $HOME/yiimp_install_script
@@ -59,7 +59,7 @@
     # Update package and Upgrade Ubuntu
     echo
     echo
-    echo -e "$CYAN => Updating system and installing required packages :$COL_RESET"
+    echo -e "$CYAN => Updating system and installing required packages $COL_RESET"
     echo 
     sleep 3
         
@@ -81,35 +81,25 @@
     DISTRO='"${DISTRO}"'
     PRIVATE_IP='"${PRIVATE_IP}"'' | sudo -E tee conf/pool.conf >/dev/null 2>&1
 
+    term_art
     echo
     echo
     echo -e "$RED Make sure you double check before hitting enter! Only one shot at these! $COL_RESET"
     echo
-    #read -e -p "Enter time zone (e.g. America/New_York) : " TIME
     read -e -p "Domain Name (Enter Domain name: example.com or ip of your server) : " server_name
     read -e -p "Are you using a subdomain (mycryptopool.example.com?) [y/N] : " sub_domain
     read -e -p "Enter support email (e.g. admin@example.com) : " EMAIL
     read -e -p "Set Pool to AutoExchange? i.e. mine any coin with BTC address? [y/N] : " BTC
-    #read -e -p "Please enter a new location for /site/adminRights this is to customize the Admin Panel entrance url (e.g. myAdminpanel) : " admin_panel
     read -e -p "Enter the Public IP of the system you will use to access the admin panel (http://www.whatsmyip.org/) : " Public
     read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
     read -e -p "Install UFW and configure ports? [Y/n] : " UFW
     read -e -p "Install LetsEncrypt SSL? IMPORTANT! You MUST have your domain name pointed to this server  [Y/n]: " ssl_install
-    
-    
-    # Switch Aptitude
-    #echo
-    #echo -e "$CYAN Switching to Aptitude $COL_RESET"
-    #echo 
-    #sleep 3
-    #apt_install aptitude
-    #echo -e "$GREEN Done...$COL_RESET $COL_RESET"
-
-
+    echo
+    term_art
     # Installing Nginx
     echo
     echo
-    echo -e "$CYAN => Installing Nginx server : $COL_RESET"
+    echo -e "$CYAN => Installing Nginx server $COL_RESET"
     echo
     sleep 3
     
@@ -146,7 +136,7 @@
     # Installing Mariadb
     echo
     echo
-    echo -e "$CYAN => Installing Mariadb Server : $COL_RESET"
+    echo -e "$CYAN => Installing Mariadb Server $COL_RESET"
     echo
     sleep 3
         
@@ -165,7 +155,7 @@
     # Installing Installing php7.3
     echo
     echo
-    echo -e "$CYAN => Installing php7.3 : $COL_RESET"
+    echo -e "$CYAN => Installing php7.3  $COL_RESET"
     echo
     sleep 3
     
@@ -179,8 +169,7 @@
     apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
     php7.3-cgi php-pear php-auth imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
     php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php7.3-memcache php7.3-memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring
-    #hide_output sudo phpenmod mcrypt
-    #hide_output sudo phpenmod mbstring
+    
     else
     apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
     php7.3-cgi php-pear imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt\
@@ -197,7 +186,7 @@
     # Installing other needed files
     echo
     echo
-    echo -e "$CYAN => Installing other needed files : $COL_RESET"
+    echo -e "$CYAN => Installing other needed files $COL_RESET"
     echo
     sleep 3
     
@@ -224,8 +213,8 @@
     hide_output sudo apt -y update
     apt_install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
     echo -e "$GREEN Done...$COL_RESET"
-       
     
+
     # Generating Random Passwords
     password=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
     password2=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
@@ -266,74 +255,21 @@
     
     if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
     apt_install fail2ban
-    sleep 5
+    sleep 3
     sudo systemctl status fail2ban | sed -n "1,3p"
-        fi
+    fi
 
 
     if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
+    
     apt_install ufw
-    hide_output sudo ufw default deny incoming
-    hide_output sudo ufw default allow outgoing
+    
     hide_output sudo ufw allow ssh
     hide_output sudo ufw allow http
     hide_output sudo ufw allow https
-    hide_output sudo ufw allow 3333/tcp
-    hide_output sudo ufw allow 3339/tcp
-    hide_output sudo ufw allow 3334/tcp
-    hide_output sudo ufw allow 3433/tcp
-    hide_output sudo ufw allow 3555/tcp
-    hide_output sudo ufw allow 3556/tcp
-    hide_output sudo ufw allow 3573/tcp
-    hide_output sudo ufw allow 3535/tcp
-    hide_output sudo ufw allow 3533/tcp
-    hide_output sudo ufw allow 3553/tcp
-    hide_output sudo ufw allow 3633/tcp
-    hide_output sudo ufw allow 3733/tcp
-    hide_output sudo ufw allow 3636/tcp
-    hide_output sudo ufw allow 3737/tcp
-    hide_output sudo ufw allow 3739/tcp
-    hide_output sudo ufw allow 3747/tcp
-    hide_output sudo ufw allow 3833/tcp
-    hide_output sudo ufw allow 3933/tcp
-    hide_output sudo ufw allow 4033/tcp
-    hide_output sudo ufw allow 4133/tcp
-    hide_output sudo ufw allow 4233/tcp
-    hide_output sudo ufw allow 4234/tcp
-    hide_output sudo ufw allow 4333/tcp
-    hide_output sudo ufw allow 4433/tcp
-    hide_output sudo ufw allow 4533/tcp
-    hide_output sudo ufw allow 4553/tcp
-    hide_output sudo ufw allow 4633/tcp
-    hide_output sudo ufw allow 4733/tcp
-    hide_output sudo ufw allow 4833/tcp
-    hide_output sudo ufw allow 4933/tcp
-    hide_output sudo ufw allow 5033/tcp
-    hide_output sudo ufw allow 5133/tcp
-    hide_output sudo ufw allow 5233/tcp
-    hide_output sudo ufw allow 5333/tcp
-    hide_output sudo ufw allow 5433/tcp
-    hide_output sudo ufw allow 5533/tcp
-    hide_output sudo ufw allow 5733/tcp
-    hide_output sudo ufw allow 5743/tcp
-    hide_output sudo ufw allow 3252/tcp
-    hide_output sudo ufw allow 5755/tcp
-    hide_output sudo ufw allow 5766/tcp
-    hide_output sudo ufw allow 5833/tcp
-    hide_output sudo ufw allow 5933/tcp
-    hide_output sudo ufw allow 6033/tcp
-    hide_output sudo ufw allow 5034/tcp
-    hide_output sudo ufw allow 6133/tcp
-    hide_output sudo ufw allow 6233/tcp
-    hide_output sudo ufw allow 6333/tcp
-    hide_output sudo ufw allow 6433/tcp
-    hide_output sudo ufw allow 7433/tcp
-    hide_output sudo ufw allow 8333/tcp
-    hide_output sudo ufw allow 8463/tcp
-    hide_output sudo ufw allow 8433/tcp
-    hide_output sudo ufw allow 8533/tcp
+    
     hide_output sudo ufw --force enable
-    sleep 5
+    sleep 3
     sudo systemctl status ufw | sed -n "1,3p"   
     fi
 
@@ -355,16 +291,17 @@
     echo "phpmyadmin phpmyadmin/mysql/admin-pass password $rootpasswd" | sudo debconf-set-selections
     echo "phpmyadmin phpmyadmin/mysql/app-pass password $AUTOGENERATED_PASS" | sudo debconf-set-selections
     echo "phpmyadmin phpmyadmin/app-password-confirm password $AUTOGENERATED_PASS" | sudo debconf-set-selections
+    
     apt_install phpmyadmin
+    
     echo -e "$GREEN Done...$COL_RESET"
 	
 	
     # Installing Yiimp
     echo
-    echo
     echo -e "$CYAN => Installing Yiimp $COL_RESET"
     echo
-    echo -e "Grabbing yiimp fron Github, building files and setting file structure."
+    echo -e "$CYAN Grabbing yiimp fron Github, building files and setting file structure. $COL_RESET"
     echo
     sleep 3
     
@@ -374,7 +311,7 @@
     
     # Compil Blocknotify
     cd ~
-    hide_output git clone https://github.com/afiniel/yiimp
+    hide_output git clone https://github.com/afiniel/yiimp.git -b next
     cd $HOME/yiimp/blocknotify
     sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
     hide_output sudo make -j8
@@ -395,18 +332,24 @@
     sudo sed -i 's/myadmin/'AdminPanel'/' $HOME/yiimp/web/yaamp/modules/site/SiteController.php
     sudo cp -r $HOME/yiimp/web /var/
     sudo mkdir -p /var/stratum
+    
+    # Stratum
     cd $HOME/yiimp/stratum
     sudo cp -a config.sample/. /var/stratum/config
     sudo cp -r stratum /var/stratum
     sudo cp -r run.sh /var/stratum
+    
+    # Blocknotify
     cd $HOME/yiimp
     sudo cp -r $HOME/yiimp/bin/. /bin/
     sudo cp -r $HOME/yiimp/blocknotify/blocknotify /usr/bin/
     sudo cp -r $HOME/yiimp/blocknotify/blocknotify /var/stratum/
     sudo mkdir -p /etc/yiimp
     sudo mkdir -p /$HOME/backup/
+    
     #fixing yiimp
     sudo sed -i "s|ROOTDIR=/data/yiimp|ROOTDIR=/var|g" /bin/yiimp
+    
     #fixing run.sh
     sudo rm -r /var/stratum/config/run.sh
     echo '
@@ -428,14 +371,16 @@
     # Update Timezone
     echo
     echo
-    echo -e "$CYAN => Update default timezone. $COL_RESET"
+    echo -e "$CYAN => Update default timezone $COL_RESET"
     echo
     
     echo -e " Setting TimeZone to UTC...$COL_RESET"
     if [ ! -f /etc/timezone ]; then
+    
     echo "Setting timezone to UTC."
     echo "Etc/UTC" > sudo /etc/timezone
     sudo systemctl restart rsyslog
+    
     fi
     sudo systemctl status rsyslog | sed -n "1,3p"
     echo
@@ -481,7 +426,7 @@
         error_log /var/log/nginx/'"${server_name}"'.app-error.log;
     
         # allow larger file uploads and longer script runtimes
- 	client_body_buffer_size  50k;
+        client_body_buffer_size  50k;
         client_header_buffer_size 50k;
         client_max_body_size 50k;
         large_client_header_buffers 2 50k;
@@ -541,7 +486,7 @@
     
     # Install SSL (with SubDomain)
     echo
-    echo -e "Install LetsEncrypt and setting SSL (with SubDomain)"
+    echo -e "$CYAN => Install LetsEncrypt and setting SSL (with SubDomain) $COL_RESET"
     echo
     
     apt_install letsencrypt
@@ -582,11 +527,11 @@
             error_log  /var/log/nginx/'"${server_name}"'.app-error.log;
         
             # allow larger file uploads and longer script runtimes
- 	client_body_buffer_size  50k;
-        client_header_buffer_size 50k;
-        client_max_body_size 50k;
-        large_client_header_buffers 2 50k;
-        sendfile off;
+ 	        client_body_buffer_size  50k;
+            client_header_buffer_size 50k;
+            client_max_body_size 50k;
+            large_client_header_buffers 2 50k;
+            sendfile off;
         
             # strengthen ssl security
             ssl_certificate /etc/letsencrypt/live/'"${server_name}"'/fullchain.pem;
@@ -691,7 +636,7 @@
         error_log /var/log/nginx/'"${server_name}"'.app-error.log;
     
         # allow larger file uploads and longer script runtimes
- 	client_body_buffer_size  50k;
+ 	    client_body_buffer_size  50k;
         client_header_buffer_size 50k;
         client_max_body_size 50k;
         large_client_header_buffers 2 50k;
@@ -751,7 +696,7 @@
     
     # Install SSL (without SubDomain)
     echo
-    echo -e "Install LetsEncrypt and setting SSL (without SubDomain)"
+    echo -e "$GREEN Install LetsEncrypt and setting SSL (without SubDomain) $COL_RESET"
     echo
     sleep 3
     
@@ -793,11 +738,11 @@
             error_log  /var/log/nginx/'"${server_name}"'.app-error.log;
         
             # allow larger file uploads and longer script runtimes
- 	client_body_buffer_size  50k;
-        client_header_buffer_size 50k;
-        client_max_body_size 50k;
-        large_client_header_buffers 2 50k;
-        sendfile off;
+ 	        client_body_buffer_size  50k;
+            client_header_buffer_size 50k;
+            client_max_body_size 50k;
+            large_client_header_buffers 2 50k;
+            sendfile off;
         
             # strengthen ssl security
             ssl_certificate /etc/letsencrypt/live/'"${server_name}"'/fullchain.pem;
@@ -874,12 +819,12 @@
     fi
     
     
-    # Config Database
+    # Database Setup
     echo
     echo
-    echo -e "$CYAN => Now for the database fun! $COL_RESET"
+    echo -e "$CYAN => Setting up the Database $COL_RESET"
     echo
-    sleep 3
+    sleep 2
     
     # Create database
     Q1="CREATE DATABASE IF NOT EXISTS yiimpfrontend;"
@@ -914,74 +859,56 @@
     user=root
     password='"${rootpasswd}"'
     ' | sudo -E tee ~/.my.cnf >/dev/null 2>&1
-      sudo chmod 0600 ~/.my.cnf
+        sudo chmod 0600 ~/.my.cnf
 
 
-    # Create keys file
+    # Create keys.php file
     echo '  
     <?php
     /* Sample config file to put in /etc/yiimp/keys.php */
     define('"'"'YIIMP_MYSQLDUMP_USER'"'"', '"'"'panel'"'"');
     define('"'"'YIIMP_MYSQLDUMP_PASS'"'"', '"'"''"${password}"''"'"');
     define('"'"'YIIMP_MYSQLDUMP_PATH'"'"', '"'"''"/var/yiimp/sauv"''"'"');
+    
     /* Keys required to create/cancel orders and access your balances/deposit addresses */
+    define('"'"'EXCH_ALCUREX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_ALTILLY_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_BIBOX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_BINANCE_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_BITTREX_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_BITSTAMP_SECRET'"'"','"'"''"'"');
     define('"'"'EXCH_BLEUTRADE_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_BTER_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_CEXIO_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_CREX24_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_CCEX_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_COINMARKETS_PASS'"'"', '"'"''"'"');
-    define('"'"'EXCH_CRYPTOPIA_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_CRYPTOHUB_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_CRYPTOWATCH_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_DELIONDEX_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_EMPOEX_SECKEY'"'"', '"'"''"'"');
+    define('"'"'EXCH_ESCODEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_GATEIO_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_GRAVIEX_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_HITBTC_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_JUBI_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_KRAKEN_SECRET'"'"','"'"''"'"');
+    define('"'"'EXCH_KUCOIN_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_LIVECOIN_SECRET'"'"', '"'"''"'"');
-    define('"'"'EXCH_NOVA_SECRET'"'"','"'"''"'"');
     define('"'"'EXCH_POLONIEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_SHAPESHIFT_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_STOCKSEXCHANGE_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_SWIFTEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_TRADEOGRE_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_YOBIT_SECRET'"'"', '"'"''"'"');
     ' | sudo -E tee /etc/yiimp/keys.php >/dev/null 2>&1
 
- 	echo -e "$GREEN Done...$COL_RESET"
+    echo -e "$GREEN Done...$COL_RESET"
 
- 
+
     # Peforming the SQL import
     echo
-    echo
-    echo -e "$CYAN => Database 'yiimpfrontend' and users 'panel' and 'stratum' created with password $password and $password2, will be saved for you $COL_RESET"
-    echo
-    echo -e "Performing the SQL import"
-    echo
-    sleep 3
-    
-    cd ~
-    cd yiimp/sql
-    
-    # Import sql dump
-    sudo zcat 2020-11-10-yaamp.sql.gz | sudo mysql --defaults-group-suffix=host1
-    
-    # Oh the humanity!
-    sudo mysql --defaults-group-suffix=host1 --force < 2016-04-24-market_history.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2016-04-27-settings.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2016-05-11-coins.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2016-05-15-benchmarks.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2016-05-23-bookmarks.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2016-06-01-notifications.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2016-06-04-bench_chips.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2016-11-23-coins.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2017-02-05-benchmarks.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2017-03-31-earnings_index.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2017-05-accounts_case_swaptime.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2017-06-payouts_coinid_memo.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2017-09-notifications.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2017-10-bookmarks.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2018-09-22-workers.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2017-11-segwit.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2018-01-stratums_ports.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2018-02-coins_getinfo.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2019-03-coins_thepool_life.sql
-    sudo mysql --defaults-group-suffix=host1 --force < 2020-06-03-blocks.sql
-    echo -e "$GREEN Done...$COL_RESET"
-        
+    database_import_sql 
     
     # Generating a basic Yiimp serverconfig.php
     echo
@@ -1030,7 +957,7 @@
     
     define('"'"'YAAMP_SITE_URL'"'"', '"'"''"${server_name}"''"'"');
     define('"'"'YAAMP_STRATUM_URL'"'"', YAAMP_SITE_URL); // change if your stratum server is on a different host
-    define('"'"'YAAMP_SITE_NAME'"'"', '"'"'YIIMP'"'"');
+    define('"'"'YAAMP_SITE_NAME'"'"', '"'"'MyYiimpPool'"'"');
     define('"'"'YAAMP_ADMIN_EMAIL'"'"', '"'"''"${EMAIL}"''"'"');
     define('"'"'YAAMP_ADMIN_IP'"'"', '"'"''"${Public}"''"'"'); // samples: "80.236.118.26,90.234.221.11" or "10.0.0.1/8"
     
@@ -1043,21 +970,36 @@
     define('"'"'YAAMP_USE_NGINX'"'"', true);
     
     // Exchange public keys (private keys are in a separate config file)
-    define('"'"'EXCH_CRYPTOPIA_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_POLONIEX_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_BITTREX_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_BLEUTRADE_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_BTER_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_YOBIT_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_CCEX_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_COINMARKETS_USER'"'"', '"'"''"'"');
-    define('"'"'EXCH_COINMARKETS_PIN'"'"', '"'"''"'"');
-    define('"'"'EXCH_BITSTAMP_ID'"'"','"'"''"'"');
-    define('"'"'EXCH_BITSTAMP_KEY'"'"','"'"''"'"');
-    define('"'"'EXCH_HITBTC_KEY'"'"','"'"''"'"');
-    define('"'"'EXCH_KRAKEN_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_LIVECOIN_KEY'"'"', '"'"''"'"');
-    define('"'"'EXCH_NOVA_KEY'"'"', '"'"''"'"');
+    define('"'"'EXCH_ALCUREX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_ALTILLY_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_BIBOX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_BINANCE_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_BITTREX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_BITSTAMP_SECRET'"'"','"'"''"'"');
+    define('"'"'EXCH_BLEUTRADE_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_BTER_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_CEXIO_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_CREX24_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_CCEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_COINMARKETS_PASS'"'"', '"'"''"'"');
+    define('"'"'EXCH_CRYPTOHUB_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_CRYPTOWATCH_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_DELIONDEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_EMPOEX_SECKEY'"'"', '"'"''"'"');
+    define('"'"'EXCH_ESCODEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_GATEIO_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_GRAVIEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_HITBTC_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_JUBI_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_KRAKEN_SECRET'"'"','"'"''"'"');
+    define('"'"'EXCH_KUCOIN_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_LIVECOIN_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_POLONIEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_SHAPESHIFT_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_STOCKSEXCHANGE_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_SWIFTEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_TRADEOGRE_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_YOBIT_SECRET'"'"', '"'"''"'"');
     
     // Automatic withdraw to Yaamp btc wallet if btc balance > 0.3
     define('"'"'EXCH_AUTO_WITHDRAW'"'"', 0.3);
@@ -1104,7 +1046,7 @@
     # Updating stratum config files with database connection info
     echo
     echo
-    echo -e "$CYAN => Updating stratum config files with database connection info. $COL_RESET"
+    echo -e "$CYAN => Updating stratum config files with database connection info $COL_RESET"
     echo
     sleep 3
  
