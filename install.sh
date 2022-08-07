@@ -67,9 +67,9 @@
     hide_output sudo apt -y upgrade
     hide_output sudo apt -y autoremove
     hide_output sudo apt-get install -y software-properties-common
-    apt_install dialog python3 python3-pip acl nano apt-transport-https figlet php8.1-mysql
+    apt_install dialog python3 python3-pip acl nano apt-transport-https figlet
     echo -e "$GREEN Done...$COL_RESET"
-
+    
 
     source conf/prerequisite.sh
     sleep 3
@@ -181,7 +181,13 @@
     sudo systemctl status php7.3-fpm | sed -n "1,3p"
     echo
     echo -e "$GREEN Done...$COL_RESET"
-
+    
+    # fix CDbConnection failed to open the DB connection.     
+    echo
+    echo -e "$CYAN Fixing DBconnection $COL_RESET"
+    apt_install php8.1-mysql
+    echo
+    hide_output service nginx restart
     
     # Installing other needed files
     echo
