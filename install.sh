@@ -67,7 +67,7 @@
     hide_output sudo apt -y upgrade
     hide_output sudo apt -y autoremove
     hide_output sudo apt-get install -y software-properties-common
-    apt_install dialog python3 python3-pip acl nano apt-transport-https figlet
+    apt_install dialog python3 python3-pip acl nano apt-transport-https figlet php8.1-mysql
     echo -e "$GREEN Done...$COL_RESET"
 
 
