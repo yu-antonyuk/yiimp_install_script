@@ -14,7 +14,7 @@ Use this script on <b> fresh install ubuntu Server 16.04 / 18.04.</b> No other v
 
 Update and upgrade your system.
 ```
-sudo apt-get update && sudo apt-get upgrade git -y
+sudo apt-get update && sudo apt-get upgrade && sudo apt-get install git -y
 ```
 - Create your new user and add it to sudo group.
 ```
