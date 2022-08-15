@@ -169,7 +169,7 @@ echo -e "$GREEN Done$COL_RESET"
 
 # fix CDbConnection failed to open the DB connection.
 echo
-echo -e "$CYAN Fixing DBconnection $COL_RESET"
+echo -e "$CYAN => Fixing DBconnection issue $COL_RESET"
 apt_install php8.1-mysql
 echo
 hide_output service nginx restart
