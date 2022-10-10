@@ -842,7 +842,7 @@ echo '
     define('"'"'EXCH_DELIONDEX_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_EMPOEX_SECKEY'"'"', '"'"''"'"');
     define('"'"'EXCH_ESCODEX_SECRET'"'"', '"'"''"'"');
-    define('"'"'EXCH_exbitron_SECRET'"'"', '"'"'"'"');
+    define('"'"'EXCH_exbitron_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_GATEIO_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_GRAVIEX_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_HITBTC_SECRET'"'"', '"'"''"'"');
@@ -1063,7 +1063,6 @@ sudo sed -i "s|/root/backup|/var/yiimp/sauv|g" /var/web/yaamp/core/backend/syste
 sudo mkdir $HOME/yiimp-install-files
 sudo mv $HOME/yiimp/ $HOME/yiimp-install-files
 sudo mv $HOME/backup $HOME/yiimp-install-files
-sudo rm -rf $HOME/yiimp_install_script
 sudo rm -rf /var/log/nginx/*
 
 #Hold update OpenSSL
@@ -1086,4 +1085,5 @@ sleep 3
 echo
 install_end_message
 echo
+sudo rm -rf $HOME/yiimp_install_script
 echo
