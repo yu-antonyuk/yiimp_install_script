@@ -151,19 +151,46 @@ fi
 hide_output sudo apt -y update
 
 if [[ ("$DISTRO" == "16") ]]; then
-    apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
-        php7.3-cgi php-pear php-auth imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php7.3-memcache php7.3-memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring
-
+apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd \
+php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi \
+php-pear php-auth-sasl mcrypt imagemagick libruby \
+php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3 \
+php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache \
+php-imagick php-gettext php7.3-zip php7.3-mbstring \
+fail2ban ntpdate python3 python3-dev python3-pip \
+curl git sudo coreutils pollinate unzip unattended-upgrades cron \
+pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev \
+libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev \
+build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev \
+automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev \
+libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached \
+php8.1-mysql
 else
-    apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd php7.3-mysql php7.3-imap php7.3-cli \
-        php7.3-cgi php-pear imagemagick libruby php7.3-curl php7.3-intl php7.3-pspell mcrypt php7.3-recode php7.3-sqlite3 php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php7.3-memcache php7.3-memcached php-memcache php-imagick php-gettext php7.3-zip php7.3-mbstring \
-        libpsl-dev libnghttp2-dev
+apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd \
+php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi \
+php-pear php-auth-sasl mcrypt imagemagick libruby \
+php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3 \
+php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache \
+php-imagick php-gettext php7.3-zip php7.3-mbstring \
+fail2ban ntpdate python3 python3-dev python3-pip \
+curl git sudo coreutils pollinate unzip unattended-upgrades cron \
+pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev \
+libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev \
+build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev \
+libpsl-dev libnghttp2-dev automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev \
+libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached \
+php8.1-mysql
 fi
-sleep 5
-hide_output sudo systemctl start php7.3-fpm
-sudo systemctl status php7.3-fpm | sed -n "1,3p"
-echo
-echo -e "$GREEN Done$COL_RESET"
+
+# ### Suppress Upgrade Prompts
+# When Ubuntu 20 comes out, we don't want users to be prompted to upgrade,
+# because we don't yet support it.
+if [ -f /etc/update-manager/release-upgrades ]; then
+sudo editconf.py /etc/update-manager/release-upgrades Prompt=never
+sudo rm -f /var/lib/ubuntu-release-upgrader/release-upgrade-available
+fi
+
+echo -e "$GREEN Done...$COL_RESET"
 
 # fix CDbConnection failed to open the DB connection.
 echo
@@ -173,21 +200,6 @@ echo
 hide_output service nginx restart
 
 echo -e "$GREEN Done$COL_RESET"
-
-# Installing other needed files
-echo
-echo -e "$CYAN => Installing other needed files $COL_RESET"
-echo
-sleep 3
-
-apt_install libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
-    librtmp-dev sendmail mutt screen git
-apt_install pwgen -y
-echo -e "$GREEN Done$COL_RESET"
-sleep 3
-
-# Installing Package to compile crypto currency 
-package_compile_crypto
 
 # Generating Random Passwords
 password=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
@@ -226,20 +238,20 @@ sleep 3
 if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
     apt_install fail2ban
     sleep 3
-    sudo systemctl status fail2ban | sed -n "1,3p"
+    restart_service fail2ban | sed -n "1,3p"
 fi
 
 if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
 
     apt_install ufw
 
-    hide_output sudo ufw allow ssh
-    hide_output sudo ufw allow http
-    hide_output sudo ufw allow https
+    hide_output ufw_allow ssh
+    hide_output ufw_allow http
+    hide_output ufw_allow https
 
     hide_output sudo ufw --force enable
     sleep 3
-    sudo systemctl status ufw | sed -n "1,3p"
+    restart_service ufw | sed -n "1,3p"
 fi
 
 echo
@@ -339,7 +351,7 @@ if [ ! -f /etc/timezone ]; then
 
     echo "Setting timezone to UTC."
     echo "Etc/UTC" /etc/timezone >sudo
-    sudo systemctl restart rsyslog
+    restart_service rsyslog
 
 fi
 sudo systemctl status rsyslog | sed -n "1,3p"
@@ -436,7 +448,7 @@ if [[ ("$sub_domain" == "y" || "$sub_domain" == "Y") ]]; then
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
     hide_output sudo systemctl reload php7.3-fpm.service
-    hide_output sudo systemctl restart nginx.service
+    hide_output restart_service nginx.service
     echo -e "$GREEN Done$COL_RESET"
 
     if [[ ("$ssl_install" == "y" || "$ssl_install" == "Y" || "$ssl_install" == "") ]]; then
@@ -559,7 +571,7 @@ if [[ ("$sub_domain" == "y" || "$sub_domain" == "Y") ]]; then
     fi
 
     hide_output sudo systemctl reload php7.3-fpm.service
-    hide_output sudo systemctl restart nginx.service
+    hide_output restart_service nginx.service
     echo -e "$GREEN Done$COL_RESET"
 
 else
@@ -645,7 +657,7 @@ else
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
     hide_output sudo systemctl reload php7.3-fpm.service
-    hide_output sudo systemctl restart nginx.service
+    hide_output restart_service nginx.service
     echo -e "$GREEN Done$COL_RESET"
 
     if [[ ("$ssl_install" == "y" || "$ssl_install" == "Y" || "$ssl_install" == "") ]]; then
@@ -771,7 +783,7 @@ else
 
     fi
     hide_output sudo systemctl reload php7.3-fpm.service
-    hide_output sudo systemctl restart nginx.service
+    hide_output restart_service nginx.service
 fi
 
 # Database Setup
@@ -1070,12 +1082,12 @@ sudo rm -rf /var/log/nginx/*
 sudo apt-mark hold openssl
 
 #Restart service
-sudo systemctl restart cron.service
-sudo systemctl restart mysql
+restart_service cron.service
+restart_service mysql
 sudo systemctl status mysql | sed -n "1,3p"
-sudo systemctl restart nginx.service
+restart_service nginx.service
 sudo systemctl status nginx | sed -n "1,3p"
-sudo systemctl restart php7.3-fpm.service
+restart_service php7.3-fpm.service
 sudo systemctl status php7.3-fpm | sed -n "1,3p"
 
 echo
