@@ -38,19 +38,17 @@ echo '# yiimp
     ' | sudo -E tee /etc/sudoers.d/${whoami} >/dev/null 2>&1
 
 #Copy needed files
-cd
-sudo mkdir buildcoin
 cd $HOME/yiimp_install_script
 sudo cp -r conf/functions.sh /etc/
 sudo cp -r utils/screen-scrypt.sh /etc/
 sudo cp -r utils/screen-stratum.sh /etc/
-sudo cp -r utils/builder.sh $HOME/buildcoin
 sudo cp -r conf/editconf.py /usr/bin/
 sudo chmod +x /usr/bin/editconf.py
 sudo chmod +x /etc/screen-scrypt.sh
 
 source /etc/functions.sh
 
+daemonbuiler_files
 term_art
 echo
 # Update package and Upgrade Ubuntu
@@ -188,21 +186,8 @@ apt_install pwgen -y
 echo -e "$GREEN Done$COL_RESET"
 sleep 3
 
-# Installing Package to compile crypto currency
-echo
-echo -e "$CYAN => Installing Package to compile crypto currency $COL_RESET"
-echo
-sleep 3
-
-apt_install build-essential
-apt_install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
-apt_install libminiupnpc10 libzmq5
-apt_install libcanberra-gtk-module libqrencode-dev libzmq3-dev
-apt_install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
-hide_output sudo apt -y update
-apt_install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
-echo -e "$GREEN Done$COL_RESET"
+# Installing Package to compile crypto currency 
+package_compile_crypto
 
 # Generating Random Passwords
 password=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
@@ -857,6 +842,7 @@ echo '
     define('"'"'EXCH_DELIONDEX_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_EMPOEX_SECKEY'"'"', '"'"''"'"');
     define('"'"'EXCH_ESCODEX_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_exbitron_SECRET'"'"', '"'"'"'"');
     define('"'"'EXCH_GATEIO_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_GRAVIEX_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_HITBTC_SECRET'"'"', '"'"''"'"');
@@ -1074,7 +1060,10 @@ sudo sed -i "s|/root/backup|/var/yiimp/sauv|g" /var/web/yaamp/core/backend/syste
 #sudo sed -i '14d' /var/web/yaamp/defaultconfig.php
 
 #Misc
-sudo mv $HOME/yiimp/ $HOME/yiimp-install-only-do-not-run-commands-from-this-folder
+sudo mkdir $HOME/yiimp-install-files
+sudo mv $HOME/yiimp/ $HOME/yiimp-install-files
+sudo mv $HOME/backup $HOME/yiimp-install-files
+sudo rm -rf $HOME/yiimp_install_script
 sudo rm -rf /var/log/nginx/*
 
 #Hold update OpenSSL
