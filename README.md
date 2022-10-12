@@ -1,7 +1,7 @@
 <h1 align="center"> Yiimp Install Scrypt v0.4.1 With DaemonBuilder (update 2022-10-10) 
 
 <a href="https://discord.gg/TTprjGD2tw"><img src="https://img.shields.io/discord/904564600354254898.svg?style=flat&label=Discord %3C3%20&color=7289DA%22" alt="Join Community Badge"/></a></h1>
-
+## Under Development NoT 🚫 Finished 🚫 Yet
  <h2 align="left"> :information_source: Yiimp install scrypt v0.4.1</h2>
 Use this script on <b> fresh install ubuntu Server 16.04 / 18.04.</b> No other version is currently supported. This install script will get you 95% ready to go with yiimp. There are a few things you need to do after the main install is finished.
 <h2 align="left"> ⚙️ The installer requires the following </h2>
