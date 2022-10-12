@@ -40,8 +40,8 @@ echo '# yiimp
 #Copy needed files
 cd $HOME/yiimp_install_script
 sudo cp -r conf/functions.sh /etc/
-sudo cp -r utils/screen-scrypt.sh /etc/
-sudo cp -r utils/screen-stratum.sh /etc/
+#sudo cp -r utils/screen-scrypt.sh /etc/
+#sudo cp -r utils/screen-stratum.sh /etc/
 sudo cp -r conf/editconf.py /usr/bin/
 sudo chmod +x /usr/bin/editconf.py
 sudo chmod +x /etc/screen-scrypt.sh

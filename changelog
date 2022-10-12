@@ -2,7 +2,11 @@ Yiimp Install Scrypt v0.2 // 10.04.2020
 Thanks to cryptopool-builders !!!!!!!!
 
 Information =>
-* Works with Ubuntu Server 16.04 / 18.04
+* Create start.sh
+     => New way for the installer to star
+ 
+ * Update user input menu
+
 * Update PHP 7.3
 * Change Aptitude by APT
 * Remove question Panel Admin
@@ -11,10 +15,7 @@ Information =>
 * Add script to remove all coin (utils/delcoin.sh)
 
 Fix =>
-* Fix command cli « Yiimp » : OK
-* Fix Backup SQL FrontEnd : OK (/var/yiimp/sauv)
-* Fix Permission on some folder
+
 
 Change =>
-* /etc/screen-scrypt.sh = add to crontab (main,loop2,blocks,debug)
-* /var/yiimp/sauv =  Backup SQL FrontEnd
+* Remove pool.conf from conf folder the script create it instead
