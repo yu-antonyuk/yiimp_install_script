@@ -187,7 +187,7 @@ bash start.sh
 sudo chmod +x /usr/bin/yiimpool
 
 # Check required files and set global variables
-cd $HOME/yiimp_install_script/install
+cd $HOME/yiimp_install_script/conf
 source pre_setup.sh
 
 # Create the STORAGE_USER and STORAGE_ROOT directory if they don't already exist.

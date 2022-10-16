@@ -2,10 +2,11 @@
 
 ###########################################################################################################
 # Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox                            #
-# Updated by Afinie for crypto use...                                                                     #
+# Updated by Afiniel for crypto use...                                                                     #
 # This script is intended to be run like this:                                                            #
 #                                                                                                         #
-#  curl https://raw.githubusercontent.com/Afiniel/yiinp-install-script/master/start.sh | bash                    # 
+#  https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/start.sh | bash
+# 
 #                                                                                                         #
 ###########################################################################################################
 
@@ -22,4 +23,4 @@ git clone https://github.com/afiniel/yiimp_install_script.git "$HOME"/yiimp_inst
 echo
 
 # Start Install script.
-bash $HOME/yiimp_install_script/Install.sh
+bash $HOME/yiimp_install_script/conf/start.sh

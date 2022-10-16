@@ -21,8 +21,8 @@ if [[ ("$FIRST_TIME_SETUP" == "1") ]]; then
     clear
     cd $HOME/yiimp_install_script/conf
     
-    source functions.sh
     # copy functions to /etc
+    source functions.sh
     sudo cp -r functions.sh /etc/
     sudo cp -r editconf.py /usr/bin
     sudo chmod +x /usr/bin/editconf.py
@@ -50,10 +50,10 @@ if [[ ("$FIRST_TIME_SETUP" == "1") ]]; then
     # Fix so line drawing characters are shown correctly in Putty on Windows. See #744.
     export NCURSES_NO_UTF8_ACS=1
     
-    #check for user
+    
     echo -e "$YELLOW Installing needed packages for setup to continue...$COL_RESET"
     sudo apt-get -q -q update
-    apt_get_quiet install dialog python3 python3-pip acl nano git apt-transport-https || exit 1
+    apt_get_quiet install dialog python3 python3-pip acl nano apt-transport-https || exit 1
     
     # Are we running as root?
     if [[ $EUID -ne 0 ]]; then
@@ -103,8 +103,8 @@ else
     echo -e "$YELLOW To run this installer anytime simply type: $GREEN yiimpool $COL_RESET"
     echo -e "$YELLOW Donations for continued support of this script are welcomed at: $COL_RESET"
     echo
-    echo -e "$YELLOW BTC: $CYAN  bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r $COL_RESET"
-    echo -e "$YELLOW DOGE: $CYAN DCj73fKJbHeDTJx7arz4z7bbknWkSDpD8h         $COL_RESET"
+    echo -e "$YELLOW BTC: $CYAN  bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y $COL_RESET"
+    echo -e "$YELLOW DOGE: $CYAN DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb         $COL_RESET"
     echo -e "$YELLOW ETH: $CYAN  0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB $COL_RESET"
     echo -e "$YELLOW LTC: $CYAN  ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw $COL_RESET"
     cd ~

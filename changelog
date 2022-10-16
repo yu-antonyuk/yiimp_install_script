@@ -1,21 +1,17 @@
-Yiimp Install Scrypt v0.2 // 10.04.2020
-Thanks to cryptopool-builders !!!!!!!!
+Yiimp Install Scrypt v0.4.1 - (2022-10-16)
+
 
 Information =>
 * Create start.sh
-     => New way for the installer to star
+     => New way for the installer to star.
+     => The installer now helps user to create new user if run as root.
  
  * Update user input menu
 
-* Update PHP 7.3
-* Change Aptitude by APT
-* Remove question Panel Admin
-* Remove question Time Zone
-* Add screen-scrypt to crontab
-* Add script to remove all coin (utils/delcoin.sh)
 
 Fix =>
 
 
 Change =>
-* Remove pool.conf from conf folder the script create it instead
+* Remove pool.conf from conf folder the script create it from now.
+* Remove old unfinished builder.sh from source.
