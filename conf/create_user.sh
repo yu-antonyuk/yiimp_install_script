@@ -10,7 +10,7 @@ clear
 
 # Welcome
 message_box "Yiimp Installer v0.4.1" \
-"Hello and thanks for using the Yiimpool Installer v2.0!
+"Hello and thanks for using the Yiimpool Installer!
 \n\nInstallation for the most part is fully automated. In most cases any user responses that are needed are asked prior to the installation.
 \n\nNOTE: You should only install this on a brand new Ubuntu 16.04 or Ubuntu 18.04 installation."
 # Root warning message box
@@ -181,7 +181,7 @@ echo '# yiimp
 ' | sudo -E tee /etc/sudoers.d/${yiimpadmin} >/dev/null 2>&1
 
 echo '
-cd ~/yiimpool/install
+cd ~/yiimp_install_script/install
 bash start.sh
 ' | sudo -E tee /usr/bin/yiimpool >/dev/null 2>&1
 sudo chmod +x /usr/bin/yiimpool
@@ -207,13 +207,13 @@ PUBLIC_IPV6='"${PUBLIC_IPV6}"'
 DISTRO='"${DISTRO}"'
 PRIVATE_IP='"${PRIVATE_IP}"'' | sudo -E tee /etc/yiimpool.conf >/dev/null 2>&1
 
-sudo cp -r ~/yiimpool /home/${yiimpadmin}/
+sudo cp -r ~/yiimp_install_script /home/${yiimpadmin}/
 cd ~
 sudo setfacl -m u:${yiimpadmin}:rwx /home/${yiimpadmin}/yiimpool
 sudo rm -r $HOME/yiimp_install_script
 clear
 echo -e "$RED New User is $COL_RESET $GREEN Created $COL_RESET $RED...$COL_RESET"
-echo -e "$RED Please reboot system and log in as the new user $GREEN ${yiimpadmin} $COL_RESET and type$COL_RESET $GREEN yiimpool$COL_RESET $RED to continue setup...$COL_RESET"
+echo -e "$RED Please reboot system and log in as the new user:$GREEN ${yiimpadmin} $COL_RESET $RED and type$COL_RESET $GREEN yiimpool$COL_RESET $RED to continue setup...$COL_RESET"
 exit 0;;
 
 1)
