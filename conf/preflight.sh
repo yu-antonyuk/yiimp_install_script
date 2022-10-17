@@ -78,3 +78,28 @@ fi
 if [ -z "$STORAGE_ROOT" ]; then
   STORAGE_ROOT=$([[ -z "$DEFAULT_STORAGE_ROOT" ]] && echo "/home/$STORAGE_USER" || echo "$DEFAULT_STORAGE_ROOT")
 fi
+
+# BTC Donation 
+if [ -z "$BTCDON" ]; then
+  BTCDON=$([[ -z "$DEFAULT_BTCDON" ]] && echo "bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y" || echo "$DEFAULT_BTCDON")
+fi
+
+# ETH Donation Address 
+if [ -z "$LTCDON" ]; then
+  LTCDON=$([[ -z "$DEFAULT_LTCDON" ]] && echo "ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw" || echo "$DEFAULT_LTCDON")
+fi
+
+# LTC Donation Address
+if [ -z "$DOGEDON" ]; then
+  DOGEDON=$([[ -z "$DEFAULT_DOGEDON" ]] && echo "DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb" || echo "$DEFAULT_DOGEDON")
+fi
+
+# DOGE Donation Address
+if [ -z "$ETHDON" ]; then
+  ETHDON=$([[ -z "$DEFAULT_ETHDON" ]] && echo "0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB" || echo "$DEFAULT_ETHDON")
+fi
+
+# BCH Donation Address
+if [ -z "$BCHDON" ]; then
+  BCHDON=$([[ -z "$DEFAULT_BCHDONATION" ]] && echo "qpy2ehcxtddkfrrxqyq5skrvace66wvuqyuyzc87sc" || echo "$DEFAULT_BCHDONATION")
+fi

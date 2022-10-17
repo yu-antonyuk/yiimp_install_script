@@ -112,6 +112,13 @@ if [[ ("$UsingSSH" == "yes") ]]; then
   DISTRO='"${DISTRO}"'
   PRIVATE_IP='"${PRIVATE_IP}"'' | sudo -E tee /etc/yiimpool.conf >/dev/null 2>&1
 
+# Create the donationaddress.conf in /etc/donation.conf so that standalone
+echo 'BTCDON='"bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y"'
+BCHDONATION='"qzz0aff2k0xnwyzg7k9fcxlndtaj4wa65uxteqe84m"'
+DOGEDON='"DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb"'
+LTCDON='"ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw"'
+ETHDON='"0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB"'' | sudo -E tee /etc/donationaddress.conf >/dev/null 2>&1
+
   sudo cp -r ~/yiimp_install_script /home/${yiimpadmin}/
   cd ~
   sudo setfacl -m u:${yiimpadmin}:rwx /home/${yiimpadmin}/yiimp_install_script
@@ -206,6 +213,13 @@ PUBLIC_IP='"${PUBLIC_IP}"'
 PUBLIC_IPV6='"${PUBLIC_IPV6}"'
 DISTRO='"${DISTRO}"'
 PRIVATE_IP='"${PRIVATE_IP}"'' | sudo -E tee /etc/yiimpool.conf >/dev/null 2>&1
+
+# Create the donationaddress.conf in /etc/donation.conf so that standalone
+echo 'BTCDON='"bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y"'
+BCHDONATION='"qzz0aff2k0xnwyzg7k9fcxlndtaj4wa65uxteqe84m"'
+DOGEDON='"DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb"'
+LTCDON='"ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw"'
+ETHDON='"0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB"'' | sudo -E tee /etc/donationaddress.conf >/dev/null 2>&1
 
 sudo cp -r ~/yiimp_install_script /home/${yiimpadmin}/
 cd ~

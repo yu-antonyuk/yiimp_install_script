@@ -69,8 +69,9 @@ source $STORAGE_ROOT/yiimp/.yiimp.conf
 clear
 
 if [[ ("$UsingDomain" == "yes") ]]; then
-  echo -e "Installation of your Yiimp is now completed."
-  echo -e "You $RED*MUST REBOOT*$COL_RESET the machine to finalize the machine updates and folder permissions! $MAGENTA YiiMP will not function until a reboot is performed!$COL_RESET"
+  echo -e "$YELLOW Installation completed!$COL_RESET"
+  echo -e "$YELLOW Your YiiMP pool is now available at https://$DomainName$COL_RESET"
+  echo -e "You $RED*MUST REBOOT*$COL_RESET the machine to finalize the machine updates and folder permissions! $MAGENTA YiiMP will not function until a$RED reboot$MAGENTA is performed!$COL_RESET"
   echo
   echo -e "$YELLOW =>  Important!$COL_RESET After first reboot it may take up to 1 minute for the main|loop2|blocks|debug screens to start!"
   echo -e "If they show$RED stopped$COL_RESET, after 1 minute, type$GREEN motd$COL_RESET to refresh the screen."
@@ -94,18 +95,18 @@ else
 fi
 
 echo
-echo -e "$YELLOW =>  Happy mining $COL_RESET"
-echo "----------------------------------------------------------------------------"
+echo -e "$YELLOW                     Donate Wallets:                                   $COL_RESET"
+echo "-------------------------------------|---------------------------------------"
+echo -e "$YELLOW Thank you for using Yiimp Install Script v0.4.1 fork by Afiniel!      $COL_RESET"
 echo
-echo -e "$GREEN Thank you for using Yiimp Install Script fork by Afiniel!         $COL_RESET"
-echo
-echo -e "$YELLOW =>  To run this installer anytime simply type, $GREEN yiimpool       $COL_RESET"
-echo -e "$YELLOW =>  If you want to support by donate, use wallet below               $COL_RESET"
-echo
-echo -e "$YELLOW =>  BTC:$COL_RESET $GREEN bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y  $COL_RESET"
-echo -e "$YELLOW =>  BCH:$COL_RESET $GREEN qpy2ehcxtddkfrrxqyq5skrvace66wvuqyuyzc87sc  $COL_RESET"
-echo -e "$YELLOW =>  ETH:$COL_RESET $GREEN 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB  $COL_RESET"
-echo -e "$YELLOW =>  DOGE:$COL_RESET $GREEN DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb         $COL_RESET"
-echo "----------------------------------------------------------------------------"
+echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
+echo -e "$YELLOW =>  Do you want to support me? Feel free to use wallets below:        $COL_RESET"
+echo "-------------------------------------|---------------------------------------"
+echo -e "$YELLOW =>  BTC:$GREEN ${BTCDON}                                   $COL_RESET"
+echo -e "$YELLOW =>  BCH:$GREEN ${BCHDON}                                   $COL_RESET"
+echo -e "$YELLOW =>  ETH:$GREEN ${ETHDON}                                   $COL_RESET"
+echo -e "$YELLOW =>  DOGE:$GREEN ${DOGEDON}                                 $COL_RESET"
+echo -e "$YELLOW =>  LTC:$GREEN ${LTCDON}                                   $COL_RESET"
+echo "-------------------------------------|--------------------------------------"
 exit 0
 
