@@ -30,7 +30,7 @@ cd $HOME/yiimpool/install
 source bootstrap_coin.sh;
 fi
 
-if [ $RESULT = 3 ]
+if [ $RESULT = 4 ]
 then
 clear;
 exit;

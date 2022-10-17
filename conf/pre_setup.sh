@@ -5,7 +5,7 @@
 
 source /etc/functions.sh
 clear
-echo -e "$YELLOW => Setting our global variables $COL_RESET"
+echo -e "$YELLOW => Setting our global variables... $COL_RESET"
 
 # If the machine is behind a NAT, inside a VM, etc., it may not know
 # its IP address on the public network / the Internet. Ask the Internet
@@ -59,7 +59,7 @@ if [ -z "${PUBLIC_IPV6:-}" ]; then
     if [[ -z "${PUBLIC_IPV6:-}" && $MATCHED == 0 ]]; then
         input_box "IPv6 Address (Optional)" \
         "Enter the public IPv6 address of this machine, as given to you by your ISP.
-        \n\nLeave blank if the machine does not have an IPv6 address.
+                                                                                                    			\n\nLeave blank if the machine does not have an IPv6 address.
         \n\nPublic IPv6 address:" \
         ${DEFAULT_PUBLIC_IPV6:-} \
         PUBLIC_IPV6
