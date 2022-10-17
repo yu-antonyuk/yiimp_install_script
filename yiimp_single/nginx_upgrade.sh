@@ -50,4 +50,4 @@ echo -e "$GREEN NGINX upgrade complete$COL_RESET"
 restart_service nginx
 restart_service php7.3-fpm
 set +eu +o pipefail
-cd $HOME/yiimpool/yiimp_single
+cd $HOME/yiimp_install_script/yiimp_single
