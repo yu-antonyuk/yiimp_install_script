@@ -17,7 +17,7 @@ sudo chmod +x /etc/update-motd.d/*
 sudo cp -r 00-header 10-sysinfo 90-footer /etc/update-motd.d/
 
 
-cd $HOME/yiimpool/yiimp_single/ubuntu
+cd $HOME/yiimpool/yiimp_single
 # copy additional files
 sudo cp -r screens /usr/bin/
 sudo chmod +x /usr/bin/screens
