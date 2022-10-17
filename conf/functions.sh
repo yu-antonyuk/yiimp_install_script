@@ -1,7 +1,7 @@
 #!/bin/bash
 #####################################################
 # Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
-# Updated by cryptopool.builders for crypto use...
+# Updated by afiniel for crypto use...
 # Modified by Xavatar
 # Current Modified by Afiniel (2022-06-06)
 # Updated by Afiniel (2022-08-01)
@@ -113,15 +113,15 @@ function term_art {
     echo "  ╚██╔╝  ██║██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║   ██║██║      "     
     echo "   ██║   ██║██║██║ ╚═╝ ██║██║     ╚██████╔╝╚██████╔╝███████╗ "
     echo "   ╚═╝   ╚═╝╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝  ╚═════╝ ╚══════╝ "               
-	echo -e "$CYAN  ------------------------------------------ 	  											$COL_RESET"
+	echo -e "$CYAN  -------------------|----------------------- 	  											$COL_RESET"
 	echo -e "$YELLOW Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
 	echo -e "$YELLOW  Version:$COL_RESET $GREEN v0.4.1 														$COL_RESET"
-	echo -e "$CYAN    --------------------------------------------------------------------- 	  			$COL_RESET"
+	echo -e "$CYAN    -----------------|---------------------------------------------------- 	  			$COL_RESET"
 	echo -e "$YELLOW  This script will install all the dependencies and will install Yiimp.					$COL_RESET"
 	echo -e "$YELLOW  It will also install a MySQL database and a Web server.								$COL_RESET"
 	echo -e "$YELLOW  MariaDB is used for the database.														$COL_RESET"
 	echo -e "$YELLOW  Nginx is used for the Web server, PHP 7.3 is also installed.							$COL_RESET"
-	echo -e "$CYAN    --------------------------------------------------------------------- 	  			$COL_RESET"
+	echo -e "$CYAN    -----------------|---------------------------------------------------- 	  			$COL_RESET"
 	echo
 
 }
@@ -168,6 +168,33 @@ function hide_output {
 
 	rm -f $OUTPUT
 }
+
+
+function last_words {
+    echo "<-------------------------------------|---------------------------------------->"
+    echo
+    echo -e "$YELLOW Thank you for using the Yiimpool Installer $GREEN v0.4.1!             $COL_RESET"
+    echo
+    echo -e "$YELLOW To run this installer anytime simply type: $GREEN yiimpool            $COL_RESET"
+   	echo -e "$YELLOW Donations for continued support of this script are welcomed at:       $COL_RESET"
+   	echo "<-------------------------------------|--------------------------------------->"
+    echo -e "$YELLOW                     Donate Wallets:                                   $COL_RESET"
+    echo "<-------------------------------------|--------------------------------------->"
+    echo -e "$YELLOW Thank you for using Yiimp Install Script v0.4.1 fork by Afiniel!      $COL_RESET"
+    echo
+    echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
+    echo -e "$YELLOW =>  Do you want to support me? Feel free to use wallets below:        $COL_RESET"
+    echo "<-------------------------------------|--------------------------------------->"
+   	echo -e "$YELLOW =>  BTC:$GREEN ${BTCDON}                                   		 $COL_RESET"
+    echo -e "$YELLOW =>  BCH:$GREEN ${BCHDON}                                   		 $COL_RESET"
+    echo -e "$YELLOW =>  ETH:$GREEN ${ETHDON}                                   		 $COL_RESET"
+    echo -e "$YELLOW =>  DOGE:$GREEN ${DOGEDON}                                 		 $COL_RESET"
+   	echo -e "$YELLOW =>  LTC:$GREEN ${LTCDON}                                   		 $COL_RESET"
+    echo "<-------------------------------------|-------------------------------------->"
+	exit 0
+}
+
+
 
 function package_compile_crypto {
 

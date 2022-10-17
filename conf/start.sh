@@ -96,16 +96,26 @@ else
     cd $HOME/yiimp_install_script/conf
     source menu.sh
     echo
-    echo "-----------------------------------------------"
+    echo "-------------------------------------|----------------------------------------"
     echo
-    echo -e "$YELLOW Thank you for using the Yiimpool Installer $GREEN v0.4.1! $COL_RESET"
+    echo -e "$YELLOW Thank you for using the Yiimpool Installer $GREEN v0.4.1!            $COL_RESET"
     echo
-    echo -e "$YELLOW To run this installer anytime simply type: $GREEN yiimpool $COL_RESET"
-    echo -e "$YELLOW Donations for continued support of this script are welcomed at: $COL_RESET"
+    echo -e "$YELLOW To run this installer anytime simply type: $GREEN yiimpool           $COL_RESET"
+    echo -e "$YELLOW Donations for continued support of this script are welcomed at:      $COL_RESET"
+    echo "-------------------------------------|---------------------------------------"
+    echo -e "$YELLOW                     Donate Wallets:                                   $COL_RESET"
+    echo "-------------------------------------|---------------------------------------"
+    echo -e "$YELLOW Thank you for using Yiimp Install Script v0.4.1 fork by Afiniel!      $COL_RESET"
     echo
-    echo -e "$YELLOW BTC: $CYAN  bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y $COL_RESET"
-    echo -e "$YELLOW DOGE: $CYAN DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb         $COL_RESET"
-    echo -e "$YELLOW ETH: $CYAN  0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB $COL_RESET"
-    echo -e "$YELLOW LTC: $CYAN  ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw $COL_RESET"
+    echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
+    echo -e "$YELLOW =>  Do you want to support me? Feel free to use wallets below:        $COL_RESET"
+    echo "-------------------------------------|---------------------------------------"
+    echo -e "$YELLOW =>  BTC:$GREEN ${BTCDON}                                   $COL_RESET"
+    echo -e "$YELLOW =>  BCH:$GREEN ${BCHDON}                                   $COL_RESET"
+    echo -e "$YELLOW =>  ETH:$GREEN ${ETHDON}                                   $COL_RESET"
+    echo -e "$YELLOW =>  DOGE:$GREEN ${DOGEDON}                                 $COL_RESET"
+    echo -e "$YELLOW =>  LTC:$GREEN ${LTCDON}                                   $COL_RESET"
+    echo "-------------------------------------|--------------------------------------"
+    exit 0
     cd ~
 fi
