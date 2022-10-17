@@ -37,7 +37,7 @@ fi
 #                                                                              #
 # Program: yiimp screen startup script                                         #
 #                                                                              #
-# BTC Donation: bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r                     #
+# BTC Donation: bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y                     #
 #                                                                              #
 ################################################################################
 sudo chmod 777 $STORAGE_ROOT/yiimp/site/log/.
@@ -60,7 +60,7 @@ echo '#!/usr/bin/env bash
 #                                                                              #
 # Program: yiimp stratum startup script                                        #
 #                                                                              #
-# BTC Donation: bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r                     #
+# BTC Donation: bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y                     #
 #                                                                              #
 ################################################################################
 source /etc/yiimpool.conf

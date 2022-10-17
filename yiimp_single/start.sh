@@ -102,10 +102,10 @@ echo
 echo -e "$YELLOW =>  To run this installer anytime simply type, $GREEN yiimpool       $COL_RESET"
 echo -e "$YELLOW =>  If you want to support by donate, use wallet below               $COL_RESET"
 echo
-echo -e "$YELLOW =>  BTC:$COL_RESET $GREEN bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r  $COL_RESET"
+echo -e "$YELLOW =>  BTC:$COL_RESET $GREEN bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y  $COL_RESET"
 echo -e "$YELLOW =>  BCH:$COL_RESET $GREEN qpy2ehcxtddkfrrxqyq5skrvace66wvuqyuyzc87sc  $COL_RESET"
 echo -e "$YELLOW =>  ETH:$COL_RESET $GREEN 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB  $COL_RESET"
-echo -e "$YELLOW =>  DOGE:$COL_RESET $GREEN DCj73fKJbHeDTJx7arz4z7bbknWkSDpD8h         $COL_RESET"
+echo -e "$YELLOW =>  DOGE:$COL_RESET $GREEN DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb         $COL_RESET"
 echo "----------------------------------------------------------------------------"
 exit 0
 

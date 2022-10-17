@@ -69,7 +69,7 @@ if [[ ("$FIRST_TIME_SETUP" == "1") ]]; then
         exit
     fi
     cd ~
-    
+      
 else
     
     clear

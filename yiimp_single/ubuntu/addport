@@ -182,8 +182,8 @@ echo -e "$YELLOW Make sure to add this to the Dedicated Port section in your Yii
 
 echo -e "$YELLOW Donations for continued support of this script are welcomed at: $COL_RESET"
 echo -e "$YELLOW ----------------------------------------------- $COL_RESET"
-echo -e "$YELLOW BTC: $CYAN bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r $COL_RESET"
-echo -e "$YELLOW DOGE $CYAN DCj73fKJbHeDTJx7arz4z7bbknWkSDpD8h        $COL_RESET"
+echo -e "$YELLOW BTC: $CYAN bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y $COL_RESET"
+echo -e "$YELLOW DOGE $CYAN DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb        $COL_RESET"
 echo -e "$YELLOW ETH  $CYAN 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB $COL_RESET"
 echo -e "$YELLOW LTC  $CYAN ltc1qxk9fl9pj6qjccd7getm0htxssyj44fdmwwqmc2 $COL_RESET"
 echo -e "$YELLOW ----------------------------------------------- $COL_RESET"

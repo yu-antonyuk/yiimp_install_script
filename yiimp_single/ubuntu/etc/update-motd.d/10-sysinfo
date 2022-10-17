@@ -100,10 +100,10 @@ echo -e "$YELLOL To reload this page just type:$RESTORE$GREEN motd $RESTORE"
 echo
 echo -e "$YELLOL Donations are welcomed at: $RESTORE"
 echo -e "$CYAN------------------------------------------------$RESTORE"
-echo -e "$YELLOL BTC:$RESTORE bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r $RESTORE"  
+echo -e "$YELLOL BTC:$RESTORE bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y $RESTORE"  
 echo -e "$YELLOL BCH:$RESTORE qpy2ehcxtddkfrrxqyq5skrvace66wvuqyuyzc87sc $RESTORE"
 echo -e "$YELLOL ETH:$RESTORE 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB $RESTORE"
-echo -e "$YELLOL DOGE:$RESTORE DCj73fKJbHeDTJx7arz4z7bbknWkSDpD8h        $RESTORE"
+echo -e "$YELLOL DOGE:$RESTORE DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb        $RESTORE"
 echo -e "$CYAN------------------------------------------------$RESTORE"
 /usr/lib/update-notifier/update-motd-reboot-required
 /usr/lib/update-notifier/apt-check --human-readable
