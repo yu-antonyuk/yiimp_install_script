@@ -51,7 +51,6 @@ source server_cleanup.sh
 source motd.sh
 source server_harden.sh
 source $STORAGE_ROOT/yiimp/.yiimp.conf
-daemonbuiler_files
 
 clear
 
