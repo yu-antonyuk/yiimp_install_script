@@ -45,7 +45,7 @@ source system.sh
 
 # fix CDbConnection failed to open the DB connection.
 echo
-echo -e "$YELLOW =>  => Fixing DBconnection issue $COL_RESET"
+echo -e "$YELLOW => Fixing DBconnection issue $COL_RESET"
 apt_install php8.1-mysql
 echo
 hide_output service nginx restart
