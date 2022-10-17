@@ -48,4 +48,4 @@ define('"'"'EXCH_SWIFTEX_SECRET'"'"', '"'"''"'"');
 define('"'"'EXCH_TRADEOGRE_SECRET'"'"', '"'"''"'"');
 define('"'"'EXCH_YOBIT_SECRET'"'"', '"'"''"'"');
 ' | sudo -E tee /etc/yiimp/keys.php >/dev/null 2>&1
-cd $HOME/yiimpool/yiimp_single
+cd $HOME/yiimp_install_script/yiimp_single
