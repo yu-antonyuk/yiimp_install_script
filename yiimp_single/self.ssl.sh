@@ -18,9 +18,6 @@ function print_error {
 }
 trap print_error ERR
 
-if [[ ("$wireguard" == "true") ]]; then
-source $STORAGE_ROOT/yiimp/.wireguard.conf
-fi
 echo -e "$YELLOW Creating initial SSL certificate...$COL_RESET"
 
 

@@ -36,6 +36,9 @@ fi
 echo -e "$GREEN Folders created...$COL_RESET"
 
 # Start the installation.
+echo '
+wireguard=false
+' | sudo -E tee $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf >/dev/null 2>&1;
 source questions.sh
 source $HOME/yiimpool/yiimp_single/.wireguard.install.cnf
 source system.sh
