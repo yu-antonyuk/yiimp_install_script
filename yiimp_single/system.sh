@@ -39,7 +39,7 @@ apt_install software-properties-common
 fi
 echo -e "$GREEN Done$COL_RESET"
 
-# PHP 7
+# PHP 7.3
 echo -e "$YELLOW =>  Installing Ondrej PHP PPA$COL_RESET"
 if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
 hide_output sudo add-apt-repository -y ppa:ondrej/php

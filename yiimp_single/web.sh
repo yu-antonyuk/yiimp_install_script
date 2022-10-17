@@ -13,14 +13,14 @@ source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 set -eu -o pipefail
 
 function print_error {
-    read line file <<<$(caller)
-    echo "An error occurred in line $line of file $file:" >&2
-    sed "${line}q;d" "$file" >&2
+  read line file <<<$(caller)
+  echo "An error occurred in line $line of file $file:" >&2
+  sed "${line}q;d" "$file" >&2
 }
 trap print_error ERR
 
 if [[ ("$wireguard" == "true") ]]; then
-source $STORAGE_ROOT/yiimp/.wireguard.conf
+  source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
 echo -e "$YELLOW =>  Building web file structure and copying files$COL_RESET"
@@ -37,17 +37,17 @@ sudo sed -i "s|ROOTDIR=/data/yiimp|ROOTDIR=${STORAGE_ROOT}/yiimp/site|g" /bin/yi
 if [[ ("$UsingSubDomain" == "y" || "$UsingSubDomain" == "Y" || "$UsingSubDomain" == "yes" || "$UsingSubDomain" == "Yes" || "$UsingSubDomain" == "YES") ]]; then
   cd $HOME/yiimp_install_script/yiimp_single
   source nginx_subdomain_nonssl.sh
-    if [[ ("$InstallSSL" == "y" || "$InstallSSL" == "Y" || "$InstallSSL" == "yes" || "$InstallSSL" == "Yes" || "$InstallSSL" == "YES") ]]; then
-      cd $HOME/yiimpool/yiimp_single
-      source nginx_subdomain_ssl.sh
-    fi
-      else
-        cd $HOME/yiimp_install_script/yiimp_single
-        source nginx_domain_nonssl.sh
-    if [[ ("$InstallSSL" == "y" || "$InstallSSL" == "Y" || "$InstallSSL" == "yes" || "$InstallSSL" == "Yes" || "$InstallSSL" == "YES") ]]; then
-      cd $HOME/yiimpool/yiimp_single
-      source nginx_domain_ssl.sh
-    fi
+  if [[ ("$InstallSSL" == "y" || "$InstallSSL" == "Y" || "$InstallSSL" == "yes" || "$InstallSSL" == "Yes" || "$InstallSSL" == "YES") ]]; then
+    cd $HOME/yiimp_install_script/yiimp_single
+    source nginx_subdomain_ssl.sh
+  fi
+else
+  cd $HOME/yiimp_install_script/yiimp_single
+  source nginx_domain_nonssl.sh
+  if [[ ("$InstallSSL" == "y" || "$InstallSSL" == "Y" || "$InstallSSL" == "yes" || "$InstallSSL" == "Yes" || "$InstallSSL" == "YES") ]]; then
+    cd $HOME/yiimp_install_script/yiimp_single
+    source nginx_domain_ssl.sh
+  fi
 fi
 
 echo -e "$YELLOW =>  Creating YiiMP configuration files$COL_RESET"
@@ -60,7 +60,7 @@ source yiimp_confs/blocks.sh
 echo -e "$GREEN Done$COL_RESET"
 
 echo -e "$YELLOW =>  Setting correct folder permissions$COL_RESET"
-whoami=`whoami`
+whoami=$(whoami)
 sudo usermod -aG www-data $whoami
 sudo usermod -a -G www-data $whoami
 sudo usermod -a -G crypto-data $whoami
@@ -73,7 +73,7 @@ sudo chgrp www-data $STORAGE_ROOT -R
 sudo chmod g+w $STORAGE_ROOT -R
 echo -e "$GREEN Done$COL_RESET"
 
-cd $HOME/yiimpool/yiimp_single
+cd $HOME/yiimp_install_script/yiimp_single
 
 #Updating YiiMP files for afiniel build
 echo -e "$YELLOW =>  Adding the afiniel flare to YiiMP$COL_RESET"
@@ -96,10 +96,10 @@ if [[ ("$wireguard" == "true") ]]; then
   internalrpcip="${DBInternalIP::-1}"
   internalrpcip="${internalrpcip::-1}"
   internalrpcip=$internalrpcip.0/26
-sudo sed -i '/# onlynet=ipv4/i\        echo "rpcallowip='${internalrpcip}'\\n";' $STORAGE_ROOT/yiimp/site/web/yaamp/modules/site/coin_form.php
+  sudo sed -i '/# onlynet=ipv4/i\        echo "rpcallowip='${internalrpcip}'\\n";' $STORAGE_ROOT/yiimp/site/web/yaamp/modules/site/coin_form.php
 fi
 
 echo -e "$GREEN Web build complete$COL_RESET"
 
 set +eu +o pipefail
-cd $HOME/yiimp_install_script/yiimp_single
+cd "$HOME"/yiimp_install_script/yiimp_single

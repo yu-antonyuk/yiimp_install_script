@@ -7,7 +7,7 @@
 
 source /etc/functions.sh
 source /etc/yiimpool.conf
-source $HOME/yiimpool/yiimp_single/.wireguard.install.cnf
+source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 if [[ ("$wireguard" == "true") ]]; then
 source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi

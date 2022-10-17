@@ -113,4 +113,4 @@ echo
 echo -e "$GREEN Daemon setup completed$COL_RESET"
 
 set +eu +o pipefail
-cd $HOME/yiimpool/yiimp_single
+cd $HOME/yiimp_install_script/yiimp_single
