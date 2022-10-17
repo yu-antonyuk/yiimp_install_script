@@ -181,7 +181,7 @@ echo '# yiimp
 ' | sudo -E tee /etc/sudoers.d/${yiimpadmin} >/dev/null 2>&1
 
 echo '
-cd ~/yiimp_install_script/install
+cd ~/yiimp_install_script/conf
 bash start.sh
 ' | sudo -E tee /usr/bin/yiimpool >/dev/null 2>&1
 sudo chmod +x /usr/bin/yiimpool

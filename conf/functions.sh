@@ -107,15 +107,21 @@ function install_end_message {
 function term_art {
 	clear
 	echo
-	echo -e "$CYAN  --------------------------------------------------------------------- 	  				$COL_RESET"
-	echo -e "$YELLOW  Welcome to the Yiimp Installer Script , Fork By Afiniel!								$COL_RESET"
-	echo -e "$GREEN  Version: v0.4.1 																			$COL_RESET"
-	echo -e "$CYAN  --------------------------------------------------------------------- 	  				$COL_RESET"
+    echo "██╗   ██╗██╗██╗███╗   ███╗██████╗  ██████╗  ██████╗ ██╗      "     
+    echo "╚██╗ ██╔╝██║██║████╗ ████║██╔══██╗██╔═══██╗██╔═══██╗██║      "
+    echo " ╚████╔╝ ██║██║██╔████╔██║██████╔╝██║   ██║██║   ██║██║      "     
+    echo "  ╚██╔╝  ██║██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║   ██║██║      "     
+    echo "   ██║   ██║██║██║ ╚═╝ ██║██║     ╚██████╔╝╚██████╔╝███████╗ "
+    echo "   ╚═╝   ╚═╝╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝  ╚═════╝ ╚══════╝ "               
+	echo -e "$CYAN  ------------------------------------------ 	  											$COL_RESET"
+	echo -e "$YELLOW Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
+	echo -e "$YELLOW  Version:$COL_RESET $GREEN v0.4.1 														$COL_RESET"
+	echo -e "$CYAN    --------------------------------------------------------------------- 	  			$COL_RESET"
 	echo -e "$YELLOW  This script will install all the dependencies and will install Yiimp.					$COL_RESET"
 	echo -e "$YELLOW  It will also install a MySQL database and a Web server.								$COL_RESET"
 	echo -e "$YELLOW  MariaDB is used for the database.														$COL_RESET"
 	echo -e "$YELLOW  Nginx is used for the Web server, PHP 7.3 is also installed.							$COL_RESET"
-	echo -e "$CYAN  --------------------------------------------------------------------- 	  				$COL_RESET"
+	echo -e "$CYAN    --------------------------------------------------------------------- 	  			$COL_RESET"
 	echo
 
 }
@@ -123,7 +129,7 @@ function term_art {
 function daemonbuiler_files {
 	echo -e "$YELLOW Copy => Copy Daemonbuilder files. $COL_RESET"
 	cd $HOME/yiimp_install_script
-	sudo mkdir -p $HOME/utils/daemon_builder
+	sudo mkdir -p /etc/utils/daemon_builder
 	sudo cp -r utils/start.sh $HOME/utils/daemon_builder
 	sudo cp -r utils/menu.sh $HOME/utils/daemon_builder
 	sudo cp -r utils/menu2.sh $HOME/utils/daemon_builder

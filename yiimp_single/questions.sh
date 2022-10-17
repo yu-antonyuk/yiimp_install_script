@@ -298,15 +298,13 @@ fi;;
 1)
 
 clear
-bash $(basenamebasename $0) && exit;;
-basenamebasenamebasenamebaseb
+bash $(basename $0) && exit;;
+
 255)
 clear
 echo "User canceled installation"
 exit 0
 ;;
 esac
-esac
 
 cd $HOME/yiimp_install_script/yiimp_single
-b

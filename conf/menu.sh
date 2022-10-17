@@ -19,7 +19,7 @@ fi
 if [ $RESULT = 1 ]
 then
 clear;
-cd $HOME/yiimp_install_script/conf
+cd $HOME/yiimp_install_script/yiimp_single
 source start.sh;
 fi
 
