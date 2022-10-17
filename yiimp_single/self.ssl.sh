@@ -18,7 +18,7 @@ function print_error {
 }
 trap print_error ERR
 
-echo -e "$YELLOW Creating initial SSL certificate...$COL_RESET"
+echo -e "$YELLOW => Creating initial SSL certificate$COL_RESET"
 
 
 # Install openssl.
@@ -69,6 +69,6 @@ if [ ! -f /etc/nginx/dhparam.pem ]; then
 sudo openssl dhparam -out /etc/nginx/dhparam.pem 2048
 fi
 
-echo -e "$GREEN Initial Self Signed SSL Generation complete...$COL_RESET"
+echo -e "$GREEN Initial Self Signed SSL Generation complete$COL_RESET"
 set +eu +o pipefail
 cd $HOME/yiimp_install_script/yiimp_single

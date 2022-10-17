@@ -22,7 +22,7 @@ source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
 # NGINX upgrade
-echo -e "$YELLOW Upgrading NGINX...$COL_RESET"
+echo -e "$YELLOW => Upgrading NGINX$COL_RESET"
 
 #Grab Nginx key and proper mainline package for distro
 echo "deb http://nginx.org/packages/mainline/ubuntu `lsb_release -cs` nginx" \
@@ -46,7 +46,7 @@ sudo rm -r /etc/nginx/conf.d/default.conf
 sudo rm -r /etc/nginx/sites-enabled/default*
 sudo rm -r /etc/nginx/sites-available/default*
 
-echo -e "$GREEN NGINX upgrade complete...$COL_RESET"
+echo -e "$GREEN NGINX upgrade complete$COL_RESET"
 restart_service nginx
 restart_service php7.3-fpm
 set +eu +o pipefail

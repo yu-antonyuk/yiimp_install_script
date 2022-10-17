@@ -168,9 +168,9 @@ echo
 echo "Adding stratum.${coinsymbollower} to crontab for autostart at system boot."
 (crontab -l 2>/dev/null; echo "@reboot sleep 10 && bash stratum.${coinsymbollower} start ${coinsymbollower}") | crontab -
 echo
-echo -e "$YELLOW Starting your new stratum...$COL_RESET"
+echo -e "$YELLOW Starting your new stratum$COL_RESET"
 bash stratum.${coinsymbollower} start ${coinsymbollower}
-echo -e "$YELLOW Your new stratum is$GREEN started...$YELLOW Do NOT run the start command manually...$COL_RESET"
+echo -e "$YELLOW Your new stratum is$GREEN started...$YELLOW Do NOT run the start command manually$COL_RESET"
 echo
 echo -e "$YELLOW To use your new stratum type,$BLUE stratum.${coinsymbollower} start|stop|restart ${coinsymbollower} $COL_RESET"
 echo

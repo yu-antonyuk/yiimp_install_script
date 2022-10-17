@@ -36,7 +36,7 @@ function database_import_sql {
 
 	# Import Database from SQL files
 	sleep 1
-	echo -e "$CYAN Importing Database from SQL files...$COL_RESET"
+	echo -e "$CYAN Importing Database from SQL files$COL_RESET"
 
 	echo
 	cd ~
@@ -148,7 +148,7 @@ function daemonbuiler_files {
 	' | sudo -E tee /usr/bin/daemonbuilder >/dev/null 2>&1
 	sudo chmod +x /usr/bin/daemonbuilder
 	echo
-	echo -e "$GREEN Done...$COL_RESET"
+	echo -e "$GREEN Done$COL_RESET"
 	sleep 2
 }
 

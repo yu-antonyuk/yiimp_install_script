@@ -190,7 +190,7 @@ sudo editconf.py /etc/update-manager/release-upgrades Prompt=never
 sudo rm -f /var/lib/ubuntu-release-upgrader/release-upgrade-available
 fi
 
-echo -e "$GREEN Done...$COL_RESET"
+echo -e "$GREEN Done$COL_RESET"
 
 # fix CDbConnection failed to open the DB connection.
 echo
@@ -346,7 +346,7 @@ echo
 echo -e "$CYAN => Update default timezone $COL_RESET"
 echo
 
-echo -e " Setting TimeZone to UTC...$COL_RESET"
+echo -e "$YELLOW Setting TimeZone to$GREEN UTC$COL_RESET"
 if [ ! -f /etc/timezone ]; then
 
     echo "Setting timezone to UTC."

@@ -66,7 +66,7 @@ if [[ ("$UsingSSH" == "yes") ]]; then
   clear
 
   # Add user
-  echo -e "Adding new user and setting SSH key...$COL_RESET"
+  echo -e "$YELLOW => Adding new user and setting SSH key$COL_RESET"
   sudo adduser ${yiimpadmin} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
   echo -e "${RootPassword}\n${RootPassword}" | passwd ${yiimpadmin}
   sudo usermod -aG sudo ${yiimpadmin}
@@ -118,7 +118,7 @@ if [[ ("$UsingSSH" == "yes") ]]; then
   sudo rm -r $HOME/yiimpool
   clear
   echo "New User is created and make sure you saved your private key..."
-  echo -e "$RED Please reboot system and log in as: $GREEN  ${yiimpadmin} $COL_RESET $RED and type $COL_RESET $GREEN yiimpool $COL_RESET $RED to continue setup...$COL_RESET"
+  echo -e "$YELLOW Please$RED Reboot$YELLOW system and log in as:$CYAN ${yiimpadmin} $COL_RESET $YELLOW and type:$GREEN yiimpool $COL_RESET $YELLOW to$GREEN continue setup$COL_RESET"
   exit 0
 fi
 
@@ -168,7 +168,7 @@ case $response in
 
 0)
 clear
-echo -e " Adding new user and password...$COL_RESET"
+echo -e "$YELLOW => Adding new user and password$COL_RESET"
 
 sudo adduser ${yiimpadmin} --gecos "First Last,RoomNumber,WorkPhone,HomePhone" --disabled-password
 echo -e ""${RootPassword}"\n"${RootPassword}"" | passwd ${yiimpadmin}
@@ -212,8 +212,8 @@ cd ~
 sudo setfacl -m u:${yiimpadmin}:rwx /home/${yiimpadmin}/yiimpool
 sudo rm -r $HOME/yiimp_install_script
 clear
-echo -e "$RED New User is $COL_RESET $GREEN Created $COL_RESET $RED...$COL_RESET"
-echo -e "$RED Please reboot system and log in as the new user:$GREEN ${yiimpadmin} $COL_RESET $RED and type$COL_RESET $GREEN yiimpool$COL_RESET $RED to continue setup...$COL_RESET"
+echo -e "$RED New User is $COL_RESET $GREEN Created $COL_RESET $RED$COL_RESET"
+echo -e "$RED Please reboot system and log in as the new user:$GREEN ${yiimpadmin} $COL_RESET $RED and type$COL_RESET $GREEN yiimpool$COL_RESET $RED to continue setup$COL_RESET"
 exit 0;;
 
 1)

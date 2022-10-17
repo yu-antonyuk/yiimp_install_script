@@ -51,7 +51,7 @@ if [[ ("$FIRST_TIME_SETUP" == "1") ]]; then
     export NCURSES_NO_UTF8_ACS=1
     
     
-    echo -e "$YELLOW Installing needed packages for setup to continue...$COL_RESET"
+    echo -e "$YELLOW => Installing needed packages for setup to continue$COL_RESET"
     sudo apt-get -q -q update
     apt_get_quiet install dialog python3 python3-pip acl nano apt-transport-https || exit 1
     
