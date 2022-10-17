@@ -132,9 +132,6 @@ keccakstop='screen -X -S keccak quit'
 keccakc="screen -dmS keccakc bash $STRATUM_DIR/run.sh keccakc"
 keccakcstop='screen -X -S keccakc quit'
 
-kawpow="screen -dms kawpow bash $STRATUM_DIR/run.sh kawpow"
-kawpowstop='screen -X -S kawpow quit'
-
 heavyhash="screen -dms heavyhash bash $STRATUM_DIR/run.sh heavyhash"
 heavyhashstop='screen -X -S heavyhash quit'
 

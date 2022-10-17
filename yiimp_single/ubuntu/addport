@@ -69,7 +69,7 @@ fi
 fi
 
 # Prevent duplications from people running addport multiple times for the same coin...Also known as asshats...
-if [ -f $STORAGE_ROOT/yiimp/site/stratum/config/$coinsymbollower.$coinalgo.conf ]; then
+if [ -f "$STORAGE_ROOT"/yiimp/site/stratum/config/$coinsymbollower.$coinalgo.conf ]; then
   if [[ ("$overwrite" == "y" || "$overwrite" == "Y" || "$overwrite" == "yes" || "$overwrite" == "YES") ]]; then
     # Insert the port in to the new symbol.algo.conf
     sed -i '/port/c\port = '${coinport}'' $coinsymbollower.$coinalgo.conf
@@ -181,12 +181,12 @@ echo
 echo -e "$YELLOW Make sure to add this to the Dedicated Port section in your YiiMP admin panel! $COL_RESET"
 
 echo -e "$YELLOW Donations for continued support of this script are welcomed at: $COL_RESET"
-echo -e "$YELLOW ----------------------------------------------- $COL_RESET"
-echo -e "$YELLOW BTC: $CYAN bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y $COL_RESET"
-echo -e "$YELLOW DOGE $CYAN DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb        $COL_RESET"
-echo -e "$YELLOW ETH  $CYAN 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB $COL_RESET"
-echo -e "$YELLOW LTC  $CYAN ltc1qxk9fl9pj6qjccd7getm0htxssyj44fdmwwqmc2 $COL_RESET"
-echo -e "$YELLOW ----------------------------------------------- $COL_RESET"
+echo -e "$YELLOW --------------------------------------------------------------- $COL_RESET"
+echo -e "$YELLOW BTC: $CYAN ${BTCDON}                                            $COL_RESET"
+echo -e "$YELLOW DOGE $CYAN ${DOGEDON}                                           $COL_RESET"
+echo -e "$YELLOW ETH  $CYAN ${ETHDON}                                            $COL_RESET"
+echo -e "$YELLOW LTC  $CYAN ${LTCDON}                                            $COL_RESET"
+echo -e "$YELLOW --------------------------------------------------------------- $COL_RESET"
 
 cd ~
 exit 0
