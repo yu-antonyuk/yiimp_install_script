@@ -19,32 +19,10 @@ daemonbuilder
 ```
 in the terminal and Daemonbuilder will start.
 
-<h2 align="center"> 💾 Pre Installation. </h2>
-
-Update and upgrade your system.
+<h2 align="center"> 💾 How to start the installation. </h2>
+To start the installation just put the command line in the terminal and run it on a fresh install ubuntu 18 or ubuntu 16 server.
 ```
-sudo apt-get update && sudo apt-get upgrade && sudo apt-get install git -y
-```
-- Create your new user and add it to sudo group.
-```
-adduser pool
-```
-- Add the new user to the sudo group.
-```
-adduser pool sudo
-```
-- Now when you have add your new user to the sudo group, you need to reboot and then login to the new user.
-
-### Clone the repository
-- > Be sure you have su in to your pool user before you clone it, else you clone it to root user
-```
-sudo su pool
-```
-<h2 align="center"> 💾 To start the installation. </h2>
-Just copy and past the command below and the install will start.
-
-```
-git clone https://github.com/afiniel/yiimp_install_script.git && bash $HOME/yiimp_install_script/install.sh
+curl https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/start.sh | bash
 ```
 
 - It will take some time for the installation to be finnished.
