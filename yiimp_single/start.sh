@@ -36,9 +36,7 @@ fi
 echo -e "$GREEN Folders created$COL_RESET"
 
 # Start the installation.
-echo '
-wireguard=false
-' | sudo -E tee $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf >/dev/null 2>&1;
+source menu.sh
 source questions.sh
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 source system.sh
@@ -52,11 +50,11 @@ hide_output service nginx restart
 sleep 2
 
 echo -e "$GREEN Done$COL_RESET"
-
-source self.ssl.sh
+source self_ssl.sh
 source db.sh
 source nginx_upgrade.sh
 source web.sh
+source stratum.sh
 source daemon.sh
 if [[ ("$UsingDomain" == "yes") ]]; then
 source send_mail.sh

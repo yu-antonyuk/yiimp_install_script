@@ -12,7 +12,7 @@ RESULT=$(dialog --stdout --default-item 1 --title "Yiimpool Installer v0.4.1" --
 1 "Continue" \
 2 Exit)
 if [ $RESULT = ]
-thenI
+then
 bash $(basename $0) && exit;
 fi
 
