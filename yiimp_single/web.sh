@@ -51,7 +51,7 @@ else
 fi
 
 echo -e "$YELLOW =>  Creating YiiMP configuration files$COL_RESET"
-cd $HOME/yiimp_install_script/yiimp_single/yiimp_confs
+cd $HOME/yiimp_install_script/conf
 source yiimp_confs/keys.sh
 source yiimp_confs/yiimpserverconfig.sh
 source yiimp_confs/main.sh
