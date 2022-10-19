@@ -18,15 +18,15 @@ function print_error {
 trap print_error ERR
 
 if [[ ("$wireguard" == "true") ]]; then
-source $STORAGE_ROOT/yiimp/.wireguard.conf
+    source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
 # NGINX upgrade
 echo -e "$YELLOW => Upgrading NGINX$COL_RESET"
 
 #Grab Nginx key and proper mainline package for distro
-echo "deb http://nginx.org/packages/mainline/ubuntu `lsb_release -cs` nginx" \
-    | sudo tee /etc/apt/sources.list.d/nginx.list >/dev/null 2>&1
+echo "deb http://nginx.org/packages/mainline/ubuntu $(lsb_release -cs) nginx" |
+    sudo tee /etc/apt/sources.list.d/nginx.list >/dev/null 2>&1
 
 sudo curl -fsSL https://nginx.org/keys/nginx_signing.key | sudo apt-key add - >/dev/null 2>&1
 hide_output sudo apt-get update

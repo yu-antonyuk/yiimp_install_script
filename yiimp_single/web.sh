@@ -8,7 +8,7 @@
 source /etc/functions.sh
 source /etc/yiimpool.conf
 source $STORAGE_ROOT/yiimp/.yiimp.conf
-source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
+source $HOME/yiimpool/yiimp_single/.wireguard.install.cnf
 
 set -eu -o pipefail
 
@@ -23,7 +23,7 @@ if [[ ("$wireguard" == "true") ]]; then
   source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
-echo -e "$YELLOW =>  Building web file structure and copying files$COL_RESET"
+echo -e "$YELLOW Building web file structure and copying files$COL_RESET"
 cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
 sudo sed -i 's/AdminRights/'${AdminPanel}'/' $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/web/yaamp/modules/site/SiteController.php
 sudo cp -r $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/web $STORAGE_ROOT/yiimp/site/
@@ -38,20 +38,20 @@ if [[ ("$UsingSubDomain" == "y" || "$UsingSubDomain" == "Y" || "$UsingSubDomain"
   cd $HOME/yiimp_install_script/yiimp_single
   source nginx_subdomain_nonssl.sh
   if [[ ("$InstallSSL" == "y" || "$InstallSSL" == "Y" || "$InstallSSL" == "yes" || "$InstallSSL" == "Yes" || "$InstallSSL" == "YES") ]]; then
-    cd $HOME/yiimp_install_script/yiimp_single
+    cd cd $HOME/yiimp_install_script/yiimp_single
     source nginx_subdomain_ssl.sh
   fi
 else
   cd $HOME/yiimp_install_script/yiimp_single
   source nginx_domain_nonssl.sh
   if [[ ("$InstallSSL" == "y" || "$InstallSSL" == "Y" || "$InstallSSL" == "yes" || "$InstallSSL" == "Yes" || "$InstallSSL" == "YES") ]]; then
-    cd $HOME/yiimp_install_script/yiimp_single
+    cd cd $HOME/yiimp_install_script/yiimp_single
     source nginx_domain_ssl.sh
   fi
 fi
 
-echo -e "$YELLOW =>  Creating YiiMP configuration files$COL_RESET"
-cd $HOME/yiimp_install_script/conf
+echo -e "$YELLOW Creating YiiMP configuration files$COL_RESET"
+cd $HOME/yiimp_install_script/yiimp_single/yiimp_confs
 source yiimp_confs/keys.sh
 source yiimp_confs/yiimpserverconfig.sh
 source yiimp_confs/main.sh
@@ -59,7 +59,7 @@ source yiimp_confs/loop2.sh
 source yiimp_confs/blocks.sh
 echo -e "$GREEN Done$COL_RESET"
 
-echo -e "$YELLOW =>  Setting correct folder permissions$COL_RESET"
+echo -e "$YELLOW Setting correct folder permissions$COL_RESET"
 whoami=$(whoami)
 sudo usermod -aG www-data $whoami
 sudo usermod -a -G www-data $whoami
@@ -76,7 +76,7 @@ echo -e "$GREEN Done$COL_RESET"
 cd $HOME/yiimp_install_script/yiimp_single
 
 #Updating YiiMP files for afiniel build
-echo -e "$YELLOW =>  Adding the afiniel flare to YiiMP$COL_RESET"
+echo -e "$YELLOW Adding the afiniel flare to YiiMP$COL_RESET"
 
 sudo sed -i 's/YII MINING POOLS/'${DomainName}' Mining Pool/g' $STORAGE_ROOT/yiimp/site/web/yaamp/modules/site/index.php
 sudo sed -i 's/domain/'${DomainName}'/g' $STORAGE_ROOT/yiimp/site/web/yaamp/modules/site/index.php
@@ -102,4 +102,4 @@ fi
 echo -e "$GREEN Web build complete$COL_RESET"
 
 set +eu +o pipefail
-cd "$HOME"/yiimp_install_script/yiimp_single
+cd $HOME/yiimp_install_script/yiimp_single

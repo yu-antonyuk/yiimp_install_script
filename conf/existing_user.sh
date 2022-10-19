@@ -9,7 +9,7 @@ cd ~/yiimp_install_script/conf
 clear
 
 # Get logged in user name
-whoami=`whoami`
+whoami=$(whoami)
 echo -e " Modifying existing user $whoami for yiimpool support."
 sudo usermod -aG sudo ${whoami}
 
@@ -31,10 +31,10 @@ source pre_setup.sh
 
 # Create the STORAGE_USER and STORAGE_ROOT directory if they don't already exist.
 if ! id -u $STORAGE_USER >/dev/null 2>&1; then
-sudo useradd -m $STORAGE_USER
+    sudo useradd -m $STORAGE_USER
 fi
 if [ ! -d $STORAGE_ROOT ]; then
-sudo mkdir -p $STORAGE_ROOT
+    sudo mkdir -p $STORAGE_ROOT
 fi
 
 # Save the global options in /etc/yiimpool.conf so that standalone

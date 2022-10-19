@@ -21,7 +21,7 @@
 #####################################################
 # Updated by Afiniel for Yiimpool use...
 #####################################################
-
+source /etc/addressdonation.conf
 date=`date`
 ps -aux | grep "[m]ain" > /dev/null 2>&1
 if [[ "$?" == "0" ]]; then
@@ -100,10 +100,10 @@ echo -e "$YELLOL To reload this page just type:$RESTORE$GREEN motd $RESTORE"
 echo
 echo -e "$YELLOW Donations for continued support of this script are welcomed at: $RESTORE"
 echo -e "$CYAN   --------------------------------------------------------------- $RESTORE"
-echo -e "$YELLOL BTC: $CYAN ${BTCDON}                                            $RESTORE"
-echo -e "$YELLOL DOGE $CYAN ${DOGEDON}                                           $RESTORE"
-echo -e "$YELLOL ETH  $CYAN ${ETHDON}                                            $RESTORE"
-echo -e "$YELLOL LTC  $CYAN ${LTCDON}                                            $RESTORE"
+echo -e "$YELLOL BTC: $CYAN $BTCDON                                            $RESTORE"
+echo -e "$YELLOL DOGE $CYAN $DOGEDON                                           $RESTORE"
+echo -e "$YELLOL ETH  $CYAN $ETHDON                                            $RESTORE"
+echo -e "$YELLOL LTC  $CYAN $LTCDON                                            $RESTORE"
 echo -e "$CYAN   --------------------------------------------------------------- $RESTORE"
 /usr/lib/update-notifier/update-motd-reboot-required
 /usr/lib/update-notifier/apt-check --human-readable

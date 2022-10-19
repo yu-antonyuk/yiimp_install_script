@@ -10,13 +10,25 @@ cd $HOME/yiimp_install_script/yiimp_single
 
 echo -e "$YELLOW => Installing cron screens to crontab$COL_RESET"
 
-(crontab -l 2>/dev/null; echo "@reboot sleep 20 && /home/crypto-data/yiimp/starts/screens.start.sh") | crontab -
+(
+    crontab -l 2>/dev/null
+    echo "@reboot sleep 20 && /home/crypto-data/yiimp/starts/screens.start.sh"
+) | crontab -
 if [[ ("$CoinPort" == "no") ]]; then
-(crontab -l 2>/dev/null; echo "@reboot sleep 20 && /home/crypto-data/yiimp/starts/stratum.start.sh") | crontab -
+    (
+        crontab -l 2>/dev/null
+        echo "@reboot sleep 20 && /home/crypto-data/yiimp/starts/stratum.start.sh"
+    ) | crontab -
 fi
 
-(crontab -l 2>/dev/null; echo "@reboot source /etc/functions.sh") | crontab -
-(crontab -l 2>/dev/null; echo "@reboot source /etc/yiimpool.conf") | crontab -
+(
+    crontab -l 2>/dev/null
+    echo "@reboot source /etc/functions.sh"
+) | crontab -
+(
+    crontab -l 2>/dev/null
+    echo "@reboot source /etc/yiimpool.conf"
+) | crontab -
 sudo cp -r first_boot.sh $STORAGE_ROOT/yiimp/
 
 echo -e "$GREEN Crontab system complete$COL_RESET"
@@ -37,7 +49,7 @@ fi
 #                                                                              #
 # Program: yiimp screen startup script                                         #
 #                                                                              #
-# BTC Donation: bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y                     #
+# BTC Donation: $BTCDON                     #
 #                                                                              #
 ################################################################################
 sudo chmod 777 $STORAGE_ROOT/yiimp/site/log/.
@@ -60,13 +72,15 @@ echo '#!/usr/bin/env bash
 #                                                                              #
 # Program: yiimp stratum startup script                                        #
 #                                                                              #
-# BTC Donation: bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y                     #
+# BTC Donation: $BTCDON                     #
 #                                                                              #
 ################################################################################
+
 source /etc/yiimpool.conf
 source $STORAGE_ROOT/yiimp/.yiimp.conf
 STRATUM_DIR=$STORAGE_ROOT/yiimp/site/stratum
 LOG_DIR=$STORAGE_ROOT/yiimp/site/log
+
 screen -dmS c11 bash $STRATUM_DIR/run.sh c11
 screen -dmS deep bash $STRATUM_DIR/run.sh deep
 screen -dmS x11 bash $STRATUM_DIR/run.sh x11

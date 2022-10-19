@@ -11,11 +11,6 @@ RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Installer
 ' ' "- Daemon Wallet Builder -" \
 2 "Daemonbuilder" \
 3 Exit)
-if [ $RESULT = ]
-then
-bash $(basename $0) && exit;
-fi
-
 if [ $RESULT = 1 ]
 then
 clear;
@@ -30,7 +25,7 @@ cd $HOME/yiimpool/install
 source bootstrap_coin.sh;
 fi
 
-if [ $RESULT = 4 ]
+if [ $RESULT = 3 ]
 then
 clear;
 exit;

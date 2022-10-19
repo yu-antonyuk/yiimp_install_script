@@ -12,14 +12,14 @@ echo -e "$YELLOW =>  =>  Building blocknotify and stratum$COL_RESET"
 
 cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
 cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/blocknotify
-blckntifypass=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
+blckntifypass=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
 sudo sed -i 's/tu8tu5/'${blckntifypass}'/' blocknotify.cpp
 hide_output sudo make -j8
 cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/stratum/iniparser
 hide_output sudo make -j8
 cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/stratum
 if [[ ("$AutoExchange" == "yes") ]]; then
-sudo sed -i 's/CFLAGS += -DNO_EXCHANGE/#CFLAGS += -DNO_EXCHANGE/' $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/stratum/Makefile
+  sudo sed -i 's/CFLAGS += -DNO_EXCHANGE/#CFLAGS += -DNO_EXCHANGE/' $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/stratum/Makefile
 fi
 hide_output sudo make -j8
 
@@ -62,7 +62,7 @@ sudo sed -i 's/server = yaamp.com/server = '${StratumURL}'/g' *.conf
 if [[ ("$wireguard" == "true") ]]; then
   sudo sed -i 's/host = yaampdb/host = '${DBInternalIP}'/g' *.conf
 else
-sudo sed -i 's/host = yaampdb/host = localhost/g' *.conf
+  sudo sed -i 's/host = yaampdb/host = localhost/g' *.conf
 fi
 sudo sed -i 's/database = yaamp/database = '${YiiMPDBName}'/g' *.conf
 sudo sed -i 's/username = root/username = '${StratumDBUser}'/g' *.conf

@@ -1,7 +1,7 @@
 #!/bin/bash
 #####################################################
 # Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
-# Updated by cryptopool.builders for crypto use...
+# Updated by afiniel for crypto use...
 # Modified by Xavatar
 # Current Modified by Afiniel (2022-06-06)
 # Updated by Afiniel (2022-08-01)
@@ -75,11 +75,10 @@ function database_import_sql {
 
 function install_end_message {
 
-
 	clear
 	echo
 	figlet -f slant -w 100 "Complete!"
-	
+
 	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
 	echo -e "$YELLOW  | Version:$GREEN v0.4.1                                                 |				$COL_RESET"
 	echo -e "$YELLOW Yiimp Installer Script Fork By Afiniel https://github.com/afiniel/yiimp_install_script $COL_RESET"
@@ -107,21 +106,21 @@ function install_end_message {
 function term_art {
 	clear
 	echo
-    echo "██╗   ██╗██╗██╗███╗   ███╗██████╗  ██████╗  ██████╗ ██╗      "     
-    echo "╚██╗ ██╔╝██║██║████╗ ████║██╔══██╗██╔═══██╗██╔═══██╗██║      "
-    echo " ╚████╔╝ ██║██║██╔████╔██║██████╔╝██║   ██║██║   ██║██║      "     
-    echo "  ╚██╔╝  ██║██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║   ██║██║      "     
-    echo "   ██║   ██║██║██║ ╚═╝ ██║██║     ╚██████╔╝╚██████╔╝███████╗ "
-    echo "   ╚═╝   ╚═╝╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝  ╚═════╝ ╚══════╝ "               
-	echo -e "$CYAN  ------------------------------------------ 	  											$COL_RESET"
+	echo "██╗   ██╗██╗██╗███╗   ███╗██████╗  ██████╗  ██████╗ ██╗      "
+	echo "╚██╗ ██╔╝██║██║████╗ ████║██╔══██╗██╔═══██╗██╔═══██╗██║      "
+	echo " ╚████╔╝ ██║██║██╔████╔██║██████╔╝██║   ██║██║   ██║██║      "
+	echo "  ╚██╔╝  ██║██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║   ██║██║      "
+	echo "   ██║   ██║██║██║ ╚═╝ ██║██║     ╚██████╔╝╚██████╔╝███████╗ "
+	echo "   ╚═╝   ╚═╝╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝  ╚═════╝ ╚══════╝ "
+	echo -e "$CYAN   ---------------|----------------------- 	  											$COL_RESET"
 	echo -e "$YELLOW Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
-	echo -e "$YELLOW  Version:$COL_RESET $GREEN v0.4.1 														$COL_RESET"
-	echo -e "$CYAN    --------------------------------------------------------------------- 	  			$COL_RESET"
-	echo -e "$YELLOW  This script will install all the dependencies and will install Yiimp.					$COL_RESET"
-	echo -e "$YELLOW  It will also install a MySQL database and a Web server.								$COL_RESET"
-	echo -e "$YELLOW  MariaDB is used for the database.														$COL_RESET"
-	echo -e "$YELLOW  Nginx is used for the Web server, PHP 7.3 is also installed.							$COL_RESET"
-	echo -e "$CYAN    --------------------------------------------------------------------- 	  			$COL_RESET"
+	echo -e "$YELLOW Version:$COL_RESET $GREEN v0.4.1 														$COL_RESET"
+	echo -e "$CYAN   -----------------|---------------------------------------------------- 	  			$COL_RESET"
+	echo -e "$YELLOW This script will install all the dependencies and will install Yiimp.					$COL_RESET"
+	echo -e "$YELLOW It will also install a MySQL database and a Web server.								$COL_RESET"
+	echo -e "$YELLOW MariaDB is used for the database.														$COL_RESET"
+	echo -e "$YELLOW Nginx is used for the Web server, PHP 7.3 is also installed.							$COL_RESET"
+	echo -e "$CYAN   -----------------|---------------------------------------------------- 	  			$COL_RESET"
 	echo
 
 }
@@ -169,30 +168,54 @@ function hide_output {
 	rm -f $OUTPUT
 }
 
+function last_words {
+	echo "<-------------------------------------|---------------------------------------->"
+	echo
+	echo -e "$YELLOW Thank you for using the Yiimpool Installer $GREEN v0.4.1!             $COL_RESET"
+	echo
+	echo -e "$YELLOW To run this installer anytime simply type: $GREEN yiimpool            $COL_RESET"
+	echo -e "$YELLOW Donations for continued support of this script are welcomed at:       $COL_RESET"
+	echo "<-------------------------------------|--------------------------------------->"
+	echo -e "$YELLOW                     Donate Wallets:                                   $COL_RESET"
+	echo "<-------------------------------------|--------------------------------------->"
+	echo -e "$YELLOW Thank you for using Yiimp Install Script v0.4.1 fork by Afiniel!      $COL_RESET"
+	echo
+	echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
+	echo -e "$YELLOW =>  Do you want to support me? Feel free to use wallets below:        $COL_RESET"
+	echo "<-------------------------------------|--------------------------------------->"
+	echo -e "$YELLOW =>  BTC:$GREEN $BTCDON                                   		 $COL_RESET"
+	echo -e "$YELLOW =>  BCH:$GREEN $BCHDON                                   		 $COL_RESET"
+	echo -e "$YELLOW =>  ETH:$GREEN $ETHDON                                   		 $COL_RESET"
+	echo -e "$YELLOW =>  DOGE:$GREEN $DOGEDON                                 		 $COL_RESET"
+	echo -e "$YELLOW =>  LTC:$GREEN $LTCDON                                   		 $COL_RESET"
+	echo "<-------------------------------------|-------------------------------------->"
+	exit 0
+}
+
 function package_compile_crypto {
 
-    # Installing Package to compile crypto currency
-    echo -e "$CYAN Installing needed Package to compile crypto currency $COL_RESET"
+	# Installing Package to compile crypto currency
+	echo -e "$CYAN Installing needed Package to compile crypto currency $COL_RESET"
 
-    hide_output sudo apt -y install software-properties-common build-essential
-    hide_output sudo apt -y install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
-    hide_output sudo apt -y install libminiupnpc10 libzmq5
-    hide_output sudo apt -y install libcanberra-gtk-module libqrencode-dev libzmq3-dev
-    hide_output sudo apt -y install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-    hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
-    hide_output sudo apt -y update
-    hide_output sudo apt -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
+	hide_output sudo apt -y install software-properties-common build-essential
+	hide_output sudo apt -y install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
+	hide_output sudo apt -y install libminiupnpc10 libzmq5
+	hide_output sudo apt -y install libcanberra-gtk-module libqrencode-dev libzmq3-dev
+	hide_output sudo apt -y install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
+	hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
+	hide_output sudo apt -y update
+	hide_output sudo apt -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
 
 	hide_output sudo apt-get -y install build-essential libzmq5 \
-	libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev \
-	libseccomp-dev libcap-dev libminiupnpc-dev gettext libminiupnpc10 libcanberra-gtk-module libqrencode-dev libzmq3-dev \
-	libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
+		libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev \
+		libseccomp-dev libcap-dev libminiupnpc-dev gettext libminiupnpc10 libcanberra-gtk-module libqrencode-dev libzmq3-dev \
+		libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
 	hide_output sudo apt -y update && sudo apt -y upgrade
 
-	hide_output sudo apt -y install	libgmp-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev \
-	libpgm-dev libhidapi-dev libusb-1.0-0-dev libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev \
-	libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev \
-	python3 ccache doxygen graphviz default-libmysqlclient-dev libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev
+	hide_output sudo apt -y install libgmp-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev \
+		libpgm-dev libhidapi-dev libusb-1.0-0-dev libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev \
+		libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev \
+		python3 ccache doxygen graphviz default-libmysqlclient-dev libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev
 }
 
 function apt_get_quiet {

@@ -182,10 +182,10 @@ echo -e "$YELLOW Make sure to add this to the Dedicated Port section in your Yii
 
 echo -e "$YELLOW Donations for continued support of this script are welcomed at: $COL_RESET"
 echo -e "$YELLOW --------------------------------------------------------------- $COL_RESET"
-echo -e "$YELLOW BTC: $CYAN ${BTCDON}                                            $COL_RESET"
-echo -e "$YELLOW DOGE $CYAN ${DOGEDON}                                           $COL_RESET"
-echo -e "$YELLOW ETH  $CYAN ${ETHDON}                                            $COL_RESET"
-echo -e "$YELLOW LTC  $CYAN ${LTCDON}                                            $COL_RESET"
+echo -e "$YELLOW BTC: $CYAN $BTCDON                                            $COL_RESET"
+echo -e "$YELLOW DOGE $CYAN $DOGEDON                                           $COL_RESET"
+echo -e "$YELLOW ETH  $CYAN $ETHDON                                            $COL_RESET"
+echo -e "$YELLOW LTC  $CYAN $LTCDON                                            $COL_RESET"
 echo -e "$YELLOW --------------------------------------------------------------- $COL_RESET"
 
 cd ~

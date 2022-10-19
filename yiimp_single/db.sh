@@ -12,20 +12,20 @@ source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 set -eu -o pipefail
 
 function print_error {
-    read line file <<<$(caller)
-    echo "An error occurred in line $line of file $file:" >&2
-    sed "${line}q;d" "$file" >&2
+  read line file <<<$(caller)
+  echo "An error occurred in line $line of file $file:" >&2
+  sed "${line}q;d" "$file" >&2
 }
 trap print_error ERR
 
 if [[ ("$wireguard" == "true") ]]; then
-source $STORAGE_ROOT/yiimp/.wireguard.conf
+  source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
 echo -e "$YELLOW => Installing MariaDB 10.4$COL_RESET"
 MARIADB_VERSION='10.4'
-sudo debconf-set-selections <<< "maria-db-$MARIADB_VERSION mysql-server/root_password password $DBRootPassword"
-sudo debconf-set-selections <<< "maria-db-$MARIADB_VERSION mysql-server/root_password_again password $DBRootPassword"
+sudo debconf-set-selections <<<"maria-db-$MARIADB_VERSION mysql-server/root_password password $DBRootPassword"
+sudo debconf-set-selections <<<"maria-db-$MARIADB_VERSION mysql-server/root_password_again password $DBRootPassword"
 apt_install mariadb-server mariadb-client
 echo -e "$GREEN MariaDB build complete$COL_RESET"
 echo -e "$YELLOW => Creating DB users for YiiMP$COL_RESET"
@@ -36,7 +36,7 @@ if [[ ("$wireguard" == "false") ]]; then
   Q3="GRANT ALL ON ${YiiMPDBName}.* TO '${StratumDBUser}'@'localhost' IDENTIFIED BY '$StratumUserDBPassword';"
   Q4="FLUSH PRIVILEGES;"
   SQL="${Q1}${Q2}${Q3}${Q4}"
-sudo mysql -u root -p"${DBRootPassword}" -e "$SQL"
+  sudo mysql -u root -p"${DBRootPassword}" -e "$SQL"
 
 else
   Q1="CREATE DATABASE IF NOT EXISTS ${YiiMPDBName};"
@@ -52,7 +52,7 @@ echo -e "$GREEN Database creation complete$COL_RESET"
 echo -e "$YELLOW => Creating my.cnf$COL_RESET"
 
 if [[ ("$wireguard" == "false") ]]; then
-echo '[clienthost1]
+  echo '[clienthost1]
 user='"${YiiMPPanelName}"'
 password='"${PanelUserDBPassword}"'
 database='"${YiiMPDBName}"'
@@ -90,10 +90,10 @@ echo -e "$GREEN Passwords can be found in $RED $STORAGE_ROOT/yiimp/.my.cnf $COL_
 echo -e "$YELLOW => Importing YiiMP Default database values$COL_RESET"
 cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/sql
 # import SQL dump
-sudo zcat 2020-11-10-yaamp.sql.gz  | sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}"
-sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force < 2018-09-22-workers.sql
-sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force < 2020-06-03-blocks.sql
-sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force < 2022-10-14-shares_solo.sql
+sudo zcat 2020-11-10-yaamp.sql.gz | sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}"
+sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force <2018-09-22-workers.sql
+sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force <2020-06-03-blocks.sql
+sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force <2022-10-14-shares_solo.sql
 echo -e "$YELLOW => Datebase import $GREEN complete$COL_RESET"
 
 echo -e "$YELLOW => Tweaking MariaDB for better performance$COL_RESET"

@@ -11,7 +11,7 @@ source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 
 if [[ ("$wireguard" == "false") ]]; then
 
-echo '<?php
+	echo '<?php
 ini_set('"'"'date.timezone'"'"', '"'"'UTC'"'"');
 define('"'"'YAAMP_LOGS'"'"', '"'"''"${STORAGE_ROOT}/yiimp/site/log"''"'"');
 define('"'"'YAAMP_HTDOCS'"'"', '"'"''"${STORAGE_ROOT}/yiimp/site/web"''"'"');

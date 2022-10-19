@@ -240,910 +240,910 @@ startstop_service() {
 startstop_sha256() {
     cmd=$1
     case $cmd in
-        stop) $sha256stop ;;
-        start) $sha256 ;;
-        restart)
-            $sha256stop
-            sleep 1
-            $sha256
-            ;;
+    stop) $sha256stop ;;
+    start) $sha256 ;;
+    restart)
+        $sha256stop
+        sleep 1
+        $sha256
+        ;;
     esac
 }
 
 startstop_sha256t() {
     cmd=$1
     case $cmd in
-        stop) $sha256tstop ;;
-        start) $sha256t ;;
-        restart)
-            $sha256tstop
-            sleep 1
-            $sha256t
-            ;;
+    stop) $sha256tstop ;;
+    start) $sha256t ;;
+    restart)
+        $sha256tstop
+        sleep 1
+        $sha256t
+        ;;
     esac
 }
 
 startstop_lbry() {
     cmd=$1
     case $cmd in
-        stop) $lbrystop ;;
-        start) $lbry ;;
-        restart)
-            $lbrystop
-            sleep 1
-            $lbry
-            ;;
+    stop) $lbrystop ;;
+    start) $lbry ;;
+    restart)
+        $lbrystop
+        sleep 1
+        $lbry
+        ;;
     esac
 }
 
 startstop_scrypt() {
     cmd=$1
     case $cmd in
-        stop) $scryptstop ;;
-        start) $scrypt ;;
-        restart)
-            $scryptstop
-            sleep 1
-            $scrypt
-            ;;
+    stop) $scryptstop ;;
+    start) $scrypt ;;
+    restart)
+        $scryptstop
+        sleep 1
+        $scrypt
+        ;;
     esac
 }
 
 startstop_timetravel() {
     cmd=$1
     case $cmd in
-        stop) $timetravelstop ;;
-        start) $timetravel ;;
-        restart)
-            $timetravelstop
-            sleep 1
-            $timetravel
-            ;;
+    stop) $timetravelstop ;;
+    start) $timetravel ;;
+    restart)
+        $timetravelstop
+        sleep 1
+        $timetravel
+        ;;
     esac
 }
 
 startstop_bitcore() {
     cmd=$1
     case $cmd in
-        stop) $bitcorestop ;;
-        start) $bitcore ;;
-        restart)
-            $bitcorestop
-            sleep 1
-            $bitcore
-            ;;
+    stop) $bitcorestop ;;
+    start) $bitcore ;;
+    restart)
+        $bitcorestop
+        sleep 1
+        $bitcore
+        ;;
     esac
 }
 
 startstop_exosis() {
     cmd=$1
     case $cmd in
-        stop) $sexosisstop ;;
-        start) $exosis ;;
-        restart)
-            $exosisstop
-            sleep 1
-            $exosis
-            ;;
+    stop) $sexosisstop ;;
+    start) $exosis ;;
+    restart)
+        $exosisstop
+        sleep 1
+        $exosis
+        ;;
     esac
 }
 
 startstop_c11() {
     cmd=$1
     case $cmd in
-        stop) $sc11stop ;;
-        start) $c11 ;;
-        restart)
-            $c11stop
-            sleep 1
-            $c11
-            ;;
+    stop) $sc11stop ;;
+    start) $c11 ;;
+    restart)
+        $c11stop
+        sleep 1
+        $c11
+        ;;
     esac
 }
 
 startstop_deep() {
     cmd=$1
     case $cmd in
-        stop) $deepstop ;;
-        start) $deep ;;
-        restart)
-            $deepstop
-            sleep 1
-            $deep
-            ;;
+    stop) $deepstop ;;
+    start) $deep ;;
+    restart)
+        $deepstop
+        sleep 1
+        $deep
+        ;;
     esac
 }
 
 startstop_x11() {
     cmd=$1
     case $cmd in
-        stop) $x11stop ;;
-        start) $x11 ;;
-        restart)
-            $x11stop
-            sleep 1
-            $x11
-            ;;
+    stop) $x11stop ;;
+    start) $x11 ;;
+    restart)
+        $x11stop
+        sleep 1
+        $x11
+        ;;
     esac
 }
 
 startstop_x11evo() {
     cmd=$1
     case $cmd in
-        stop) $x11evostop ;;
-        start) $x11evo ;;
-        restart)
-            $x11evostop
-            sleep 1
-            $x11evo
-            ;;
+    stop) $x11evostop ;;
+    start) $x11evo ;;
+    restart)
+        $x11evostop
+        sleep 1
+        $x11evo
+        ;;
     esac
 }
 
 startstop_x12() {
     cmd=$1
     case $cmd in
-        stop) $x12stop ;;
-        start) $x12 ;;
-        restart)
-            $x12stop
-            sleep 1
-            $x12
-            ;;
+    stop) $x12stop ;;
+    start) $x12 ;;
+    restart)
+        $x12stop
+        sleep 1
+        $x12
+        ;;
     esac
 }
 
 startstop_x13() {
     cmd=$1
     case $cmd in
-        stop) $x13stop ;;
-        start) $x13 ;;
-        restart)
-            $x13stop
-            sleep 1
-            $x13
-            ;;
+    stop) $x13stop ;;
+    start) $x13 ;;
+    restart)
+        $x13stop
+        sleep 1
+        $x13
+        ;;
     esac
 }
 
 startstop_x15() {
     cmd=$1
     case $cmd in
-        stop) $x15stop ;;
-        start) $x15 ;;
-        restart)
-            $x15stop
-            sleep 1
-            $x15
-            ;;
+    stop) $x15stop ;;
+    start) $x15 ;;
+    restart)
+        $x15stop
+        sleep 1
+        $x15
+        ;;
     esac
 }
 
 startstop_x16r() {
     cmd=$1
     case $cmd in
-        stop) $x16rstop ;;
-        start) $x16r ;;
-        restart)
-            $x16rstop
-            sleep 1
-            $x16r
-            ;;
+    stop) $x16rstop ;;
+    start) $x16r ;;
+    restart)
+        $x16rstop
+        sleep 1
+        $x16r
+        ;;
     esac
 }
 
 startstop_x16s() {
     cmd=$1
     case $cmd in
-        stop) $x16sstop ;;
-        start) $x16s ;;
-        restart)
-            $x16sstop
-            sleep 1
-            $x16s
-            ;;
+    stop) $x16sstop ;;
+    start) $x16s ;;
+    restart)
+        $x16sstop
+        sleep 1
+        $x16s
+        ;;
     esac
 }
 
 startstop_x17() {
     cmd=$1
     case $cmd in
-        stop) $x17stop ;;
-        start) $x17 ;;
-        restart)
-            $x17stop
-            sleep 1
-            $x17
-            ;;
+    stop) $x17stop ;;
+    start) $x17 ;;
+    restart)
+        $x17stop
+        sleep 1
+        $x17
+        ;;
     esac
 }
 
 startstop_x22i() {
     cmd=$1
     case $cmd in
-        stop) $x22istop ;;
-        start) $x22i ;;
-        restart)
-            $x22istop
-            sleep 1
-            $x22i
-            ;;
+    stop) $x22istop ;;
+    start) $x22i ;;
+    restart)
+        $x22istop
+        sleep 1
+        $x22i
+        ;;
     esac
 }
 
 startstop_aergo() {
     cmd=$1
     case $cmd in
-        stop) $aergostop ;;
-        start) $aergo ;;
-        restart)
-            $aergostop
-            sleep 1
-            $aergo
-            ;;
+    stop) $aergostop ;;
+    start) $aergo ;;
+    restart)
+        $aergostop
+        sleep 1
+        $aergo
+        ;;
     esac
 }
 
 startstop_xevan() {
     cmd=$1
     case $cmd in
-        stop) $xevanstop ;;
-        start) $xevan ;;
-        restart)
-            $xevanstop
-            sleep 1
-            $xevan
-            ;;
+    stop) $xevanstop ;;
+    start) $xevan ;;
+    restart)
+        $xevanstop
+        sleep 1
+        $xevan
+        ;;
     esac
 }
 
 startstop_hmq1725() {
     cmd=$1
     case $cmd in
-        stop) $hmq1725stop ;;
-        start) $hmq1725 ;;
-        restart)
-            $hmq1725stop
-            sleep 1
-            $hmq1725
-            ;;
+    stop) $hmq1725stop ;;
+    start) $hmq1725 ;;
+    restart)
+        $hmq1725stop
+        sleep 1
+        $hmq1725
+        ;;
     esac
 }
 
 startstop_nist5() {
     cmd=$1
     case $cmd in
-        stop) $nist5stop ;;
-        start) $nist5 ;;
-        restart)
-            $nist5stop
-            sleep 1
-            $nist5
-            ;;
+    stop) $nist5stop ;;
+    start) $nist5 ;;
+    restart)
+        $nist5stop
+        sleep 1
+        $nist5
+        ;;
     esac
 }
 
 startstop_x14() {
     cmd=$1
     case $cmd in
-        stop) $x14stop ;;
-        start) $x14 ;;
-        restart)
-            $x14stop
-            sleep 1
-            $x14
-            ;;
+    stop) $x14stop ;;
+    start) $x14 ;;
+    restart)
+        $x14stop
+        sleep 1
+        $x14
+        ;;
     esac
 }
 
 startstop_quark() {
     cmd=$1
     case $cmd in
-        stop) $quarkstop ;;
-        start) $quark ;;
-        restart)
-            $quarkstop
-            sleep 1
-            $quark
-            ;;
+    stop) $quarkstop ;;
+    start) $quark ;;
+    restart)
+        $quarkstop
+        sleep 1
+        $quark
+        ;;
     esac
 }
 
 startstop_whirlpool() {
     cmd=$1
     case $cmd in
-        stop) $whirlpoolstop ;;
-        start) $whirlpool ;;
-        restart)
-            $whirlpoolstop
-            sleep 1
-            $whirlpool
-            ;;
+    stop) $whirlpoolstop ;;
+    start) $whirlpool ;;
+    restart)
+        $whirlpoolstop
+        sleep 1
+        $whirlpool
+        ;;
     esac
 }
 
 startstop_neoscrypt() {
     cmd=$1
     case $cmd in
-        stop) $neoscryptstop ;;
-        start) $neoscrypt ;;
-        restart)
-            $neoscryptstop
-            sleep 1
-            $neoscrypt
-            ;;
+    stop) $neoscryptstop ;;
+    start) $neoscrypt ;;
+    restart)
+        $neoscryptstop
+        sleep 1
+        $neoscrypt
+        ;;
     esac
 }
 
 startstop_argon2() {
     cmd=$1
     case $cmd in
-        stop) $argon2stop ;;
-        start) $argon2 ;;
-        restart)
-            $argon2stop
-            sleep 1
-            $argon2
-            ;;
+    stop) $argon2stop ;;
+    start) $argon2 ;;
+    restart)
+        $argon2stop
+        sleep 1
+        $argon2
+        ;;
     esac
 }
 
 startstop_argon2ddyn() {
     cmd=$1
     case $cmd in
-        stop) $argon2ddynstop ;;
-        start) $argon2ddyn ;;
-        restart)
-            $argon2ddynstop
-            sleep 1
-            $argon2ddyn
-            ;;
+    stop) $argon2ddynstop ;;
+    start) $argon2ddyn ;;
+    restart)
+        $argon2ddynstop
+        sleep 1
+        $argon2ddyn
+        ;;
     esac
 }
 
 startstop_scryptn() {
     cmd=$1
     case $cmd in
-        stop) $scryptnstop ;;
-        start) $scryptn ;;
-        restart)
-            $scryptnstop
-            sleep 1
-            $scryptn
-            ;;
+    stop) $scryptnstop ;;
+    start) $scryptn ;;
+    restart)
+        $scryptnstop
+        sleep 1
+        $scryptn
+        ;;
     esac
 }
 
 startstop_allium() {
     cmd=$1
     case $cmd in
-        stop) $alliumstop ;;
-        start) $allium ;;
-        restart)
-            $alliumstop
-            sleep 1
-            $allium
-            ;;
+    stop) $alliumstop ;;
+    start) $allium ;;
+    restart)
+        $alliumstop
+        sleep 1
+        $allium
+        ;;
     esac
 }
 
 startstop_lbk3() {
     cmd=$1
     case $cmd in
-        stop) $lbk3stop ;;
-        start) $lbk3 ;;
-        restart)
-            $lbk3stop
-            sleep 1
-            $lbk3
-            ;;
+    stop) $lbk3stop ;;
+    start) $lbk3 ;;
+    restart)
+        $lbk3stop
+        sleep 1
+        $lbk3
+        ;;
     esac
 }
 
 startstop_lyra2() {
     cmd=$1
     case $cmd in
-        stop) $lyra2stop ;;
-        start) $lyra2 ;;
-        restart)
-            $lyra2stop
-            sleep 1
-            $lyra2
-            ;;
+    stop) $lyra2stop ;;
+    start) $lyra2 ;;
+    restart)
+        $lyra2stop
+        sleep 1
+        $lyra2
+        ;;
     esac
 }
 
 startstop_lyra2v2() {
     cmd=$1
     case $cmd in
-        stop) $lyra2v2stop ;;
-        start) $lyra2v2 ;;
-        restart)
-            $lyra2v2stop
-            sleep 1
-            $lyra2v2
-            ;;
+    stop) $lyra2v2stop ;;
+    start) $lyra2v2 ;;
+    restart)
+        $lyra2v2stop
+        sleep 1
+        $lyra2v2
+        ;;
     esac
 }
 
 startstop_lyra2z() {
     cmd=$1
     case $cmd in
-        stop) $lyra2zstop ;;
-        start) $lyra2z ;;
-        restart)
-            $lyra2zstop
-            sleep 1
-            $lyra2z
-            ;;
+    stop) $lyra2zstop ;;
+    start) $lyra2z ;;
+    restart)
+        $lyra2zstop
+        sleep 1
+        $lyra2z
+        ;;
     esac
 }
 
 startstop_jha() {
     cmd=$1
     case $cmd in
-        stop) $jhastop ;;
-        start) $jha ;;
-        restart)
-            $jhastop
-            sleep 1
-            $jha
-            ;;
+    stop) $jhastop ;;
+    start) $jha ;;
+    restart)
+        $jhastop
+        sleep 1
+        $jha
+        ;;
     esac
 }
 
 startstop_qubit() {
     cmd=$1
     case $cmd in
-        stop) $qubitstop ;;
-        start) $qubit ;;
-        restart)
-            $qubitstop
-            sleep 1
-            $qubit
-            ;;
+    stop) $qubitstop ;;
+    start) $qubit ;;
+    restart)
+        $qubitstop
+        sleep 1
+        $qubit
+        ;;
     esac
 }
 
 startstop_zr5() {
     cmd=$1
     case $cmd in
-        stop) $zr5stop ;;
-        start) $zr5 ;;
-        restart)
-            $zr5stop
-            sleep 1
-            $zr5
-            ;;
+    stop) $zr5stop ;;
+    start) $zr5 ;;
+    restart)
+        $zr5stop
+        sleep 1
+        $zr5
+        ;;
     esac
 }
 
 startstop_skein() {
     cmd=$1
     case $cmd in
-        stop) $skeinstop ;;
-        start) $skein ;;
-        restart)
-            $skeinstop
-            sleep 1
-            $skein
-            ;;
+    stop) $skeinstop ;;
+    start) $skein ;;
+    restart)
+        $skeinstop
+        sleep 1
+        $skein
+        ;;
     esac
 }
 
 startstop_sib() {
     cmd=$1
     case $cmd in
-        stop) $sibstop ;;
-        start) $sib ;;
-        restart)
-            $sibstop
-            sleep 1
-            $sib
-            ;;
+    stop) $sibstop ;;
+    start) $sib ;;
+    restart)
+        $sibstop
+        sleep 1
+        $sib
+        ;;
     esac
 }
 
 startstop_keccak() {
     cmd=$1
     case $cmd in
-        stop) $keccakstop ;;
-        start) $keccak ;;
-        restart)
-            $keccakstop
-            sleep 1
-            $keccak
-            ;;
+    stop) $keccakstop ;;
+    start) $keccak ;;
+    restart)
+        $keccakstop
+        sleep 1
+        $keccak
+        ;;
     esac
 }
 
 startstop_keccakc() {
     cmd=$1
     case $cmd in
-        stop) $keccakcstop ;;
-        start) $keccakc ;;
-        restart)
-            $keccakcstop
-            sleep 1
-            $keccakc
-            ;;
+    stop) $keccakcstop ;;
+    start) $keccakc ;;
+    restart)
+        $keccakcstop
+        sleep 1
+        $keccakc
+        ;;
     esac
 }
 
 startstop_hex() {
     cmd=$1
     case $cmd in
-        stop) $hexstop ;;
-        start) $hex ;;
-        restart)
-            $hexstop
-            sleep 1
-            $hex
-            ;;
+    stop) $hexstop ;;
+    start) $hex ;;
+    restart)
+        $hexstop
+        sleep 1
+        $hex
+        ;;
     esac
 }
 
 startstop_skein2() {
     cmd=$1
     case $cmd in
-        stop) $skein2stop ;;
-        start) $skein2 ;;
-        restart)
-            $skein2stop
-            sleep 1
-            $skein2
-            ;;
+    stop) $skein2stop ;;
+    start) $skein2 ;;
+    restart)
+        $skein2stop
+        sleep 1
+        $skein2
+        ;;
     esac
 }
 
 startstop_dmdgr() {
     cmd=$1
     case $cmd in
-        stop) $dmdgrstop ;;
-        start) $dmdgr ;;
-        restart)
-            $dmdgrstop
-            sleep 1
-            $dmdgr
-            ;;
+    stop) $dmdgrstop ;;
+    start) $dmdgr ;;
+    restart)
+        $dmdgrstop
+        sleep 1
+        $dmdgr
+        ;;
     esac
 }
 
 startstop_myrgr() {
     cmd=$1
     case $cmd in
-        stop) $myrgrstop ;;
-        start) $myrgr ;;
-        restart)
-            $myrgrstop
-            sleep 1
-            $myrgr
-            ;;
+    stop) $myrgrstop ;;
+    start) $myrgr ;;
+    restart)
+        $myrgrstop
+        sleep 1
+        $myrgr
+        ;;
     esac
 }
 
 startstop_zr5() {
     cmd=$1
     case $cmd in
-        stop) $zr5stop ;;
-        start) $zr5 ;;
-        restart)
-            $zr5stop
-            sleep 1
-            $zr5
-            ;;
+    stop) $zr5stop ;;
+    start) $zr5 ;;
+    restart)
+        $zr5stop
+        sleep 1
+        $zr5
+        ;;
     esac
 }
 
 startstop_blake() {
     cmd=$1
     case $cmd in
-        stop) $blakestop ;;
-        start) $blake ;;
-        restart)
-            $blakestop
-            sleep 1
-            $blake
-            ;;
+    stop) $blakestop ;;
+    start) $blake ;;
+    restart)
+        $blakestop
+        sleep 1
+        $blake
+        ;;
     esac
 }
 
 startstop_blakecoin() {
     cmd=$1
     case $cmd in
-        stop) $blakecoinstop ;;
-        start) $blakecoin ;;
-        restart)
-            $blakecoinstop
-            sleep 1
-            $blakecoin
-            ;;
+    stop) $blakecoinstop ;;
+    start) $blakecoin ;;
+    restart)
+        $blakecoinstop
+        sleep 1
+        $blakecoin
+        ;;
     esac
 }
 
 startstop_decred() {
     cmd=$1
     case $cmd in
-        stop) $decredstop ;;
-        start) $decred ;;
-        restart)
-            $decredstop
-            sleep 1
-            $decred
-            ;;
+    stop) $decredstop ;;
+    start) $decred ;;
+    restart)
+        $decredstop
+        sleep 1
+        $decred
+        ;;
     esac
 }
 
 startstop_vanilla() {
     cmd=$1
     case $cmd in
-        stop) $vanillastop ;;
-        start) $vanilla ;;
-        restart)
-            $vanillastop
-            sleep 1
-            $vanilla
-            ;;
+    stop) $vanillastop ;;
+    start) $vanilla ;;
+    restart)
+        $vanillastop
+        sleep 1
+        $vanilla
+        ;;
     esac
 }
 
 startstop_blake2s() {
     cmd=$1
     case $cmd in
-        stop) $blake2sstop ;;
-        start) $blake2s ;;
-        restart)
-            $blake2sstop
-            sleep 1
-            $blake2s
-            ;;
+    stop) $blake2sstop ;;
+    start) $blake2s ;;
+    restart)
+        $blake2sstop
+        sleep 1
+        $blake2s
+        ;;
     esac
 }
 
 startstop_penta() {
     cmd=$1
     case $cmd in
-        stop) $pentastop ;;
-        start) $penta ;;
-        restart)
-            $pentastop
-            sleep 1
-            $penta
-            ;;
+    stop) $pentastop ;;
+    start) $penta ;;
+    restart)
+        $pentastop
+        sleep 1
+        $penta
+        ;;
     esac
 }
 
 startstop_rainforest() {
     cmd=$1
     case $cmd in
-        stop) $rainforeststop ;;
-        start) $rainforest ;;
-        restart)
-            $rainforeststop
-            sleep 1
-            $rainforest
-            ;;
+    stop) $rainforeststop ;;
+    start) $rainforest ;;
+    restart)
+        $rainforeststop
+        sleep 1
+        $rainforest
+        ;;
     esac
 }
 
 startstop_luffa() {
     cmd=$1
     case $cmd in
-        stop) $luffastop ;;
-        start) $luffa ;;
-        restart)
-            $luffastop
-            sleep 1
-            $luffa
-            ;;
+    stop) $luffastop ;;
+    start) $luffa ;;
+    restart)
+        $luffastop
+        sleep 1
+        $luffa
+        ;;
     esac
 }
 
 startstop_m7m() {
     cmd=$1
     case $cmd in
-        stop) $m7mstop ;;
-        start) $m7m ;;
-        restart)
-            $m7mstop
-            sleep 1
-            $m7m
-            ;;
+    stop) $m7mstop ;;
+    start) $m7m ;;
+    restart)
+        $m7mstop
+        sleep 1
+        $m7m
+        ;;
     esac
 }
 
 startstop_veltor() {
     cmd=$1
     case $cmd in
-        stop) $veltorstop ;;
-        start) $veltor ;;
-        restart)
-            $veltorstop
-            sleep 1
-            $veltor
-            ;;
+    stop) $veltorstop ;;
+    start) $veltor ;;
+    restart)
+        $veltorstop
+        sleep 1
+        $veltor
+        ;;
     esac
 }
 
 startstop_velvet() {
     cmd=$1
     case $cmd in
-        stop) $velvetstop ;;
-        start) $velvet ;;
-        restart)
-            $velvetstop
-            sleep 1
-            $velvet
-            ;;
+    stop) $velvetstop ;;
+    start) $velvet ;;
+    restart)
+        $velvetstop
+        sleep 1
+        $velvet
+        ;;
     esac
 }
 
 startstop_vitalium() {
     cmd=$1
     case $cmd in
-        stop) $vitaliumstop ;;
-        start) $vitalium ;;
-        restart)
-            $vitaliumstop
-            sleep 1
-            $vitalium
-            ;;
+    stop) $vitaliumstop ;;
+    start) $vitalium ;;
+    restart)
+        $vitaliumstop
+        sleep 1
+        $vitalium
+        ;;
     esac
 }
 
 startstop_yescrypt() {
     cmd=$1
     case $cmd in
-        stop) $yescryptstop ;;
-        start) $yescrypt ;;
-        restart)
-            $yescryptstop
-            sleep 1
-            $yescrypt
-            ;;
+    stop) $yescryptstop ;;
+    start) $yescrypt ;;
+    restart)
+        $yescryptstop
+        sleep 1
+        $yescrypt
+        ;;
     esac
 }
 
 startstop_yescryptR16() {
     cmd=$1
     case $cmd in
-        stop) $yescryptR16stop ;;
-        start) $yescryptR16 ;;
-        restart)
-            $yescryptR16stop
-            sleep 1
-            $yescryptR16
-            ;;
+    stop) $yescryptR16stop ;;
+    start) $yescryptR16 ;;
+    restart)
+        $yescryptR16stop
+        sleep 1
+        $yescryptR16
+        ;;
     esac
 }
 
 startstop_yescryptR32() {
     cmd=$1
     case $cmd in
-        stop) $yescryptR32stop ;;
-        start) $yescryptR32 ;;
-        restart)
-            $yescryptR32stop
-            sleep 1
-            $yescryptR32
-            ;;
+    stop) $yescryptR32stop ;;
+    start) $yescryptR32 ;;
+    restart)
+        $yescryptR32stop
+        sleep 1
+        $yescryptR32
+        ;;
     esac
 }
 
 startstop_bastion() {
     cmd=$1
     case $cmd in
-        stop) $bastionstop ;;
-        start) $bastion ;;
-        restart)
-            $bastionstop
-            sleep 1
-            $bastion
-            ;;
+    stop) $bastionstop ;;
+    start) $bastion ;;
+    restart)
+        $bastionstop
+        sleep 1
+        $bastion
+        ;;
     esac
 }
 
 startstop_hsr() {
     cmd=$1
     case $cmd in
-        stop) $hsrstop ;;
-        start) $hsr ;;
-        restart)
-            $hsrstop
-            sleep 1
-            $hsr
-            ;;
+    stop) $hsrstop ;;
+    start) $hsr ;;
+    restart)
+        $hsrstop
+        sleep 1
+        $hsr
+        ;;
     esac
 }
 
 startstop_phi() {
     cmd=$1
     case $cmd in
-        stop) $phistop ;;
-        start) $phi ;;
-        restart)
-            $phistop
-            sleep 1
-            $phi
-            ;;
+    stop) $phistop ;;
+    start) $phi ;;
+    restart)
+        $phistop
+        sleep 1
+        $phi
+        ;;
     esac
 }
 
 startstop_phi2() {
     cmd=$1
     case $cmd in
-        stop) $phi2stop ;;
-        start) $phi2 ;;
-        restart)
-            $phi2stop
-            sleep 1
-            $phi2
-            ;;
+    stop) $phi2stop ;;
+    start) $phi2 ;;
+    restart)
+        $phi2stop
+        sleep 1
+        $phi2
+        ;;
     esac
 }
 
 startstop_polytimos() {
     cmd=$1
     case $cmd in
-        stop) $polytimosstop ;;
-        start) $polytimos ;;
-        restart)
-            $polytimosstop
-            sleep 1
-            $polytimos
-            ;;
+    stop) $polytimosstop ;;
+    start) $polytimos ;;
+    restart)
+        $polytimosstop
+        sleep 1
+        $polytimos
+        ;;
     esac
 }
 
 startstop_skunk() {
     cmd=$1
     case $cmd in
-        stop) $skunkstop ;;
-        start) $skunk ;;
-        restart)
-            $skunkstop
-            sleep 1
-            $skunk
-            ;;
+    stop) $skunkstop ;;
+    start) $skunk ;;
+    restart)
+        $skunkstop
+        sleep 1
+        $skunk
+        ;;
     esac
 }
 
 startstop_tribus() {
     cmd=$1
     case $cmd in
-        stop) $tribusstop ;;
-        start) $tribus ;;
-        restart)
-            $tribusstop
-            sleep 1
-            $tribus
-            ;;
+    stop) $tribusstop ;;
+    start) $tribus ;;
+    restart)
+        $tribusstop
+        sleep 1
+        $tribus
+        ;;
     esac
 }
 
 startstop_a5a() {
     cmd=$1
     case $cmd in
-        stop) $a5astop ;;
-        start) $a5a ;;
-        restart)
-            $a5astop
-            sleep 1
-            $a5a
-            ;;
+    stop) $a5astop ;;
+    start) $a5a ;;
+    restart)
+        $a5astop
+        sleep 1
+        $a5a
+        ;;
     esac
 }
 
 startstop_x16rv2() {
     cmd=$1
     case $cmd in
-        stop) $x16rv2stop ;;
-        start) $x16rv2 ;;
-        restart)
-            $x16rv2stop
-            sleep 1
-            $x16rv2
-            ;;
+    stop) $x16rv2stop ;;
+    start) $x16rv2 ;;
+    restart)
+        $x16rv2stop
+        sleep 1
+        $x16rv2
+        ;;
     esac
 }
 
@@ -1200,12 +1200,13 @@ startstop_minotaurx() {
 }
 
 case "$1" in
-    start|stop|restart) cmd=$1 ;;
-    *)
-        shift
-        servicenames=${@-servicenames}
-        echo "usage: $0 [start|stop|restart] algo"
-        exit 1
+start | stop | restart) cmd=$1 ;;
+*)
+    shift
+    servicenames=${@-servicenames}
+    echo "usage: $0 [start|stop|restart] algo"
+    exit 1
+    ;;
 esac
 shift
 
@@ -1286,6 +1287,6 @@ for name; do
     kawpow) startstop_kawpow $cmd ;;
     a5a) startstop_a5a $cmd ;;
     x16rv2) startstop_x16rv2 $cmd ;;
-        *) startstop_service $cmd $name ;;
+    *) startstop_service $cmd $name ;;
     esac
 done

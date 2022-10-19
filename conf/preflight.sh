@@ -3,10 +3,11 @@
 # Updated by afiniel-tech for yiimpool use...
 #####################################################
 
-if [ "`lsb_release -d | sed 's/.*:\s*//' | sed 's/18\.04\.[0-9]/18.04/' `" == "Ubuntu 18.04 LTS" ]; then
+if [ "$(lsb_release -d | sed 's/.*:\s*//' | sed 's/18\.04\.[0-9]/18.04/')" == "Ubuntu 18.04 LTS" ]; then
   DISTRO=18
   sudo chmod g-w /etc /etc/default /usr
-else [ "`lsb_release -d | sed 's/.*:\s*//' | sed 's/16\.04\.[0-9]/16.04/' `" != "Ubuntu 16.04 LTS" ];
+else
+  [ "$(lsb_release -d | sed 's/.*:\s*//' | sed 's/16\.04\.[0-9]/16.04/')" != "Ubuntu 16.04 LTS" ]
   DISTRO=16
 fi
 
@@ -36,26 +37,26 @@ TOTAL_PHYSICAL_MEM=$(head -n 1 /proc/meminfo | awk '{print $2}')
 AVAILABLE_DISK_SPACE=$(df / --output=avail | tail -n 1)
 if
   [ -z "$SWAP_MOUNTED" ] &&
-  [ -z "$SWAP_IN_FSTAB" ] &&
-  [ ! -e /swapfile ] &&
-  [ -z "$ROOT_IS_BTRFS" ] &&
-  [ $TOTAL_PHYSICAL_MEM -lt 1536000 ] &&
-  [ $AVAILABLE_DISK_SPACE -gt 5242880 ]
+    [ -z "$SWAP_IN_FSTAB" ] &&
+    [ ! -e /swapfile ] &&
+    [ -z "$ROOT_IS_BTRFS" ] &&
+    [ $TOTAL_PHYSICAL_MEM -lt 1536000 ] &&
+    [ $AVAILABLE_DISK_SPACE -gt 5242880 ]
 then
   echo "Adding a swap file to the system..."
 
   # Allocate and activate the swap file. Allocate in 1KB chuncks
   # doing it in one go, could fail on low memory systems
   sudo fallocate -l 3G /swapfile
-    if [ -e /swapfile ]; then
-      sudo chmod 600 /swapfile
-      hide_output sudo mkswap /swapfile
-      sudo swapon /swapfile
-      echo "vm.swappiness=10" >> sudo /etc/sysctl.conf
-    fi
-# Check if swap is mounted then activate on boot
+  if [ -e /swapfile ]; then
+    sudo chmod 600 /swapfile
+    hide_output sudo mkswap /swapfile
+    sudo swapon /swapfile
+    echo "vm.swappiness=10" /etc/sysctl.conf >>sudo
+  fi
+  # Check if swap is mounted then activate on boot
   if swapon -s | grep -q "\/swapfile"; then
-    echo "/swapfile  none swap sw 0  0" >> sudo /etc/fstab
+    echo "/swapfile  none swap sw 0  0" /etc/fstab >>sudo
   else
     echo "ERROR: Swap allocation failed"
   fi
@@ -77,29 +78,4 @@ if [ -z "$STORAGE_USER" ]; then
 fi
 if [ -z "$STORAGE_ROOT" ]; then
   STORAGE_ROOT=$([[ -z "$DEFAULT_STORAGE_ROOT" ]] && echo "/home/$STORAGE_USER" || echo "$DEFAULT_STORAGE_ROOT")
-fi
-
-# BTC Donation 
-if [ -z "$BTCDON" ]; then
-  BTCDON=$([[ -z "$DEFAULT_BTCDON" ]] && echo "bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y" || echo "$DEFAULT_BTCDON")
-fi
-
-# ETH Donation Address 
-if [ -z "$LTCDON" ]; then
-  LTCDON=$([[ -z "$DEFAULT_LTCDON" ]] && echo "ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw" || echo "$DEFAULT_LTCDON")
-fi
-
-# LTC Donation Address
-if [ -z "$DOGEDON" ]; then
-  DOGEDON=$([[ -z "$DEFAULT_DOGEDON" ]] && echo "DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb" || echo "$DEFAULT_DOGEDON")
-fi
-
-# DOGE Donation Address
-if [ -z "$ETHDON" ]; then
-  ETHDON=$([[ -z "$DEFAULT_ETHDON" ]] && echo "0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB" || echo "$DEFAULT_ETHDON")
-fi
-
-# BCH Donation Address
-if [ -z "$BCHDON" ]; then
-  BCHDON=$([[ -z "$DEFAULT_BCHDONATION" ]] && echo "qpy2ehcxtddkfrrxqyq5skrvace66wvuqyuyzc87sc" || echo "$DEFAULT_BCHDONATION")
 fi
