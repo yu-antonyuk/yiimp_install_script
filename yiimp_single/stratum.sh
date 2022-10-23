@@ -11,7 +11,7 @@ source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 # sudo rm -rf /home/crypto-data/yiimp/yiimp_setup/yiimp
 #cd ~
 cd /home/crypto-data/yiimp/yiimp_setup
-sudo git clone https://github.com/afiniel/yiimp.git
+# sudo git clone https://github.com/afiniel/yiimp.git
 
 # Starting the build progress of the stratum
 echo -e "$YELLOW Building blocknotify , iniparser , stratum...$COL_RESET"
