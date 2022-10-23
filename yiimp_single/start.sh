@@ -48,7 +48,7 @@ source self_ssl.sh
 source db.sh
 source nginx_upgrade.sh
 source web.sh
-source stratum.sh
+sudo bash stratum.sh
 source daemon.sh
 if [[ ("$UsingDomain" == "yes") ]]; then
   source send_mail.sh
