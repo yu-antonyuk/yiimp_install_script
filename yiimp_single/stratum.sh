@@ -8,28 +8,31 @@ source /etc/functions.sh
 source /home/crypto-data/yiimp/.yiimp.conf
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 
-sudo rm -rf /home/crypto-data/yiimp/yiimp_setup/yiimp
-cd $STORAGE_ROOT/yiimp/yiimp_setup/
-git clone https://github.com/afiniel/yiimp.git
+# sudo rm -rf /home/crypto-data/yiimp/yiimp_setup/yiimp
+#cd ~
+cd /home/crypto-data/yiimp/yiimp_setup
+sudo git clone https://github.com/afiniel/yiimp.git
 
 # Starting the build progress of the stratum
 echo -e "$YELLOW Building blocknotify , iniparser , stratum...$COL_RESET"
 
-cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/blocknotify
+# Generating Random Password for stratum
 blckntifypass=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
-sudo sed -i 's/tu8tu5/'${blckntifypass}'/' blocknotify.cpp
+
+# Compil Blocknotify
+cd /home/crypto-data/yiimp/yiimp_setup/yiimp/blocknotify
+sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
 make -j$((`nproc`+1))
 
-# Compile iniparser , blocknotify and stratum.
-cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/stratum
-
+# Compil Stratum
+cd /home/crypto-data/yiimp/yiimp_setup/yiimp/stratum
 git submodule init && git submodule update
 sudo make -C algos
 sudo make -C sha3
 sudo make -C iniparser
 cd secp256k1 && chmod +x autogen.sh && ./autogen.sh && ./configure --enable-experimental --enable-module-ecdh --with-bignum=no --enable-endomorphism && make
-if [[ ("$AutoExchange" == "yes") ]]; then
-    sudo sed -i 's/CFLAGS += -DNO_EXCHANGE/#CFLAGS += -DNO_EXCHANGE/' $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/stratum/Makefile
+if [[ ("$AutoExchange" == "y" || "$AutoExchange" == "Y") ]]; then
+sudo sed -i 's/CFLAGS += -DNO_EXCHANGE/#CFLAGS += -DNO_EXCHANGE/' $HOME/yiimp/stratum/Makefile
 fi
 cd /home/crypto-data/yiimp/yiimp_setup/yiimp/stratum
 make -j$((`nproc`+1))
