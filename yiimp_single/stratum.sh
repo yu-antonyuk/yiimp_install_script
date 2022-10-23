@@ -8,6 +8,10 @@ source /etc/functions.sh
 source /home/crypto-data/yiimp/.yiimp.conf
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 
+sudo rm -rf /home/crypto-data/yiimp/yiimp_setup/yiimp
+cd $STORAGE_ROOT/yiimp/yiimp_setup/
+git clone https://github.com/afiniel/yiimp.git
+
 # Starting the build progress of the stratum
 echo -e "$YELLOW Building blocknotify , iniparser , stratum...$COL_RESET"
 
@@ -18,6 +22,7 @@ make -j$((`nproc`+1))
 
 # Compile iniparser , blocknotify and stratum.
 cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/stratum
+
 git submodule init && git submodule update
 sudo make -C algos
 sudo make -C sha3
