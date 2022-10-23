@@ -8,7 +8,10 @@ The Development is still in progress. Please report any issues you find.
 This is the main page for Yiimpool Yiimp Install script. Here you find information all documentation about <b> Yiimpool Yiimp Installer v0.4.1</b><p>The installer automatically install all requirements to get Yiimp installed correctly.</p><p><b> Yiimpool Yiimp Install Scrypt</b> is a Script that will install <b> Yiimp</b> Mining Pool on a clean<b>Ubuntu 18.04 VPS.</p>
 
 More information will be added soon.
-
+<p align="center">
+  <img src="./.assets/motd.png" alt="motd"
+       width="650" height="650">
+</p>
 <h2 align="left"> ⚙️ The installer requires the following </h2>
 
 * Fresh Ubuntu Ubuntu 18.04
