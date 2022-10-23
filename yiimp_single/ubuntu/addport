@@ -2,7 +2,9 @@
 
 source /etc/functions.sh
 source /etc/yiimpool.conf
+source /etc/yiimpooldonate.conf
 source $STORAGE_ROOT/yiimp/.yiimp.conf
+
 #####################################################
 # Dedicated Port config generator
 # Created by afiniel for yiimpool

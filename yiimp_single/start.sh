@@ -8,6 +8,7 @@
 
 source /etc/functions.sh
 source /etc/yiimpool.conf
+source /etc/yiimpooldonate.conf
 
 # Ensure Python reads/writes files in UTF-8. If the machine
 # triggers some other locale in Python, like ASCII encoding,
@@ -38,7 +39,7 @@ echo -e "$GREEN => Folders created $COL_RESET"
 # Start the installation.
 source menu.sh
 source questions.sh
-source $HOME/yiimpool/yiimp_single/.wireguard.install.cnf
+source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 if [[ ("$wireguard" == "true") ]]; then
   source wireguard.sh
 fi

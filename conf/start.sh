@@ -12,6 +12,7 @@ if [ -f /etc/yiimpool.conf ]; then
     # into variables with a DEFAULT_ prefix.
     cat /etc/yiimpool.conf | sed s/^/DEFAULT_/ > /tmp/yiimpool.prev.conf
     source /tmp/yiimpool.prev.conf
+    source /etc/yiimpooldonate.conf
     rm -f /tmp/yiimpool.prev.conf
 else
     FIRST_TIME_SETUP=1

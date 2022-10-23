@@ -52,7 +52,7 @@ You <b>MUST RUN</b> the <b>yiimpool</b> installer under <b>root</b> or an existi
 <h4 align="left"> 📝 Run the following commands in the terminal. </h4>
 
 ```
-curl https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/start.sh | bash
+curl https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/install.sh | bash
 
 ```
 

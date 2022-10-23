@@ -21,7 +21,7 @@
 #####################################################
 # Updated by Afiniel for Yiimpool use...
 #####################################################
-source /etc/addressdonation.conf
+source /etc/yiimpooldonate.conf
 date=`date`
 ps -aux | grep "[m]ain" > /dev/null 2>&1
 if [[ "$?" == "0" ]]; then

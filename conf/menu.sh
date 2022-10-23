@@ -7,7 +7,7 @@ source /etc/functions.sh
 
 RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Installer v0.4.1" --menu "Choose one" -1 60 16 \
 ' ' "-  Yiimp  -" \
-1 "Start Yiimp Configuration" \
+1 "Start Yiimp Install" \
 ' ' "- Daemon Wallet Builder -" \
 2 "Daemonbuilder" \
 3 Exit)

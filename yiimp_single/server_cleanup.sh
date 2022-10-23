@@ -6,6 +6,7 @@
 
 source /etc/functions.sh
 source $STORAGE_ROOT/yiimp/.yiimp.conf
+source /etc/yiimpooldonate.conf
 cd $HOME/yiimp_install_script/yiimp_single
 
 echo -e "$YELLOW => Installing cron screens to crontab$COL_RESET"
@@ -49,7 +50,7 @@ fi
 #                                                                              #
 # Program: yiimp screen startup script                                         #
 #                                                                              #
-# BTC Donation: $BTCDON                     #
+# BTC Donation: $BTCDON                                                        #
 #                                                                              #
 ################################################################################
 sudo chmod 777 $STORAGE_ROOT/yiimp/site/log/.

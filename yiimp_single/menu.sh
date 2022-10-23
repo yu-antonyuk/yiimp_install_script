@@ -8,7 +8,7 @@
 source /etc/functions.sh
 
 RESULT=$(dialog --stdout --default-item 1 --title "Yiimpool Installer v0.4.1" --menu "Choose one" -1 60 6 \
-    ' ' "- Pre-install complete. Do you want to continue with the Yiimp Install? -" \
+    ' ' "- Pre-install complete. -" \
     1 "Continue" \
     2 Exit)
 if [ $RESULT = 1 ]; then

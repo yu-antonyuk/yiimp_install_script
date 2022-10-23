@@ -8,7 +8,7 @@
 source /etc/functions.sh
 source /etc/yiimpool.conf
 source $STORAGE_ROOT/yiimp/.yiimp.conf
-source $HOME/yiimpool/yiimp_single/.wireguard.install.cnf
+source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 
 set -eu -o pipefail
 
@@ -51,7 +51,7 @@ else
 fi
 
 echo -e "$YELLOW Creating YiiMP configuration files$COL_RESET"
-cd $HOME/yiimp_install_script/yiimp_single/yiimp_confs
+cd $HOME/yiimp_install_script/yiimp_single
 source yiimp_confs/keys.sh
 source yiimp_confs/yiimpserverconfig.sh
 source yiimp_confs/main.sh
