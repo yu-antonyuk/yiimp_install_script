@@ -3,7 +3,6 @@
 # Updated by afiniel-tech for yiimpool use...
 #####################################################
 
-source /etc/yiimpoolversion.conf
 
 if [ "$(lsb_release -d | sed 's/.*:\s*//' | sed 's/18\.04\.[0-9]/18.04/')" == "Ubuntu 18.04 LTS" ]; then
   DISTRO=18
@@ -67,7 +66,7 @@ fi
 ARCHITECTURE=$(uname -m)
 if [ "$ARCHITECTURE" != "x86_64" ]; then
   if [ -z "$ARM" ]; then
-    echo "Yiimpool Installer $YIIMPOOL_VERSION only supports x86_64 and will not work on any other architecture, like ARM or 32 bit OS."
+    echo "Yiimpool Installer only supports x86_64 and will not work on any other architecture, like ARM or 32 bit OS."
     echo "Your architecture is $ARCHITECTURE"
     exit
   fi
