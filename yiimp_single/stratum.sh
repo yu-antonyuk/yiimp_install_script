@@ -19,7 +19,7 @@ blckntifypass=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 # Compil Blocknotify
 cd /home/crypto-data/yiimp/yiimp_setup/yiimp/blocknotify
 sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
-make -j$((`nproc`+1))
+hide_output make -j$((`nproc`+1))
 
 # Compil Stratum
 cd /home/crypto-data/yiimp/yiimp_setup/yiimp/stratum
@@ -34,7 +34,7 @@ fi
 cd /home/crypto-data/yiimp/yiimp_setup/yiimp/stratum
 hide_output make -j$((`nproc`+1))
 
-echo -e " Building stratum folder structure and copying files...$COL_RESET"
+echo -e "$YELLOW Building stratum folder structure and copying files...$COL_RESET"
 cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/stratum
 sudo cp -a config.sample/. $STORAGE_ROOT/yiimp/site/stratum/config
 sudo cp -r stratum $STORAGE_ROOT/yiimp/site/stratum
@@ -65,7 +65,7 @@ cd '""''"${STORAGE_ROOT}"''""'/yiimp/site/stratum/config/ && ./run.sh $*
 ' | sudo -E tee $STORAGE_ROOT/yiimp/site/stratum/run.sh >/dev/null 2>&1
 sudo chmod +x $STORAGE_ROOT/yiimp/site/stratum/run.sh
 
-echo -e " Updating stratum config files with database connection info...$COL_RESET"
+echo -e "YELLOW Updating stratum config files with database$GREEN connection$YELLOW info$COL_RESET"
 cd $STORAGE_ROOT/yiimp/site/stratum/config
 
 sudo sed -i 's/password = tu8tu5/password = '${blckntifypass}'/g' *.conf
