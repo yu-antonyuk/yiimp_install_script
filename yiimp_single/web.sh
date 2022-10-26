@@ -38,14 +38,14 @@ if [[ ("$UsingSubDomain" == "y" || "$UsingSubDomain" == "Y" || "$UsingSubDomain"
   cd $HOME/yiimp_install_script/yiimp_single
   source nginx_subdomain_nonssl.sh
   if [[ ("$InstallSSL" == "y" || "$InstallSSL" == "Y" || "$InstallSSL" == "yes" || "$InstallSSL" == "Yes" || "$InstallSSL" == "YES") ]]; then
-    cd cd $HOME/yiimp_install_script/yiimp_single
+    cd $HOME/yiimp_install_script/yiimp_single
     source nginx_subdomain_ssl.sh
   fi
 else
   cd $HOME/yiimp_install_script/yiimp_single
   source nginx_domain_nonssl.sh
   if [[ ("$InstallSSL" == "y" || "$InstallSSL" == "Y" || "$InstallSSL" == "yes" || "$InstallSSL" == "Yes" || "$InstallSSL" == "YES") ]]; then
-    cd cd $HOME/yiimp_install_script/yiimp_single
+    cd $HOME/yiimp_install_script/yiimp_single
     source nginx_domain_ssl.sh
   fi
 fi
