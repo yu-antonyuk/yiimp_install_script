@@ -83,5 +83,5 @@ sudo sed -i 's/password = patofpaq/password = '${StratumUserDBPassword}'/g' *.co
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/yiimp/site/stratum/
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/yiimp/site/stratum/config
 
-echo -e "$GREEN Stratum build complete...$COL_RESET"
+echo -e "$GREEN Stratum build complete$COL_RESET"
 cd $HOME/yiimp_install_script/yiimp_single
