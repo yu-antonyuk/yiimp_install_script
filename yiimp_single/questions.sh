@@ -7,20 +7,22 @@
 
 source /etc/functions.sh
 source /etc/yiimpool.conf
+source /etc/yiimpoolversion.conf
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
+
 if [[ ("$wireguard" == "true") ]]; then
    source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
 if [[ ("$wireguard" == "true") ]]; then
-   message_box "Yiimpool Installer v0.4.1" \
+   message_box "Yiimpool Installer $YIIMPOOL_VERSION" \
       "You have choosen to install Yiimp with WireGuard!
 \n\nThis option will install all componets of YiiMP on a single server along with WireGuard so you can easily add additional servers in the future.
 \n\nPlease make sure any domain name or sub domain names are pointed to this servers IP prior to running this installer.
 \n\nAfter answering the following questions, setup will be automated.
 \n\nNOTE: If installing on a system with less then 8 GB of RAM you may experience system issues!"
 else
-   message_box "Yiimpool nstaller v0.4.1" \
+   message_box "Yiimpool nstaller $YIIMPOOL_VERSION" \
       "You have choosen to install Yiimp!
 \n\nThis option will install all componets of YiiMP on a single server.
 \n\nPlease make sure any domain name or sub domain names are pointed to this servers IP prior to running this installer.

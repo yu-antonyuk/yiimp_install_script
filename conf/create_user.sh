@@ -4,17 +4,21 @@
 # Updated by finiel for yiimpool use...
 #####################################################
 
-source /etc/functions.shA
+source /etc/functions.sh
 cd ~/yiimpool/install
 clear
 
+# Yiimpool version tag.
+echo 'YIIMPOOL_VERSION='"${v0.4.1}"'' | sudo -E tee /etc/yiimpoolversion.conf >/dev/null 2>&1
+source /etc/yiimpoolversion.conf
+
 # Welcome
-message_box "Yiimp Installer v0.4.1" \
+message_box "Yiimp Installer $YIIMPOOL_VERSION" \
   "Hello and thanks for using the Yiimpool Installer!
 \n\nInstallation for the most part is fully automated. In most cases any user responses that are needed are asked prior to the installation.
 \n\nNOTE: You should only install this on a brand new Ubuntu 16.04 or Ubuntu 18.04 installation."
 # Root warning message box
-message_box "Yiimp Installer v0.4.1" \
+message_box "Yiimp Installer $YIIMPOOL_VERSION" \
   "WARNING: You are trying to install as the root user!
 \n\nRunning any program as root is not recommended and can pose serious security risks that you want to avoid.
 \n\nThe next step you will be asked to create a new user account, you can name it whatever you want."
@@ -114,10 +118,11 @@ if [[ ("$UsingSSH" == "yes") ]]; then
 
   # Set Donor Addresses
   echo 'BTCDON="bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y"
-LTCDON="ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw"
-ETHDON="0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB"
-BCHDON="qzz0aff2k0xnwyzg7k9fcxlndtaj4wa65uxteqe84m"
-DOGEDON="DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb"' | sudo -E tee /etc/yiimpooldonate.conf >/dev/null 2>&1
+  LTCDON="ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw"
+  ETHDON="0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB"
+  BCHDON="qzz0aff2k0xnwyzg7k9fcxlndtaj4wa65uxteqe84m"
+  DOGEDON="DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb"' | sudo -E tee /etc/yiimpooldonate.conf >/dev/null 2>&1
+
 
   sudo cp -r ~/yiimp_install_script /home/${yiimpadmin}/
   cd ~
@@ -183,14 +188,14 @@ case $response in
 
   # enabling yiimpool command
   echo '# yiimp
-# It needs passwordless sudo functionality.
-'""''"${yiimpadmin}"''""' ALL=(ALL) NOPASSWD:ALL
-' | sudo -E tee /etc/sudoers.d/${yiimpadmin} >/dev/null 2>&1
+  # It needs passwordless sudo functionality.
+  '""''"${yiimpadmin}"''""' ALL=(ALL) NOPASSWD:ALL
+  ' | sudo -E tee /etc/sudoers.d/${yiimpadmin} >/dev/null 2>&1
 
   echo '
-cd ~/yiimp_install_script/conf
-bash start.sh
-' | sudo -E tee /usr/bin/yiimpool >/dev/null 2>&1
+  cd ~/yiimp_install_script/conf
+  bash start.sh
+  ' | sudo -E tee /usr/bin/yiimpool >/dev/null 2>&1
   sudo chmod +x /usr/bin/yiimpool
 
   # Check required files and set global variables
@@ -208,26 +213,29 @@ bash start.sh
   # Save the global options in /etc/yiimpool.conf so that standalone
   # tools know where to look for data.
   echo 'STORAGE_USER='"${STORAGE_USER}"'
-STORAGE_ROOT='"${STORAGE_ROOT}"'
-PUBLIC_IP='"${PUBLIC_IP}"'
-PUBLIC_IPV6='"${PUBLIC_IPV6}"'
-DISTRO='"${DISTRO}"'
-PRIVATE_IP='"${PRIVATE_IP}"'' | sudo -E tee /etc/yiimpool.conf >/dev/null 2>&1
+  STORAGE_ROOT='"${STORAGE_ROOT}"'
+  PUBLIC_IP='"${PUBLIC_IP}"'
+  PUBLIC_IPV6='"${PUBLIC_IPV6}"'
+  DISTRO='"${DISTRO}"'
+  PRIVATE_IP='"${PRIVATE_IP}"'' | sudo -E tee /etc/yiimpool.conf >/dev/null 2>&1
 
  # Set Donor Addresses
   echo 'BTCDON="bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y"
-LTCDON="ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw"
-ETHDON="0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB"
-BCHDON="qzz0aff2k0xnwyzg7k9fcxlndtaj4wa65uxteqe84m"
-DOGEDON="DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb"' | sudo -E tee /etc/yiimpooldonate.conf >/dev/null 2>&1 2>&1
+  LTCDON="ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw"
+  ETHDON="0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB"
+  BCHDON="qzz0aff2k0xnwyzg7k9fcxlndtaj4wa65uxteqe84m"
+  DOGEDON="DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb"' | sudo -E tee /etc/yiimpooldonate.conf >/dev/null 2>&1 2>&1
+
+  # Yiimpool version tag.
+  echo 'YIIMPOOL_VERSION='"${v0.4.1}"'' | sudo -E tee /etc/yiimpoolversion.conf >/dev/null 2>&1
 
   sudo cp -r ~/yiimp_install_script /home/${yiimpadmin}/
   cd ~
   sudo setfacl -m u:${yiimpadmin}:rwx /home/${yiimpadmin}/yiimpool
   sudo rm -r $HOME/yiimp_install_script
   clear
-  echo -e "$RED New User is $COL_RESET $GREEN Created $COL_RESET $RED$COL_RESET"
-  echo -e "$RED Please reboot system and log in as the new user:$GREEN ${yiimpadmin} $COL_RESET $RED and type$COL_RESET $GREEN yiimpool$COL_RESET $RED to continue setup$COL_RESET"
+  echo -e "$YELLOW User: ${yiimpadmin} is$GREEN Created$COL_RESET"
+  echo -e "$RED Please reboot system and log in as the new user:$GREEN ${yiimpadmin} $RED and type$GREEN yiimpool$RED to continue setup$COL_RESET"
   exit 0
   ;;
 

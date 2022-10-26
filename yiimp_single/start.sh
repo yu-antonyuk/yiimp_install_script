@@ -9,6 +9,7 @@
 source /etc/functions.sh
 source /etc/yiimpool.conf
 source /etc/yiimpooldonate.conf
+source /etc/yiimpoolversion.conf
 
 # Ensure Python reads/writes files in UTF-8. If the machine
 # triggers some other locale in Python, like ASCII encoding,
@@ -92,23 +93,23 @@ else
   echo -e "$GREEN Database user names and passwords$YELLOW can be found in$RED $STORAGE_ROOT/yiimp_setup/.my.cnf$COL_RESET"
 fi
 
-echo "<-------------------------------------|---------------------------------------->"
-echo
-echo -e "$YELLOW Thank you for using the Yiimpool Installer $GREEN v0.4.1!             $COL_RESET"
-echo
-echo -e "$YELLOW To run this installer anytime simply type: $GREEN yiimpool            $COL_RESET"
-echo -e "$YELLOW Donations for continued support of this script are welcomed at:       $COL_RESET"
+
 echo "<-------------------------------------|--------------------------------------->"
-echo -e "$YELLOW                     Donate Wallets:                                   $COL_RESET"
-echo "<-------------------------------------|--------------------------------------->"
-echo -e "$YELLOW Thank you for using Yiimp Install Script v0.4.1 fork by Afiniel!      $COL_RESET"
+echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN $YIIMPOOL_VERSION$YELLOW fork by Afiniel!      $COL_RESET"
 echo
 echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
-echo -e "$YELLOW =>  Do you want to support me? Feel free to use wallets below:        $COL_RESET"
-echo "<-------------------------------------|--------------------------------------->"
+echo "<----------------------------------------------------------------------------->"
+echo -e "$YELLOW => Do you like the installer and want to support the project? use wallets below:                       $COL_RESET"
+echo "<----------------------------------------------------------------------------->"
 echo -e "$YELLOW =>  BTC:$GREEN $BTCDON                                   		       $COL_RESET"
+echo
 echo -e "$YELLOW =>  BCH:$GREEN $BCHDON                                   		       $COL_RESET"
+echo
 echo -e "$YELLOW =>  ETH:$GREEN $ETHDON                                   		       $COL_RESET"
+echo
 echo -e "$YELLOW =>  DOGE:$GREEN $DOGEDON                                 		       $COL_RESET"
+echo
 echo -e "$YELLOW =>  LTC:$GREEN $LTCDON                                   		       $COL_RESET"
 echo "<-------------------------------------|-------------------------------------->"
+
+

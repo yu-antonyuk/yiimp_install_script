@@ -18,7 +18,7 @@ apt-get -q -q update
 apt-get -q -q install -y git < /dev/null
 echo
 
-echo Downloading Yiimp Install Scrip v0.4.1. . .
+echo Downloading Yiimp Install Scrip $YIIMPOOL_VERSION. . .
 git clone https://github.com/afiniel/yiimp_install_script.git "$HOME"/yiimp_install_script < /dev/null 2> /dev/null
 echo
 

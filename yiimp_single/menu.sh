@@ -6,8 +6,9 @@
 #####################################################
 
 source /etc/functions.sh
+source /etc/yiimpoolversion.conf
 
-RESULT=$(dialog --stdout --default-item 1 --title "Yiimpool Installer v0.4.1" --menu "Choose one" -1 60 6 \
+RESULT=$(dialog --stdout --default-item 1 --title "Yiimpool Installer $YIIMPOOL_VERSION" --menu "Choose one" -1 60 6 \
     ' ' "- User account is ready for use! -" \
     1 "Continue" \
     2 Exit)

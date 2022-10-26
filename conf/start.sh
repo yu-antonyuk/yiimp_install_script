@@ -12,11 +12,27 @@ if [ -f /etc/yiimpool.conf ]; then
     # into variables with a DEFAULT_ prefix.
     cat /etc/yiimpool.conf | sed s/^/DEFAULT_/ > /tmp/yiimpool.prev.conf
     source /tmp/yiimpool.prev.conf
-    source /etc/yiimpooldonate.conf
     rm -f /tmp/yiimpool.prev.conf
 else
     FIRST_TIME_SETUP=1
 fi
+
+if  [ -f /etc/yiimpooldonate.conf ]; then
+    # Load the old .conf file to get existing configuration options loaded
+    # into variables with a DEFAULT_ prefix.
+    cat /etc/yiimpooldonate.conf | sed s/^/DEFAULT_/ > /tmp/yiimpooldonate.prev.conf
+    source /tmp/yiimpooldonate.prev.conf
+    rm -f /tmp/yiimpooldonate.prev.conf
+fi
+
+if [ -f /etc/yiimpoolversion.conf ]; then
+    # Load the old .conf file to get existing configuration options loaded
+    # into variables with a DEFAULT_ prefix.
+    cat /etc/yiimpoolversion.conf | sed s/^/DEFAULT_/ > /tmp/yiimpoolversion.prev.conf
+    source /tmp/yiimpoolversion.prev.conf
+    rm -f /tmp/yiimpoolversion.prev.conf
+fi
+
 
 if [[ ("$FIRST_TIME_SETUP" == "1") ]]; then
     clear
@@ -59,8 +75,8 @@ if [[ ("$FIRST_TIME_SETUP" == "1") ]]; then
     # Are we running as root?
     if [[ $EUID -ne 0 ]]; then
         # Welcome
-        message_box "Yiimp Installer v0.4.1" \
-        "Hello and thanks for using the Yiimpool Installer v0.4.1!
+        message_box "Yiimp Installer $YIIMPOOL_VERSION" \
+        "Hello and thanks for using the Yiimpool Installer!
         \n\nInstallation for the most part is fully automated. In most cases any user responses that are needed are asked prior to the installation.
         \n\nNOTE: You should only install this on a brand new Ubuntu 16.04 or Ubuntu 18.04 VPS."
         source existing_user.sh
@@ -97,26 +113,6 @@ else
     cd $HOME/yiimp_install_script/conf
     source menu.sh
     echo
-    echo "-------------------------------------|----------------------------------------"
-    echo
-    echo -e "$YELLOW Thank you for using the Yiimpool Installer $GREEN v0.4.1!            $COL_RESET"
-    echo
-    echo -e "$YELLOW To run this installer anytime simply type: $GREEN yiimpool           $COL_RESET"
-    echo -e "$YELLOW Donations for continued support of this script are welcomed at:      $COL_RESET"
-    echo "-------------------------------------|---------------------------------------"
-    echo -e "$YELLOW                     Donate Wallets:                                   $COL_RESET"
-    echo "-------------------------------------|---------------------------------------"
-    echo -e "$YELLOW Thank you for using Yiimp Install Script v0.4.1 fork by Afiniel!      $COL_RESET"
-    echo
-    echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
-    echo -e "$YELLOW =>  Do you want to support me? Feel free to use wallets below:        $COL_RESET"
-    echo "-------------------------------------|---------------------------------------"
-    echo -e "$YELLOW =>  BTC:$GREEN $BTCDON                                   $COL_RESET"
-    echo -e "$YELLOW =>  BCH:$GREEN $BCHDON                                   $COL_RESET"
-    echo -e "$YELLOW =>  ETH:$GREEN $ETHDON                                   $COL_RESET"
-    echo -e "$YELLOW =>  DOGE:$GREEN $DOGEDON                                 $COL_RESET"
-    echo -e "$YELLOW =>  LTC:$GREEN $LTCDON                                   $COL_RESET"
-    echo "-------------------------------------|--------------------------------------"
     exit 0
     cd ~
 fi
