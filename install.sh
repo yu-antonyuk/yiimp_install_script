@@ -1,26 +1,55 @@
-#!bin/bash
-
-###########################################################################################################
-# Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox                            #
-# Updated by Afiniel for crypto use...                                                                     #
-# This script is intended to be run like this:                                                            #
-#                                                                                                         #
-#  https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/start.sh | bash
-# 
-#                                                                                                         #
-###########################################################################################################
+#!/usr/bin/env bash
 
 
-# Install git and Clone yiimp_install_script
+#########################################################
+# Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
+# Updated by Afiniel for Yiimpool use...
+# This script is intended to be run like this:
+#
+#   curl https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/install.sh | bash
 
-echo Installing git . . .
-apt-get -q -q update
-apt-get -q -q install -y git < /dev/null
-echo
+#
+#########################################################
+if [ -z "${TAG}" ]; then
+	TAG=v0.4.2
+fi
 
-echo Downloading Yiimp Install Scrip $YIIMPOOL_VERSION. . .
-git clone https://github.com/afiniel/yiimp_install_script.git "$HOME"/yiimp_install_script < /dev/null 2> /dev/null
-echo
 
-# Start Install script.
+# Clone the Yiimp Install Script repository if it doesn't exist.
+if [ ! -d $HOME/yiimp_install_script ]; then
+	if [ ! -f /usr/bin/git ]; then
+		echo Installing git . . .
+		apt-get -q -q update
+		DEBIAN_FRONTEND=noninteractive apt-get -q -q install -y git < /dev/null
+		echo DONE...
+		echo
+
+	fi
+	
+	echo Downloading Yiimpool Installer ${TAG}. . .
+	git clone \
+		-b ${TAG} --depth 1 \
+		https://github.com/afiniel/yiimp_install_script \
+		"$HOME"/yiimp_install_script \
+		< /dev/null 2> /dev/null
+
+	echo
+fi
+
+
+cd $HOME/yiimp_install_script/conf
+
+# Update it.
+sudo chown -R $USER $HOME/yiimpool/install/.git/
+if [ "${TAG}" != `git describe --tags` ]; then
+	echo Updating Yiimpool Installer to ${TAG} . . .
+	git fetch --depth 1 --force --prune origin tag ${TAG}
+	if ! git checkout -q ${TAG}; then
+		echo "Update failed. Did you modify something in `pwd`?"
+		exit
+	fi
+	echo
+fi
+
+# Start setup script.
 bash $HOME/yiimp_install_script/conf/start.sh

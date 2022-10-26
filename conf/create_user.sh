@@ -9,7 +9,7 @@ cd ~/yiimpool/install
 clear
 
 # Yiimpool version tag.
-echo 'YIIMPOOL_VERSION='"${v0.4.1}"'' | sudo -E tee /etc/yiimpoolversion.conf >/dev/null 2>&1
+echo 'YIIMPOOL_VERSION='"${v0.4.2}"'' | sudo -E tee /etc/yiimpoolversion.conf >/dev/null 2>&1
 source /etc/yiimpoolversion.conf
 
 # Welcome
@@ -227,7 +227,7 @@ case $response in
   DOGEDON="DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb"' | sudo -E tee /etc/yiimpooldonate.conf >/dev/null 2>&1 2>&1
 
   # Yiimpool version tag.
-  echo 'YIIMPOOL_VERSION='"${v0.4.1}"'' | sudo -E tee /etc/yiimpoolversion.conf >/dev/null 2>&1
+  echo 'YIIMPOOL_VERSION='"${v0.4.2}"'' | sudo -E tee /etc/yiimpoolversion.conf >/dev/null 2>&1
 
   sudo cp -r ~/yiimp_install_script /home/${yiimpadmin}/
   cd ~

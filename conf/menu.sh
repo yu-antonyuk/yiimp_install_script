@@ -22,7 +22,7 @@ fi
 if [ $RESULT = 2 ]
 then
 clear;
-cd $HOME/yiimpool/install
+cd $HOME/yiimp_install_script/conf
 source bootstrap_coin.sh;
 fi
 
