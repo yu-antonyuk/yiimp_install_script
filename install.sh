@@ -19,7 +19,7 @@ apt-get -q -q install -y git < /dev/null
 echo
 
 echo Downloading Yiimp Install Scrip v0.4.3. . .
-git clone https://github.com/afiniel/yiimp_install_script.git "$HOME"/yiimp_install_script/install < /dev/null 2> /dev/null
+git clone https://github.com/afiniel/yiimp_install_script.git "$HOME"/yiimp_install_script < /dev/null 2> /dev/null
 echo
 
 # Start Install script.
