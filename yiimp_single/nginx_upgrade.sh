@@ -6,7 +6,7 @@
 
 source /etc/functions.sh
 source $STORAGE_ROOT/yiimp/.yiimp.conf
-cd $HOME/multipool/yiimp_single
+cd $HOME/yiimp_install_script/yiimp_single
 
 set -eu -o pipefail
 
@@ -22,7 +22,7 @@ source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
 # NGINX upgrade
-echo -e " Upgrading NGINX...$COL_RESET"
+echo -e "$YELLOW => Upgrading NGINX $COL_RESET"
 
 #Grab Nginx key and proper mainline package for distro
 echo "deb http://nginx.org/packages/mainline/ubuntu `lsb_release -cs` nginx" \
@@ -50,4 +50,4 @@ echo -e "$GREEN NGINX upgrade complete...$COL_RESET"
 restart_service nginx
 restart_service php7.3-fpm
 set +eu +o pipefail
-cd $HOME/multipool/yiimp_single
+cd $HOME/yiimp_install_script/yiimp_single

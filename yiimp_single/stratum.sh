@@ -23,7 +23,7 @@ hide_output make -j$((`nproc`+1))
 
 # Compil Stratum
 cd /home/crypto-data/yiimp/yiimp_setup/yiimp/stratum
-hide_output git submodule init && git submodule update
+hide_output git submodule init && hide_output git submodule update
 hide_output sudo make -C algos
 hide_output sudo make -C sha3
 hide_output sudo make -C iniparser
@@ -84,4 +84,6 @@ sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/yiimp/site/stratum/
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/yiimp/site/stratum/config
 
 echo -e "$GREEN Stratum build complete$COL_RESET"
+sleep 1.5
+term_art
 cd $HOME/yiimp_install_script/yiimp_single
