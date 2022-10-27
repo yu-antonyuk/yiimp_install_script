@@ -1,9 +1,10 @@
-#!/usr/bin/env bash
+#!/bin/env bash
 
-#####################################################
-# Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
-# Updated by Afiniel for crypto use...
-#####################################################
+##################################################################################
+# This is the entry point for configuring the system.                            #
+# Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox   #
+# Updated by Afiniel for yiimpool use...                                         #
+##################################################################################
 
 clear
 source /etc/functions.sh

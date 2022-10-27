@@ -73,7 +73,7 @@ echo '#!/usr/bin/env bash
 #                                                                              #
 # Program: yiimp stratum startup script                                        #
 #                                                                              #
-# BTC Donation: $BTCDON                     #
+# BTC Donation: $BTCDON                                                        #
 #                                                                              #
 ################################################################################
 

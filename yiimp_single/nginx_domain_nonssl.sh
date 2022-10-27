@@ -39,7 +39,7 @@ server {
 	ssl_certificate '"${STORAGE_ROOT}"'/ssl/ssl_certificate.pem;
 	ssl_certificate_key '"${STORAGE_ROOT}"'/ssl/ssl_private_key.pem;
 	# security
-	include afiniel/security.conf;
+	include yiimpool/security.conf;
 	# logging
 	access_log '"${STORAGE_ROOT}"'/yiimp/site/log/'"${DomainName}"'.app.access.log;
 	error_log '"${STORAGE_ROOT}"'/yiimp/site/log/'"${DomainName}"'.app.error.log warn;
@@ -54,17 +54,17 @@ server {
 	}
 	# handle .php
 	location ~ \.php$ {
-		include afiniel/php_fastcgi.conf;
+		include yiimpool/php_fastcgi.conf;
 	}
 	# additional config
-	include afiniel/general.conf;
+	include yiimpool/general.conf;
 }
 # HTTP redirect
 server {
 	listen 80;
 	listen [::]:80;
 	server_name .'"${DomainName}"';
-	include afiniel/letsencrypt.conf;
+	include yiimpool/letsencrypt.conf;
 	location / {
 		return 301 https://'"${DomainName}"'$request_uri;
 	}
