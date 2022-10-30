@@ -46,40 +46,13 @@ define('"'"'YAAMP_CREATE_NEW_COINS'"'"', false);
 define('"'"'YAAMP_NOTIFY_NEW_COINS'"'"', false);
 define('"'"'YAAMP_DEFAULT_ALGO'"'"', '"'"'x11'"'"');
 define('"'"'YAAMP_USE_NGINX'"'"', true);
+
 // Exchange public keys (private keys are in a separate config file)
-define('"'"'EXCH_ALCUREX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_ALTILLY_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_BIBOX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_BINANCE_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_BITTREX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_BITSTAMP_SECRET'"'"','"'"''"'"');
-define('"'"'EXCH_BLEUTRADE_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_BTER_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_CEXIO_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_CREX24_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_CCEX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_COINMARKETS_PASS'"'"', '"'"''"'"');
-define('"'"'EXCH_CRYPTOHUB_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_CRYPTOWATCH_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_DELIONDEX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_EMPOEX_SECKEY'"'"', '"'"''"'"');
-define('"'"'EXCH_ESCODEX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_EXBITRON_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_GATEIO_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_GRAVIEX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_HITBTC_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_JUBI_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_KRAKEN_SECRET'"'"','"'"''"'"');
-define('"'"'EXCH_KUCOIN_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_LIVECOIN_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_POLONIEX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_SHAPESHIFT_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_STOCKSEXCHANGE_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_SWIFTEX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_TRADEOGRE_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_YOBIT_SECRET'"'"', '"'"''"'"');
+
+
 // Automatic withdraw to Yaamp btc wallet if btc balance > 0.3
 define('"'"'EXCH_AUTO_WITHDRAW'"'"', 0.3);
+
 // nicehash keys deposit account & amount to deposit at a time
 define('"'"'NICEHASH_API_KEY'"'"','"'"'521c254d-8cc7-4319-83d2-ac6c604b5b49'"'"');
 define('"'"'NICEHASH_API_ID'"'"','"'"'9205'"'"');
@@ -87,6 +60,7 @@ define('"'"'NICEHASH_DEPOSIT'"'"','"'"'3J9tapPoFCtouAZH7Th8HAPsD8aoykEHzk'"'"');
 define('"'"'NICEHASH_DEPOSIT_AMOUNT'"'"','"'"'0.01'"'"');
 $cold_wallet_table = array(
 '"'"'bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r'"'"' => 0.10,
+
 );
 // Sample fixed pool fees
 $configFixedPoolFees = array(
@@ -146,48 +120,22 @@ define('"'"'YAAMP_CREATE_NEW_COINS'"'"', false);
 define('"'"'YAAMP_NOTIFY_NEW_COINS'"'"', false);
 define('"'"'YAAMP_DEFAULT_ALGO'"'"', '"'"'x11'"'"');
 define('"'"'YAAMP_USE_NGINX'"'"', true);
+
 // Exchange public keys (private keys are in a separate config file)
-define('"'"'EXCH_ALCUREX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_ALTILLY_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_BIBOX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_BINANCE_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_BITTREX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_BITSTAMP_SECRET'"'"','"'"''"'"');
-define('"'"'EXCH_BLEUTRADE_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_BTER_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_CEXIO_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_CREX24_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_CCEX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_COINMARKETS_PASS'"'"', '"'"''"'"');
-define('"'"'EXCH_CRYPTOHUB_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_CRYPTOWATCH_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_DELIONDEX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_EMPOEX_SECKEY'"'"', '"'"''"'"');
-define('"'"'EXCH_ESCODEX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_EXBITRON_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_GATEIO_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_GRAVIEX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_HITBTC_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_JUBI_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_KRAKEN_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_KUCOIN_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_LIVECOIN_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_POLONIEX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_SHAPESHIFT_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_STOCKSEXCHANGE_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_SWIFTEX_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_TRADEOGRE_SECRET'"'"', '"'"''"'"');
-define('"'"'EXCH_YOBIT_SECRET'"'"', '"'"''"'"');
+
 // Automatic withdraw to Yaamp btc wallet if btc balance > 0.3
 define('"'"'EXCH_AUTO_WITHDRAW'"'"', 0.3);
+
 // nicehash keys deposit account & amount to deposit at a time
 define('"'"'NICEHASH_API_KEY'"'"','"'"'521c254d-8cc7-4319-83d2-ac6c604b5b49'"'"');
 define('"'"'NICEHASH_API_ID'"'"','"'"'9205'"'"');
 define('"'"'NICEHASH_DEPOSIT'"'"','"'"'3J9tapPoFCtouAZH7Th8HAPsD8aoykEHzk'"'"');
 define('"'"'NICEHASH_DEPOSIT_AMOUNT'"'"','"'"'0.01'"'"');
+
 $cold_wallet_table = array(
 '"'"'bc1qpnxtg3dvtglrvfllfk3gslt6h5zffkf069nh8r'"'"' => 0.10,
 );
+
 // Sample fixed pool fees
 $configFixedPoolFees = array(
 '"'"'zr5'"'"' => 2.0,
@@ -200,10 +148,12 @@ $configFixedPoolFeesSolo = array(
 '"'"'scrypt'"'"' => 1.5,
 '"'"'sha256'"'"' => 1.5,
 );
+
 // Sample custom stratum ports
 $configCustomPorts = array(
 // '"'"'x11'"'"' => 7000,
 );
+
 // mBTC Coefs per algo (default is 1.0)
 $configAlgoNormCoef = array(
 // '"'"'x11'"'"' => 5.0,
