@@ -854,7 +854,7 @@ echo '
     define('"'"'EXCH_DELIONDEX_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_EMPOEX_SECKEY'"'"', '"'"''"'"');
     define('"'"'EXCH_ESCODEX_SECRET'"'"', '"'"''"'"');
-    define('"'"'EXCH_exbitron_SECRET'"'"', '"'"''"'"');
+    define('"'"'EXCH_EXBITRON_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_GATEIO_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_GRAVIEX_SECRET'"'"', '"'"''"'"');
     define('"'"'EXCH_HITBTC_SECRET'"'"', '"'"''"'"');
