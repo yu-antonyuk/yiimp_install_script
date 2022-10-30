@@ -94,7 +94,7 @@ fi
 
 echo
 echo "<-------------------------------------|--------------------------------------->"
-echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.4.4 $YELLOW fork by Afiniel!     $COL_RESET"
+echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.4.5 $YELLOW fork by Afiniel!     $COL_RESET"
 echo
 echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
 echo "<----------------------------------------------------------------------------->"
