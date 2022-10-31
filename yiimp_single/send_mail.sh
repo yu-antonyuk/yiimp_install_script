@@ -23,7 +23,8 @@ fi
 
 echo -e "$YELLOW => Installing mail system $COL_RESET"
 
-apt_install postfix mailutils
+apt_install postfix 
+apt_install mailutils
 
 sudo debconf-set-selections <<<"postfix postfix/mailname string ${PRIMARY_HOSTNAME}"
 sudo debconf-set-selections <<<"postfix postfix/main_mailer_type string 'Internet Site'"
