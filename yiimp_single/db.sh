@@ -138,6 +138,6 @@ echo -e "$MAGENTA <----------------------------------> $COL_RESET"
 echo -e "$MAGENTA Database$YELLOW build and tweak$GREEN completed $COL_RESET"
 echo -e "$MAGENTA <----------------------------------> $COL_RESET"
 echo -e "$GREEN Passwords can be found in$RED $STORAGE_ROOT/yiimp/.my.cnf $COL_RESET $COL_RESET"
--------
+
 set +eu +o pipefail
 cd $HOME/yiimp_install_script/yiimp_single
