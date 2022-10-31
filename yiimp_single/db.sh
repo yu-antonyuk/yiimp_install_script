@@ -134,6 +134,7 @@ fi
 
 echo -e "$GREEN Database tweak complete$COL_RESET"
 restart_service mysql
+term_art
 echo -e "$GREEN Database build complete$COL_RESET"
 set +eu +o pipefail
 cd $HOME/yiimp_install_script/yiimp_single
