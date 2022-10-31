@@ -18,14 +18,14 @@ function print_error {
 trap print_error ERR
 
 if [[ ("$wireguard" == "true") ]]; then
-    source $STORAGE_ROOT/yiimp/.wireguard.conf
+source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
 echo -e "$YELLOW => Installing mail system $COL_RESET"
 
 sudo debconf-set-selections <<<"postfix postfix/mailname string ${PRIMARY_HOSTNAME}"
 sudo debconf-set-selections <<<"postfix postfix/main_mailer_type string 'Internet Site'"
-apt_install mailutils
+sudo apt-get install mailutils -y
 
 sudo sed -i 's/inet_interfaces = all/inet_interfaces = loopback-only/g' /etc/postfix/main.cf
 sudo sed -i 's/myhostname =/# myhostname =/g' /etc/postfix/main.cf
@@ -37,11 +37,11 @@ sudo systemctl restart postfix
 whoami=$(whoami)
 
 
-sudo sed -i '/postmaster:    root/a root:'${SupportEmail}''/etc/aliases
-sudo sed -i '/root:/a '$whoami':'${SupportEmail}''/etc/aliases
+sudo sed -i '/postmaster:    root/a root:          '${SupportEmail}'' /etc/aliases
+sudo sed -i '/root:/a '$whoami':     '${SupportEmail}'' /etc/aliases
 sudo newaliases
 
 sudo adduser $whoami mail
-echo -e "$GREEN Mail system complete$COL_RESET"
+echo -e "$GREEN Mail system complete $COL_RESET"
 set +eu +o pipefail
 cd $HOME/yiimp_install_script/yiimp_single
