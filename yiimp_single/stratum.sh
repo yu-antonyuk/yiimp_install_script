@@ -27,7 +27,7 @@ hide_output git submodule init && hide_output git submodule update
 hide_output sudo make -C algos
 hide_output sudo make -C sha3
 hide_output sudo make -C iniparser
-cd secp256k1 && chmod +x autogen.sh && ./autogen.sh && ./configure --enable-experimental --enable-module-ecdh --with-bignum=no --enable-endomorphism && make
+cd secp256k1 && chmod +x autogen.sh && hide_output ./autogen.sh && hide_output ./configure --enable-experimental --enable-module-ecdh --with-bignum=no --enable-endomorphism && hide_output make -j$((`nproc`+1))
 if [[ ("$AutoExchange" == "y" || "$AutoExchange" == "Y") ]]; then
 sudo sed -i 's/CFLAGS += -DNO_EXCHANGE/#CFLAGS += -DNO_EXCHANGE/' $HOME/yiimp/stratum/Makefile
 fi
@@ -65,7 +65,7 @@ cd '""''"${STORAGE_ROOT}"''""'/yiimp/site/stratum/config/ && ./run.sh $*
 ' | sudo -E tee $STORAGE_ROOT/yiimp/site/stratum/run.sh >/dev/null 2>&1
 sudo chmod +x $STORAGE_ROOT/yiimp/site/stratum/run.sh
 
-echo -e "YELLOW Updating stratum config files with database$GREEN connection$YELLOW info$COL_RESET"
+echo -e "$YELLOW Updating stratum config files with database$GREEN connection$YELLOW info$COL_RESET"
 cd $STORAGE_ROOT/yiimp/site/stratum/config
 
 sudo sed -i 's/password = tu8tu5/password = '${blckntifypass}'/g' *.conf
@@ -83,7 +83,7 @@ sudo sed -i 's/password = patofpaq/password = '${StratumUserDBPassword}'/g' *.co
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/yiimp/site/stratum/
 sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/yiimp/site/stratum/config
 
-echo -e "$GREEN Stratum build complete$COL_RESET"
 sleep 1.5
 term_art
+echo -e "$GREEN Stratum build complete $COL_RESET"
 cd $HOME/yiimp_install_script/yiimp_single
