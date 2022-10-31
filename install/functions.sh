@@ -113,7 +113,7 @@ function term_art {
 	echo "   ╚═╝   ╚═╝╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝  ╚═════╝ ╚══════╝ "
 	echo -e "$CYAN   ----------------------------------------------------> 	  											$COL_RESET"
 	echo -e "$CYAN  |$YELLOW Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
-	echo -e "$CYAN  |$MAGENTA Version: $GREEN v0.4.8 														$COL_RESET"
+	echo -e "$CYAN  |$MAGENTA Version:$GREEN v0.4.8 														$COL_RESET"
 	echo -e "$CYAN   ----------------------------------------------------------------------> 	  			$COL_RESET"
 	echo -e "$CYAN  |$YELLOW This script will install all the dependencies and will install Yiimp.					$COL_RESET"
 	echo -e "$CYAN  |$YELLOW It will also install a MySQL database and a Web server.								$COL_RESET"
