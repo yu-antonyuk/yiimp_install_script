@@ -39,7 +39,8 @@ sudo sed -i '/# myhostname =/i myhostname = localhost' /etc/postfix/main.cf
 sudo systemctl restart postfix
 whoami=$(whoami)
 
-
+cd $HOME/etc/
+sudo touch aliases
 sudo sed -i '/postmaster:    root/a root:          '${SupportEmail}'' /etc/aliases
 sudo sed -i '/root:/a '$whoami':     '${SupportEmail}'' /etc/aliases
 sudo newaliases
