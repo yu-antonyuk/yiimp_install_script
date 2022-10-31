@@ -58,9 +58,10 @@ source web.sh
 sudo bash stratum.sh
 source compile_crypto.sh
 source daemon.sh
-if [[ ("$UsingDomain" == "yes") ]]; then
-source send_mail.sh
-fi
+
+# if [[ ("$UsingDomain" == "yes") ]]; then
+# source send_mail.sh
+# fi
 source server_cleanup.sh
 
 # fix CDbConnection failed to open the DB connection.
