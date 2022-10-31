@@ -1,11 +1,11 @@
-<h1 align="center"> Yiimpool Yiimp Install Scrypt v0.4.8 With DaemonBuilder and addport (update 2022-10-27) </h1>
+<h1 align="center"> Yiimpool Yiimp Install Scrypt v0.4.9 With DaemonBuilder and addport (update 2022-10-27) </h1>
 
 <a href="https://discord.gg/TTprjGD2tw"><img src="https://img.shields.io/discord/904564600354254898.svg?style=flat&label=Discord %3C3%20&color=7289DA%22" alt="Join Community Badge"/></a>
 </p>
 The Development is still in progress. Please report any issues you find.
 
 <h2 align="center"> Description </h2>
-This is the main page for Yiimpool Yiimp Install script. Here you find information all documentation about <b> Yiimpool Yiimp Installer v0.4.8</b><p>The installer automatically install all requirements to get Yiimp installed correctly.</p><p><b> Yiimpool Yiimp Install Scrypt</b> is a Script that will install <b> Yiimp</b> Mining Pool on a clean<b>Ubuntu 18.04 VPS.</p>
+This is the main page for Yiimpool Yiimp Install script. Here you find information all documentation about <b> Yiimpool Yiimp Installer v0.4.9</b><p>The installer automatically install all requirements to get Yiimp installed correctly.</p><p><b> Yiimpool Yiimp Install Scrypt</b> is a Script that will install <b> Yiimp</b> Mining Pool on a clean<b>Ubuntu 18.04 VPS.</p>
 
 More information will be added soon.
 <p align="center">
