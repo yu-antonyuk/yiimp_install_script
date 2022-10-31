@@ -132,9 +132,12 @@ else
   sudo sed -i 's/#bind-address=0.0.0.0/bind-address='${DBInternalIP}'/g' /etc/mysql/my.cnf
 fi
 
-echo -e "$GREEN Database tweak complete$COL_RESET"
 restart_service mysql
 term_art
-echo -e "$GREEN Database build complete$COL_RESET"
+echo -e "$MAGENTA <-----------------------------------------> $COL_RESET"
+echo -e "$GREEN Database build and tweak completed $COL_RESET"
+echo -e "$MAGENTA <-----------------------------------------> $COL_RESET"
+echo -e "$GREEN Passwords can be found in$RED $STORAGE_ROOT/yiimp/.my.cnf $COL_RESET $COL_RESET"
+
 set +eu +o pipefail
 cd $HOME/yiimp_install_script/yiimp_single
