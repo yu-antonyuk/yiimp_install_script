@@ -112,6 +112,7 @@ sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force <2018-09-22-wo
 sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force <2019-03-coins_thepool_life.sql
 sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force <2020-06-03-blocks.sql
 sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force <2022-10-14-shares_solo.sql
+sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force <2022-10-29-blocks_effort.sql
 echo -e "$YELLOW => Datebase import $GREEN complete$COL_RESET"
 
 echo -e "$YELLOW => Tweaking MariaDB for better performance$COL_RESET"
