@@ -25,7 +25,7 @@ echo -e "$YELLOW => Installing mail system $COL_RESET"
 
 sudo debconf-set-selections <<<"postfix postfix/mailname string ${PRIMARY_HOSTNAME}"
 sudo debconf-set-selections <<<"postfix postfix/main_mailer_type string 'Internet Site'"
-sudo apt-get install mailutils -y
+# sudo apt-get install mailutils -y
 
 sudo sed -i 's/inet_interfaces = all/inet_interfaces = loopback-only/g' /etc/postfix/main.cf
 sudo sed -i 's/myhostname =/# myhostname =/g' /etc/postfix/main.cf
