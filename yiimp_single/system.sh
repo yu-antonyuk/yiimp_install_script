@@ -171,6 +171,13 @@ if [ -f /etc/update-manager/release-upgrades ]; then
 	sudo rm -f /var/lib/ubuntu-release-upgrader/release-upgrade-available
 fi
 
+# fix CDbConnection failed to open the DB connection.
+echo
+echo -e "$CYAN => Fixing DBconnection issue $COL_RESET"
+apt_install php8.1-mysql
+echo
+hide_output service nginx restart
+
 echo -e "$GREEN Done$COL_RESET"
 
 echo -e "$YELLOW =>  Downloading YiiMP Repo$COL_RESET"
