@@ -35,7 +35,7 @@ function database_import_sql {
 
 	# Import Database from SQL files
 	sleep 1
-	echo -e "$CYAN Importing Database from SQL files$COL_RESET"
+	echo -e "$CYAN => Importing Database from SQL files <= $COL_RESET"
 
 	echo
 	cd ~
@@ -66,7 +66,7 @@ function database_import_sql {
 	sudo mysql --defaults-group-suffix=host1 --force <2019-03-coins_thepool_life.sql
 	sudo mysql --defaults-group-suffix=host1 --force <2020-06-03-blocks.sql
 
-	echo -e "$GREEN Database imported successfully!$COL_RESET"
+	echo -e "$GREEN => Database imported successfully! <= $COL_RESET"
 
 }
 
@@ -125,7 +125,7 @@ function term_art {
 }
 
 function daemonbuiler_files {
-	echo -e "$YELLOW Copy => Copy Daemonbuilder files. $COL_RESET"
+	echo -e "$YELLOW Copy => Copy Daemonbuilder files.  <= $COL_RESET"
 	cd $HOME/yiimp_install_script
 	sudo mkdir -p /etc/utils/daemon_builder
 	sudo cp -r utils/start.sh $HOME/utils/daemon_builder
@@ -193,7 +193,7 @@ function last_words {
 function package_compile_crypto {
 
 	# Installing Package to compile crypto currency
-	echo -e "$CYAN Installing needed Package to compile crypto currency $COL_RESET"
+	echo -e "$CYAN Installing needed Package to compile crypto currency  <= $COL_RESET"
 
 	hide_output sudo apt-get -y install software-properties-common build-essential
 	hide_output sudo apt-get -y install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext

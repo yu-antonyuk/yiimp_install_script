@@ -21,7 +21,7 @@ if [[ ("$wireguard" == "true") ]]; then
 source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
-echo -e "$YELLOW => Installing mail system $COL_RESET"
+echo -e "$YELLOW => Installing mail system  <= $COL_RESET"
 
 apt_install postfix 
 apt_install mailutils

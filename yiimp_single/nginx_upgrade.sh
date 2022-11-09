@@ -22,7 +22,7 @@ source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
 # NGINX upgrade
-echo -e "$YELLOW => Upgrading NGINX $COL_RESET"
+echo -e "$YELLOW => Upgrading NGINX  <= $COL_RESET"
 
 #Grab Nginx key and proper mainline package for distro
 echo "deb http://nginx.org/packages/mainline/ubuntu `lsb_release -cs` nginx" \

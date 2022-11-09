@@ -36,7 +36,7 @@ export LC_TYPE=en_US.UTF-8
 export NCURSES_NO_UTF8_ACS=1
 
 # Create the temporary installation directory if it doesn't already exist.
-echo -e "$YELLOW Creating the temporary YiiMP installation folder...$COL_RESET"
+echo -e "$YELLOW Creating the temporary YiiMP installation folder... <= $COL_RESET"
 if [ ! -d $STORAGE_ROOT/yiimp/yiimp_setup ]; then
 sudo mkdir -p $STORAGE_ROOT/{wallets,yiimp/{yiimp_setup/log,site/{web,stratum,configuration,crons,log},starts}}
 sudo touch $STORAGE_ROOT/yiimp/yiimp_setup/log/installer.log

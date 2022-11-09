@@ -9,7 +9,7 @@ source $STORAGE_ROOT/yiimp/.yiimp.conf
 source /etc/yiimpooldonate.conf
 cd $HOME/yiimp_install_script/yiimp_single
 
-echo -e "$YELLOW => Installing cron screens to crontab$COL_RESET"
+echo -e "$YELLOW => Installing cron screens to crontab <= $COL_RESET"
 
 (
     crontab -l 2>/dev/null
@@ -33,7 +33,7 @@ fi
 sudo cp -r first_boot.sh $STORAGE_ROOT/yiimp/
 
 echo -e "$GREEN Crontab system complete$COL_RESET"
-echo -e "$YELLOW => Creating YiiMP Screens startup script$COL_RESET"
+echo -e "$YELLOW => Creating YiiMP Screens startup script <= $COL_RESET"
 
 echo '#!/usr/bin/env bash
 source /etc/yiimpool.conf
@@ -64,7 +64,7 @@ screen -dmS debug tail -f $LOG_DIR/debug.log
 ' | sudo -E tee $STORAGE_ROOT/yiimp/starts/screens.start.sh >/dev/null 2>&1
 sudo chmod +x $STORAGE_ROOT/yiimp/starts/screens.start.sh
 
-echo -e "$YELLOW => Creating Stratum screens start script$COL_RESET"
+echo -e "$YELLOW => Creating Stratum screens start script <= $COL_RESET"
 
 echo '#!/usr/bin/env bash
 ################################################################################

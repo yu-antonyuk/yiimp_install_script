@@ -36,7 +36,7 @@ function database_import_sql {
 
 	# Import Database from SQL files
 	sleep 1
-	echo -e "$CYAN Importing Database from SQL files$COL_RESET"
+	echo -e "$CYAN Importing Database from SQL files <= $COL_RESET"
 
 	echo
 	cd ~
@@ -127,7 +127,7 @@ function term_art {
 }
 
 function daemonbuiler_files {
-	echo -e "$YELLOW Copy => Copy Daemonbuilder files. $COL_RESET"
+	echo -e "$YELLOW Copy => Copy Daemonbuilder files.  <= $COL_RESET"
 	cd $HOME/yiimp_install_script
 	sudo mkdir -p /etc/utils/daemon_builder
 	sudo cp -r utils/start.sh $HOME/utils/daemon_builder

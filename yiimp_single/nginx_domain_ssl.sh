@@ -20,7 +20,7 @@ if [[ ("$wireguard" == "true") ]]; then
 	source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
-echo -e "$YELLOW Generating Certbot Request for$GREEN ${DomainName}$COL_RESET"
+echo -e "$YELLOW => Generating Certbot Request for$GREEN ${DomainName} <= $COL_RESET"
 sudo mkdir -p /var/www/_letsencrypt
 sudo chown www-data /var/www/_letsencrypt
 hide_output sudo certbot certonly --webroot -d "${DomainName}" --register-unsafely-without-email -w /var/www/_letsencrypt -n --agree-tos --force-renewal

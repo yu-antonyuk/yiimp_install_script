@@ -30,7 +30,7 @@ sudo mkdir -p $STORAGE_ROOT/daemon_builder
 fi
 
 # Copy DaemonBuilder files to DaemonBuilder directory
-echo -e "$YELLOW Copying DaemonBuilder files $COL_RESET"
+echo -e "$YELLOW => Copying DaemonBuilder files  <= $COL_RESET"
 sudo cp -r $HOME/yiimp_install_script/daemon_builder/* $STORAGE_ROOT/daemon_builder
 
 # Enable DaemonBuilder

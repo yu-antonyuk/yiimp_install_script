@@ -23,7 +23,7 @@ function print_error {
 trap print_error ERR
 
 # Set timezone
-echo -e "$YELLOW =>  Setting TimeZone to UTC$COL_RESET"
+echo -e "$YELLOW =>  Setting TimeZone to UTC <= $COL_RESET"
 if [ ! -f /etc/timezone ]; then
 	echo "Setting timezone to UTC."
 	echo "Etc/UTC" /etc/timezone >sudo
@@ -32,28 +32,28 @@ fi
 echo -e "$GREEN Done$COL_RESET"
 
 # Add repository
-echo -e "$YELLOW =>  Adding the required repsoitories$COL_RESET"
+echo -e "$YELLOW =>  Adding the required repsoitories <= $COL_RESET"
 if [ ! -f /usr/bin/add-apt-repository ]; then
-	echo -e "$YELLOW =>  Installing add-apt-repository... $COL_RESET"
+	echo -e "$YELLOW =>  Installing add-apt-repository...  <= $COL_RESET"
 	hide_output sudo apt-get -y update
 	apt_install software-properties-common
 fi
 echo -e "$GREEN Done$COL_RESET"
 
 # PHP 7.3
-echo -e "$YELLOW =>  Installing Ondrej PHP PPA$COL_RESET"
+echo -e "$YELLOW =>  Installing Ondrej PHP PPA <= $COL_RESET"
 if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
 	hide_output sudo add-apt-repository -y ppa:ondrej/php
 fi
 echo -e "$GREEN Done$COL_RESET"
 
 # CertBot
-echo -e "$YELLOW =>  Installing CertBot PPA$COL_RESET"
+echo -e "$YELLOW =>  Installing CertBot PPA <= $COL_RESET"
 hide_output sudo add-apt-repository -y ppa:certbot/certbot
 echo -e "$GREEN Done$COL_RESET"
 
 # MariaDB
-echo -e "$YELLOW =>  Installing MariaDB Repository$COL_RESET"
+echo -e "$YELLOW =>  Installing MariaDB <= $COL_RESET"
 hide_output sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 if [[ ("$DISTRO" == "16") ]]; then
 	sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
@@ -63,10 +63,10 @@ fi
 echo -e "$GREEN Done$COL_RESET"
 
 # Upgrade System Files
-echo -e "$YELLOW =>  Updating system packages$COL_RESET"
+echo -e "$YELLOW =>  Updating system packages <= $COL_RESET"
 hide_output sudo apt-get update
 echo -e "$GREEN Done$COL_RESET"
-echo -e "$YELLOW =>  Upgrading system packages$COL_RESET"
+echo -e "$YELLOW =>  Upgrading system packages <= $COL_RESET"
 if [ ! -f /boot/grub/menu.lst ]; then
 	apt_get_quiet upgrade
 else
@@ -75,14 +75,14 @@ else
 	apt_get_quiet upgrade
 fi
 echo -e "$GREEN Done$COL_RESET"
-echo -e "$YELLOW =>  Running Dist-Upgrade$COL_RESET"
+echo -e "$YELLOW =>  Running Dist-Upgrade <= $COL_RESET"
 apt_get_quiet dist-upgrade
 echo -e "$GREEN Done$COL_RESET"
-echo -e "$YELLOW =>  Running Autoremove$COL_RESET"
+echo -e "$YELLOW =>  Running Autoremove <= $COL_RESET"
 apt_get_quiet autoremove
 
 echo -e "$GREEN Done$COL_RESET"
-echo -e "$YELLOW =>  Installing Base system packages$COL_RESET"
+echo -e "$YELLOW =>  Installing Base system packages <= $COL_RESET"
 apt_install python3 python3-dev python3-pip \
 	wget curl git sudo coreutils bc \
 	haveged pollinate unzip \
@@ -90,12 +90,12 @@ apt_install python3 python3-dev python3-pip \
 
 # ### Seed /dev/urandom
 echo -e "$GREEN Done$COL_RESET"
-echo -e "$YELLOW =>  Initializing system random number generator$COL_RESET"
+echo -e "$YELLOW =>  Initializing system random number generator <= $COL_RESET"
 hide_output dd if=/dev/random of=/dev/urandom bs=1 count=32 2>/dev/null
 hide_output sudo pollinate -q -r
 echo -e "$GREEN Done$COL_RESET"
 
-echo -e "$YELLOW =>  Initializing UFW Firewall$COL_RESET"
+echo -e "$YELLOW =>  Initializing UFW Firewall <= $COL_RESET"
 set +eu +o pipefail
 if [ -z "${DISABLE_FIREWALL:-}" ]; then
 	# Install `ufw` which provides a simple firewall configuration.
@@ -124,7 +124,7 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 fi #NODOC
 set -eu -o pipefail
 echo -e "$GREEN Done$COL_RESET"
-echo -e "$YELLOW =>  Installing YiiMP Required system packages$COL_RESET"
+echo -e "$YELLOW =>  Installing YiiMP Required system packages <= $COL_RESET"
 if [ -f /usr/sbin/apache2 ]; then
 	echo Removing apache...
 	hide_output apt-get -y purge apache2 apache2-*
@@ -180,7 +180,7 @@ hide_output service nginx restart
 
 echo -e "$GREEN Done$COL_RESET"
 
-echo -e "$YELLOW =>  Downloading YiiMP Repo$COL_RESET"
+echo -e "$YELLOW =>  Downloading YiiMP Repo <= $COL_RESET"
 hide_output sudo git clone ${YiiMPRepo} $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
 if [[ ("$CoinPort" == "yes") ]]; then
 	cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp

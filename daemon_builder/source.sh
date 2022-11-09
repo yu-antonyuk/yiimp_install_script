@@ -165,7 +165,7 @@ if [[ ("$cmake" == "true") ]]; then
 	if [ -d "$DEPENDS" ]; then
 		echo
 		echo
-		echo -e "$CYAN => Building using cmake with DEPENDS directory... $COL_RESET"
+		echo -e "$CYAN => Building using cmake with DEPENDS directory...  <= $COL_RESET"
 		echo
 		sleep 3
 		
@@ -191,7 +191,7 @@ if [[ ("$cmake" == "true") ]]; then
 
 		# Building autogen....
 		echo
-		echo -e "$YELLOW => Building autogen... $COL_RESET"
+		echo -e "$YELLOW => Building autogen...  <= $COL_RESET"
 		echo
 		sleep 3
 		cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
@@ -207,7 +207,7 @@ if [[ ("$cmake" == "true") ]]; then
 		# Configure with your platform....
 		if [ -d "$DEPENDS/i686-pc-linux-gnu" ]; then
 			echo
-			echo -e "$YELLOW => Configure with i686-pc-linux-gnu... $COL_RESET"
+			echo -e "$YELLOW => Configure with i686-pc-linux-gnu...  <= $COL_RESET"
 			echo
 			sleep 3
 			if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
@@ -217,7 +217,7 @@ if [[ ("$cmake" == "true") ]]; then
 			fi
 		elif [ -d "$DEPENDS/x86_64-pc-linux-gnu/" ]; then
 			echo
-			echo -e "$YELLOW => Configure with x86_64-pc-linux-gnu... $COL_RESET"
+			echo -e "$YELLOW => Configure with x86_64-pc-linux-gnu...  <= $COL_RESET"
 			echo
 			sleep 3
 			if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
@@ -227,7 +227,7 @@ if [[ ("$cmake" == "true") ]]; then
 			fi
 		elif [ -d "$DEPENDS/i686-w64-mingw32/" ]; then
 			echo
-			echo -e "$YELLOW => Configure with i686-w64-mingw32... $COL_RESET"
+			echo -e "$YELLOW => Configure with i686-w64-mingw32...  <= $COL_RESET"
 			echo
 			sleep 3
 			if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
@@ -237,7 +237,7 @@ if [[ ("$cmake" == "true") ]]; then
 			fi
 		elif [ -d "$DEPENDS/x86_64-w64-mingw32/" ]; then
 			echo
-			echo -e "$YELLOW => Configure with x86_64-w64-mingw32... $COL_RESET"
+			echo -e "$YELLOW => Configure with x86_64-w64-mingw32...  <= $COL_RESET"
 			echo
 			sleep 3
 			if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
@@ -247,7 +247,7 @@ if [[ ("$cmake" == "true") ]]; then
 			fi
 		elif [ -d "$DEPENDS/x86_64-apple-darwin14/" ]; then
 			echo
-			echo -e "$YELLOW => Configure with x86_64-apple-darwin14... $COL_RESET"
+			echo -e "$YELLOW => Configure with x86_64-apple-darwin14...  <= $COL_RESET"
 			echo
 			sleep 3
 			if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
@@ -257,7 +257,7 @@ if [[ ("$cmake" == "true") ]]; then
 			fi
 		elif [ -d "$DEPENDS/arm-linux-gnueabihf/" ]; then
 			echo
-			echo -e "$YELLOW => Configure with arm-linux-gnueabihf... $COL_RESET"
+			echo -e "$YELLOW => Configure with arm-linux-gnueabihf...  <= $COL_RESET"
 			echo
 			sleep 3
 			if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
@@ -267,7 +267,7 @@ if [[ ("$cmake" == "true") ]]; then
 			fi
 		elif [ -d "$DEPENDS/aarch64-linux-gnu/" ]; then
 			echo
-			echo -e "$YELLOW => Configure with aarch64-linux-gnu... $COL_RESET"
+			echo -e "$YELLOW => Configure with aarch64-linux-gnu...  <= $COL_RESET"
 			echo
 			sleep 3
 			if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
@@ -282,7 +282,7 @@ if [[ ("$cmake" == "true") ]]; then
 		
 		# Executing make to finalize....
 		echo
-		echo -e "$YELLOW => Executing make to finalize... $COL_RESET"
+		echo -e "$YELLOW => Executing make to finalize...  <= $COL_RESET"
 		echo
 		sleep 3
 		if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
@@ -342,7 +342,7 @@ if [[ ("$precompiled" == "true") ]]; then
 		sudo tar xzvf $coinzipped
 		for i in $(ls -d */); do repzipcoin=${i%%/}; done
 	else
-		echo -e "$RED => This is a not valid file zipped $COL_RESET"
+		echo -e "$RED => This is a not valid file zipped  <= $COL_RESET"
 	fi
 fi
 

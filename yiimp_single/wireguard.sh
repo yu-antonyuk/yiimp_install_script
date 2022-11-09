@@ -9,7 +9,7 @@ source $STORAGE_ROOT/yiimp/.wireguard.conf
 source /etc/yiimpool.conf
 
 clear
-echo -e "$YELLOW => Installing WireGuard $COL_RESET"
+echo -e "$YELLOW => Installing WireGuard  <= $COL_RESET"
 sudo add-apt-repository ppa:wireguard/wireguard -y
 sudo apt-get update -y
 sudo apt-get install wireguard-dkms wireguard-tools -y
