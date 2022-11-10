@@ -187,7 +187,7 @@ if [[ ("$cmake" == "true") ]]; then
 		fi
 		echo
 		echo
-		echo -e "$GREEN <-- Done$COL_RESET -->"
+		echo -e "$GREEN <-- Done -->$COL_RESET"
 
 		# Building autogen....
 		echo
@@ -202,7 +202,7 @@ if [[ ("$cmake" == "true") ]]; then
 		fi
 		echo
 		echo
-		echo -e "$GREEN <-- Done$COL_RESET -->"
+		echo -e "$GREEN <-- Done -->$COL_RESET"
 
 		# Configure with your platform....
 		if [ -d "$DEPENDS/i686-pc-linux-gnu" ]; then
@@ -278,7 +278,7 @@ if [[ ("$cmake" == "true") ]]; then
 		fi
 		echo
 		echo
-		echo -e "$GREEN <-- Done$COL_RESET -->"
+		echo -e "$GREEN <-- Done -->$COL_RESET"
 		
 		# Executing make to finalize....
 		echo
@@ -292,7 +292,7 @@ if [[ ("$cmake" == "true") ]]; then
 		fi
 		echo
 		echo
-		echo -e "$GREEN <-- Done$COL_RESET -->"
+		echo -e "$GREEN <-- Done -->$COL_RESET"
 	else
 		echo
 		echo "Building using Cmake method..."

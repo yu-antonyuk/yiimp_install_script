@@ -34,7 +34,7 @@ if [ ! -f /etc/timezone ]; then
 	restart_service rsyslog
 fi
 echo
-echo -e "$GREEN <-- Done$COL_RESET -->"
+echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # Add repository
 echo -e "$YELLOW =>  Adding the required repsoitories <= $COL_RESET"
@@ -44,20 +44,20 @@ if [ ! -f /usr/bin/add-apt-repository ]; then
 	apt_install software-properties-common
 fi
 echo
-echo -e "$GREEN <-- Done$COL_RESET -->"
+echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # PHP 7.3
 echo -e "$MAGENTA =>  Installing Ondrej PHP PPA <= $COL_RESET"
 if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
 	hide_output sudo add-apt-repository -y ppa:ondrej/php
 fi
-echo -e "$GREEN <-- Done$COL_RESET -->"
+echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # CertBot
 echo -e "$MAGENTA =>  Installing CertBot PPA <= $COL_RESET"
 hide_output sudo add-apt-repository -y ppa:certbot/certbot
 echo
-echo -e "$GREEN <-- Done$COL_RESET -->"
+echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # MariaDB
 echo -e "$MAGENTA =>  Installing MariaDB <= $COL_RESET"
@@ -68,7 +68,7 @@ else
 	sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
 fi
 echo
-echo -e "$GREEN <-- Done$COL_RESET -->"
+echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # Upgrade System Files
 hide_output sudo apt-get update
@@ -82,14 +82,14 @@ else
 	apt_get_quiet upgrade
 fi
 echo
-echo -e "$GREEN <-- Done$COL_RESET -->"
+echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # Dist Upgrade
 apt_get_quiet dist-upgrade
 
 apt_get_quiet autoremove
 
-echo -e "$GREEN <-- Done$COL_RESET -->"
+echo -e "$GREEN <-- Done -->$COL_RESET"
 echo -e "$MAGENTA =>  Installing Base system packages <= $COL_RESET"
 apt_install python3 python3-dev python3-pip \
 	wget curl git sudo coreutils bc \
@@ -98,12 +98,12 @@ apt_install python3 python3-dev python3-pip \
 
 # ### Seed /dev/urandom
 echo
-echo -e "$GREEN <-- Done$COL_RESET -->"
+echo -e "$GREEN <-- Done -->$COL_RESET"
 echo -e "$YELLOW =>  Initializing system random number generator <= $COL_RESET"
 hide_output dd if=/dev/random of=/dev/urandom bs=1 count=32 2>/dev/null
 hide_output sudo pollinate -q -r
 echo
-echo -e "$GREEN <-- Done$COL_RESET -->"
+echo -e "$GREEN <-- Done -->$COL_RESET"
 
 echo -e "$YELLOW =>  Initializing UFW Firewall <= $COL_RESET"
 set +eu +o pipefail
@@ -134,7 +134,7 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 fi #NODOC
 set -eu -o pipefail
 echo
-echo -e "$GREEN <-- Done$COL_RESET -->"
+echo -e "$GREEN <-- Done -->$COL_RESET"
 echo -e "$MAGENTA =>  Installing YiiMP Required system packages <= $COL_RESET"
 if [ -f /usr/sbin/apache2 ]; then
 	echo Removing apache...
@@ -189,7 +189,7 @@ apt_install php8.1-mysql
 echo
 hide_output service nginx restart
 echo
-echo -e "$GREEN <-- Done$COL_RESET -->"
+echo -e "$GREEN <-- Done -->$COL_RESET"
 
 echo -e "$CYAN =>  Downloading YiiMP Repo <= $COL_RESET"
 hide_output sudo git clone ${YiiMPRepo} $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
