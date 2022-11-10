@@ -31,7 +31,7 @@ export LC_TYPE=en_US.UTF-8
 export NCURSES_NO_UTF8_ACS=1
 
 # Create the temporary installation directory if it doesn't already exist.
-echo "$YELLOW Creating the temporary build folder... $COL_RESET"
+echo "$YELLOW => Creating the temporary build folder... <= $COL_RESET"
 if [ ! -d $STORAGE_ROOT/daemon_builder/temp_coin_builds ]; then
 sudo mkdir -p $STORAGE_ROOT/daemon_builder/temp_coin_builds
 fi
