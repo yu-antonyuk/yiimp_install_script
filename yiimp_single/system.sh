@@ -189,14 +189,14 @@ apt_install php8.1-mysql
 echo
 hide_output service nginx restart
 echo
-echo -e "$GREEN <-- Done -->$COL_RESET"
+echo
 
 echo -e "$CYAN =>  Downloading YiiMP Repo <= $COL_RESET"
 hide_output sudo git clone ${YiiMPRepo} $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
 if [[ ("$CoinPort" == "yes") ]]; then
 	cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
 	sudo git fetch
-	sudo git checkout multi-port >/dev/null 2>&1
+	sudo git checkout dev >/dev/null 2>&1
 fi
 
 hide_output service nginx restart
