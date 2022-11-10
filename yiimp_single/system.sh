@@ -8,6 +8,7 @@
 
 clear
 source /etc/functions.sh
+source /etc/yiimpool.conf
 source $STORAGE_ROOT/yiimp/.yiimp.conf
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 
@@ -55,10 +56,10 @@ echo -e "$GREEN Done$COL_RESET"
 # MariaDB
 echo -e "$YELLOW =>  Installing MariaDB <= $COL_RESET"
 hide_output sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-if [[ ("$DISTRO" == "16") ]]; then
-	sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
+if [[ ("$DISTRO" == "18") ]]; then
+	sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu bionic main' >/dev/null 2>&1
 else
-	sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu bionic main' >/dev/null 2>&1
+	sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
 fi
 echo -e "$GREEN Done$COL_RESET"
 
@@ -133,7 +134,7 @@ fi
 
 hide_output sudo apt-get update
 
-if [[ ("$DISTRO" == "16") ]]; then
+if [[ ("$DISTRO" == "18") ]]; then
 	apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd \
 		php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi \
 		php-pear php-auth-sasl mcrypt imagemagick libruby \
@@ -180,7 +181,7 @@ hide_output service nginx restart
 
 echo -e "$GREEN Done$COL_RESET"
 
-echo -e "$YELLOW =>  Downloading YiiMP Repo <= $COL_RESET"
+echo -e "$CYAN =>  Downloading YiiMP Repo <= $COL_RESET"
 hide_output sudo git clone ${YiiMPRepo} $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
 if [[ ("$CoinPort" == "yes") ]]; then
 	cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
