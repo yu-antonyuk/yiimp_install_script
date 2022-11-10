@@ -104,10 +104,10 @@ echo -e "$YELLOL To reload this page just type:$GREEN motd$RESTORE"
 echo
 echo -e "$MAGENTA Donations for continued support of this script are welcomed at:$RESTORE"
 echo -e "$CYAN --------------------------------------------------------------- $RESTORE"
-echo -e "$MAGENTA BTC: $CYAN $BTCDON                                            $RESTORE"
-echo -e "$MAGENTA DOGE $CYAN $DOGEDON                                           $RESTORE"
-echo -e "$MAGENTA ETH  $CYAN $ETHDON                                            $RESTORE"
-echo -e "$MAGENTA LTC  $CYAN $LTCDON                                            $RESTORE"
+echo -e "$MAGENTA BTC:$CYAN $BTCDON                                            $RESTORE"
+echo -e "$MAGENTA DOGE:$CYAN $DOGEDON                                          $RESTORE"
+echo -e "$MAGENTA ETH:$CYAN $ETHDON                                            $RESTORE"
+echo -e "$MAGENTA LTC:$CYAN $LTCDON                                            $RESTORE"
 echo -e "$CYAN --------------------------------------------------------------- $RESTORE"
 /usr/lib/update-notifier/update-motd-reboot-required
 /usr/lib/update-notifier/apt-check --human-readable
