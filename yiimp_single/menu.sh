@@ -8,10 +8,9 @@
 source /etc/functions.sh
 
 RESULT=$(dialog --stdout --default-item 1 --title "Yiimpool Yiimp installer" --menu "Choose one" -1 60 6 \
-' ' "- Without wireguard installed use the following option -" \
-1 "YiiMP - server without wireguard installed" \
-' ' "- If you plan on adding more servers later use the following option -" \
-2 "YiiMP - Server with WireGuard installed" \
+' ' "- Do want to install yiimp with wireguard?  -" \
+1 "No " \
+2 "Yes " \
 3 Exit)
 if [ $RESULT = ]
 then
