@@ -22,6 +22,7 @@
 # Updated by Afiniel for Yiimpool use...
 #####################################################
 source /etc/yiimpooldonate.conf
+source /etc/yiimpool.conf
 date=`date`
 ps -aux | grep "[m]ain" > /dev/null 2>&1
 if [[ "$?" == "0" ]]; then
@@ -49,6 +50,7 @@ else
 fi
 daemon='/home/crypto-data/wallets'
 site='/home/crypto-data/yiimp/site'
+serverconfig='/home/crypto-data/yiimp/site/configuration/'
 hint1="To view a screen type, screen -r main|loop2|blocks|debug"
 hint2="To detach from a screen type, ctrl+a+d"
 function likame {
@@ -61,14 +63,15 @@ GREEN=$'\033[00;32m'
 YELLO=$'\033[00;33m'    # YELLO=$ESC_SEQ"33;01m" Darker Yello
 YELLOL=$'\033[33;01m'   # YELLOL=$'\033[33;01m' Smooth Yellow
 RESTORE=$'\033[0m'
+
 likame
-echo -e "$YELLOL Current date and time:$GREEN $date $COL_RESET $RESTORE"
+echo -e "$YELLOL Current date and time:$GREEN $date $RESTORE"
 echo
-echo -e "$YELLOL System information:$RESTORE"
+echo -e "$MAGENTA System information:$RESTORE"
 echo
 /usr/bin/landscape-sysinfo
 likame
-echo -e "$YELLOL Pool Status:$RESTORE"
+echo -e "$MAGENTA Pool Status:$RESTORE"
 
 if [[ $main = stopped ]]; then
 printf "$header" "Main:" $RED$main$RESTORE "$YELLO Daemon Directory:$RESTORE" $YELLOL$daemon$RESTORE
@@ -92,19 +95,20 @@ printf "$header" "Debug:" $GREEN$debug$RESTORE "$GREEN Hint:$RESTORE $YELLOL$hin
 fi
 echo
 likame
-echo -e "$YELLOL To$GREEN Start $YELLOL| $RED stop $YELLOL| $YELLO restart $YELLOL| a screen use the following command.$RESTORE"
+echo  -e "$MAGENTA Server screens:$RESTORE"
+echo -e "$YELLOL To$GREEN Start$YELLOL|$RED stop$YELLOL|$YELLO restart$YELLOL| a screen use the following command.$RESTORE"
 echo
-echo -e "$YELLOL screens$GREEN start $YELLOL|$RED stop $YELLOL|$YELLO restart $YELLOL|$RESTORE main $YELLOL|$RESTORE loop2 $YELLOL|$RESTORE blocks $YELLOL|$RESTORE debug"
+echo -e "$YELLOL screens$GREEN start $YELLOL|$RED stop $YELLOL|$YELLO restart $YELLOL| main $YELLOL|loop2 $YELLOL| blocks $YELLOL| debug $RESTORE"
 likame
-echo -e "$YELLOL To reload this page just type:$RESTORE$GREEN motd $RESTORE"
+echo -e "$YELLOL To reload this page just type:$GREEN motd$RESTORE"
 echo
-echo -e "$YELLOW Donations for continued support of this script are welcomed at: $RESTORE"
-echo -e "$CYAN   --------------------------------------------------------------- $RESTORE"
-echo -e "$YELLOL BTC: $CYAN $BTCDON                                            $RESTORE"
-echo -e "$YELLOL DOGE $CYAN $DOGEDON                                           $RESTORE"
-echo -e "$YELLOL ETH  $CYAN $ETHDON                                            $RESTORE"
-echo -e "$YELLOL LTC  $CYAN $LTCDON                                            $RESTORE"
-echo -e "$CYAN   --------------------------------------------------------------- $RESTORE"
+echo -e "$MAGENTA Donations for continued support of this script are welcomed at:$RESTORE"
+echo -e "$CYAN --------------------------------------------------------------- $RESTORE"
+echo -e "$MAGENTA BTC: $CYAN $BTCDON                                            $RESTORE"
+echo -e "$MAGENTA DOGE $CYAN $DOGEDON                                           $RESTORE"
+echo -e "$MAGENTA ETH  $CYAN $ETHDON                                            $RESTORE"
+echo -e "$MAGENTA LTC  $CYAN $LTCDON                                            $RESTORE"
+echo -e "$CYAN --------------------------------------------------------------- $RESTORE"
 /usr/lib/update-notifier/update-motd-reboot-required
 /usr/lib/update-notifier/apt-check --human-readable
 echo
