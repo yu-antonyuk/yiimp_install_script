@@ -18,12 +18,16 @@ function print_error {
   sed "${line}q;d" "$file" >&2
 }
 trap print_error ERR
-
+term_art
 if [[ ("$wireguard" == "true") ]]; then
   source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
+echo -e "$MAGENTA    <--------------------------------------------------->$COL_RESET"
+echo -e "$YELLOW     <-- Building web file structure and copying files -->$COL_RESET"
+echo -e "$MAGENTA    <--------------------------------------------------->$COL_RESET"
 echo -e "$CYAN => Building web file structure and copying files <= $COL_RESET"
+
 cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
 sudo sed -i 's/AdminRights/'${AdminPanel}'/' $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/web/yaamp/modules/site/SiteController.php
 sudo cp -r $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/web $STORAGE_ROOT/yiimp/site/

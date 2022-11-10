@@ -22,7 +22,7 @@ message_box "Yiimpool Yiimp installer" \
 \n\nNOTE: If installing on a system with less then 8 GB of RAM you may experience system issues!"
 else
 message_box "Yiimpool Yiimp installer" \
-"You have choosen to install Yiimp!
+"You have choosen to install Yiimp without WireGuard!
 \n\nThis option will install all componets of YiiMP on a single server.
 \n\nPlease make sure any domain name or sub domain names are pointed to this servers IP prior to running this installer.
 \n\nAfter answering the following questions, setup will be automated.
@@ -225,7 +225,7 @@ StratumDBUser=Stratum$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 13 ; echo 
 clear
 
 dialog --title "Verify Your Responses" \
---yesno "Please verify your answers to continue setup:
+--yesno "Please verify your input before continueing.:
 Using Domain : ${UsingDomain}
 Using Sub-Domain : ${UsingSubDomain}
 Domain Name      : ${DomainName}

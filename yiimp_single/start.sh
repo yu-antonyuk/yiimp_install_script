@@ -36,11 +36,12 @@ export LC_TYPE=en_US.UTF-8
 export NCURSES_NO_UTF8_ACS=1
 
 # Create the temporary installation directory if it doesn't already exist.
-echo -e "$YELLOW Creating the temporary YiiMP installation folder... <= $COL_RESET"
+echo -e "$CYAN => Creating the temporary YiiMP installation folder... <= $COL_RESET"
 if [ ! -d $STORAGE_ROOT/yiimp/yiimp_setup ]; then
 sudo mkdir -p $STORAGE_ROOT/{wallets,yiimp/{yiimp_setup/log,site/{web,stratum,configuration,crons,log},starts}}
 sudo touch $STORAGE_ROOT/yiimp/yiimp_setup/log/installer.log
 fi
+echo
 echo -e "$GREEN Folders created...$COL_RESET"
 
 # Start the installation.
@@ -71,6 +72,31 @@ source $STORAGE_ROOT/yiimp/.yiimp.conf
 clear
 
 if [[ ("$UsingDomain" == "yes") ]]; then
+  source /etc/yiimpool.conf
+  source /etc/functions.sh
+  term_art
+  echo -e "$MAGENTA          <-------------------------->$COL_RESET"
+  echo -e "$YELLOW           <--$GREEN Installation Complete$YELLOW -->$COL_RESET"
+  echo -e "$MAGENTA          <--------------|------------>$COL_RESET"
+  echo -e "$MAGMENTA                                     |$COL_RESET"
+  echo "<-----------------------------------|----------------------------------------->"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.5.2 $YELLOW fork by Afiniel!     $COL_RESET"
+  echo
+  echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
+  echo "<----------------------------------------------------------------------------->"
+  echo -e "$YELLOW => Do you like the installer and want to support the project? use wallets below:             $COL_RESET"
+  echo "<----------------------------------------------------------------------------->"
+  echo -e "$YELLOW =>  BTC:$GREEN $BTCDON                                   		       $COL_RESET"
+  echo
+  echo -e "$YELLOW =>  BCH:$GREEN $BCHDON                                   		       $COL_RESET"
+  echo
+  echo -e "$YELLOW =>  ETH:$GREEN $ETHDON                                   		       $COL_RESET"
+  echo
+  echo -e "$YELLOW =>  DOGE:$GREEN $DOGEDON                                 		       $COL_RESET"
+  echo
+  echo -e "$YELLOW =>  LTC:$GREEN $LTCDON                                   		       $COL_RESET"
+  echo "<-------------------------------------|-------------------------------------->"
+  echo
   echo -e "$YELLOW Installation of your Yiimp is now$GREEN completed. $COL_RESET"
   echo -e "$YELLOW You $RED*MUST REBOOT*$YELLOW the machine to finalize the machine updates and folder permissions! $MAGENTA YiiMP will not function until a$RED reboot$YELLOW is performed!$COL_RESET"
   echo
@@ -81,7 +107,33 @@ if [[ ("$UsingDomain" == "yes") ]]; then
   echo
   echo -e "$RED By default all stratum ports are blocked by the firewall.$YELLOW To allow a port through, from the command prompt type $GREEN sudo ufw allow port number.$COL_RESET"
   echo -e "$GREEN Database user names and passwords$YELLOW can be found in$RED $STORAGE_ROOT/yiimp_setup/.my.cnf$COL_RESET"
+  exit 0
 else
+  source /etc/yiimpool.conf
+  source /etc/functions.sh
+  term_art
+  echo -e "$MAGENTA          <--------------------------->$COL_RESET"
+  echo -e "$YELLOW           <--$GREEN Installation Complete$YELLOW -->$COL_RESET"
+  echo -e "$MAGENTA          <--------------|------------->$COL_RESET"
+  echo -e "$MAGMENTA                                     |$COL_RESET" 
+  echo "<-----------------------------------|$COL_RESET ----------------------------------------->"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.5.2 $YELLOW fork by Afiniel!     $COL_RESET"
+  echo
+  echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
+  echo "<----------------------------------------------------------------------------->"
+  echo -e "$YELLOW => Do you like the installer and want to support the project? use wallets below:             $COL_RESET"
+  echo "<----------------------------------------------------------------------------->"
+  echo -e "$YELLOW =>  BTC:$GREEN $BTCDON                                   		       $COL_RESET"
+  echo
+  echo -e "$YELLOW =>  BCH:$GREEN $BCHDON                                   		       $COL_RESET"
+  echo
+  echo -e "$YELLOW =>  ETH:$GREEN $ETHDON                                   		       $COL_RESET"
+  echo
+  echo -e "$YELLOW =>  DOGE:$GREEN $DOGEDON                                 		       $COL_RESET"
+  echo
+  echo -e "$YELLOW =>  LTC:$GREEN $LTCDON                                   		       $COL_RESET"
+  echo "<-------------------------------------|-------------------------------------->"
+  echo 0
   echo -e "$YELLOW Installation of your Yiimp is now$GREEN completed."
   echo -e "$YELLOW You $RED*MUST REBOOT*$YELLOW the machine to finalize the machine updates and folder permissions! $MAGENTA YiiMP will not function until a$RED reboot$YELLOW is performed!$COL_RESET"
   echo
@@ -93,23 +145,3 @@ else
   echo -e "$RED By default all stratum ports are blocked by the firewall.$YELLOW To allow a port through, from the command prompt type $GREEN sudo ufw allow port number.$COL_RESET"
   echo -e "$GREEN Database user names and passwords$YELLOW can be found in$RED $STORAGE_ROOT/yiimp_setup/.my.cnf$COL_RESET"
 fi
-
-echo
-echo "<-------------------------------------|--------------------------------------->"
-echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.5.2 $YELLOW fork by Afiniel!     $COL_RESET"
-echo
-echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
-echo "<----------------------------------------------------------------------------->"
-echo -e "$YELLOW => Do you like the installer and want to support the project? use wallets below:             $COL_RESET"
-echo "<----------------------------------------------------------------------------->"
-echo -e "$YELLOW =>  BTC:$GREEN $BTCDON                                   		       $COL_RESET"
-echo
-echo -e "$YELLOW =>  BCH:$GREEN $BCHDON                                   		       $COL_RESET"
-echo
-echo -e "$YELLOW =>  ETH:$GREEN $ETHDON                                   		       $COL_RESET"
-echo
-echo -e "$YELLOW =>  DOGE:$GREEN $DOGEDON                                 		       $COL_RESET"
-echo
-echo -e "$YELLOW =>  LTC:$GREEN $LTCDON                                   		       $COL_RESET"
-echo "<-------------------------------------|-------------------------------------->"
-exit 0

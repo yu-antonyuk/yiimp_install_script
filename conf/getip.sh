@@ -6,7 +6,7 @@
 source /etc/functions.sh
 echo
 echo
-echo -e "$CYAN => Setting our global variables :  <= $COL_RESET"
+echo -e "$CYAN => Setting our global variables <= $COL_RESET"
 echo
 
 # If the machine is behind a NAT, inside a VM, etc., it may not know
@@ -101,4 +101,4 @@ if [ "$PUBLIC_IPV6" = "auto" ]; then
 	PUBLIC_IPV6=$(get_publicip_from_web_service 6 || get_default_privateip 6)
 fi
 
-echo -e "$GREEN Done$COL_RESET"
+echo -e "$GREEN <-- Done$COL_RESET -->"

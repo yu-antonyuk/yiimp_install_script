@@ -18,7 +18,10 @@ function print_error {
 }
 trap print_error ERR
 
-echo -e "$YELLOW => Creating initial SSL certificate <= $COL_RESET"
+term_art
+echo -e "$MAGENTA    <-------------------------------------->$COL_RESET"
+echo -e "$YELLOW     <-- Creating initial SSL certificate -->$COL_RESET"
+echo -e "$MAGENTA    <-------------------------------------->$COL_RESET"
 
 # Install openssl.
 

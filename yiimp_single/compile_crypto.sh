@@ -17,12 +17,15 @@ function print_error {
 	sed "${line}q;d" "$file" >&2
 }
 trap print_error ERR
-
+term_art
+echo -e "$MAGENTA    <---------------------------------------->$COL_RESET"
+echo -e "$YELLOW     <-- Install DaemonBuilder Requirements -->$COL_RESET"
+echo -e "$MAGENTA    <---------------------------------------->$COL_RESET"
 
 # Install required packages to compile coin daemons
 package_compile_crypto
 
-echo -e "$GREEN Done...$COL_RESET"
+echo
 
 # Create DaemonBuilder directory
 if [ ! -d $STORAGE_ROOT/daemon_builder ]; then

@@ -8,6 +8,11 @@ source /etc/functions.sh
 source /home/crypto-data/yiimp/.yiimp.conf
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 
+term_art
+term_art
+echo -e "$MAGENTA    <--------------------->$COL_RESET"
+echo -e "$YELLOW     <-- Compile Stratum -->$COL_RESET"
+echo -e "$MAGENTA    <--------------------->$COL_RESET"
 cd /home/crypto-data/yiimp/yiimp_setup
 
 # Starting the build progress of the stratum
@@ -85,5 +90,5 @@ sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/yiimp/site/stratum/config
 
 sleep 1.5
 term_art
-echo -e "$GREEN Stratum build complete $COL_RESET"
+echo -e "$GREEN => Stratum build complete $COL_RESET"
 cd $HOME/yiimp_install_script/yiimp_single

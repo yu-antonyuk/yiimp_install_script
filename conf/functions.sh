@@ -148,7 +148,7 @@ function daemonbuiler_files {
 	' | sudo -E tee /usr/bin/daemonbuilder >/dev/null 2>&1
 	sudo chmod +x /usr/bin/daemonbuilder
 	echo
-	echo -e "$GREEN Done$COL_RESET"
+	echo -e "$GREEN <-- Done$COL_RESET -->"
 	sleep 2
 }
 
@@ -196,7 +196,7 @@ function last_words {
 function package_compile_crypto {
 
 	# Installing Package to compile crypto currency
-	echo -e "$CYAN Installing needed Package to compile crypto currency $COL_RESET"
+	echo -e "$CYAN => Installing needed Package to compile crypto currency <= $COL_RESET"
 
 	hide_output sudo apt -y install software-properties-common build-essential
 	hide_output sudo apt -y install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext

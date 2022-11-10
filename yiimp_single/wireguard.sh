@@ -6,10 +6,13 @@
 
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 source $STORAGE_ROOT/yiimp/.wireguard.conf
+source /etc/functions.sh
 source /etc/yiimpool.conf
 
-clear
-echo -e "$YELLOW => Installing WireGuard  <= $COL_RESET"
+term_art
+echo -e "$MAGENTA    <-------------------------->$COL_RESET"
+echo -e "$YELLOW     <-- Installing WireGuard -->$COL_RESET"
+echo -e "$MAGENTA    <-------------------------->$COL_RESET"
 sudo add-apt-repository ppa:wireguard/wireguard -y
 sudo apt-get update -y
 sudo apt-get install wireguard-dkms wireguard-tools -y
@@ -23,7 +26,7 @@ echo "Address = ${DBInternalIP}/24" | hide_output sudo tee -a /etc/wireguard/wg0
 cd $HOME
 sudo systemctl start wg-quick@wg0
 sudo systemctl enable wg-quick@wg0
-sudo ufw allow 6121
+ufw_allow 6121
 clear
 dbpublic=${PUBLIC_IP}
 mypublic="$(sudo cat /etc/wireguard/publickey)"
@@ -32,5 +35,6 @@ echo '  Public Ip: '"${dbpublic}"'
 Public Key: '"${mypublic}"'
 ' | sudo -E tee $STORAGE_ROOT/yiimp/.wireguard_public.conf >/dev/null 2>&1;
 
+echo
 echo -e "$GREEN WireGuard setup completed $COL_RESET"
 cd $HOME/yiimpool/yiimp_single

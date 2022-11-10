@@ -16,6 +16,11 @@ function print_error {
     sed "${line}q;d" "$file" >&2
 }
 trap print_error ERR
+term_art
+echo -e "$MAGENTA <----------------------------------> $COL_RESET"
+echo -e "$MAGENTA Database$YELLOW build and tweak$GREEN completed $COL_RESET"
+echo -e "$MAGENTA <----------------------------------> $COL_RESET"
+echo -e "$GREEN Passwords can be found in$RED $STORAGE_ROOT/yiimp/.my.cnf $COL_RESET $COL_RESET"
 
 if [[ ("$wireguard" == "true") ]]; then
 source $STORAGE_ROOT/yiimp/.wireguard.conf
@@ -46,7 +51,7 @@ sudo rm -r /etc/nginx/conf.d/default.conf
 sudo rm -r /etc/nginx/sites-enabled/default*
 sudo rm -r /etc/nginx/sites-available/default*
 
-echo -e "$GREEN NGINX upgrade complete...$COL_RESET"
+echo -e "$GREEN NGINX upgrade complete.$COL_RESET"
 restart_service nginx
 restart_service php7.3-fpm
 set +eu +o pipefail

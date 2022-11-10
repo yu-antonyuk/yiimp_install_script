@@ -17,17 +17,21 @@ function print_error {
   sed "${line}q;d" "$file" >&2
 }
 trap print_error ERR
-
+term_art
 if [[ ("$wireguard" == "true") ]]; then
   source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
-echo -e "$YELLOW => Installing MariaDB 10.4 <= $COL_RESET"
+echo -e "$MAGENTA    <----------------------------->$COL_RESET"
+echo -e "$YELLOW     <-- Installing MariaDB 10.4 -->$COL_RESET"
+echo -e "$MAGENTA    <----------------------------->$COL_RESET"
+
 MARIADB_VERSION='10.4'
 sudo debconf-set-selections <<<"maria-db-$MARIADB_VERSION mysql-server/root_password password $DBRootPassword"
 sudo debconf-set-selections <<<"maria-db-$MARIADB_VERSION mysql-server/root_password_again password $DBRootPassword"
 apt_install mariadb-server mariadb-client
 echo -e "$GREEN => MariaDB build complete <= $COL_RESET"
+echo
 echo -e "$YELLOW => Creating DB users for YiiMP <= $COL_RESET"
 
 if [[ ("$wireguard" == "false") ]]; then
@@ -113,7 +117,7 @@ sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force <2020-06-03-bl
 sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force <2022-10-14-shares_solo.sql
 sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force <2022-10-29-blocks_effort.sql
 sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force <2022-11-05-blocks_effort.sql
-echo -e "$YELLOW => Datebase import $GREEN complete <= $COL_RESET"
+echo -e "$GREEN <-- Datebase import $GREEN complete -->$COL_RESET"
 
 echo -e "$YELLOW => Tweaking MariaDB for better performance <= $COL_RESET"
 if [[ ("$wireguard" == "false") ]]; then
@@ -134,11 +138,6 @@ else
 fi
 
 restart_service mysql
-term_art
-echo -e "$MAGENTA <----------------------------------> $COL_RESET"
-echo -e "$MAGENTA Database$YELLOW build and tweak$GREEN completed $COL_RESET"
-echo -e "$MAGENTA <----------------------------------> $COL_RESET"
-echo -e "$GREEN Passwords can be found in$RED $STORAGE_ROOT/yiimp/.my.cnf $COL_RESET $COL_RESET"
 
 set +eu +o pipefail
 cd $HOME/yiimp_install_script/yiimp_single

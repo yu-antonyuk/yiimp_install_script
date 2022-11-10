@@ -17,6 +17,10 @@ function print_error {
   sed "${line}q;d" "$file" >&2
 }
 trap print_error ERR
+term_art
+echo -e "$MAGENTA    <-------------------------->$COL_RESET"
+echo -e "$YELLOW     <-- Installing Berkeley , openssl , bls-signatures -->$COL_RESET"
+echo -e "$MAGENTA    <-------------------------->$COL_RESET"
 
 echo -e "$YELLOW => Installing BitCoin PPA <= $COL_RESET"
 if [ ! -f /etc/apt/sources.list.d/bitcoin.list ]; then
