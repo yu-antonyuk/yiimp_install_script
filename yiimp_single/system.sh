@@ -41,7 +41,7 @@ echo -e "$YELLOW =>  Adding the required repsoitories <= $COL_RESET"
 if [ ! -f /usr/bin/add-apt-repository ]; then
 	echo -e "$MAGENTA =>  Installing add-apt-repository...  <= $COL_RESET"
 	hide_output sudo apt-get -y update
-	apt_install software-properties-common
+	hide_output sudo apt-get -y install software-properties-common
 fi
 echo
 
@@ -50,6 +50,7 @@ echo -e "$MAGENTA =>  Installing Ondrej PHP PPA <= $COL_RESET"
 if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
 	hide_output sudo add-apt-repository -y ppa:ondrej/php
 	hide_output sudo apt-get -y update
+	hide_output sudo apt-get -y install software-properties-common
 fi
 echo -e "$GREEN <-- Done -->$COL_RESET"
 
