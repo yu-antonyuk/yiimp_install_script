@@ -44,18 +44,19 @@ if [ ! -f /usr/bin/add-apt-repository ]; then
 	apt_install software-properties-common
 fi
 echo
-echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # PHP 7.3
 echo -e "$MAGENTA =>  Installing Ondrej PHP PPA <= $COL_RESET"
 if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
 	hide_output sudo add-apt-repository -y ppa:ondrej/php
+	hide_output sudo apt-get -y update
 fi
 echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # CertBot
 echo -e "$MAGENTA =>  Installing CertBot PPA <= $COL_RESET"
 hide_output sudo add-apt-repository -y ppa:certbot/certbot
+hide_output sudo apt-get -y update
 echo
 echo -e "$GREEN <-- Done -->$COL_RESET"
 
@@ -135,6 +136,7 @@ fi #NODOC
 set -eu -o pipefail
 echo
 echo -e "$GREEN <-- Done -->$COL_RESET"
+echo
 echo -e "$MAGENTA =>  Installing YiiMP Required system packages <= $COL_RESET"
 if [ -f /usr/sbin/apache2 ]; then
 	echo Removing apache...
@@ -145,53 +147,54 @@ fi
 hide_output sudo apt-get update
 
 if [[ ("$DISTRO" == "18") ]]; then
-	apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd \
-		php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi \
-		php-pear php-auth-sasl mcrypt imagemagick libruby \
-		php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3 \
-		php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache \
-		php-imagick php-gettext php7.3-zip php7.3-mbstring \
-		fail2ban ntpdate python3 python3-dev python3-pip \
-		curl git sudo coreutils pollinate unzip unattended-upgrades cron \
-		pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev \
-		libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev \
-		build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev \
-		automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev \
-		libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached
+apt_install php7.4-fpm php7.4-opcache php7.4-fpm php7.4 php7.4-common php7.4-gd \
+php7.4-mysql php7.4-imap php7.4-cli php7.4-cgi \
+php-pear php-auth-sasl mcrypt imagemagick libruby \
+php7.4-curl php7.4-intl php7.4-pspell php7.4-recode php7.4-sqlite3 \
+php7.4-tidy php7.4-xmlrpc php7.4-xsl memcached php-memcache \
+php-imagick php-gettext php7.4-zip php7.4-mbstring \
+fail2ban ntpdate python3 python3-dev python3-pip \
+curl git sudo coreutils pollinate unzip unattended-upgrades cron \
+pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev \
+libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev \
+build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev \
+automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev \
+libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.4-memcache php7.4-memcached memcached \
+php8.1-mysql
 else
-	apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd \
-		php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi \
-		php-pear php-auth-sasl mcrypt imagemagick libruby \
-		php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3 \
-		php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache \
-		php-imagick php-gettext php7.3-zip php7.3-mbstring \
-		fail2ban ntpdate python3 python3-dev python3-pip \
-		curl git sudo coreutils pollinate unzip unattended-upgrades cron \
-		pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev \
-		libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev \
-		build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev \
-		libpsl-dev libnghttp2-dev automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev \
-		libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached
+apt_install php7.4-fpm php7.4-opcache php7.4-fpm php7.4 php7.4-common php7.4-gd \
+php7.4-mysql php7.4-imap php7.4-cli php7.4-cgi \
+php-pear php-auth-sasl mcrypt imagemagick libruby \
+php7.4-curl php7.4-intl php7.4-pspell php7.4-recode php7.4-sqlite3 \
+php7.4-tidy php7.4-xmlrpc php7.4-xsl memcached php-memcache \
+php-imagick php-gettext php7.4-zip php7.4-mbstring \
+fail2ban ntpdate python3 python3-dev python3-pip \
+curl git sudo coreutils pollinate unzip unattended-upgrades cron \
+pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev \
+libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev \
+build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev \
+libpsl-dev libnghttp2-dev automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev \
+libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.4-memcache php7.4-memcached memcached \
+php8.1-mysql
 fi
 
 # ### Suppress Upgrade Prompts
 # When Ubuntu 20 comes out, we don't want users to be prompted to upgrade,
 # because we don't yet support it.
 if [ -f /etc/update-manager/release-upgrades ]; then
-	sudo editconf.py /etc/update-manager/release-upgrades Prompt=never
-	sudo rm -f /var/lib/ubuntu-release-upgrader/release-upgrade-available
+sudo editconf.py /etc/update-manager/release-upgrades Prompt=never
+sudo rm -f /var/lib/ubuntu-release-upgrader/release-upgrade-available
 fi
 
 # fix CDbConnection failed to open the DB connection.
-echo
-echo -e "$CYAN => Fixing DBconnection issue $COL_RESET"
-apt_install php8.1-mysql
-echo
+# echo
+# echo -e "$CYAN => Fixing DBconnection issue $COL_RESET"
+# apt_install php8.1-mysql
+# echo
 hide_output service nginx restart
-echo
-echo
+# echo
 
-echo -e "$CYAN =>  Downloading YiiMP Repo <= $COL_RESET"
+echo -e "$MAGENTA =>  Clone Kudaraidee Yiimp Repo <= $COL_RESET"
 hide_output sudo git clone ${YiiMPRepo} $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
 if [[ ("$CoinPort" == "yes") ]]; then
 	cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
