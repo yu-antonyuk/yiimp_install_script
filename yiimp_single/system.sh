@@ -83,8 +83,6 @@ else
 	hide_output sudo update-grub-legacy-ec2 -y
 	apt_get_quiet upgrade
 fi
-echo
-echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # Dist Upgrade
 apt_get_quiet dist-upgrade

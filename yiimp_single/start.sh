@@ -6,14 +6,6 @@
 # Updated by Afiniel for yiimpool use...                                         #
 ##################################################################################
 
-#!/usr/bin/env bash
-
-#####################################################
-# This is the entry point for configuring the system.
-# Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
-# Updated by afiniel for crypto use...
-#####################################################
-
 source /etc/functions.sh
 source /etc/yiimpool.conf
 
@@ -80,7 +72,7 @@ if [[ ("$UsingDomain" == "yes") ]]; then
   echo -e "$MAGENTA          <--------------|------------>$COL_RESET"
   echo -e "$MAGMENTA                                     |$COL_RESET"
   echo "<-----------------------------------|----------------------------------------->"
-  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.5.6 $YELLOW fork by Afiniel!     $COL_RESET"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.5.7 $YELLOW fork by Afiniel!     $COL_RESET"
   echo
   echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
   echo "<----------------------------------------------------------------------------->"
@@ -117,7 +109,7 @@ else
   echo -e "$MAGENTA          <--------------|------------->$COL_RESET"
   echo -e "$MAGMENTA                                     |$COL_RESET" 
   echo "<-----------------------------------|$COL_RESET ----------------------------------------->"
-  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.5.6 $YELLOW fork by Afiniel!     $COL_RESET"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.5.7 $YELLOW fork by Afiniel!     $COL_RESET"
   echo
   echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
   echo "<----------------------------------------------------------------------------->"
