@@ -97,8 +97,10 @@ hide_output sudo cmake .
 hide_output sudo make install -j$((`nproc`+1))
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 sudo rm -r v20181101.zip bls-signatures-20181101
+echo
 echo -e "$GREEN => bls-signatures Completed$COL_RESET"
 
+echo
 echo -e "$YELLOW => Building blocknotify.sh <= $COL_RESET"
 if [[ ("$wireguard" == "true") ]]; then
   source $STORAGE_ROOT/yiimp/.wireguard.conf
