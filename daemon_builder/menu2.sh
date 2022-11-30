@@ -19,10 +19,6 @@ RESULT=$(dialog --stdout --title "DaemonBuilder" --menu "Choose one" -1 60 7 \
 5 "Install Coin with CMake file" \
 6 Exit)
 
-if [ $RESULT = ]
-then
-exit;
-fi
 
 if [ $RESULT = 1 ]
 then

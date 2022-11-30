@@ -37,13 +37,10 @@ if [[ ("$precompiled" == "true") ]]; then
 else
 	read -r -e -p "Paste the github link for the coin : " git_hub
 	echo
-	read -r -e -p "Switch from main to develop ? [y/N] :" swithdevelop
-	if [[ ("$swithdevelop" == "N" || "$swithdevelop" == "n" || "$swithdevelop" == "not" || "$swithdevelop" == "NOT" || "$swithdevelop" == "no" || "$swithdevelop" == "NO" || "$swithdevelop" == "none" || "$swithdevelop" == "NONE") ]]; then
+	read -r -e -p "Do you need to use a specific github branch of the coin (y/n) : " branch_git_hub
+	if [[ ("$branch_git_hub" == "y" || "$branch_git_hub" == "Y" || "$branch_git_hub" == "yes" || "$branch_git_hub" == "Yes" || "$branch_git_hub" == "YES") ]]; then
+		read -r -e -p "Please enter the branch name exactly as in github, i.e. v2.5.1  : " branch_git_hub_ver
 		echo
-		read -r -e -p "Do you need to use a specific github branch of the coin (y/n) : " branch_git_hub
-		if [[ ("$branch_git_hub" == "y" || "$branch_git_hub" == "Y" || "$branch_git_hub" == "yes" || "$branch_git_hub" == "Yes" || "$branch_git_hub" == "YES") ]]; then
-			read -r -e -p "Please enter the branch name exactly as in github, i.e. v2.5.1  : " branch_git_hub_ver
-		fi
 	fi
 fi
 
@@ -70,9 +67,6 @@ if [[ ! -e $coindir ]]; then
 	  git checkout "$branch_git_hub_ver"
 	fi
 
-	if [[ ("$swithdevelop" == "y" || "$swithdevelop" == "Y" || "$swithdevelop" == "yes" || "$swithdevelop" == "Yes" || "$swithdevelop" == "YES") ]]; then
-	  git checkout develop
-	fi
 	errorexist="false"
 else
 	echo "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir} already exists.... Skipping"
@@ -460,5 +454,5 @@ sudo rm -r $STORAGE_ROOT/daemon_builder/.my.cnf
 
 clear
 echo "Installation of ${coind::-1} is completed and running."
-echo Type daemonbuilder at anytime to install a new coin!
+echo -e "$YELLOW Type$MAGENTA daemonbuilder$YELLOW at anytime to install a new coin! $COL_RESET"
 exit
