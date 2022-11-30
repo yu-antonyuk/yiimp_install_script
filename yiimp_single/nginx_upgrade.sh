@@ -41,8 +41,8 @@ apt_install nginx
 
 # Make additional conf directories, move and generate needed configurations.
 sudo mkdir -p /etc/nginx/yiimpool
-sudo mkdir -p /etc/nginx/sites-available
-sudo mkdir -p /etc/nginx/sites-enabled
+#sudo mkdir -p /etc/nginx/sites-available
+#sudo mkdir -p /etc/nginx/sites-enabled
 sudo mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.old
 sudo cp -r nginx_confs/nginx.conf /etc/nginx/
 sudo cp -r nginx_confs/general.conf /etc/nginx/yiimpool
