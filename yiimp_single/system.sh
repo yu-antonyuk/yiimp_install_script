@@ -23,10 +23,11 @@ trap print_error ERR
 
 term_art
 echo -e "$MAGENTA    <-------------------------->$COL_RESET"
-echo -e "$YELLOW     <-- System Configuration -->$COL_RESET"
+echo -e "$YELLOW     <--  System Configuration  -->$COL_RESET"
 echo -e "$MAGENTA    <-------------------------->$COL_RESET"
 
 # Set timezone
+echo
 echo -e "$YELLOW =>  Setting TimeZone to UTC <= $COL_RESET"
 if [ ! -f /etc/timezone ]; then
 	echo "Setting timezone to UTC."
@@ -55,6 +56,7 @@ fi
 echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # CertBot
+echo
 echo -e "$MAGENTA =>  Installing CertBot PPA <= $COL_RESET"
 hide_output sudo add-apt-repository -y ppa:certbot/certbot
 hide_output sudo apt-get -y update

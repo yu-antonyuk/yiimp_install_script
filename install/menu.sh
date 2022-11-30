@@ -12,13 +12,9 @@ RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Menu v0.5
 1 "YiiMP Single Server" \
 ' ' "- Daemon Wallet Builder -" \
 2 "Daemonbuilder" \
-' ' "- NOT DONE! Upgrade stratum server -" \
+' ' "- Upgrade stratum server -" \
 3 "Yiimp stratum update " \
 4 Exit)
-if [ $RESULT = ] 
-then
-bash $(basename $0) && exit;
-fi
 
 if [ $RESULT = 1 ]
 then

@@ -12,10 +12,6 @@ RESULT=$(dialog --stdout --default-item 1 --title "Yiimpool Yiimp installer" --m
 1 "No " \
 2 "Yes " \
 3 Exit)
-if [ $RESULT = ]
-then
-bash $(basename $0) && exit;
-fi
 
 if [ $RESULT = 1 ]
 then
