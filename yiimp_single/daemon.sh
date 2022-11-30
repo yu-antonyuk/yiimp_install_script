@@ -18,15 +18,15 @@ function print_error {
 }
 trap print_error ERR
 term_art
-echo -e "$MAGENTA    <-------------------------->$COL_RESET"
-echo -e "$YELLOW     <-- Installing Berkeley , openssl , bls-signatures -->$COL_RESET"
-echo -e "$MAGENTA    <-------------------------->$COL_RESET"
+echo -e "$MAGENTA    <----------------------------------------------------->$COL_RESET"
+echo -e "$YELLOW     <-- Installing Berkeley , openssl , bls-signatures   -->$COL_RESET"
+echo -e "$MAGENTA    <----------------------------------------------------->$COL_RESET"
 
 echo -e "$YELLOW => Installing BitCoin PPA <= $COL_RESET"
 if [ ! -f /etc/apt/sources.list.d/bitcoin.list ]; then
   hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
 fi
-
+echo
 echo -e "$YELLOW => Installing additional system files required for daemons <= $COL_RESET"
 hide_output sudo apt-get update
 apt_install build-essential libtool autotools-dev \
@@ -36,8 +36,10 @@ apt_install build-essential libtool autotools-dev \
 
 sudo mkdir -p $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
+echo
 echo -e "$GREEN => Additional System Files Completed  <= $COL_RESET"
 
+echo
 echo -e "$YELLOW => Building Berkeley 4.8, this may take several minutes <= $COL_RESET"
 sudo mkdir -p $STORAGE_ROOT/berkeley/db4/
 hide_output sudo wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
@@ -50,6 +52,7 @@ sudo rm -r db-4.8.30.NC.tar.gz db-4.8.30.NC
 echo -e "$GREEN => Berkeley 4.8 Completed <= $COL_RESET"
 
 echo -e "$YELLOW => Building Berkeley 5.1, this may take several minutes <= $COL_RESET"
+echo
 sudo mkdir -p $STORAGE_ROOT/berkeley/db5/
 hide_output sudo wget 'http://download.oracle.com/berkeley-db/db-5.1.29.tar.gz'
 hide_output sudo tar -xzvf db-5.1.29.tar.gz
@@ -59,7 +62,7 @@ hide_output sudo make -j$((`nproc`+1))
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 sudo rm -r db-5.1.29.tar.gz db-5.1.29
 echo -e "$GREEN => Berkeley 5.1 Completed <= $COL_RESET"
-
+echo
 echo -e "$YELLOW => Building Berkeley 5.3, this may take several minutes <= $COL_RESET"
 sudo mkdir -p $STORAGE_ROOT/berkeley/db5.3/
 hide_output sudo wget 'http://anduin.linuxfromscratch.org/BLFS/bdb/db-5.3.28.tar.gz'
@@ -70,8 +73,9 @@ hide_output sudo make -j$((`nproc`+1))
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 sudo rm -r db-5.3.28.tar.gz db-5.3.28
 echo -e "$GREEN => Berkeley 5.3 Completed <= $COL_RESET"
-
+echo
 echo -e "$YELLOW => Building OpenSSL 1.0.2g, this may take several minutes <= $COL_RESET"
+echo
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 hide_output sudo wget https://www.openssl.org/source/old/1.0.2/openssl-1.0.2g.tar.gz --no-check-certificate
 hide_output sudo tar -xf openssl-1.0.2g.tar.gz
@@ -82,6 +86,7 @@ hide_output sudo make install -j$((`nproc`+1))
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 sudo rm -r openssl-1.0.2g.tar.gz openssl-1.0.2g
 echo -e "$GREEN =>OpenSSL 1.0.2g Completed <= $COL_RESET"
+echo
 
 echo -e "$YELLOW => Building bls-signatures, this may take several minutes <= $COL_RESET"
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp

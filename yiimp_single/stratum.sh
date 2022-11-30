@@ -5,6 +5,7 @@
 ##########################################
 
 source /etc/functions.sh
+source /etc/yiimpool.conf
 source /home/crypto-data/yiimp/.yiimp.conf
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 

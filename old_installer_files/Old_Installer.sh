@@ -4,13 +4,13 @@
 # Modified by : Xavatar (https://github.com/xavatar/yiimp_install_scrypt)
 # Web: https://www.xavatar.com
 #
-#   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.4
+#   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.3
 #   v0.2 (update Avril, 2020)
 #
 # Current modified by : Afiniel
 # web: https://www.afiniel.xyz
 # Program:
-#   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.4
+#   Install yiimp on Ubuntu 16.04/18.04 running Nginx, MariaDB, and php7.3
 #   v0.3 (2022-06-14 Fixed solo fee in serverconfig.php)
 #        (2022-06-14 added block.sql and coins_thepool_life.sql dump)
 #
@@ -137,9 +137,9 @@ sudo systemctl status mysql | sed -n "1,3p"
 echo
 echo -e "$GREEN <-- Done -->$COL_RESET"
 
-# Installing Installing php7.4
+# Installing Installing php7.3
 echo
-echo -e "$CYAN => Installing php7.4  $COL_RESET"
+echo -e "$CYAN => Installing php7.3  $COL_RESET"
 echo
 sleep 3
 
@@ -150,34 +150,34 @@ fi
 hide_output sudo apt -y update
 
 if [[ ("$DISTRO" == "16") ]]; then
-apt_install php7.4-fpm php7.4-opcache php7.4-fpm php7.4 php7.4-common php7.4-gd \
-php7.4-mysql php7.4-imap php7.4-cli php7.4-cgi \
+apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd \
+php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi \
 php-pear php-auth-sasl mcrypt imagemagick libruby \
-php7.4-curl php7.4-intl php7.4-pspell php7.4-recode php7.4-sqlite3 \
-php7.4-tidy php7.4-xmlrpc php7.4-xsl memcached php-memcache \
-php-imagick php-gettext php7.4-zip php7.4-mbstring \
+php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3 \
+php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache \
+php-imagick php-gettext php7.3-zip php7.3-mbstring \
 fail2ban ntpdate python3 python3-dev python3-pip \
 curl git sudo coreutils pollinate unzip unattended-upgrades cron \
 pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev \
 libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev \
 build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev \
 automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev \
-libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.4-memcache php7.4-memcached memcached \
+libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached \
 php8.1-mysql
 else
-apt_install php7.4-fpm php7.4-opcache php7.4-fpm php7.4 php7.4-common php7.4-gd \
-php7.4-mysql php7.4-imap php7.4-cli php7.4-cgi \
+apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd \
+php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi \
 php-pear php-auth-sasl mcrypt imagemagick libruby \
-php7.4-curl php7.4-intl php7.4-pspell php7.4-recode php7.4-sqlite3 \
-php7.4-tidy php7.4-xmlrpc php7.4-xsl memcached php-memcache \
-php-imagick php-gettext php7.4-zip php7.4-mbstring \
+php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3 \
+php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache \
+php-imagick php-gettext php7.3-zip php7.3-mbstring \
 fail2ban ntpdate python3 python3-dev python3-pip \
 curl git sudo coreutils pollinate unzip unattended-upgrades cron \
 pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev \
 libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev \
 build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev \
 libpsl-dev libnghttp2-dev automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev \
-libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.4-memcache php7.4-memcached memcached \
+libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached \
 php8.1-mysql
 fi
 
@@ -403,7 +403,7 @@ if [[ ("$sub_domain" == "y" || "$sub_domain" == "Y") ]]; then
     
         location ~ ^/index\.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -435,7 +435,7 @@ if [[ ("$sub_domain" == "y" || "$sub_domain" == "Y") ]]; then
     		deny all;
   	  }
   		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+    		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     		include fastcgi_params;
     		include snippets/fastcgi-php.conf;
@@ -446,7 +446,7 @@ if [[ ("$sub_domain" == "y" || "$sub_domain" == "Y") ]]; then
 
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
-    hide_output sudo systemctl reload php7.4-fpm.service
+    hide_output sudo systemctl reload php7.3-fpm.service
     hide_output restart_service nginx.service
     echo -e "$GREEN <-- Done -->$COL_RESET"
 
@@ -527,7 +527,7 @@ if [[ ("$sub_domain" == "y" || "$sub_domain" == "Y") ]]; then
         
             location ~ ^/index\.php$ {
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+                fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
                 fastcgi_index index.php;
                 include fastcgi_params;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -558,7 +558,7 @@ if [[ ("$sub_domain" == "y" || "$sub_domain" == "Y") ]]; then
     		deny all;
   	}
   		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+    		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     		include fastcgi_params;
     		include snippets/fastcgi-php.conf;
@@ -569,7 +569,7 @@ if [[ ("$sub_domain" == "y" || "$sub_domain" == "Y") ]]; then
     ' | sudo -E tee /etc/nginx/sites-available/$server_name.conf >/dev/null 2>&1
     fi
 
-    hide_output sudo systemctl reload php7.4-fpm.service
+    hide_output sudo systemctl reload php7.3-fpm.service
     hide_output restart_service nginx.service
     echo -e "$GREEN <-- Done -->$COL_RESET"
 
@@ -612,7 +612,7 @@ else
     
         location ~ ^/index\.php$ {
             fastcgi_split_path_info ^(.+\.php)(/.+)$;
-            fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+            fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
             fastcgi_index index.php;
             include fastcgi_params;
             fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -644,7 +644,7 @@ else
     		deny all;
   	}
   		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+    		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     		include fastcgi_params;
     		include snippets/fastcgi-php.conf;
@@ -655,7 +655,7 @@ else
 
     sudo ln -s /etc/nginx/sites-available/$server_name.conf /etc/nginx/sites-enabled/$server_name.conf
     sudo ln -s /var/web /var/www/$server_name/html
-    hide_output sudo systemctl reload php7.4-fpm.service
+    hide_output sudo systemctl reload php7.3-fpm.service
     hide_output restart_service nginx.service
     echo -e "$GREEN <-- Done -->$COL_RESET"
 
@@ -737,7 +737,7 @@ else
         
             location ~ ^/index\.php$ {
                 fastcgi_split_path_info ^(.+\.php)(/.+)$;
-                fastcgi_pass unix:/var/run/php/php7.4-fpm.sock;
+                fastcgi_pass unix:/var/run/php/php7.3-fpm.sock;
                 fastcgi_index index.php;
                 include fastcgi_params;
                 fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
@@ -768,7 +768,7 @@ else
     		deny all;
   	}
   		location ~ /phpmyadmin/(.+\.php)$ {
-    		fastcgi_pass unix:/run/php/php7.4-fpm.sock;
+    		fastcgi_pass unix:/run/php/php7.3-fpm.sock;
     		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
     		include fastcgi_params;
     		include snippets/fastcgi-php.conf;
@@ -781,7 +781,7 @@ else
         echo -e "$GREEN <-- Done -->$COL_RESET"
 
     fi
-    hide_output sudo systemctl reload php7.4-fpm.service
+    hide_output sudo systemctl reload php7.3-fpm.service
     hide_output restart_service nginx.service
 fi
 
@@ -1086,8 +1086,8 @@ restart_service mysql
 sudo systemctl status mysql | sed -n "1,3p"
 restart_service nginx.service
 sudo systemctl status nginx | sed -n "1,3p"
-restart_service php7.4-fpm.service
-sudo systemctl status php7.4-fpm | sed -n "1,3p"
+restart_service php7.3-fpm.service
+sudo systemctl status php7.3-fpm | sed -n "1,3p"
 
 echo
 echo -e "$GREEN <-- Done -->$COL_RESET"

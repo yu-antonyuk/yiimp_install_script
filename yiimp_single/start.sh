@@ -108,7 +108,7 @@ else
   echo -e "$YELLOW           <--$GREEN Installation Complete$YELLOW -->$COL_RESET"
   echo -e "$MAGENTA          <--------------|------------->$COL_RESET"
   echo -e "$MAGMENTA                                     |$COL_RESET" 
-  echo "<-----------------------------------|$COL_RESET ----------------------------------------->"
+  echo "<-----------------------------------|----------------------------------------->"
   echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.5.8 $YELLOW fork by Afiniel!     $COL_RESET"
   echo
   echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
@@ -125,7 +125,7 @@ else
   echo
   echo -e "$YELLOW =>  LTC:$GREEN $LTCDON                                   		       $COL_RESET"
   echo "<-------------------------------------|-------------------------------------->"
-  echo 0
+  echo
   echo -e "$YELLOW Installation of your Yiimp is now$GREEN completed."
   echo -e "$YELLOW You $RED*MUST REBOOT*$YELLOW the machine to finalize the machine updates and folder permissions! $MAGENTA YiiMP will not function until a$RED reboot$YELLOW is performed!$COL_RESET"
   echo

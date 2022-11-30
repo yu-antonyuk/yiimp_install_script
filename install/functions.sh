@@ -203,6 +203,7 @@ function package_compile_crypto {
 	hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
 	hide_output sudo apt-get -y update
 	hide_output sudo apt-get -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
+	hide_output sudo apt-get -y install libcurl4-openssl-dev
 
 	hide_output sudo apt-get -y install build-essential libzmq5 \
 	libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev \
