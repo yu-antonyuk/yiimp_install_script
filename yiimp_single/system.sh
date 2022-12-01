@@ -93,6 +93,7 @@ apt_get_quiet dist-upgrade
 apt_get_quiet autoremove
 
 echo -e "$GREEN <-- Done -->$COL_RESET"
+echo
 echo -e "$MAGENTA =>  Installing Base system packages <= $COL_RESET"
 apt_install python3 python3-dev python3-pip \
 	wget curl git sudo coreutils bc \
@@ -102,12 +103,13 @@ apt_install python3 python3-dev python3-pip \
 # ### Seed /dev/urandom
 echo
 echo -e "$GREEN <-- Done -->$COL_RESET"
+echo
 echo -e "$YELLOW =>  Initializing system random number generator <= $COL_RESET"
 hide_output dd if=/dev/random of=/dev/urandom bs=1 count=32 2>/dev/null
 hide_output sudo pollinate -q -r
-echo
 echo -e "$GREEN <-- Done -->$COL_RESET"
 
+echo
 echo -e "$YELLOW =>  Initializing UFW Firewall <= $COL_RESET"
 set +eu +o pipefail
 if [ -z "${DISABLE_FIREWALL:-}" ]; then
@@ -134,9 +136,8 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 	fi
 
 	sudo ufw --force enable
-fi #NODOC
+fi
 set -eu -o pipefail
-echo
 echo -e "$GREEN <-- Done -->$COL_RESET"
 echo
 echo -e "$MAGENTA =>  Installing YiiMP Required system packages <= $COL_RESET"
@@ -196,7 +197,8 @@ fi
 hide_output service nginx restart
 # echo
 
-echo -e "$MAGENTA =>  Clone Kudaraidee Yiimp Repo <= $COL_RESET"
+echo
+echo -e "$CYAN =>  Clone Kudaraidee Yiimp Repo <= $COL_RESET"
 hide_output sudo git clone ${YiiMPRepo} $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
 if [[ ("$CoinPort" == "yes") ]]; then
 	cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp

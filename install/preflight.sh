@@ -29,8 +29,7 @@ if [ $TOTAL_PHYSICAL_MEM -lt 1436000 ]; then
   echo " It might run unreliably when under heavy load."
 fi
 
-# Check swap
-echo Checking if swap space is needed and if so creating...
+# Check if swap is needed.
 
 SWAP_MOUNTED=$(cat /proc/swaps | tail -n+2)
 SWAP_IN_FSTAB=$(grep "swap" /etc/fstab)

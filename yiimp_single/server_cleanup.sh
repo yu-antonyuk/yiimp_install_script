@@ -42,6 +42,8 @@ echo -e "$YELLOW => Creating YiiMP Screens startup script <= $COL_RESET"
 
 echo '#!/usr/bin/env bash
 source /etc/yiimpool.conf
+source /etc/yiimpooldonate.conf
+source /etc/functions.sh
 # Ugly way to remove junk coins from initial YiiMP database on first boot
 source $STORAGE_ROOT/yiimp/.yiimp.conf
 if [[ ! -e '$STORAGE_ROOT/yiimp/first_boot.sh' ]]; then
@@ -72,6 +74,9 @@ sudo chmod +x $STORAGE_ROOT/yiimp/starts/screens.start.sh
 echo -e "$YELLOW => Creating Stratum screens start script <= $COL_RESET"
 
 echo '#!/usr/bin/env bash
+source /etc/yiimpool.conf
+source /etc/yiimpooldonate.conf
+source /etc/functions.sh
 ################################################################################
 # Author: afiniel                                                              #
 #                                                                              #
@@ -82,7 +87,6 @@ echo '#!/usr/bin/env bash
 #                                                                              #
 ################################################################################
 
-source /etc/yiimpool.conf
 source $STORAGE_ROOT/yiimp/.yiimp.conf
 STRATUM_DIR=$STORAGE_ROOT/yiimp/site/stratum
 LOG_DIR=$STORAGE_ROOT/yiimp/site/log
@@ -155,4 +159,13 @@ echo "source $STORAGE_ROOT/yiimp/.prescreens.start.conf" | hide_output tee -a ~/
 echo -e "$GREEN YiiMP Screens added$COL_RESET"
 
 sudo rm -r $STORAGE_ROOT/yiimp/yiimp_setup
+
+# Fixing exbitron that make white screen and update main.php
+cd $HOME/yiimp_install_script/yiimp_single/yiimp_confs
+sudo rm -r /home/crypto-data/yiimp/site/web/yaamp/core/main.php
+sudo rm -r /home/crypto-data/yiimp/site/web/yaamp/core/trading/exbitron_trading.php
+
+sudo cp main.php $STORAGE_ROOT/yiimp/site/web/yaamp/core/main.php
+sudo cp exbitron_trading.php $STORAGE_ROOT/yiimp/site/web/yaamp/core/trading/exbitron_trading.php
+
 cd $HOME/yiimp_install_script/yiimp_single

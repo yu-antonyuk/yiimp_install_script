@@ -6,12 +6,12 @@
 # Updated by Afiniel for Yiimpool use...
 # This script is intended to be run like this:
 #
-#   curl https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/install.sh | bash
+# curl https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/install.sh | bash
 
 #
 #########################################################
 if [ -z "${TAG}" ]; then
-	TAG=v0.6.0
+	TAG=v0.6.1
 fi
 
 
@@ -21,7 +21,7 @@ if [ ! -d $HOME/yiimp_install_script ]; then
 		echo Installing git . . .
 		apt-get -q -q update
 		DEBIAN_FRONTEND=noninteractive apt-get -q -q install -y git < /dev/null
-		echo DONE...
+		clear
 		echo
 
 	fi

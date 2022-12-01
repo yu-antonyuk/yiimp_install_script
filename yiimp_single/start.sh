@@ -40,9 +40,11 @@ echo -e "$GREEN Folders created...$COL_RESET"
 source menu.sh
 source questions.sh
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
+
 if [[ ("$wireguard" == "true") ]]; then
   source wireguard.sh
 fi
+
 source system.sh
 source self_ssl.sh
 source db.sh
@@ -68,7 +70,7 @@ if [[ ("$UsingDomain" == "yes") ]]; then
   source /etc/functions.sh
   term_yiimpool
   echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
-  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.6.0 $YELLOW fork by Afiniel!     $COL_RESET"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.6.1 $YELLOW fork by Afiniel!     $COL_RESET"
   echo
   echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
   echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
@@ -101,7 +103,7 @@ else
   source /etc/functions.sh
   term_yiimpool
   echo -e "$CYAN<----------------------------------------------------------------------------->   $COL_RESET"
-  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.6.0 $YELLOW fork by Afiniel! $COL_RESET"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.6.1 $YELLOW fork by Afiniel! $COL_RESET"
   echo
   echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool                  $COL_RESET"
   echo -e "$CYAN<----------------------------------------------------------------------------->   $COL_RESET"

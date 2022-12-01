@@ -26,6 +26,7 @@ fi
 echo -e "$MAGENTA    <--------------------------------------------------->$COL_RESET"
 echo -e "$YELLOW     <-- Building web file structure and copying files -->$COL_RESET"
 echo -e "$MAGENTA    <--------------------------------------------------->$COL_RESET"
+echo
 echo -e "$CYAN => Building web file structure and copying files <= $COL_RESET"
 
 cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
@@ -54,6 +55,7 @@ else
   fi
 fi
 
+echo
 echo -e "$YELLOW => Creating YiiMP configuration files <= $COL_RESET"
 cd $HOME/yiimp_install_script/yiimp_single
 source yiimp_confs/keys.sh
@@ -63,6 +65,7 @@ source yiimp_confs/loop2.sh
 source yiimp_confs/blocks.sh
 echo -e "$GREEN Done$COL_RESET"
 
+echo
 echo -e "$YELLOW => Setting correct folder permissions <= $COL_RESET"
 whoami=$(whoami)
 sudo usermod -aG www-data $whoami
@@ -80,6 +83,7 @@ echo -e "$GREEN Done$COL_RESET"
 cd $HOME/yiimp_install_script/yiimp_single
 
 #Updating YiiMP files for YiimPool build
+echo
 echo -e "$YELLOW => Adding the yiimpool flare to YiiMP <= $COL_RESET"
 
 sudo sed -i 's/YII MINING POOLS/'${DomainName}' Mining Pool/g' $STORAGE_ROOT/yiimp/site/web/yaamp/modules/site/index.php
@@ -106,13 +110,4 @@ fi
 echo -e "$GREEN Web build complete$COL_RESET"
 
 set +eu +o pipefail
-
-# Fixing exbitron that make white screen and update main.php
-
-sudo rm -r /home/crypto-data/yiimp/site/web/yaamp/core/trading/exbitron_trading.php
-sudo rm -r /home/crypto-data/yiimp/site/web/yaamp/ui/main.php
-cd $HOME/yiimp_install_script/yiimp_single/yiimp_confs
-cp -r exbitron_trading.php /home/crypto-data/yiimp/site/web/yaamp/core/trading
-cp -r main.php /home/crypto-data/yiimp/site/web/yaamp/ui/
-
 cd $HOME/yiimp_install_script/yiimp_single

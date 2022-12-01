@@ -6,6 +6,7 @@
 source /etc/functions.sh
 source /etc/yiimpool.conf
 source $STORAGE_ROOT/yiimp/.yiimp.conf
+source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 
 set -eu -o pipefail
 
@@ -88,7 +89,8 @@ server {
 	restart_service nginx >/dev/null 2>&1
 	restart_service php7.3-fpm >/dev/null 2>&1
 else
-	echo -e "Certbot generation failed, after the installer is finished check /var/log/letsencrypt (must be root to view) on why it failed."
+	echo -e "$GREEN Certbot$RED generation failed, after the installer is finished check$MAGENTA /var/log/letsencrypt$YELLOW (must be root to view) on why it failed. $COL_RESET"
 fi
 set +eu +o pipefail
+
 cd $HOME/yiimp_install_script/yiimp_single

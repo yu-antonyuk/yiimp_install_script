@@ -7,10 +7,7 @@
 source /etc/functions.sh # load our functions
 source /etc/yiimpool.conf
 
-term_art
-echo -e "$MAGENTA    <----------------->$COL_RESET"
-echo -e "$YELLOW     <-- Update Motd -->$COL_RESET"
-echo -e "$MAGENTA    <----------------->$COL_RESET"
+echo -e "$YELLOW <-- Update Motd -->$COL_RESET"
 
 apt_install lsb-release figlet update-motd \
     landscape-common update-notifier-common
