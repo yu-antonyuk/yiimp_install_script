@@ -29,7 +29,7 @@ echo -e "$MAGENTA    <--------------------------------------------------->$COL_R
 echo -e "$CYAN => Building web file structure and copying files <= $COL_RESET"
 
 cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
-sudo sed -i 's/AdminRights/'${AdminPanel}'/' $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/web/yaamp/modules/site/SiteController.php
+sudo sed -i 's/myadmin/'${AdminPanel}'/' $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/web/yaamp/modules/site/SiteController.php
 sudo cp -r $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/web $STORAGE_ROOT/yiimp/site/
 cd $STORAGE_ROOT/yiimp/yiimp_setup/
 sudo cp -r $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/bin/. /bin/
@@ -113,6 +113,6 @@ sudo rm -r /home/crypto-data/yiimp/site/web/yaamp/core/trading/exbitron_trading.
 sudo rm -r /home/crypto-data/yiimp/site/web/yaamp/ui/main.php
 cd $HOME/yiimp_install_script/yiimp_single/yiimp_confs
 cp -r exbitron_trading.php /home/crypto-data/yiimp/site/web/yaamp/core/trading
-cp -r main.php /home/crypto-data/yiimp/site/web/yaamp/ui
+cp -r main.php /home/crypto-data/yiimp/site/web/yaamp/ui/
 
 cd $HOME/yiimp_install_script/yiimp_single
