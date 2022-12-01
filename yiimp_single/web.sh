@@ -107,10 +107,12 @@ echo -e "$GREEN Web build complete$COL_RESET"
 
 set +eu +o pipefail
 
-# Fixing exbitron that make white screen
+# Fixing exbitron that make white screen and update main.php
 
 sudo rm -r /home/crypto-data/yiimp/site/web/yaamp/core/trading/exbitron_trading.php
+sudo rm -r /home/crypto-data/yiimp/site/web/yaamp/ui/main.php
 cd $HOME/yiimp_install_script/yiimp_single/yiimp_confs
-cp -r exbitron_trading.php /home/crypto-data/yiimp/site/web/yaamp/core/trading/exbitron_trading.php
+cp -r exbitron_trading.php /home/crypto-data/yiimp/site/web/yaamp/core/trading
+cp -r main.php /home/crypto-data/yiimp/site/web/yaamp/ui
 
 cd $HOME/yiimp_install_script/yiimp_single
