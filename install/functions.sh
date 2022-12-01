@@ -105,6 +105,8 @@ function install_end_message {
 # terminal art start screen.
 function term_art {
 	clear
+	source /etc/functions.sh
+	source /etc/yiimpool.conf
 	echo
 	echo "██╗   ██╗██╗██╗███╗   ███╗██████╗  ██████╗  ██████╗ ██╗      "
 	echo "╚██╗ ██╔╝██║██║████╗ ████║██╔══██╗██╔═══██╗██╔═══██╗██║      "
@@ -126,8 +128,9 @@ function term_art {
 }
 
 function term_yiimpool {
-	source /etc/yiimpoolversion.conf
 	clear
+	source /etc/functions.sh
+	source /etc/yiimpool.conf
 	echo
 	echo "██╗   ██╗██╗██╗███╗   ███╗██████╗  ██████╗  ██████╗ ██╗      "
 	echo "╚██╗ ██╔╝██║██║████╗ ████║██╔══██╗██╔═══██╗██╔═══██╗██║      "
