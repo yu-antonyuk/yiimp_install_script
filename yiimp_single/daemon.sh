@@ -49,7 +49,9 @@ hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --pr
 hide_output sudo make -j$((`nproc`+1))
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 sudo rm -r db-4.8.30.NC.tar.gz db-4.8.30.NC
+echo
 echo -e "$GREEN => Berkeley 4.8 Completed <= $COL_RESET"
+echo
 
 echo -e "$YELLOW => Building Berkeley 5.1, this may take several minutes <= $COL_RESET"
 echo
@@ -64,6 +66,7 @@ sudo rm -r db-5.1.29.tar.gz db-5.1.29
 echo -e "$GREEN => Berkeley 5.1 Completed <= $COL_RESET"
 echo
 echo -e "$YELLOW => Building Berkeley 5.3, this may take several minutes <= $COL_RESET"
+echo
 sudo mkdir -p $STORAGE_ROOT/berkeley/db5.3/
 hide_output sudo wget 'http://anduin.linuxfromscratch.org/BLFS/bdb/db-5.3.28.tar.gz'
 hide_output sudo tar -xzvf db-5.3.28.tar.gz
