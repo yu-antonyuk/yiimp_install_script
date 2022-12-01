@@ -66,18 +66,14 @@ clear
 if [[ ("$UsingDomain" == "yes") ]]; then
   source /etc/yiimpool.conf
   source /etc/functions.sh
-  term_art
-  echo -e "$MAGENTA          <-------------------------->$COL_RESET"
-  echo -e "$YELLOW           <--$GREEN Installation Complete$YELLOW -->$COL_RESET"
-  echo -e "$MAGENTA          <--------------|------------>$COL_RESET"
-  echo -e "$MAGMENTA                                     |$COL_RESET"
-  echo "<-----------------------------------|----------------------------------------->"
+  term_yiimpool
+  echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
   echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.5.8 $YELLOW fork by Afiniel!     $COL_RESET"
   echo
   echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
-  echo "<----------------------------------------------------------------------------->"
+  echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
   echo -e "$YELLOW => Do you like the installer and want to support the project? use wallets below:             $COL_RESET"
-  echo "<----------------------------------------------------------------------------->"
+  echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
   echo -e "$YELLOW =>  BTC:$GREEN $BTCDON                                   		       $COL_RESET"
   echo
   echo -e "$YELLOW =>  BCH:$GREEN $BCHDON                                   		       $COL_RESET"
@@ -87,7 +83,7 @@ if [[ ("$UsingDomain" == "yes") ]]; then
   echo -e "$YELLOW =>  DOGE:$GREEN $DOGEDON                                 		       $COL_RESET"
   echo
   echo -e "$YELLOW =>  LTC:$GREEN $LTCDON                                   		       $COL_RESET"
-  echo "<-------------------------------------|-------------------------------------->"
+  echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
   echo
   echo -e "$YELLOW Installation of your Yiimp is now$GREEN completed. $COL_RESET"
   echo -e "$YELLOW You $RED*MUST REBOOT*$YELLOW the machine to finalize the machine updates and folder permissions! $MAGENTA YiiMP will not function until a$RED reboot$YELLOW is performed!$COL_RESET"
@@ -103,28 +99,24 @@ if [[ ("$UsingDomain" == "yes") ]]; then
 else
   source /etc/yiimpool.conf
   source /etc/functions.sh
-  term_art
-  echo -e "$MAGENTA          <--------------------------->$COL_RESET"
-  echo -e "$YELLOW           <--$GREEN Installation Complete$YELLOW -->$COL_RESET"
-  echo -e "$MAGENTA          <--------------|------------->$COL_RESET"
-  echo -e "$MAGMENTA                                     |$COL_RESET" 
-  echo "<-----------------------------------|----------------------------------------->"
-  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.5.8 $YELLOW fork by Afiniel!     $COL_RESET"
+  term_yiimpool
+  echo -e "$CYAN<----------------------------------------------------------------------------->   $COL_RESET"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.5.8 $YELLOW fork by Afiniel! $COL_RESET"
   echo
-  echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
-  echo "<----------------------------------------------------------------------------->"
+  echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool                  $COL_RESET"
+  echo -e "$CYAN<----------------------------------------------------------------------------->   $COL_RESET"
   echo -e "$YELLOW => Do you like the installer and want to support the project? use wallets below:             $COL_RESET"
-  echo "<----------------------------------------------------------------------------->"
-  echo -e "$YELLOW =>  BTC:$GREEN $BTCDON                                   		       $COL_RESET"
+  echo -e "$CYAN<----------------------------------------------------------------------------->   $COL_RESET"
+  echo -e "$CYAN =>  BTC:$GREEN $BTCDON                                   		       $COL_RESET"
   echo
-  echo -e "$YELLOW =>  BCH:$GREEN $BCHDON                                   		       $COL_RESET"
+  echo -e "$CYAN =>  BCH:$GREEN $BCHDON                                   		       $COL_RESET"
   echo
-  echo -e "$YELLOW =>  ETH:$GREEN $ETHDON                                   		       $COL_RESET"
+  echo -e "$CYAN =>  ETH:$GREEN $ETHDON                                   		       $COL_RESET"
   echo
-  echo -e "$YELLOW =>  DOGE:$GREEN $DOGEDON                                 		       $COL_RESET"
+  echo -e "$CYAN =>  DOGE:$GREEN $DOGEDON                                 		       $COL_RESET"
   echo
-  echo -e "$YELLOW =>  LTC:$GREEN $LTCDON                                   		       $COL_RESET"
-  echo "<-------------------------------------|-------------------------------------->"
+  echo -e "$CYAN =>  LTC:$GREEN $LTCDON                                   		       $COL_RESET"
+  echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
   echo
   echo -e "$YELLOW Installation of your Yiimp is now$GREEN completed."
   echo -e "$YELLOW You $RED*MUST REBOOT*$YELLOW the machine to finalize the machine updates and folder permissions! $MAGENTA YiiMP will not function until a$RED reboot$YELLOW is performed!$COL_RESET"

@@ -126,6 +126,24 @@ function term_art {
 
 }
 
+function term_yiimpool {
+	source /etc/yiimpoolversion.conf
+	clear
+	echo
+	echo "██╗   ██╗██╗██╗███╗   ███╗██████╗  ██████╗  ██████╗ ██╗      "
+	echo "╚██╗ ██╔╝██║██║████╗ ████║██╔══██╗██╔═══██╗██╔═══██╗██║      "
+	echo " ╚████╔╝ ██║██║██╔████╔██║██████╔╝██║   ██║██║   ██║██║      "
+	echo "  ╚██╔╝  ██║██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║   ██║██║      "
+	echo "   ██║   ██║██║██║ ╚═╝ ██║██║     ╚██████╔╝╚██████╔╝███████╗ "
+	echo "   ╚═╝   ╚═╝╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝  ╚═════╝ ╚══════╝ "
+	echo -e "$CYAN   -----------------|--------------------- 	  											$COL_RESET"
+	echo -e "$YELLOW  Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
+	echo -e "$YELLOW  Version:$COL_RESET $GREEN $YIIMPOOL_VERSION 											$COL_RESET"
+	echo -e "$CYAN   -----------------|--------------------- 	  			$COL_RESET"
+	echo
+
+}
+
 function daemonbuiler_files {
 	echo -e "$YELLOW Copy => Copy Daemonbuilder files.  <= $COL_RESET"
 	cd $HOME/yiimp_install_script
