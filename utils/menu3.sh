@@ -13,11 +13,6 @@ RESULT=$(dialog --stdout --title "DaemonBuilder" --menu "Choose one" -1 60 4 \
 3 "Update Coin with makefile.unix file" \
 4 Exit)
 
-if [ $RESULT = ]
-then
-exit;
-fi
-
 if [ $RESULT = 1 ]
 then
 clear;

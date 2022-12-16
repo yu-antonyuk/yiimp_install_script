@@ -54,7 +54,7 @@ if [[ ("$FIRST_TIME_SETUP" == "1") ]]; then
     #check for user
     echo -e "$YELLOW => Installing needed packages for setup to continue  <= $COL_RESET"
     hide_output sudo apt-get -q -q update
-    hide_output sudo apt-get instal -y figlet
+    hide_output sudo apt-get install -y figlet
     hide_output sudo apt-get install -y lolcat
     apt_get_quiet install dialog python3 python3-pip acl nano git apt-transport-https || exit 1
 

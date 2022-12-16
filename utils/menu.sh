@@ -19,11 +19,6 @@ RESULT=$(dialog --stdout --nocancel --default-item 1 --title "DamonBuilder" --me
 3 "Daemon Build Failed - Help!" \
 4 Exit)
 
-if [ $RESULT = ]
-then
-bash $(basename $0) && exit;
-fi
-
 if [ $RESULT = 1 ]
 then
 clear;
