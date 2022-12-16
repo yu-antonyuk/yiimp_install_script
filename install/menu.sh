@@ -7,13 +7,13 @@
 
 source /etc/functions.sh
 
-RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Menu v0.6.4" --menu "Choose one" -1 60 16 \
+RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Menu v0.6.5" --menu "Choose one" -1 60 16 \
 ' ' "- Install Yiimp  -" \
 1 "YiiMP Single Server" \
 ' ' "- Daemon Wallet Builder -" \
 2 "Daemonbuilder" \
 ' ' "- Upgrade stratum server -" \
-3 "Yiimp stratum update " \
+3 "Yiimp stratum update NOT completed " \
 4 Exit)
 
 if [ $RESULT = 1 ]
@@ -33,9 +33,10 @@ fi
 if [ $RESULT = 3 ]
 then
 clear;
-echo "This is not done yet, please come back later! Use yiimpool command again to start again.";
+echo The Yiimp upgrader is not completed yet.;
 exit;
-fi
+# cd $HOME/yiimp_install_script/yiimp_upgrade
+# source start.sh
 
 if [ $RESULT = 4 ]
 then
