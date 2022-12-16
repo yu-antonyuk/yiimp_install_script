@@ -36,5 +36,5 @@ fi
 figlet -f slant -w 100 "YiimpooL" | lolcat
 printf "\n"
 
-printf "Welcome to %s (%s).\n" "$DISTRIB_DESCRIPTION" "YiimPool Version v0.6.3"
+printf "Welcome to %s (%s).\n" "$DISTRIB_DESCRIPTION" "YiimPool Version v0.6.4"
 printf "\n"
