@@ -110,12 +110,7 @@ function term_art {
 	source /etc/functions.sh
 	source /etc/yiimpool.conf
 	echo
-	echo "██╗   ██╗██╗██╗███╗   ███╗██████╗  ██████╗  ██████╗ ██╗      "
-	echo "╚██╗ ██╔╝██║██║████╗ ████║██╔══██╗██╔═══██╗██╔═══██╗██║      "
-	echo " ╚████╔╝ ██║██║██╔████╔██║██████╔╝██║   ██║██║   ██║██║      "
-	echo "  ╚██╔╝  ██║██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║   ██║██║      "
-	echo "   ██║   ██║██║██║ ╚═╝ ██║██║     ╚██████╔╝╚██████╔╝███████╗ "
-	echo "   ╚═╝   ╚═╝╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝  ╚═════╝ ╚══════╝ "
+	figlet -f slant -w 100 "YiimpooL" | lolcat
 	echo -e "$CYAN   ----------------------------------------------------------> 	  											$COL_RESET"
 	echo -e "$CYAN  |$YELLOW Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
 	echo -e "$CYAN  |$MAGENTA Version:$GREEN v0.6.3 														$COL_RESET"
@@ -133,13 +128,7 @@ function term_yiimpool {
 	clear
 	source /etc/functions.sh
 	source /etc/yiimpool.conf
-	echo
-	echo "██╗   ██╗██╗██╗███╗   ███╗██████╗  ██████╗  ██████╗ ██╗      "
-	echo "╚██╗ ██╔╝██║██║████╗ ████║██╔══██╗██╔═══██╗██╔═══██╗██║      "
-	echo " ╚████╔╝ ██║██║██╔████╔██║██████╔╝██║   ██║██║   ██║██║      "
-	echo "  ╚██╔╝  ██║██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║   ██║██║      "
-	echo "   ██║   ██║██║██║ ╚═╝ ██║██║     ╚██████╔╝╚██████╔╝███████╗ "
-	echo "   ╚═╝   ╚═╝╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝  ╚═════╝ ╚══════╝ "
+	figlet -f slant -w 100 "YiimpooL" | lolcat
 	echo -e "$CYAN   -----------------|--------------------- 	  											$COL_RESET"
 	echo -e "$YELLOW  Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
 	echo -e "$YELLOW  Version:$COL_RESET $GREEN v0.6.3 											$COL_RESET"
