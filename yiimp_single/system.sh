@@ -76,6 +76,7 @@ echo -e "$GREEN <-- Done -->$COL_RESET"
 # Upgrade System Files
 hide_output sudo apt-get update
 
+echo
 echo -e "$YELLOW =>  Upgrading system packages <= $COL_RESET"
 if [ ! -f /boot/grub/menu.lst ]; then
 	apt_get_quiet upgrade
@@ -126,7 +127,7 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 	sleep 0.5
 	echo
 	ufw_allow https
-	
+	echo -e "$YELLOW https port$GREEN OPEN $COL_RESET"
 	# ssh might be running on an alternate port. Use sshd -T to dump sshd's #NODOC
 	# settings, find the port it is supposedly running on, and open that port #NODOC
 	# too. #NODOC
