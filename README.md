@@ -1,17 +1,21 @@
-<h1 align="center"> Yiimpool Yiimp Install Scrypt v0.6.6 With DaemonBuilder and addport (update 2022-12-16) </h1>
+<h1 align="center"> Yiimpool Yiimp Install Scrypt v0.6.6 With DaemonBuilder and addport (update 2022-12-17) </h1>
 
-<a href="https://discord.gg/vV3JvN5JFm"><img src="https://img.shields.io/discord/904564600354254898.svg?style=flat&label=Discord %3C3%20&color=7289DA%22" alt="Join Community Badge"/></a>
-</p>
-The Development is still in progress. Please report any issues you find.
+<img alt="Discord" src="https://img.shields.io/discord/904564600354254898?label=Discord">
+<img alt="GitHub issues" src="https://img.shields.io/github/issues/afiniel/yiimp_install_script" >
+<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/afiniel/yiimp_install_script">
 
-<h2 align="center"> Description </h2>
-This is the main page for Yiimpool Yiimp Install script. Here you find information all documentation about <b> Yiimpool Yiimp Installer v0.6.2</b><p>The installer automatically install all requirements to get Yiimp installed correctly.</p><p><b> Yiimpool Yiimp Install Scrypt</b> is a Script that will install <b> Yiimp</b> Mining Pool on a clean<b>Ubuntu 18.04 VPS.</p>
+If you have any issues with the installation open issue here on Github.
 
-More information will be added soon.
 <p align="center">
-  <img src="./.assets/motd.png" alt="motd"
+  <img src="./.assets/yiimp.png" alt="yiimp"
        width="650" height="650">
 </p>
+
+<h2 align="center"> Description </h2>
+This is the main page for Yiimpool Yiimp Install script. Here you find information all documentation about <b> Yiimpool Yiimp Installer.</b><p>The installer automatically install all requirements to get Yiimp installed correctly.</p><p><b> Yiimpool Yiimp Install script</b> is a Script that will install <b> Yiimp</b> Mining Pool on a clean <b>Ubuntu 18.04 VPS.</p>
+
+More information will be added soon.
+
 <h2 align="left"> ⚙️ The installer requires the following </h2>
 
 * Fresh Ubuntu Ubuntu 18.04
@@ -141,7 +145,7 @@ and get to know those commands as well!
 
 ## 🎁 Support
 
-Donations for continued support of this script are welcomed at:
+If you find this script useful please consider donating to the following addresses:
 
 * BTC:  bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y
 * BCH: qzz0aff2k0xnwyzg7k9fcxlndtaj4wa65uxteqe84m
