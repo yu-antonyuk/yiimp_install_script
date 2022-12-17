@@ -13,9 +13,8 @@ RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Menu v0.6
 ' ' "- Daemon Wallet Builder -" \
 2 "Daemonbuilder" \
 ' ' "- Upgrade stratum server -" \
-3 "Yiimp stratum update NOT completed " \
+3 "Yiimp stratum update NOT completed" \
 4 Exit)
-
 if [ $RESULT = 1 ]
 then
 clear;
