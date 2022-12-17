@@ -7,6 +7,7 @@
 source /etc/functions.sh # load our functions
 source /etc/yiimpool.conf
 
+echo
 echo -e "$YELLOW <-- Update Motd -->$COL_RESET"
 
 apt_install lsb-release figlet update-motd \
@@ -20,8 +21,8 @@ sudo touch /etc/update-motd.d/90-footer
 sudo chmod +x /etc/update-motd.d/*
 sudo cp -r 00-header 10-sysinfo 90-footer /etc/update-motd.d/
 
-cd $HOME/yiimp_install_script/yiimp_single/ubuntu/
 # copy additional files
+cd $HOME/yiimp_install_script/yiimp_single/ubuntu/
 sudo cp -r screens /usr/bin/
 sudo chmod +x /usr/bin/screens
 sudo cp -r stratum /usr/bin
