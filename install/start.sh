@@ -52,7 +52,7 @@ if [[ ("$FIRST_TIME_SETUP" == "1") ]]; then
     export NCURSES_NO_UTF8_ACS=1
 
     #check for user
-    echo -e "$YELLOW => Installing needed packages for setup to continue  <= $COL_RESET"
+    echo -e "$YELLOW => Installing needed packages for setup to$GREEN continue$YELLOW  <= $COL_RESET"
     hide_output sudo apt-get -q -q update
     hide_output sudo apt-get install -y figlet
     hide_output sudo apt-get install -y lolcat
@@ -64,7 +64,7 @@ if [[ ("$FIRST_TIME_SETUP" == "1") ]]; then
         message_box "Yiimpool Installer" \
         "Hello and thanks for using the Yiimpool Installer!
         \n\nInstallation for the most part is fully automated. In most cases any user responses that are needed are asked prior to the installation.
-        \n\nNOTE: You should only install this on a brand new Ubuntu 16.04 or Ubuntu 18.04 installation."
+        \n\nNOTE: You should only install this on a brand new Ubuntu 18.04 or Ubuntu 16.04 installation."
         source existing_user.sh
         exit
     else
