@@ -118,6 +118,7 @@ sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force < 2022-10-14-s
 sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force < 2022-10-29-blocks_effort.sql
 echo -e "$YELLOW <-- Datebase import $GREEN complete -->$COL_RESET"
 
+echo
 echo -e "$YELLOW => Tweaking MariaDB for better performance <= $COL_RESET"
 if [[ ("$wireguard" == "false") ]]; then
   sudo sed -i '/max_connections/c\max_connections         = 800' /etc/mysql/my.cnf
@@ -136,6 +137,7 @@ else
   sudo sed -i 's/#bind-address=0.0.0.0/bind-address='${DBInternalIP}'/g' /etc/mysql/my.cnf
 fi
 
+# Restart MariaDB
 restart_service mysql
 
 set +eu +o pipefail

@@ -40,7 +40,7 @@ echo
 echo -e "$MAGENTA =>  Adding the required repsoitories <= $COL_RESET"
 if [ ! -f /usr/bin/add-apt-repository ]; then
 	echo
-	echo -e "$MAGENTA =>  Installing add-apt-repository...  <= $COL_RESET"
+	echo -e "$YELLOW =>  Installing add-apt-repository  <= $COL_RESET"
 	hide_output sudo apt-get update
 	hide_output sudo apt-get -y install software-properties-common
 fi
@@ -115,19 +115,19 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 	echo
 	echo -e "$YELLOW => Allow incoming connections to SSH <= $COL_RESET"
 	echo
-	echo -e "$YELLOW ssh port$GREEN OPEN $COL_RESET"
+	echo -e "$YELLOW ssh port$GREEN OPEN: $COL_RESET"
 	echo
 	ufw_allow ssh
 	sleep 0.5
-	echo -e "$YELLOW http port$GREEN OPEN $COL_RESET"
+	echo -e "$YELLOW http port:$GREEN OPEN $COL_RESET"
 	echo
 	sleep 0.5
 	ufw_allow http
+	echo -e "$YELLOW http port:$GREEN OPEN: $COL_RESET"
 	echo
 	sleep 0.5
-	echo
 	ufw_allow https
-	echo -e "$YELLOW https port$GREEN OPEN $COL_RESET"
+	echo -e "$YELLOW https port:$GREEN OPEN: $COL_RESET"
 	# ssh might be running on an alternate port. Use sshd -T to dump sshd's #NODOC
 	# settings, find the port it is supposedly running on, and open that port #NODOC
 	# too. #NODOC
@@ -142,11 +142,11 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 			ufw_allow $SSH_PORT
 			sleep 0.5
 			echo
-			echo -e "$YELLOW http port$GREEN open $COL_RESET"
+			echo -e "$YELLOW http port:$GREEN OPEN $COL_RESET"
 			ufw_allow http
 			sleep 0.5
 			echo
-			echo -e "$YELLOW https port$GREEN OPEN $COL_RESET"
+			echo -e "$YELLOW https port:$GREEN OPEN $COL_RESET"
 			ufw_allow https
 			sleep 0.5
 			echo

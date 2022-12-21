@@ -28,7 +28,6 @@ export LC_TYPE=en_US.UTF-8
 export NCURSES_NO_UTF8_ACS=1
 
 # Create the temporary installation directory if it doesn't already exist.
-echo -e "$CYAN => Creating the YiiMP folder structure... <= $COL_RESET"
 if [ ! -d $STORAGE_ROOT/yiimp/yiimp_setup ]; then
 sudo mkdir -p $STORAGE_ROOT/{wallets,yiimp/{yiimp_setup/log,site/{web,stratum,configuration,crons,log},starts}}
 sudo touch $STORAGE_ROOT/yiimp/yiimp_setup/log/installer.log
@@ -69,7 +68,7 @@ if [[ ("$UsingDomain" == "yes") ]]; then
   source /etc/functions.sh
   term_yiimpool
   echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
-  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.6.6 $YELLOW fork by Afiniel!     $COL_RESET"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.6.7 $YELLOW fork by Afiniel!     $COL_RESET"
   echo
   echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
   echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
@@ -102,7 +101,7 @@ else
   source /etc/functions.sh
   term_yiimpool
   echo -e "$CYAN<----------------------------------------------------------------------------->   $COL_RESET"
-  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.6.6 $YELLOW fork by Afiniel! $COL_RESET"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.6.7 $YELLOW fork by Afiniel! $COL_RESET"
   echo
   echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool                  $COL_RESET"
   echo -e "$CYAN<----------------------------------------------------------------------------->   $COL_RESET"

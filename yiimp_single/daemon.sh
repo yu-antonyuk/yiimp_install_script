@@ -21,6 +21,7 @@ term_art
 echo -e "$MAGENTA    <----------------------------------------------------->$COL_RESET"
 echo -e "$YELLOW     <-- Installing Berkeley , openssl , bls-signatures   -->$COL_RESET"
 echo -e "$MAGENTA    <----------------------------------------------------->$COL_RESET"
+echo
 
 echo -e "$YELLOW => Installing BitCoin PPA <= $COL_RESET"
 if [ ! -f /etc/apt/sources.list.d/bitcoin.list ]; then
