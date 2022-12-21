@@ -178,7 +178,7 @@ echo -e "$YELLOW To use your new stratum type,$BLUE stratum.${coinsymbollower} s
 echo
 echo -e "$YELLOW To see the stratum screen type,$MAGENTA screen -r ${coinsymbollower} $COL_RESET"
 echo
-echo -e "$YELLOW The assigned dedicated port for this coins stratum is :$YELLOW $coinport $COL_RESET"
+echo -e "$YELLOW The assigned dedicated port for this coins stratum is :$GREEN $coinport $COL_RESET"
 echo
 echo -e "$YELLOW Make sure to add this to the Dedicated Port section in your YiiMP admin panel! $COL_RESET"
 
