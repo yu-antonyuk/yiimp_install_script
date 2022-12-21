@@ -10,7 +10,6 @@ source /home/crypto-data/yiimp/.yiimp.conf
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 
 term_art
-term_art
 echo -e "$MAGENTA    <--------------------->$COL_RESET"
 echo -e "$YELLOW     <-- Compile Stratum -->$COL_RESET"
 echo -e "$MAGENTA    <--------------------->$COL_RESET"
