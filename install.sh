@@ -1,17 +1,15 @@
 #!/usr/bin/env bash
-
-
 #########################################################
 # Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
 # Updated by Afiniel for Yiimpool use...
 # This script is intended to be run like this:
 #
 # curl https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/install.sh | bash
-
+# 
 #
 #########################################################
 if [ -z "${TAG}" ]; then
-	TAG=v0.6.6
+	TAG=v0.6.7
 fi
 
 

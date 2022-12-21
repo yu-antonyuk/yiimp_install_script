@@ -7,7 +7,7 @@
 
 source /etc/functions.sh
 
-RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Menu v0.6.6" --menu "Choose one" -1 60 16 \
+RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Menu v0.6.7" --menu "Choose one" -1 60 16 \
 ' ' "- Install Yiimp  -" \
 1 "YiiMP Single Server" \
 ' ' "- Daemon Wallet Builder -" \
@@ -15,6 +15,10 @@ RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Menu v0.6
 ' ' "- Upgrade stratum server -" \
 3 "Yiimp stratum update NOT completed" \
 4 Exit)
+if [ $RESULT = ]
+then
+bash $(basename $0) && exit;
+fi
 
 if [ $RESULT = 1 ]
 then
@@ -33,7 +37,7 @@ fi
 if [ $RESULT = 3 ]
 then
 clear;
-echo The Yiimp upgrader is not completed yet.;
+echo The Yiimp upgrader is not completed yet.
 exit;
 fi
 

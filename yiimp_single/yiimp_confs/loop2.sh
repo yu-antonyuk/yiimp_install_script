@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-#####################################################
-# Created by Afiniel for Yiimpool use...
-#####################################################
+#########################################
+# Created by Afiniel for Yiimpool use...#
+#########################################
 
 source /etc/functions.sh
 source /etc/yiimpool.conf

@@ -1,125 +1,125 @@
-Supported algorithms:
+Supportedalgorithms:
 
-- 0x10
-- a5a
-- aergo
-- allium
-- anime
-- argon2
-- argon2d250
-- argon2d500
-- argon2d4096
-- argon2d16000
-- astralhash
-- bastion
-- bcd
-- bitcore
-- blake
-- blake2s
-- blakecoin
-- bmw512
-- c11
-- cosa
-- cpupower
-- curvehash
-- decred
-- dedal
-- deep
-- dmd-gr
-- fresh
-- geek
-- gr
-- heavyhash
-- hive
-- hmq1725
-- honeycomb
-- hsr
-- jeonghash
-- jha
-- keccak
-- keccakc
-- lbk3
-- lbry
-- luffa
-- lyra2
-- lyra2TDC
-- lyra2v2
-- lyra2v3
-- lyra2vc0ban
-- lyra2z
-- lyra2z330
-- m7m
-- megabtx
-- megamec
-- mike
-- minotaur
-- minotaurx
-- myr-gr
-- neoscrypt
-- nist5
-- pawelhash
-- penta
-- phi
-- phi2
-- phi5
-- pipe
-- polytimos
-- power2b
-- quark
-- qubit
-- rainforest
-- renesis
-- scrypt
-- scryptn
-- sha3d
-- sha256
-- sha256t
-- sha512256d
-- sib
-- skein
-- skunk
-- sonoa
-- timetravel
-- tribus
-- vanilla
-- veltor
-- velvet
-- vitalium
-- whirlpool
-- x11
-- x11evo
-- x11k
-- x11kvs
-- x12
-- x13
-- x14
-- x15
-- x16r
-- x16rt
-- x16rv2
-- x16s
-- x17
-- x18
-- x20r
-- x21s
-- x22i
-- x25x
-- xevan
-- yescrypt
-- yescryptR8
-- yescryptR16
-- yescryptR32
-- yespower
-- yespowerARWN
-- yespowerIC
-- yespowerIOTS
-- yespowerLITB
-- yespowerLTNCG
-- yespowerMGPC
-- yespowerR16
-- yespowerSUGAR
-- yespowerTIDE
-- yespowerURX
+0x10
+a5a
+aergo
+allium
+anime
+argon2
+argon2d250
+argon2d500
+argon2d4096
+argon2d16000
+astralhash
+bastion
+bcd
+bitcore
+blake
+blake2s
+blakecoin
+bmw512
+c11
+cosa
+cpupower
+curvehash
+decred
+dedal
+deep
+dmdgr
+fresh
+geek
+gr
+heavyhash
+hive
+hmq1725
+honeycomb
+hsr
+jeonghash
+jha
+keccak
+keccakc
+lbk3
+lbry
+luffa
+lyra2
+lyra2TDC
+lyra2v2
+lyra2v3
+lyra2vc0ban
+lyra2z
+lyra2z330
+m7m
+megabtx
+megamec
+mike
+minotaur
+minotaurx
+myrgr
+neoscrypt
+nist5
+pawelhash
+penta
+phi
+phi2
+phi5
+pipe
+polytimos
+power2b
+quark
+qubit
+rainforest
+renesis
+scrypt
+scryptn
+sha3d
+sha256
+sha256t
+sha512256d
+sib
+skein
+skunk
+sonoa
+timetravel
+tribus
+vanilla
+veltor
+velvet
+vitalium
+whirlpool
+x11
+x11evo
+x11k
+x11kvs
+x12
+x13
+x14
+x15
+x16r
+x16rt
+x16rv2
+x16s
+x17
+x18
+x20r
+x21s
+x22i
+x25x
+xevan
+yescrypt
+yescryptR8
+yescryptR16
+yescryptR32
+yespower
+yespowerARWN
+yespowerIC
+yespowerIOTS
+yespowerLITB
+yespowerLTNCG
+yespowerMGPC
+yespowerR16
+yespowerSUGAR
+yespowerTIDE
+yespowerURX
 
 
 007
@@ -238,7 +238,7 @@ FLO
 RDD
 NXT
 BC
-MYR-qubit
+MYRqubit
 UTC
 888
 EFL
@@ -724,8 +724,8 @@ NTRN
 COV
 SLING
 MYR
-UIS-skein
-UIS-qubit
+UISskein
+UISqubit
 LUX
 DRZ
 7
@@ -735,7 +735,7 @@ NIRO
 GRAM
 SIGU
 AIB
-UNAT-skein
+UNATskein
 QTZ
 DOX
 XTP
@@ -1074,7 +1074,7 @@ GAME
 CFC
 VGC
 PR
-GRE-OLD
+GREOLD
 EUC
 PAK
 CAPT

@@ -18,7 +18,10 @@ RESULT=$(dialog --stdout --nocancel --default-item 1 --title "DamonBuilder" --me
 ' ' "- NOT WORKING YET. WORK IN PROGRESS If your last coin failed to build try this -" \
 3 " WORK IN-PROGRESS! Daemon Build Failed - Help!" \
 4 Exit)
-
+if [ $RESULT = ]
+then
+bash $(basename $0) && exit;
+fi
 
 if [ $RESULT = 1 ]
 then

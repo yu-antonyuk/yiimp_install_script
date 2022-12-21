@@ -11,6 +11,10 @@ RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool YiiMP Upd
 1 "Start YiiMP Updater Installation" \
 ' ' "- Exit -" \
 2 Exit)
+if [ $RESULT = ]
+then
+bash $(basename $0) && exit;
+fi
 
 if [ $RESULT = 1 ]
 then

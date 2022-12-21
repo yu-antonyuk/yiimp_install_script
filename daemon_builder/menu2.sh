@@ -18,7 +18,10 @@ RESULT=$(dialog --stdout --title "DaemonBuilder" --menu "Choose one" -1 60 7 \
 4 "Install Coin with makefile.unix file" \
 5 "Install Coin with CMake file" \
 6 Exit)
-
+if [ $RESULT = ]
+then
+bash $(basename $0) && exit;
+fi
 
 if [ $RESULT = 1 ]
 then
