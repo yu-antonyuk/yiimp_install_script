@@ -200,7 +200,7 @@ libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev lib
 php8.1-mysql
 fi
 
-# ### Suppress Upgrade Prompts
+# Suppress Upgrade Prompts
 # When Ubuntu 20 comes out, we don't want users to be prompted to upgrade,
 # because we don't yet support it.
 if [ -f /etc/update-manager/release-upgrades ]; then
