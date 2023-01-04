@@ -7,16 +7,11 @@
 
 source /etc/functions.sh
 
-RESULT=$(dialog --stdout --default-item 1 --title "Yiimpool Yiimp installer" --menu "Choose one" -1 60 6 \
+RESULT=$(dialog --stdout --default-item 1 --title "Yiimpool Yiimp installer v0.6.7" --menu "Choose one" -1 60 6 \
 ' ' "- Do want to install yiimp with wireguard?  -" \
 1 "No" \
 2 "Yes" \
 3 Exit)
-if [ $RESULT = ]
-then
-bash $(basename $0) && exit;
-fi
-
 if [ $RESULT = 1 ]
 then
 clear;

@@ -115,7 +115,7 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 	echo
 	echo -e "$YELLOW => Allow incoming connections to SSH <= $COL_RESET"
 	echo
-	echo -e "$YELLOW ssh port$GREEN OPEN: $COL_RESET"
+	echo -e "$YELLOW ssh port$GREEN OPEN $COL_RESET"
 	echo
 	ufw_allow ssh
 	sleep 0.5
@@ -123,11 +123,11 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 	echo
 	sleep 0.5
 	ufw_allow http
-	echo -e "$YELLOW http port:$GREEN OPEN: $COL_RESET"
+	echo -e "$YELLOW http port:$GREEN OPEN $COL_RESET"
 	echo
 	sleep 0.5
 	ufw_allow https
-	echo -e "$YELLOW https port:$GREEN OPEN: $COL_RESET"
+	echo -e "$YELLOW https port:$GREEN OPEN $COL_RESET"
 	# ssh might be running on an alternate port. Use sshd -T to dump sshd's #NODOC
 	# settings, find the port it is supposedly running on, and open that port #NODOC
 	# too. #NODOC
@@ -210,11 +210,11 @@ fi
 
 # fix CDbConnection failed to open the DB connection.
 # echo
-# echo -e "$CYAN => Fixing DBconnection issue $COL_RESET"
+echo -e "$CYAN => Fixing DBconnection issue $COL_RESET"
 # apt_install php8.1-mysql
-# echo
+echo
 hide_output service nginx restart
-# echo
+echo
 
 echo
 echo -e "$CYAN =>  Clone Kudaraidee Yiimp Repo <= $COL_RESET"

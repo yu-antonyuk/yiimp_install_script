@@ -15,11 +15,6 @@ RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Menu v0.6
 ' ' "- Upgrade stratum server -" \
 3 "Yiimp stratum update NOT completed" \
 4 Exit)
-if [ $RESULT = ]
-then
-bash $(basename $0) && exit;
-fi
-
 if [ $RESULT = 1 ]
 then
 clear;
