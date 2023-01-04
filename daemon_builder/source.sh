@@ -150,7 +150,7 @@ if [[ ("$berkeley" == "6.2") ]]; then
 fi
 if [[ ("$berkeley" != "6.2") ]]; then
 # make install
-make -j$(nproc)
+make -j$((`nproc`+1))
 fi
 else
 if [[ ("$cmake" == "true") ]]; then
@@ -175,9 +175,9 @@ if [[ ("$cmake" == "true") ]]; then
 		sleep 3
 		cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/depends
 		if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
-		hide_output make -j$NPROC
+		hide_output make -j$((`nproc`+1))
 		else
-		make -j$NPROC
+		make -j$((`nproc`+1))
 		fi
 		echo
 		echo
@@ -280,9 +280,9 @@ if [[ ("$cmake" == "true") ]]; then
 		echo
 		sleep 3
 		if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
-		hide_output make -j$NPROC
+		hide_output make -j$((`nproc`+1))
 		else
-		make -j$NPROC
+		make -j$((`nproc`+1))
 		fi
 		echo
 		echo
@@ -294,7 +294,7 @@ if [[ ("$cmake" == "true") ]]; then
 		echo
 		sleep 3
 		cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir} && git submodule init && git submodule update
-		make -j$NPROC
+		make -j$((`nproc`+1))
 		sleep 3
 	fi
 fi
@@ -320,7 +320,7 @@ fi
 		cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src
 		sed -i '/USE_UPNP:=0/i BDB_LIB_PATH = /home/utils/berkeley/db4/lib\nBDB_INCLUDE_PATH = /home/utils/berkeley/db4/include\nOPENSSL_LIB_PATH = /home/utils/openssl/lib\nOPENSSL_INCLUDE_PATH = /home/utils/openssl/include' makefile.unix
 		sed -i '/USE_UPNP:=1/i BDB_LIB_PATH = /home/utils/berkeley/db4/lib\nBDB_INCLUDE_PATH = /home/utils/berkeley/db4/include\nOPENSSL_LIB_PATH = /home/utils/openssl/lib\nOPENSSL_INCLUDE_PATH = /home/utils/openssl/include' makefile.unix
-		make -j$NPROC -f makefile.unix USE_UPNP=-
+		make -j$((`nproc`+1)) -f makefile.unix USE_UPNP=-
 	fi
 fi
 
