@@ -75,7 +75,7 @@ if [[ ("$FIRST_TIME_SETUP" == "1") ]]; then
     # Are we running as root?
     if [[ $EUID -ne 0 ]]; then
         # Welcome
-        message_box "Yiimp Installer v0.6.7" \
+        message_box "Yiimp Installer v0.6.8" \
         "Hello and thanks for using the Yiimpool Installer!
         \n\nInstallation for the most part is fully automated. In most cases any user responses that are needed are asked prior to the installation.
         \n\nNOTE: You should only install this on a brand new Ubuntu 16.04 or Ubuntu 18.04 VPS."
