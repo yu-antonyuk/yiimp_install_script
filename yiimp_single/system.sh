@@ -212,10 +212,9 @@ fi
 # echo
 echo -e "$CYAN => Fixing DBconnection issue $COL_RESET"
 # apt_install php8.1-mysql
-echo
+sudo update-alternatives --set php /usr/bin/php7.3
 hide_output service nginx restart
 sleep 2
-sudo update-alternatives --set php /usr/bin/php7.3
 echo
 
 echo
