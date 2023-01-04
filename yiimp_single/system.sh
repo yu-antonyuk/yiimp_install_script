@@ -115,7 +115,7 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 	echo
 	echo -e "$YELLOW => Allow incoming connections to SSH <= $COL_RESET"
 	echo
-	echo -e "$YELLOW ssh port$GREEN OPEN $COL_RESET"
+	echo -e "$YELLOW ssh port:$GREEN OPEN $COL_RESET"
 	echo
 	ufw_allow ssh
 	sleep 0.5
@@ -214,6 +214,8 @@ echo -e "$CYAN => Fixing DBconnection issue $COL_RESET"
 # apt_install php8.1-mysql
 echo
 hide_output service nginx restart
+sleep 2
+sudo update-alternatives --set php /usr/bin/php7.3
 echo
 
 echo
