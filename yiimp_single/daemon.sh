@@ -78,6 +78,31 @@ cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 sudo rm -r db-5.3.28.tar.gz db-5.3.28
 echo -e "$GREEN => Berkeley 5.3 Completed <= $COL_RESET"
 echo
+echo -e "$YELLOW Building Berkeley 6.2, this may take several minutes...$COL_RESET"
+echo
+sudo mkdir -p $STORAGE_ROOT/berkeley/db6.2/
+hide_output sudo wget 'https://download.oracle.com/berkeley-db/db-6.2.23.tar.gz'
+hide_output sudo tar -xzvf db-6.2.23.tar.gz
+cd db-6.2.23/build_unix/
+hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$STORAGE_ROOT/berkeley/db6.2/
+hide_output sudo make -j$((`nproc`+1))
+cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
+sudo rm -r db-6.2.23.tar.gz db-6.2.23
+echo -e "$GREEN => Berkeley 6.2 Completed <= $COL_RESET"
+echo
+echo -e "$YELLOW Building Berkeley 18, this may take several minutes...$COL_RESET"
+echo
+sudo mkdir -p $STORAGE_ROOT/berkeley/db18/
+hide_output sudo wget 'https://download.oracle.com/berkeley-db/db-18.1.40.tar.gz'
+hide_output sudo tar -xzvf db-18.1.40.tar.gz
+cd db-18.1.40/build_unix/
+hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$STORAGE_ROOT/berkeley/db18/
+hide_output sudo make -j$((`nproc`+1))
+cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
+sudo rm -r db-18.1.40.tar.gz db-18.1.40
+echo -e "$GREEN => Berkeley 18 Completed <= $COL_RESET"
+echo
+
 echo -e "$YELLOW => Building OpenSSL 1.0.2g, this may take several minutes <= $COL_RESET"
 echo
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
