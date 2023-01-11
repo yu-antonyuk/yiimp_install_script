@@ -3,24 +3,21 @@
 # Updated by Afiniel for crypto use...
 #####################################################
 source /etc/yiimpool.conf
-FUNC=/etc/functionscoin.sh
-if [[ ! -f "$FUNC" ]]; then
-	source /etc/functions.sh
-else
-	source /etc/functionscoin.sh
-fi
-cd $STORAGE_ROOT/daemon_builder
 
-RESULT=$(dialog --stdout --title "DaemonBuilder" --menu "Choose one" -1 60 7 \
-1 "Install Berkeley 4.x Coin with autogen file" \
+RESULT=$(dialog --stdout --title "DaemonBuilder" --menu "Choose one" 16 60 9 \
+1 "Install Berkeley 4.8 Coin with autogen file" \
 2 "Install Berkeley 5.1 Coin with autogen file" \
 3 "Install Berkeley 5.3 Coin with autogen file" \
-4 "Install Coin with makefile.unix file" \
-5 "Install Coin with CMake file" \
-6 Exit)
+4 "Install Berkeley 6.2 Coin with build.sh file" \
+5 "Install Coin with makefile.unix file" \
+6 "Install Coin with CMake file & DEPENDS folder" \
+7 "Install Coin with UTIL folder contains BULD.SH" \
+8 "Install Coin precompiled linux version" \
+9 Exit)
+
 if [ $RESULT = ]
 then
-bash $(basename $0) && exit;
+exit;
 fi
 
 if [ $RESULT = 1 ]
@@ -57,7 +54,8 @@ if [ $RESULT = 4 ]
 then
 clear;
 echo '
-autogen=false
+autogen=true
+berkeley="6.2"
 ' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
 source source.sh;
 fi
@@ -67,12 +65,41 @@ then
 clear;
 echo '
 autogen=false
-cmake=true
+unix=true
 ' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
 source source.sh;
 fi
 
 if [ $RESULT = 6 ]
+then
+clear;
+echo '
+autogen=false
+cmake=true
+' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
+source source.sh;
+fi
+
+if [ $RESULT = 7 ]
+then
+clear;
+echo '
+buildutil=true
+autogen=true
+' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
+source source.sh;
+fi
+
+if [ $RESULT = 8 ]
+then
+clear;
+echo '
+precompiled=true
+' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
+source source.sh;
+fi
+
+if [ $RESULT = 9 ]
 then
 clear;
 exit;

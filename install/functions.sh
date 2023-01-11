@@ -1,11 +1,16 @@
 #!/bin/bash
-#####################################################
-# Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
-# Updated by Afiniel for crypto use...
-# Modified by Xavatar
-# Current Modified by Afiniel (2022-06-06)
-# Updated by Afiniel (2022-08-01)
-#####################################################
+
+##############################################
+#											 #
+# Current Modified by Afiniel (2022-06-06)   #
+# Updated by Afiniel (2022-08-01)			 #
+# 											 #
+##############################################
+
+absolutepath=absolutepathserver
+installtoserver=installpath
+daemonname=daemonnameserver
+DISTRO=distroserver
 
 ESC_SEQ="\x1b["
 COL_RESET=$ESC_SEQ"39;49;00m"
@@ -30,8 +35,19 @@ function spinner {
 	printf "    \b\b\b\b"
 }
 
-# Database functions
+function spinning_timer() {
+  animation=( ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ )
+  end=$((SECONDS+NUM))
+  while [ $SECONDS -lt $end ]; do
+    for i in "${animation[@]}"; do
+      echo -ne "${RED}\r$i ${CYAN}${MSG1}${NC}"
+      sleep 0.1
+    done
+  done
+  echo -e "${MSG2}"
+}
 
+# Database functions
 function database_import_sql {
 
 	# Import Database from SQL files
