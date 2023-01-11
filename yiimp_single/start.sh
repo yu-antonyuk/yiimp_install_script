@@ -50,7 +50,7 @@ source nginx_upgrade.sh
 source web.sh
 sudo bash stratum.sh
 source compile_crypto.sh
-source daemon.sh
+#source daemon.sh
 
 # if [[ ("$UsingDomain" == "yes") ]]; then
 # source send_mail.sh

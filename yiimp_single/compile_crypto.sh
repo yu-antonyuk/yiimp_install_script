@@ -22,33 +22,8 @@ echo -e "$MAGENTA    <---------------------------------------->$COL_RESET"
 echo -e "$YELLOW     <-- Install DaemonBuilder Requirements -->$COL_RESET"
 echo -e "$MAGENTA    <---------------------------------------->$COL_RESET"
 
-# Install required packages to compile coin daemons
-package_compile_crypto
+cd $HOME/yiimp_install_script/daemon_builder
 
-echo
-
-# Create DaemonBuilder directory
-if [ ! -d $STORAGE_ROOT/daemon_builder ]; then
-sudo mkdir -p $STORAGE_ROOT/daemon_builder
-fi
-
-# Copy DaemonBuilder files to DaemonBuilder directory
-echo -e "$YELLOW => Copying DaemonBuilder files  <= $COL_RESET"
-sudo cp -r $HOME/yiimp_install_script/daemon_builder/* $STORAGE_ROOT/daemon_builder
-
-# Enable DaemonBuilder
-echo '
-#!/usr/bin/env bash
-source /etc/yiimpool.conf
-source /etc/functions.sh
-cd $STORAGE_ROOT/daemon_builder
-bash start.sh
-cd ~
-' | sudo -E tee /usr/bin/daemonbuilder >/dev/null 2>&1
-
-# Set permissions
-sudo chmod +x /usr/bin/daemonbuilder
-echo -e "$GREEN Done...$COL_RESET"
-
+sudo bash install.sh
 set +eu +o pipefail
 cd $HOME/yiimp_install_script/yiimp_single

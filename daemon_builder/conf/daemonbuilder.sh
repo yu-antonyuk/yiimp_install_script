@@ -1,6 +1,6 @@
 #!/bin/bash
 ##################################################################
-# Current Modified by Vaudois for Daemon coin & addport & stratum
+# Current Modified by Afiniel for Daemon coin & addport & stratum
 ##################################################################
 
 absolutepath=absolutepathserver
@@ -50,28 +50,27 @@ function install_end_message {
 
 	clear
 	echo
-	figlet -f slant -w 100 "Complete!"
-	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
-	echo -e "$YELLOW  | Version:$GREEN v0.7.2                                                 |				$COL_RESET"
-	echo -e "$YELLOW Yiimp Installer Script Fork By Afiniel https://github.com/afiniel/yiimp_install_script $COL_RESET"
-	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
-	echo -e "$YELLOW   Your mysql information (login/Password) is saved in:$RED ~/.my.cnf					$COL_RESET"
-	echo -e "$CYAN  ---------------------------------------------------------------------------	  	  		$COL_RESET"
-	echo -e "$YELLOW   Your pool  at :$CYAN http://"$server_name" 									  		$COL_RESET"
-	echo -e "$YELLOW   Admin area at :$CYAN http://"$server_name"/site/AdminPanel					  		$COL_RESET"
-	echo -e "$YELLOW   phpMyAdmin at :$CYAN http://"$server_name"/phpmyadmin 						  		$COL_RESET"
-	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
-	echo -e "$YELLOW   If you want change$RED $admin_panel $YELLOW edit SiteController.php:			  		$COL_RESET"
-	echo -e "$RED   /var/web/yaamp/modules/site/SiteController.php 									  		$COL_RESET"
-	echo -e "$YELLOW   Line 11 => change it to your preference. 									  		$COL_RESET"
-	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
-	echo -e "$YELLOW  Please make sure to change your$RED public keys and your wallet addresses in:  		$COL_RESET"
-	echo -e "$RED   /var/web/serverconfig.php		 												  		$COL_RESET"
-	echo -e "$YELLOW  Please make sure to change your private keys in the$RED /etc/yiimp/keys.php$YELLOW file.$COL_RESET"
-	echo -e "$CYAN  -----------------------------------------------------------------------------  	  		$COL_RESET"
-	echo -e "$YELLOW |  YOU MUST$RED REBOOT$YELLOW NOW  TO FINALIZE INSTALLATION Thanks you! |		  		$COL_RESET"
-	echo -e "$CYAN  -----------------------------------------------------------   			    	  		$COL_RESET"
+	clear
 	echo
+	figlet -f slant -w 100 "Complete!"
+	echo -e "$CYAN  --------------------------------------------------------------------------- 	$COL_RESET"
+	echo -e "$YELLOW  Script install of Daemon & Addpor & Stratum By Afiniel       					$COL_RESET"
+	echo -e "$GREEN	Donations are welcome at wallets below:					  						$COL_RESET"
+	echo -e "$YELLOW  BTC:$COL_RESET $MAGENTA btcdons	$COL_RESET"
+	echo -e "$YELLOW  LTC:$COL_RESET $MAGENTA ltcdons	$COL_RESET"
+	echo -e "$YELLOW  ETH:$COL_RESET $MAGENTA ethdons	$COL_RESET"
+	echo -e "$YELLOW  BCH:$COL_RESET $MAGENTA bchdons	$COL_RESET"
+	echo -e "$CYAN  --------------------------------------------------------------------------- 	$COL_RESET"
+	echo -e "$CYAN 	https://github.com/Afiniel/yiimp_install_script									$COL_RESET"
+	echo -e "$CYAN  ---------------------------------------------------------------------------  	$COL_RESET"
+	echo
+	echo -e "$CYAN  ---------------------------------------------------------------------------		$COL_RESET"
+    echo -e "$RED   How to use																		$COL_RESET"
+    echo -e "$GREEN	To build a new coin :$COL_RESET $MAGENTA ${daemonname}			  				$COL_RESET"
+    echo -e "$GREEN	To added stratum to coin and dedicated port : $COL_RESET $MAGENTA addport	  	$COL_RESET"
+    echo -e "$CYAN  ---------------------------------------------------------------------------		$COL_RESET"
+    echo
+    cd ~
 }
 
 # terminal art start screen.
@@ -86,7 +85,7 @@ function term_art {
 	echo " ██║  ██║██╔══██║██╔══╝  ██║╚██╔╝██║██║   ██║██║╚██╗██║    ██║     ██║   ██║██║██║╚██╗██║"
 	echo " ██████╔╝██║  ██║███████╗██║ ╚═╝ ██║╚██████╔╝██║ ╚████║    ╚██████╗╚██████╔╝██║██║ ╚████║"
 	echo " ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝     ╚═════╝ ╚═════╝ ╚═╝╚═╝  ╚═══╝"
-    echo -e "$GREEN  *$COL_RESET $MAGENTA versiontag									$COL_RESET"
+    echo -e "$GREEN  *Daemon Coin Installer$COL_RESET $MAGENTA versiontag									$COL_RESET"
 	echo -e "$CYAN-----------------------------------------------------------------------------------------	$COL_RESET"
 	echo
 }
