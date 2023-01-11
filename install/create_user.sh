@@ -11,13 +11,13 @@ cd ~/yiimp_install_script/install
 clear
 
 # Welcome
-message_box "Yiimpool Installer" \
+message_box "Yiimpool Installer v0.7.2" \
 "Hello and thanks for using the Yiimpool Installer!
 \n\nInstallation for the most part is fully automated. In most cases any user responses that are needed are asked prior to the installation.
-\n\nNOTE: You should only install this on a brand new Ubuntu 16.04 or Ubuntu 18.04 installation."
+\n\nNOTE: You should only install this on a brand new Ubuntu 18.04 or Ubuntu 16.04 installation."
 
 # Root warning message box
-message_box "Yiimpool Installer" \
+message_box "Yiimpool Installer v0.7.2" \
 "WARNING: You are trying to install as the root user!
 \n\nRunning any program as root is not recommended and can pose serious security risks that you want to avoid.
 \n\nThe next step you will be asked to create a new user account, you can name it whatever you want."
@@ -127,8 +127,9 @@ if [[ ("$UsingSSH" == "yes") ]]; then
     sudo setfacl -m u:${yiimpadmin}:rwx /home/${yiimpadmin}/yiimp_install_script
     sudo rm -r $HOME/yiimpool
     clear
-    echo -e "$YELLOW New User: ${yiimpadmin} $GREEN created$YELLOW and make sure you saved your private key... $COL_RESET"
-    echo -e "$RED Please reboot system and log in as $GREEN  ${yiimpadmin} $RED and type$GREEN yiimpool$RED to$GREEN continue$YELLOW setup...$COL_RESET"
+    echo -e "$YELLOW New User:$MAGENTA ${yiimpadmin} $GREEN created!$YELLOW Make sure you save your$RED private key!$COL_RESET"
+    echo
+    echo -e "$RED Please reboot system and log in as $GREEN ${yiimpadmin} $RED and type$GREEN yiimpool$RED to$GREEN continue$YELLOW setup...$COL_RESET"
     exit 0
 fi
 
@@ -230,6 +231,7 @@ case $response in
     sudo rm -r $HOME/yiimp_install_script
     clear
     echo -e "$YELLOW New User:$MAGENTA ${yiimpadmin} $GREEN created$RED $COL_RESET"
+    echo
     echo -e "$YELLOW Please$RED reboot$YELLOW system and log in as the new user:$MAGENTA ${yiimpadmin} $YELLOW and type$GREEN yiimpool$YELLOW to$GREEN continue$YELLOW setup.$COL_RESET"
     exit 0
     ;;
