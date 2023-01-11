@@ -6,9 +6,10 @@
 
 source /etc/functions.sh
 source /etc/yiimpool.conf
-source /home/crypto-data/yiimp/.yiimp.conf
+source $STORAGE_ROOT/yiimp/.yiimp.conf
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 
+echo
 term_art
 echo -e "$MAGENTA    <--------------------->$COL_RESET"
 echo -e "$YELLOW     <-- Compile Stratum -->$COL_RESET"
