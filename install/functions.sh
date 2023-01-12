@@ -258,6 +258,22 @@ function apt_install {
 	apt_get_quiet install $PACKAGES
 }
 
+function apt_update {
+	sudo apt-get update
+}
+
+function apt_upgrade {
+	hide_output sudo apt-get upgrade -y
+}
+
+function apt_dist_upgrade {
+	hide_output sudo apt-get dist-upgrade -y
+}
+
+function apt_autoremove {
+	hide_output sudo apt-get autoremove -y
+}
+
 function ufw_allow {
 	if [ -z "$DISABLE_FIREWALL" ]; then
 		sudo ufw allow $1 >/dev/null
