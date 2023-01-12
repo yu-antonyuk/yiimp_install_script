@@ -30,11 +30,8 @@ hide_output sudo chmod +x /etc/screen-scrypt-daemonbuilder.sh
 			
 #Add to contrab screen-scrypt-daemonbuilder
 echo -e "$GREEN Adding screen-scrypt-daemonbuilder to crontab...$COL_RESET"
-(
-    crontab -l 2>/dev/null
-    echo "@reboot sleep 20 && /etc/screen-scrypt-daemonbuilder.sh"
-) | crontab -
-fi
+crontab -l | grep -v "@reboot sleep 20 && /etc/screen-scrypt-daemonbuilder.sh" |
+crontab -
 
 # Set editconf.py path
 #EDITCONFAPP=/usr/bin/editconf.py

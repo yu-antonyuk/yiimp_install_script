@@ -6,7 +6,10 @@
 absolutepath=absolutepathserver
 installtoserver=installpath
 daemonname=daemonnameserver
-DISTRO=distroserver
+
+source /etc/functions.sh
+source /etc/yiimpool.conf
+source $STORAGE_ROOT/yiimp/.yiimp.conf
 
 ESC_SEQ="\x1b["
 COL_RESET=$ESC_SEQ"39;49;00m"
