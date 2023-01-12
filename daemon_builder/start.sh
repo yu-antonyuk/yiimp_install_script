@@ -32,37 +32,5 @@ if [ ! -d $STORAGE_ROOT/daemon_builder ]; then
 sudo mkdir -p $STORAGE_ROOT/daemon_builder
 fi
 
-source requirements.sh
-source berkeley.sh
-
-echo -e "$CYAN => Installing daemonbuilder $COL_RESET"
 cd $HOME/yiimp_install_script/daemon_builder
-sudo cp -r $HOME/yiimp_install_script/daemon_builder/* $STORAGE_ROOT/daemon_builder
-
-# Enable DaemonBuilder
-echo '
-#!/usr/bin/env bash
-source /etc/yiimpool.conf
-source /etc/functions.sh
-cd $STORAGE_ROOT/daemon_builder
-bash start.sh
-cd ~
-' | sudo -E tee /usr/bin/daemonbuilder >/dev/null 2>&1
-
-# Set permissions
-sudo chmod +x /usr/bin/daemonbuilder
-echo -e "$GREEN Done...$COL_RESET"
-
-echo '#!/bin/sh
-USERSERVER='"${whoami}"'
-PATH_STRATUM='"${path_stratum}"'
-FUNCTION_FILE='"${FUNCTIONFILE}"'
-VERSION='"${TAG}"'
-BTCDEP='"${BTCDEP}"'
-LTCDEP='"${LTCDEP}"'
-ETHDEP='"${ETHDEP}"'
-DOGEDEP='"${DOGEDEP}"''| sudo -E tee ${absolutepath}/${installtoserver}/conf/info.sh >/dev/null 2>&1
-hide_output sudo chmod +x ${absolutepath}/${installtoserver}/conf/info.sh
-
-set +eu +o pipefail
-cd $HOME/yiimp_install_script/yiimp_single
+source requirements.sh

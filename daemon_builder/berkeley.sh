@@ -4,6 +4,7 @@
 # This is the entry point for configuring the system.                            #
 # Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox   #
 # Updated by Afiniel for yiimpool use...                                         #
+#                                                                                #  
 ##################################################################################
 
 source /etc/functions.sh
@@ -17,28 +18,20 @@ function print_error {
 	sed "${line}q;d" "$file" >&2
 }
 trap print_error ERR
-
-echo -e "$MAGENTA    <----------------------------------------------------->$COL_RESET"
-echo -e "$YELLOW     <-- Installing Berkeley , openssl , bls-signatures   -->$COL_RESET"
-echo -e "$MAGENTA    <----------------------------------------------------->$COL_RESET"
-echo
+sudo mkdir -p $STORAGE_ROOT/yiimp/yiimp_setup/tmp
+cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
+echo -e "$GREEN => Additional System Files Completed  <= $COL_RESET"
 
 echo
 echo -e "$YELLOW => Building Berkeley 4.8, this may take several minutes <= $COL_RESET"
 sudo mkdir -p $STORAGE_ROOT/berkeley/db4/
-
 hide_output sudo wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
 hide_output sudo tar -xzvf db-4.8.30.NC.tar.gz
-
 cd db-4.8.30.NC/build_unix/
-
 hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$STORAGE_ROOT/berkeley/db4/
 hide_output sudo make -j$((`nproc`+1))
-
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
-
 sudo rm -r db-4.8.30.NC.tar.gz db-4.8.30.NC
-
 echo
 echo -e "$GREEN => Berkeley 4.8 Completed <= $COL_RESET"
 echo
@@ -46,77 +39,27 @@ echo
 echo -e "$YELLOW => Building Berkeley 5.1, this may take several minutes <= $COL_RESET"
 echo
 sudo mkdir -p $STORAGE_ROOT/berkeley/db5/
-
 hide_output sudo wget 'http://download.oracle.com/berkeley-db/db-5.1.29.tar.gz'
 hide_output sudo tar -xzvf db-5.1.29.tar.gz
-
 cd db-5.1.29/build_unix/
-
 hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$STORAGE_ROOT/berkeley/db5/
 hide_output sudo make -j$((`nproc`+1))
-
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 sudo rm -r db-5.1.29.tar.gz db-5.1.29
-
 echo -e "$GREEN => Berkeley 5.1 Completed <= $COL_RESET"
 echo
 echo -e "$YELLOW => Building Berkeley 5.3, this may take several minutes <= $COL_RESET"
 echo
 sudo mkdir -p $STORAGE_ROOT/berkeley/db5.3/
-
 hide_output sudo wget 'http://anduin.linuxfromscratch.org/BLFS/bdb/db-5.3.28.tar.gz'
 hide_output sudo tar -xzvf db-5.3.28.tar.gz
-
 cd db-5.3.28/build_unix/
-
 hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$STORAGE_ROOT/berkeley/db5.3/
 hide_output sudo make -j$((`nproc`+1))
-
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 sudo rm -r db-5.3.28.tar.gz db-5.3.28
-
 echo -e "$GREEN => Berkeley 5.3 Completed <= $COL_RESET"
 echo
-
-echo -e "$YELLOW => Building Berkeley 6.2, this may take several minutes <= $COL_RESET"
-echo
-
-sudo mkdir -p $STORAGE_ROOT/berkeley/db6.2/
-
-hide_output sudo wget 'https://download.oracle.com/berkeley-db/db-6.2.23.tar.gz'
-hide_output sudo tar -xzvf db-6.2.23.tar.gz
-
-cd db-6.2.23/build_unix/
-
-hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$STORAGE_ROOT/berkeley/db6.2/
-hide_output sudo make -j$((`nproc`+1))
-
-cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
-sudo rm -r db-6.2.23.tar.gz db-6.2.23
-
-echo -e "$GREEN => Berkeley 6.2 Completed <= $COL_RESET"
-echo
-
-echo -e "$YELLOW Building Berkeley 18, this may take several minutes...$COL_RESET"
-echo
-
-sudo mkdir -p $STORAGE_ROOT/berkeley/db18/
-
-hide_output sudo wget 'https://download.oracle.com/berkeley-db/db-18.1.40.tar.gz'
-hide_output sudo tar -xzvf db-18.1.40.tar.gz
-
-cd db-18.1.40/build_unix/
-
-hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$STORAGE_ROOT/berkeley/db18/
-hide_output sudo make -j$((`nproc`+1))
-
-cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
-sudo rm -r db-18.1.40.tar.gz db-18.1.40
-
-echo -e "$GREEN => Berkeley 18 Completed <= $COL_RESET"
-echo
-
-echo -e "$YELLOW => Building openssl 1.0.2, this may take several minutes <= $COL_RESET"
 echo -e "$YELLOW => Building OpenSSL 1.0.2g, this may take several minutes <= $COL_RESET"
 echo
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
@@ -164,6 +107,38 @@ fi
 
 echo
 echo -e "$GREEN Daemon setup completed $COL_RESET"
+
+set +eu +o pipefail
+cd $HOME/yiimp_install_script/yiimp_single
+
+echo -e "$CYAN => Installing daemonbuilder $COL_RESET"
+cd $HOME/yiimp_install_script/daemon_builder
+sudo cp -r $HOME/yiimp_install_script/daemon_builder/* $STORAGE_ROOT/daemon_builder
+
+# Enable DaemonBuilder
+echo '
+#!/usr/bin/env bash
+source /etc/yiimpool.conf
+source /etc/functions.sh
+cd $STORAGE_ROOT/daemon_builder
+bash start.sh
+cd ~
+' | sudo -E tee /usr/bin/daemonbuilder >/dev/null 2>&1
+
+# Set permissions
+sudo chmod +x /usr/bin/daemonbuilder
+echo -e "$GREEN Done...$COL_RESET"
+
+echo '#!/bin/sh
+USERSERVER='"${whoami}"'
+PATH_STRATUM='"${path_stratum}"'
+FUNCTION_FILE='"${FUNCTIONFILE}"'
+VERSION='"${TAG}"'
+BTCDEP='"${BTCDEP}"'
+LTCDEP='"${LTCDEP}"'
+ETHDEP='"${ETHDEP}"'
+DOGEDEP='"${DOGEDEP}"''| sudo -E tee $STORAGE_ROOT/daemon_builder/conf/info.sh >/dev/null 2>&1
+hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/conf/info.sh
 
 set +eu +o pipefail
 cd $HOME/yiimp_install_script/yiimp_single

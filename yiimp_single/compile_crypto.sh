@@ -25,6 +25,5 @@ echo -e "$MAGENTA    <---------------------------------------->$COL_RESET"
 cd $HOME/yiimp_install_script/daemon_builder
 source start.sh
 
-sudo bash install.sh
 set +eu +o pipefail
 cd $HOME/yiimp_install_script/yiimp_single

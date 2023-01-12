@@ -12,28 +12,43 @@ source /etc/functions.sh
 source /etc/yiimpool.conf
 source $STORAGE_ROOT/yiimp/.yiimp.conf
 
+set -eu -o pipefail
+
+function print_error {
+	read line file <<<$(caller)
+	echo "An error occurred in line $line of file $file:" >&2
+	sed "${line}q;d" "$file" >&2
+}
+trap print_error ERR
+
 cd $HOME/yiimp_install_script/daemon_builder
 
 SCSCRYPT=/etc/screen-scrypt-daemonbuilder.sh
 if [[ ! -f "$SCSCRYPT" ]]; then
-hide_output sudo cp -r ${installdirname}/utils/screen-scrypt-daemonbuilder.sh /etc/
+hide_output sudo cp -r $HOME/yiimp_install_script/daemon_builder/utils/screen-scrypt-daemonbuilder.sh /etc/
 hide_output sudo chmod +x /etc/screen-scrypt-daemonbuilder.sh
 			
 #Add to contrab screen-scrypt-daemonbuilder
-(crontab -l 2>/dev/null; echo "@reboot sleep 20 && /etc/screen-scrypt-daemonbuilder.sh") | crontab -
+echo -e "$GREEN Adding screen-scrypt-daemonbuilder to crontab...$COL_RESET"
+(
+    crontab -l 2>/dev/null
+    echo "@reboot sleep 20 && /etc/screen-scrypt-daemonbuilder.sh"
+) | crontab -
 fi
 
 # Set editconf.py path
-EDITCONFAPP=/usr/bin/editconf.py
+#EDITCONFAPP=/usr/bin/editconf.py
+
 # Set stratum directory
-STRATUM_DIR=$STORAGE_ROOT/yiimp/site/stratum
+#STRATUM_DIR=$STORAGE_ROOT/yiimp/site/stratum
+
 
 
 #Install dependencies
 echo
 echo -e "$CYAN => Installing Package to compile crypto currency <= $COL_RESET"
-apt_update
-apt_upgrade
+hide_output sudo apt-get update
+hide_output sudo apt-get -y upgrade
 apt_install build-essential libzmq5 libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils cmake libboost-all-dev zlib1g-dev \
 libseccomp-dev libcap-dev libminiupnpc-dev gettext libcanberra-gtk-module libqrencode-dev libzmq3-dev \
 libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
@@ -41,8 +56,8 @@ libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-
 if [[ ("${DISTRO}" == "18") ]]; then
 apt_install libz-dev libminiupnpc10
 hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
-apt_update
-apt_upgrade
+hide_output sudo apt-get update
+hide_output sudo apt-get -y upgrade
 apt_install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
 fi
 
@@ -51,7 +66,7 @@ echo -e "$GREEN Done...$COL_RESET"
 
 echo
 echo -e "$CYAN => Installing additional system files required for daemons $COL_RESET"
-apt_update
+hide_output sudo apt-get update
 apt_install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev libboost-all-dev libminiupnpc-dev \
 libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler libqrencode-dev libzmq3-dev \
 libgmp-dev cmake libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev libpgm-dev libhidapi-dev \
@@ -72,8 +87,8 @@ echo
 # Updating gcc & g++ to version 8
 echo
 echo -e "$CYAN => Updating gcc & g++ to version 8 $COL_RESET"
-apt_update
-apt_upgrade
+hide_output sudo apt-get update
+hide_output sudo apt-get -y upgrade
 apt_dist_upgrade
 
 apt_install software-properties-common
@@ -81,7 +96,7 @@ apt_install software-properties-common
 if [[ ("${DISTRO}" == "18") ]]; then
 hide_output sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
 fi
-apt_update
+hide_output sudo apt-get update
 
 apt_install gcc-8 g++-8
 
@@ -89,6 +104,7 @@ hide_output sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-8 6
 hide_output sudo update-alternatives --config gcc
 
 echo -e "$GREEN gcc & g++ Updated...$COL_RESET"
-echo
 
-cd $HOME/yiimp_install_script/yiimp_single
+set +eu +o pipefail
+cd $HOME/yiimp_install_script/daemon_builder
+source $HOME/yiimp_install_script/daemon_builder/berkeley.sh
