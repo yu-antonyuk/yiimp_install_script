@@ -24,13 +24,7 @@ trap print_error ERR
 cd $HOME/yiimp_install_script/daemon_builder
 hide_output sudo cp -r $HOME/yiimp_install_script/daemon_builder/utils/screen-scrypt-daemonbuilder.sh /etc/
 hide_output sudo chmod +x /etc/screen-scrypt-daemonbuilder.sh
-			
-#Add to contrab screen-scrypt-daemonbuilder
-echo -e "$GREEN Adding screen-scrypt-daemonbuilder to crontab...$COL_RESET"
-(
-    crontab -l 2>/dev/null
-    echo "@reboot sleep 20 && /etc/screen-scrypt-daemonbuilder.sh"
-) | crontab -
+
 
 # Set editconf.py path
 #EDITCONFAPP=/usr/bin/editconf.py

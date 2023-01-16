@@ -33,7 +33,7 @@ sudo sed -i 's#installpath#'$installtoserver'#' conf/daemonbuilder.sh
 sleep 1
 	
 sudo sed -i 's#absolutepathserver#'$absolutepath'#' conf/daemonbuilder.sh
-leep 1
+sleep 1
 
 sudo sed -i 's#versiontag#'$TAG'#' conf/daemonbuilder.sh
 sleep 1

@@ -29,6 +29,10 @@ fi
 
 (
     crontab -l 2>/dev/null
+    echo "@reboot sleep 20 && /etc/screen-scrypt-daemonbuilder.sh"
+) | crontab -
+(
+    crontab -l 2>/dev/null
     echo "@reboot source /etc/functions.sh"
 ) | crontab -
 (
