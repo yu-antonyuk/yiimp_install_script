@@ -6,6 +6,7 @@
 absolutepath=absolutepathserver
 installtoserver=installpath
 daemonname=daemonnameserver
+path_stratum=$STORAGE_ROOT/yiimp/stratum
 
 source /etc/functions.sh
 source /etc/yiimpool.conf

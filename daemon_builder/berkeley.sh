@@ -7,6 +7,40 @@
 #                                                                                #  
 ##################################################################################
 
+BTCDEP="bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y"
+LTCDEP="ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw"
+ETHDEP="0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB"
+DOGEDEP="DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb"
+
+STRATUM_DIR=$STORAGE_ROOT/yiimp/site/stratum
+
+sudo sed -i 's#btcdons#'$BTCDEP'#' conf/daemonbuilder.sh
+sleep 1
+
+sudo sed -i 's#ltcdons#'$LTCDEP'#' conf/daemonbuilder.sh
+sleep 1
+
+sudo sed -i 's#ethdons#'$ETHDEP'#' conf/daemonbuilder.sh
+sleep 1
+
+sudo sed -i 's#bchdons#'$DOGEDEP'#' conf/daemonbuilder.sh
+sleep 1
+
+sudo sed -i 's#daemonnameserver#'$daemonname'#' conf/daemonbuilder.sh
+sleep 1
+
+sudo sed -i 's#installpath#'$installtoserver'#' conf/daemonbuilder.sh
+sleep 1
+	
+sudo sed -i 's#absolutepathserver#'$absolutepath'#' conf/daemonbuilder.sh
+leep 1
+
+sudo sed -i 's#versiontag#'$TAG'#' conf/daemonbuilder.sh
+sleep 1
+
+sudo sed -i 's#distroserver#'$DISTRO'#' conf/daemonbuilder.sh
+sleep 1
+
 source /etc/functions.sh
 source /etc/yiimpool.conf
 
@@ -110,6 +144,9 @@ echo -e "$CYAN => Installing daemonbuilder $COL_RESET"
 cd $HOME/yiimp_install_script/daemon_builder
 sudo cp -r $HOME/yiimp_install_script/daemon_builder/* $STORAGE_ROOT/daemon_builder
 
+source /etc/daemonbuilder.sh
+
+
 # Enable DaemonBuilder
 echo '
 #!/usr/bin/env bash
@@ -126,7 +163,7 @@ echo -e "$GREEN Done...$COL_RESET"
 
 echo '#!/bin/sh
 USERSERVER='"${whoami}"'
-PATH_STRATUM='"${path_stratum}"'
+PATH_STRATUM='"$STORAGE_ROOT/daemon_builder/conf/info.sh"'
 FUNCTION_FILE='"${FUNCTIONFILE}"'
 VERSION='"${TAG}"'
 BTCDEP='"${BTCDEP}"'
