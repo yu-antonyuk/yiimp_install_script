@@ -46,12 +46,12 @@ source /etc/yiimpool.conf
 
 sudo mkdir -p $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
+echo
 echo -e "$GREEN => Additional System Files Completed  <= $COL_RESET"
 
 echo
 echo -e "$YELLOW => Building Berkeley 4.8, this may take several minutes <= $COL_RESET"
 sudo mkdir -p $STORAGE_ROOT/berkeley/db4/
-cd $STORAGE_ROOT/berkeley/db4/
 hide_output sudo wget 'http://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
 hide_output sudo tar -xzvf db-4.8.30.NC.tar.gz
 cd db-4.8.30.NC/build_unix/
@@ -66,7 +66,6 @@ echo
 echo -e "$YELLOW => Building Berkeley 5.1, this may take several minutes <= $COL_RESET"
 echo
 sudo mkdir -p $STORAGE_ROOT/berkeley/db5/
-cd $STORAGE_ROOT/berkeley/db5/
 hide_output sudo wget 'http://download.oracle.com/berkeley-db/db-5.1.29.tar.gz'
 hide_output sudo tar -xzvf db-5.1.29.tar.gz
 cd db-5.1.29/build_unix/
@@ -79,7 +78,6 @@ echo
 echo -e "$YELLOW => Building Berkeley 5.3, this may take several minutes <= $COL_RESET"
 echo
 sudo mkdir -p $STORAGE_ROOT/berkeley/db5.3/
-cd $STORAGE_ROOT/berkeley/db5.3/
 hide_output sudo wget 'http://anduin.linuxfromscratch.org/BLFS/bdb/db-5.3.28.tar.gz'
 hide_output sudo tar -xzvf db-5.3.28.tar.gz
 cd db-5.3.28/build_unix/
@@ -134,6 +132,7 @@ else
   sudo chmod +x /usr/bin/blocknotify.sh
 fi
 
+
 echo
 echo -e "$GREEN Daemon setup completed $COL_RESET"
 
@@ -142,8 +141,9 @@ cd $HOME/yiimp_install_script/yiimp_single
 
 echo -e "$CYAN => Installing daemonbuilder $COL_RESET"
 cd $HOME/yiimp_install_script/daemon_builder
-sudo mkdir conf
-sudo cp -r $HOME/yiimp_install_script/daemon_builder/utils* $STORAGE_ROOT/daemon_builder
+sudo mkdir -p conf
+sudo cp -r $HOME/yiimp_install_script/daemon_builder/utils/* $STORAGE_ROOT/daemon_builder
+# Rename utils to daemon_builder
 sudo cp -r $HOME/yiimp_install_script/daemon_builder/conf/daemonbuilder.sh /etc/
 
 
@@ -163,6 +163,11 @@ cd ~
 # Set permissions
 sudo chmod +x /usr/bin/daemonbuilder
 echo -e "$GREEN Done...$COL_RESET"
+
+#Check if conf directory exists
+if [ ! -d "$STORAGE_ROOT/daemon_builder/conf" ]; then
+  sudo mkdir -p $STORAGE_ROOT/daemon_builder/conf
+fi
 
 echo '#!/bin/sh
 USERSERVER='"${whoami}"'
