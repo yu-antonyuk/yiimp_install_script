@@ -5,7 +5,7 @@
 #####################################################
 
 source /etc/daemonbuilder.sh
-source ${absolutepath}/${installtoserver}/conf/info.sh
+source $STORAGE_ROOT/daemon_builder/conf/info.sh
 
 message_box " Stratum compiler " \
 "This Scrypt of Stratum run in future builds sorry

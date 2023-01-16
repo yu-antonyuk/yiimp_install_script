@@ -6,7 +6,7 @@
 
 source /etc/daemonbuilder.sh
 
-cd ${absolutepath}/${installtoserver}/daemon_builder
+cd $STORAGE_ROOT/daemon_builder
 
 RESULT=$(dialog --stdout --title "Daemon Builder Coin" --menu "Choose one" 16 60 9 \
 1 "Install Berkeley 4.8 Coin with autogen file" \
@@ -30,7 +30,7 @@ clear;
 echo '
 autogen=true
 berkeley="4.8"
-' | sudo -E tee ${absolutepath}/${installtoserver}/daemon_builder/.my.cnf >/dev/null 2>&1;
+' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
 source source.sh;
 fi
 
@@ -40,7 +40,7 @@ clear;
 echo '
 autogen=true
 berkeley="5.1"
-' | sudo -E tee ${absolutepath}/${installtoserver}/daemon_builder/.my.cnf >/dev/null 2>&1;
+' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
 source source.sh;
 fi
 
@@ -50,7 +50,7 @@ clear;
 echo '
 autogen=true
 berkeley="5.3"
-' | sudo -E tee ${absolutepath}/${installtoserver}/daemon_builder/.my.cnf >/dev/null 2>&1;
+' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
 source source.sh;
 fi
 
@@ -60,7 +60,7 @@ clear;
 echo '
 autogen=true
 berkeley="6.2"
-' | sudo -E tee ${absolutepath}/${installtoserver}/daemon_builder/.my.cnf >/dev/null 2>&1;
+' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
 source source.sh;
 fi
 
@@ -70,7 +70,7 @@ clear;
 echo '
 autogen=false
 unix=true
-' | sudo -E tee ${absolutepath}/${installtoserver}/daemon_builder/.my.cnf >/dev/null 2>&1;
+' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
 source source.sh;
 fi
 
@@ -80,7 +80,7 @@ clear;
 echo '
 autogen=false
 cmake=true
-' | sudo -E tee ${absolutepath}/${installtoserver}/daemon_builder/.my.cnf >/dev/null 2>&1;
+' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
 source source.sh;
 fi
 
@@ -90,7 +90,7 @@ clear;
 echo '
 buildutil=true
 autogen=true
-' | sudo -E tee ${absolutepath}/${installtoserver}/daemon_builder/.my.cnf >/dev/null 2>&1;
+' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
 source source.sh;
 fi
 
@@ -99,7 +99,7 @@ then
 clear;
 echo '
 precompiled=true
-' | sudo -E tee ${absolutepath}/${installtoserver}/daemon_builder/.my.cnf >/dev/null 2>&1;
+' | sudo -E tee $STORAGE_ROOT/daemon_builder/.my.cnf >/dev/null 2>&1;
 source source.sh;
 fi
 

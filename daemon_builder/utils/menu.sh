@@ -4,11 +4,11 @@
 #####################################################
 
 source /etc/daemonbuilder.sh
-source ${absolutepath}/${installtoserver}/conf/info.sh
+source $STORAGE_ROOT/daemon_builder/conf/info.sh
 
-cd ${absolutepath}/${installtoserver}/daemon_builder
+cd $STORAGE_ROOT/daemon_builder
 
-LATESTVER=$(curl -sL 'https://api.github.com/repos/Afiniel/daemonbuilder/releases/latest' | jq -r ".tag_name")
+LATESTVER=$(curl -sL 'https://api.github.com/repos/Afiniel/yiimp_install_script/releases/latest' | jq -r ".tag_name")
 
 if [[ ("${LATESTVER}" > "${VERSION}" && "${LATESTVER}" != "null") ]]; then
 	RESULT=$(dialog --backtitle " New version ${LATESTVER} available!! Please update to latest..." --stdout --nocancel --default-item 1 --title " Coin Setup ${VERSION} " --menu "Choose one" 13 60 8 \
@@ -36,28 +36,32 @@ fi
 if [ $RESULT = 1 ]
 then
 clear;
-cd ${absolutepath}/${installtoserver}/daemon_builder
-source menu1.sh;
+echo '
+autogen=true
+berkeley="4.8"
+' | sudo -E tee $HOME/utils/daemon_builder/.my.cnf >/dev/null 2>&1;
 fi
 
 if [ $RESULT = 2 ]
 then
 clear;
-cd ${absolutepath}/${installtoserver}/daemon_builder
-source menu2.sh;
+echo '
+autogen=true
+berkeley="4.8"
+' | sudo -E tee $HOME/utils/daemon_builder/.my.cnf >/dev/null 2>&1;
 fi
 
 if [ $RESULT = 3 ]
 then
 clear;
-cd ${absolutepath}/${installtoserver}/daemon_builder
+cd $STORAGE_ROOT/daemon_builder
 source menu3.sh;
 fi
 
 if [ $RESULT = 4 ]
 then
 clear;
-cd ${absolutepath}/${installtoserver}/daemon_builder
+cd $STORAGE_ROOT/daemon_builder
 source menu4.sh;
 fi
 

@@ -5,7 +5,7 @@
 #####################################################
 
 source /etc/daemonbuilder.sh
-source ${absolutepath}/${installtoserver}/conf/info.sh
+source $STORAGE_ROOT/daemon_builder/conf/info.sh
 
 cd ~
 clear

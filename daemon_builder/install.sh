@@ -121,8 +121,8 @@ else
 	'""''"${whoami}"''""' ALL=(ALL) NOPASSWD:ALL
 	' | sudo -E tee /etc/sudoers.d/${whoami} >/dev/null 2>&1
 
-	if [[ -f "${absolutepath}/${installtoserver}/conf/info.sh" ]]; then
-		source ${absolutepath}/${installtoserver}/conf/info.sh
+	if [[ -f "$STORAGE_ROOT/daemon_builder/conf/info.sh" ]]; then
+		source $STORAGE_ROOT/daemon_builder/conf/info.sh
 		if [[ ("$VERSION" == "$TAG") ]]; then
 			source ${installdirname}/conf/daemonbuilder.sh
 
@@ -156,7 +156,7 @@ else
 	if [[ ("${INSTVERSION}" == "${TAG}" && "${EXIT}" == "false") ]]; then
 		#Copy needed files
 		cd ${installdirname}
-		sudo mkdir -p ${absolutepath}/${installtoserver}/conf/
+		sudo mkdir -p $STORAGE_ROOT/daemon_builder/conf/
 
 		source ${installdirname}/conf/daemonbuilder.sh
 		
@@ -182,7 +182,7 @@ else
 			hide_output sudo chmod +x /usr/bin/editconf.py
 		fi
 
-		hide_output sudo cp -r ${installdirname}/conf/getip.sh ${absolutepath}/${installtoserver}/conf
+		hide_output sudo cp -r ${installdirname}/conf/getip.sh $STORAGE_ROOT/daemon_builder/conf
 
 	else
 		if [[ ("${EXIT}" == "false") ]]; then
@@ -345,16 +345,16 @@ else
 			#fi
 		}
 
-		if [[ ! -d "${absolutepath}/${installtoserver}/berkeley/db4" ]]; then
+		if [[ ! -d "$STORAGE_ROOT/daemon_builder/berkeley/db4" ]]; then
 			echo -e "$YELLOW Building Berkeley 4.8, this may take several minutes...$COL_RESET"
 			sleep 3
 
-			sudo mkdir -p ${absolutepath}/${installtoserver}/berkeley/db4/
+			sudo mkdir -p $STORAGE_ROOT/daemon_builder/berkeley/db4/
 			cd ${absolutepath}/daemon_setup/tmp
 			hide_output sudo wget 'https://download.oracle.com/berkeley-db/db-4.8.30.NC.tar.gz'
 			hide_output sudo tar -xzvf db-4.8.30.NC.tar.gz
 			cd db-4.8.30.NC/build_unix/
-			hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=${absolutepath}/${installtoserver}/berkeley/db4/
+			hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$STORAGE_ROOT/daemon_builder/berkeley/db4/
 			berkeley_pacht_4x_5x "db-4.8.30.NC"
 			hide_output sudo make install
 			cd ${absolutepath}/daemon_setup/tmp/
@@ -363,16 +363,16 @@ else
 			DONEINST=true
 		fi
 
-		if [[ ! -d "${absolutepath}/${installtoserver}/berkeley/db5" ]]; then
+		if [[ ! -d "$STORAGE_ROOT/daemon_builder/berkeley/db5" ]]; then
 			echo -e "$YELLOW Building Berkeley 5.1, this may take several minutes...$COL_RESET"
 			sleep 3
 
-			sudo mkdir -p ${absolutepath}/${installtoserver}/berkeley/db5/
+			sudo mkdir -p $STORAGE_ROOT/daemon_builder/berkeley/db5/
 			cd ${absolutepath}/daemon_setup/tmp/
 			hide_output sudo wget 'https://download.oracle.com/berkeley-db/db-5.1.29.tar.gz'
 			hide_output sudo tar -xzvf db-5.1.29.tar.gz
 			cd db-5.1.29/build_unix/
-			hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=${absolutepath}/${installtoserver}/berkeley/db5/
+			hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$STORAGE_ROOT/daemon_builder/berkeley/db5/
 			berkeley_pacht_4x_5x "db-5.1.29/src"
 			hide_output sudo make install
 			cd ${absolutepath}/daemon_setup/tmp
@@ -381,16 +381,16 @@ else
 			DONEINST=true
 		fi
 
-		if [[ ! -d "${absolutepath}/${installtoserver}/berkeley/db5.3" ]]; then
+		if [[ ! -d "$STORAGE_ROOT/daemon_builder/berkeley/db5.3" ]]; then
 			echo -e "$YELLOW Building Berkeley 5.3, this may take several minutes...$COL_RESET"
 			sleep 3
 
-			sudo mkdir -p ${absolutepath}/${installtoserver}/berkeley/db5.3/
+			sudo mkdir -p $STORAGE_ROOT/daemon_builder/berkeley/db5.3/
 			cd ${absolutepath}/daemon_setup/tmp/
 			hide_output sudo wget 'https://anduin.linuxfromscratch.org/BLFS/bdb/db-5.3.28.tar.gz'
 			hide_output sudo tar -xzvf db-5.3.28.tar.gz
 			cd db-5.3.28/build_unix/
-			hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=${absolutepath}/${installtoserver}/berkeley/db5.3/
+			hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$STORAGE_ROOT/daemon_builder/berkeley/db5.3/
 			berkeley_pacht_4x_5x "db-5.3.28/src"
 			hide_output sudo make install
 			cd ${absolutepath}/daemon_setup/tmp/
@@ -399,16 +399,16 @@ else
 			DONEINST=true
 		fi
 
-		if [[ ! -d "${absolutepath}/${installtoserver}/berkeley/db6.2" ]]; then
+		if [[ ! -d "$STORAGE_ROOT/daemon_builder/berkeley/db6.2" ]]; then
 			echo -e "$YELLOW Building Berkeley 6.2, this may take several minutes...$COL_RESET"
 			sleep 3
 
-			sudo mkdir -p ${absolutepath}/${installtoserver}/berkeley/db6.2/
+			sudo mkdir -p $STORAGE_ROOT/daemon_builder/berkeley/db6.2/
 			cd ${absolutepath}/daemon_setup/tmp/
 			hide_output sudo wget 'https://download.oracle.com/berkeley-db/db-6.2.23.tar.gz'
 			hide_output sudo tar -xzvf db-6.2.23.tar.gz
 			cd db-6.2.23/build_unix/
-			hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=${absolutepath}/${installtoserver}/berkeley/db6.2/
+			hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$STORAGE_ROOT/daemon_builder/berkeley/db6.2/
 			hide_output sudo make install
 			cd ${absolutepath}/daemon_setup/tmp/
 			sudo rm -r db-6.2.23.tar.gz db-6.2.23
@@ -416,16 +416,16 @@ else
 			DONEINST=true
 		fi
 
-		if [[ ! -d "${absolutepath}/${installtoserver}/berkeley/db18" ]]; then
+		if [[ ! -d "$STORAGE_ROOT/daemon_builder/berkeley/db18" ]]; then
 			echo -e "$YELLOW Building Berkeley 18, this may take several minutes...$COL_RESET"
 			sleep 3
 
-			sudo mkdir -p ${absolutepath}/${installtoserver}/berkeley/db18/
+			sudo mkdir -p $STORAGE_ROOT/daemon_builder/berkeley/db18/
 			cd ${absolutepath}/daemon_setup/tmp/
 			hide_output sudo wget 'https://download.oracle.com/berkeley-db/db-18.1.40.tar.gz'
 			hide_output sudo tar -xzvf db-18.1.40.tar.gz
 			cd db-18.1.40/build_unix/
-			hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=${absolutepath}/${installtoserver}/berkeley/db18/
+			hide_output sudo ../dist/configure --enable-cxx --disable-shared --with-pic --prefix=$STORAGE_ROOT/daemon_builder/berkeley/db18/
 			hide_output sudo make install
 			cd ${absolutepath}/daemon_setup/tmp/
 			sudo rm -r db-18.1.40.tar.gz db-18.1.40
@@ -433,7 +433,7 @@ else
 			DONEINST=true
 		fi
 
-		if [[ ! -d "${absolutepath}/${installtoserver}/openssl" ]]; then
+		if [[ ! -d "$STORAGE_ROOT/daemon_builder/openssl" ]]; then
 			echo -e "$YELLOW Building OpenSSL 1.0.2g, this may take several minutes...$COL_RESET"
 			sleep 3
 
@@ -441,7 +441,7 @@ else
 			hide_output sudo wget https://www.openssl.org/source/old/1.0.2/openssl-1.0.2g.tar.gz --no-check-certificate
 			hide_output sudo tar -xf openssl-1.0.2g.tar.gz
 			cd openssl-1.0.2g
-			hide_output sudo ./config --prefix=${absolutepath}/${installtoserver}/openssl --openssldir=${absolutepath}/${installtoserver}/openssl shared zlib
+			hide_output sudo ./config --prefix=$STORAGE_ROOT/daemon_builder/openssl --openssldir=$STORAGE_ROOT/daemon_builder/openssl shared zlib
 			hide_output sudo make
 			hide_output sudo make install
 			cd ${absolutepath}/daemon_setup/tmp/
@@ -498,23 +498,23 @@ else
 			fi
 
 			cd ${installdirname}
-			sudo mkdir -p ${absolutepath}/${installtoserver}/daemon_builder/
+			sudo mkdir -p $STORAGE_ROOT/daemon_builder/
 
-			hide_output sudo cp -r ${installdirname}/utils/start.sh ${absolutepath}/${installtoserver}/daemon_builder/
-			hide_output sudo cp -r ${installdirname}/utils/menu.sh ${absolutepath}/${installtoserver}/daemon_builder/
-			hide_output sudo cp -r ${installdirname}/utils/menu1.sh ${absolutepath}/${installtoserver}/daemon_builder/
-			hide_output sudo cp -r ${installdirname}/utils/menu2.sh ${absolutepath}/${installtoserver}/daemon_builder/
-			hide_output sudo cp -r ${installdirname}/utils/menu3.sh ${absolutepath}/${installtoserver}/daemon_builder/
-			hide_output sudo cp -r ${installdirname}/utils/menu4.sh ${absolutepath}/${installtoserver}/daemon_builder/
-			hide_output sudo cp -r ${installdirname}/utils/source.sh ${absolutepath}/${installtoserver}/daemon_builder/
+			hide_output sudo cp -r ${installdirname}/utils/start.sh $STORAGE_ROOT/daemon_builder/
+			hide_output sudo cp -r ${installdirname}/utils/menu.sh $STORAGE_ROOT/daemon_builder/
+			hide_output sudo cp -r ${installdirname}/utils/menu1.sh $STORAGE_ROOT/daemon_builder/
+			hide_output sudo cp -r ${installdirname}/utils/menu2.sh $STORAGE_ROOT/daemon_builder/
+			hide_output sudo cp -r ${installdirname}/utils/menu3.sh $STORAGE_ROOT/daemon_builder/
+			hide_output sudo cp -r ${installdirname}/utils/menu4.sh $STORAGE_ROOT/daemon_builder/
+			hide_output sudo cp -r ${installdirname}/utils/source.sh $STORAGE_ROOT/daemon_builder/
 			sleep 3
-			hide_output sudo chmod +x ${absolutepath}/${installtoserver}/daemon_builder/start.sh
-			hide_output sudo chmod +x ${absolutepath}/${installtoserver}/daemon_builder/menu.sh
-			hide_output sudo chmod +x ${absolutepath}/${installtoserver}/daemon_builder/menu1.sh
-			hide_output sudo chmod +x ${absolutepath}/${installtoserver}/daemon_builder/menu2.sh
-			hide_output sudo chmod +x ${absolutepath}/${installtoserver}/daemon_builder/menu3.sh
-			hide_output sudo chmod +x ${absolutepath}/${installtoserver}/daemon_builder/menu4.sh
-			hide_output sudo chmod +x ${absolutepath}/${installtoserver}/daemon_builder/source.sh
+			hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/start.sh
+			hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/menu.sh
+			hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/menu1.sh
+			hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/menu2.sh
+			hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/menu3.sh
+			hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/menu4.sh
+			hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/source.sh
 			sleep 3
 			echo -e "$GREEN Done...$COL_RESET"
 
@@ -571,8 +571,8 @@ else
 				BTCDEP='"${BTCDEP}"'
 				LTCDEP='"${LTCDEP}"'
 				ETHDEP='"${ETHDEP}"'
-				DOGEDEP='"${DOGEDEP}"''| sudo -E tee ${absolutepath}/${installtoserver}/conf/info.sh >/dev/null 2>&1
-				hide_output sudo chmod +x ${absolutepath}/${installtoserver}/conf/info.sh
+				DOGEDEP='"${DOGEDEP}"''| sudo -E tee $STORAGE_ROOT/daemon_builder/conf/info.sh >/dev/null 2>&1
+				hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/conf/info.sh
 			else
 				if [[ ! "$VERSION" == "$TAG" ]]; then
 					echo '#!/bin/sh
@@ -583,8 +583,8 @@ else
 					BTCDEP='"${BTCDEP}"'
 					LTCDEP='"${LTCDEP}"'
 					ETHDEP='"${ETHDEP}"'
-					DOGEDEP='"${DOGEDEP}"''| sudo -E tee ${absolutepath}/${installtoserver}/conf/info.sh >/dev/null 2>&1
-					hide_output sudo chmod +x ${absolutepath}/${installtoserver}/conf/info.sh
+					DOGEDEP='"${DOGEDEP}"''| sudo -E tee $STORAGE_ROOT/daemon_builder/conf/info.sh >/dev/null 2>&1
+					hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/conf/info.sh
 				fi
 				echo -e "$GREEN Done...$COL_RESET"
 				sleep 5
@@ -600,8 +600,8 @@ else
 			BTCDEP='"${BTCDEP}"'
 			LTCDEP='"${LTCDEP}"'
 			ETHDEP='"${ETHDEP}"'
-			DOGEDEP='"${DOGEDEP}"'' | sudo -E tee ${absolutepath}/${installtoserver}/conf/info.sh >/dev/null 2>&1
-			hide_output sudo chmod +x ${absolutepath}/${installtoserver}/conf/info.sh
+			DOGEDEP='"${DOGEDEP}"'' | sudo -E tee $STORAGE_ROOT/daemon_builder/conf/info.sh >/dev/null 2>&1
+			hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/conf/info.sh
 			echo -e "$GREEN Done...$COL_RESET"
 			sleep 5
 		fi

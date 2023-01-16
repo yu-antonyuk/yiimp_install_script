@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 source /etc/daemonbuilder.sh
-source ${absolutepath}/${installtoserver}/conf/info.sh
+source $STORAGE_ROOT/daemon_builder/conf/info.sh
 
 #####################################################
 # Dedicated Port config generator
@@ -242,7 +242,7 @@ if [[("$CREATECOIN" == 'true')]]; then
 	echo '
 	COINPORT='""''"${coinport}"''""'
 	COINALGO='""''"${coinalgo}"''""'
-	' | sudo -E tee ${absolutepath}/${installtoserver}/daemon_builder/.addport.cnf >/dev/null 2>&1;
+	' | sudo -E tee $STORAGE_ROOT/daemon_builder/.addport.cnf >/dev/null 2>&1;
 	echo -e "$CYAN --------------------------------------------------------------------------- 	$COL_RESET"
 	echo -e "$GREEN    The assigned dedicated port for this coins stratum is :$YELLOW $coinport $COL_RESET"
 	echo -e "$GREEN    Addport finish return to config...										$COL_RESET"

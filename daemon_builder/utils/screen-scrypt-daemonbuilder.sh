@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source /etc/daemonbuilder.sh
-source ${absolutepath}/${installtoserver}/conf/info.sh
+source $STORAGE_ROOT/daemon_builder/conf/info.sh
 
 	LOG_DIR=/var/log/daemon-coin
 	STRATUM_DIR=${PATH_STRATUM}

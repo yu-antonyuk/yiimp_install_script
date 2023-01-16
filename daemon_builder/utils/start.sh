@@ -6,11 +6,12 @@
 
 source /etc/daemonbuilder.sh
 source /etc/functions.sh
-source /etc/yiimp.conf
-source /etc/yiimpool.conf
-source ${absolutepath}/${installtoserver}/conf/info.sh
+source $STORAGE_ROOT/yiimp/.yiimp.conf
 
-cd ${absolutepath}/${installtoserver}/daemon_builder
+source /etc/yiimpool.conf
+source $STORAGE_ROOT/daemon_builder/conf/info.sh
+
+cd $STORAGE_ROOT/daemon_builder
 # Ensure Python reads/writes files in UTF-8. If the machine
 # triggers some other locale in Python, like ASCII encoding,
 # Python may not be able to read/write files. This is also
