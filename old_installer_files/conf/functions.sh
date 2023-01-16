@@ -160,7 +160,7 @@ function daemonbuiler_files {
 	echo '
 	#!/usr/bin/env bash
 	source /etc/functions.sh # load our functions
-	cd $HOME/utils/daemon_builder
+	cd $STORAGE_ROOT/daemon_builder
 	bash start.sh
 	cd ~
 	' | sudo -E tee /usr/bin/daemonbuilder >/dev/null 2>&1

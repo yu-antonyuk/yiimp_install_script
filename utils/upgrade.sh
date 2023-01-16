@@ -4,8 +4,8 @@
 #####################################################
 
 source /etc/functions.sh
-source $HOME/utils/daemon_builder/.my.cnf
-cd $HOME/utils/daemon_builder
+source cd $STORAGE_ROOT/daemon_builder/.my.cnf
+cd $STORAGE_ROOT/daemon_builder
 
 # Set what we need
 now=$(date +"%m_%d_%Y")
@@ -20,7 +20,7 @@ fi
 # Just double checking folder permissions
 sudo setfacl -m u:$USER:rwx $HOME/utils/daemon_builder/temp_coin_builds
 
-cd $HOME/utils/daemon_builder/temp_coin_builds
+cd $STORAGE_ROOT/daemon_builder/temp_coin_builds
 
 # Kill the old coin and get the github info
 read -r -e -p "Enter the name of the coin : " coin
@@ -88,7 +88,7 @@ fi
 make -j$(nproc)
 else
 echo "Building using makefile.unix method..."
-cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src
+cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src
 if [[ ! -e '$HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/obj' ]]; then
  mkdir -p $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/obj
         else
@@ -99,11 +99,11 @@ mkdir -p $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/obj/zerocoin
 else
 echo  "Wow even the /src/obj/zerocoin is there! Good job developer!"
 fi
-cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/leveldb
+cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb
 sudo chmod +x build_detect_platform
 sudo make clean
 sudo make libleveldb.a libmemenv.a
-cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src
+cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src
 sed -i '/USE_UPNP:=0/i BDB_LIB_PATH = /home/utils/berkeley/db4/lib\nBDB_INCLUDE_PATH = /home/utils/berkeley/db4/include\nOPENSSL_LIB_PATH = /home/utils/openssl/lib\nOPENSSL_INCLUDE_PATH = /home/utils/openssl/include' makefile.unix
 sed -i '/USE_UPNP:=1/i BDB_LIB_PATH = /home/utils/berkeley/db4/lib\nBDB_INCLUDE_PATH = /home/utils/berkeley/db4/include\nOPENSSL_LIB_PATH = /home/utils/openssl/lib\nOPENSSL_INCLUDE_PATH = /home/utils/openssl/include' makefile.unix
 make -j$NPROC -f makefile.unix USE_UPNP=-
@@ -112,7 +112,7 @@ fi
 clear
 
 # LS the SRC dir to have user input bitcoind and bitcoin-cli names
-cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/
+cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/
 find . -maxdepth 1 -type f \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
 read -r -e -p "Please enter the coind name from the directory above, example bitcoind :" coind
 read -r -e -p "Is there a coin-cli, example bitcoin-cli [y/N] :" ifcoincli
@@ -137,14 +137,14 @@ echo "I am now going to open nano, please verify if there any changes that are n
 read -n 1 -s -r -p "Press any key to continue"
 sudo nano $HOME/wallets/."${coind::-1}"/${coind::-1}.conf
 clear
-cd $HOME/utils/daemon_builder
+cd $STORAGE_ROOT/daemon_builder
 echo "Starting ${coind::-1}"
 "${coind}" -datadir=$HOME/wallets/."${coind::-1}" -conf="${coind::-1}.conf" -daemon -shrinkdebugfile -reindex
 
 # If we made it this far everything built fine removing last coin.conf and build directory
 sudo rm -r $HOME/utils/daemon_builder/temp_coin_builds/.lastcoin.conf
 sudo rm -r $HOME/utils/daemon_builder/temp_coin_builds/${coindir}
-sudo rm -r $HOME/utils/daemon_builder/.my.cnf
+sudo rm -r cd $STORAGE_ROOT/daemon_builder/.my.cnf
 
 
 clear

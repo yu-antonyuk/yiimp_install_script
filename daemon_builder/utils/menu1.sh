@@ -21,7 +21,7 @@ RESULT=$(dialog --stdout --title "Daemon Builder Coin" --menu "Choose one" 16 60
 
 if [ $RESULT = ]
 then
-exit;
+bash $(basename $0) && exit;
 fi
 
 if [ $RESULT = 1 ]

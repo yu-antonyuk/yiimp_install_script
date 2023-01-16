@@ -12,8 +12,6 @@ LTCDEP="ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw"
 ETHDEP="0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB"
 DOGEDEP="DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb"
 
-STRATUM_DIR=$STORAGE_ROOT/yiimp/site/stratum
-
 sudo sed -i 's#btcdons#'$BTCDEP'#' conf/daemonbuilder.sh
 sleep 1
 
@@ -43,6 +41,11 @@ sleep 1
 
 source /etc/functions.sh
 source /etc/yiimpool.conf
+
+# Set Stratum directory
+STRATUM_DIR="{$STORAGE_ROOT}/yiimp/site/stratum"
+# Set Function file.
+FUNCTIONFILE=daemonbuilder.sh
 
 sudo mkdir -p $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
@@ -193,11 +196,12 @@ if [ ! -d "$STORAGE_ROOT/daemon_builder/conf" ]; then
   sudo mkdir -p $STORAGE_ROOT/daemon_builder/conf
 fi
 
+# TODO: Fix the $TAG
 echo '#!/bin/sh
 USERSERVER='"${whoami}"'
-PATH_STRATUM='"$STORAGE_ROOT/daemon_builder/conf/info.sh"'
+PATH_STRATUM='"${STRATUM_DIR}"'
 FUNCTION_FILE='"${FUNCTIONFILE}"'
-VERSION='"${TAG}"'
+VERSION='"v0.7.2"'
 BTCDEP='"${BTCDEP}"'
 LTCDEP='"${LTCDEP}"'
 ETHDEP='"${ETHDEP}"'
