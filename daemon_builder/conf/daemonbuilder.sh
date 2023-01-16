@@ -2,15 +2,14 @@
 ##################################################################
 # Current Modified by Afiniel for Daemon coin & addport & stratum
 ##################################################################
+source /etc/functions.sh
+source /etc/yiimpool.conf
+source $STORAGE_ROOT/yiimp/.yiimp.conf
 
 absolutepath=absolutepathserver
 installtoserver=installpath
 daemonname=daemonnameserver
 path_stratum=$STORAGE_ROOT/yiimp/stratum
-
-source /etc/functions.sh
-source /etc/yiimpool.conf
-source $STORAGE_ROOT/yiimp/.yiimp.conf
 
 ESC_SEQ="\x1b["
 COL_RESET=$ESC_SEQ"39;49;00m"

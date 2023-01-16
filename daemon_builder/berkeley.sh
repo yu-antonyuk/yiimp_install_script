@@ -142,7 +142,10 @@ cd $HOME/yiimp_install_script/yiimp_single
 
 echo -e "$CYAN => Installing daemonbuilder $COL_RESET"
 cd $HOME/yiimp_install_script/daemon_builder
-sudo cp -r $HOME/yiimp_install_script/daemon_builder/* $STORAGE_ROOT/daemon_builder
+sudo mkdir conf
+sudo cp -r $HOME/yiimp_install_script/daemon_builder/utils* $STORAGE_ROOT/daemon_builder
+sudo cp -r $HOME/yiimp_install_script/daemon_builder/conf/daemonbuilder.sh /etc/
+
 
 source /etc/daemonbuilder.sh
 

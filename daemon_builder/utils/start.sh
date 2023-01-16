@@ -5,6 +5,9 @@
 #####################################################
 
 source /etc/daemonbuilder.sh
+source /etc/functions.sh
+source /etc/yiimp.conf
+source /etc/yiimpool.conf
 source ${absolutepath}/${installtoserver}/conf/info.sh
 
 cd ${absolutepath}/${installtoserver}/daemon_builder
