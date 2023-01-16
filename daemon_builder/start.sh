@@ -35,7 +35,7 @@ fi
 cd $HOME/yiimp_install_script/daemon_builder
 source requirements.sh
 
-cd $HOME/yiimp_install_script/yiimp_single
+# cd $HOME/yiimp_install_script/yiimp_single
 #source daemon.sh
 
 # if [[ ("$UsingDomain" == "yes") ]]; then
