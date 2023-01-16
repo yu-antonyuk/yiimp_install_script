@@ -66,8 +66,8 @@ cd ${absolutepath}/${installtoserver}/daemon_builder/temp_coin_builds
 	optionslistalgos=$(echo -e "${convertlistalgos}" | awk '{ printf "%s on\n", $1}' | sort | uniq | grep [[:alnum:]])
 
 	DIALOGFORLISTALGOS=${DIALOGFORLISTALGOS=dialog}
-	tempfile=`tempfile 2>/dev/null` || tempfile=/tmp/test$$
-	trap "rm -f $tempfile" 0 1 2 5 15
+	mktemp=`mktemp 2>/dev/null` || mktemp=/tmp/test$$
+	trap "rm -f $mktemp" 0 1 2 5 15
 
 	$DIALOGFORLISTALGOS --colors --title "\Zb\Zr\Z7| Select the algorithm for coin: \Zn\ZR\ZB\Z0${coin^^}\Zn\Zb\Zr\Z7 |" --clear --colors --no-items --nocancel --shadow \
 			--radiolist "\n\
@@ -77,9 +77,9 @@ cd ${absolutepath}/${installtoserver}/daemon_builder/temp_coin_builds
 	hotkey or number keys 1-9 to choose an option. \n\
 	Press SPACE to select an option.\Zn\n\n\
 		What is your algorithm? choose from the following..." \
-		55 60 47 $optionslistalgos 2> $tempfile
+		55 60 47 $optionslistalgos 2> $mktemp
 	retvalalgoselected=$?
-	ALGOSELECTED=`cat $tempfile`
+	ALGOSELECTED=`cat $mktemp`
 	case $retvalalgoselected in
 	  0)
 		coinalgo="${ALGOSELECTED}";;
