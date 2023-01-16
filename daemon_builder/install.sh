@@ -264,7 +264,7 @@ else
 
 		# Installing other needed files
 		echo
-		echo -e "$CYAN => Installing other needed files : $COL_RESET"
+		echo -e "$MAGENTA => Installing other needed files : $COL_RESET"
 		sleep 3
 
 		hide_output sudo apt-get -y install dialog acl libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
@@ -275,7 +275,7 @@ else
 
 		# Installing Package to compile crypto currency
 		echo
-		echo -e "$CYAN => Installing Package to compile crypto currency $COL_RESET"
+		echo -e "$MAGENTA => Installing Package to compile crypto currency $COL_RESET"
 		sleep 3
 
 		hide_output sudo apt-get -y install build-essential libzmq5 \
@@ -294,7 +294,7 @@ else
 
 		# Installing Package to compile crypto currency
 		echo
-		echo -e "$CYAN => Installing additional system files required for daemons $COL_RESET"
+		echo -e "$MAGENTA => Installing additional system files required for daemons $COL_RESET"
 		sleep 3
 
 		hide_output sudo apt-get -y update
@@ -493,7 +493,7 @@ else
 			else
 				# Install Daemonbuilder
 				echo
-				echo -e "$CYAN => Installing daemonbuilder $COL_RESET"
+				echo -e "$MAGENTA => Installing daemonbuilder $COL_RESET"
 				sleep 3
 			fi
 
@@ -525,7 +525,7 @@ else
 			else
 				# Install Addport
 				echo
-				echo -e "$CYAN => Installing Addport $COL_RESET"
+				echo -e "$MAGENTA => Installing Addport $COL_RESET"
 				sleep 3
 			fi
 

@@ -17,7 +17,8 @@ echo -e "$MAGENTA    <--------------------->$COL_RESET"
 cd /home/crypto-data/yiimp/yiimp_setup
 
 # Starting the build progress of the stratum
-echo -e "$YELLOW => Building blocknotify , iniparser , stratum... <= $COL_RESET"
+echo
+echo -e "$MAGENTA => Building$GREEN blocknotify$MAGENTA ,$GREEN iniparser$MAGENTA ,$GREEN stratum$MAGENTA ... <= $COL_RESET"
 
 # Generating Random Password for stratum
 blckntifypass=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`

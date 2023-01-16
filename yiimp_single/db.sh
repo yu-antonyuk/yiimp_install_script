@@ -32,7 +32,7 @@ sudo debconf-set-selections <<<"maria-db-$MARIADB_VERSION mysql-server/root_pass
 apt_install mariadb-server mariadb-client
 echo -e "$GREEN => MariaDB build complete <= $COL_RESET"
 echo
-echo -e "$YELLOW => Creating DB users for YiiMP <= $COL_RESET"
+echo -e "$MAGENTA => Creating DB users for YiiMP <= $COL_RESET"
 
 if [[ ("$wireguard" == "false") ]]; then
   Q1="CREATE DATABASE IF NOT EXISTS ${YiiMPDBName};"
@@ -53,7 +53,7 @@ fi
 
 echo -e "$GREEN => Database creation complete <= $COL_RESET"
 
-echo -e "$YELLOW => Creating my.cnf <= $COL_RESET"
+echo -e "$MAGENTA => Creating my.cnf <= $COL_RESET"
 
 if [[ ("$wireguard" == "false") ]]; then
   echo '[clienthost1]

@@ -36,7 +36,7 @@ hide_output sudo chmod +x /etc/screen-scrypt-daemonbuilder.sh
 
 #Install dependencies
 echo
-echo -e "$CYAN => Installing Package to compile crypto currency <= $COL_RESET"
+echo -e "$MAGENTA => Installing Package to compile crypto currency <= $COL_RESET"
 hide_output sudo apt-get update
 hide_output sudo apt-get -y upgrade
 apt_install build-essential libzmq5 libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils cmake libboost-all-dev zlib1g-dev \
@@ -52,10 +52,10 @@ apt_install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
 fi
 
 hide_output sudo apt -y install libdb5.3 libdb5.3++
-echo -e "$GREEN Done...$COL_RESET"
+echo -e "$GREEN => Done <=$COL_RESET"
 
 echo
-echo -e "$CYAN => Installing additional system files required for daemons $COL_RESET"
+echo -e "$MAGENTA => Installing additional system files required for daemons <= $COL_RESET"
 hide_output sudo apt-get update
 apt_install build-essential libtool autotools-dev automake pkg-config libssl-dev libevent-dev libboost-all-dev libminiupnpc-dev \
 libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler libqrencode-dev libzmq3-dev \

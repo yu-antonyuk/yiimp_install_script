@@ -40,14 +40,14 @@ echo
 echo -e "$MAGENTA =>  Adding the required repsoitories <= $COL_RESET"
 if [ ! -f /usr/bin/add-apt-repository ]; then
 	echo
-	echo -e "$YELLOW =>  Installing add-apt-repository  <= $COL_RESET"
+	echo -e "$MAGENTA =>  Installing add-apt-repository  <= $COL_RESET"
 	hide_output sudo apt-get update
 	hide_output sudo apt-get -y install software-properties-common
 fi
 echo
 
 # PHP 7.3
-echo -e "$YELLOW =>  Installing Ondrej PHP PPA <= $COL_RESET"
+echo -e "$MAGENTA =>  Installing Ondrej PHP PPA <= $COL_RESET"
 if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
 	hide_output sudo add-apt-repository -y ppa:ondrej/php
 	hide_output sudo apt-get -y update
@@ -57,14 +57,14 @@ fi
 
 # CertBot
 echo
-echo -e "$YELLOW =>  Installing CertBot PPA <= $COL_RESET"
+echo -e "$MAGENTA =>  Installing CertBot PPA <= $COL_RESET"
 hide_output sudo add-apt-repository -y ppa:certbot/certbot
 hide_output sudo apt-get -y update
 echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # MariaDB
 echo
-echo -e "$YELLOW =>  Installing MariaDB <= $COL_RESET"
+echo -e "$MAGENTA =>  Installing MariaDB <= $COL_RESET"
 hide_output sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 if [[ ("$DISTRO" == "18") ]]; then
 	sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu bionic main' >/dev/null 2>&1

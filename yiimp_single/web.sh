@@ -56,7 +56,7 @@ else
 fi
 
 echo
-echo -e "$YELLOW => Creating YiiMP configuration files <= $COL_RESET"
+echo -e "$MAGENTA => Creating YiiMP configuration files <= $COL_RESET"
 cd $HOME/yiimp_install_script/yiimp_single
 source yiimp_confs/keys.sh
 source yiimp_confs/yiimpserverconfig.sh

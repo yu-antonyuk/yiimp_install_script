@@ -36,7 +36,7 @@
 	# Installing Stratum
 	echo
 	echo
-	echo -e "$CYAN => Installing Stratum $COL_RESET"
+	echo -e "$MAGENTA => Installing Stratum $COL_RESET"
 	echo
 	echo -e "Grabbing Stratum fron Github, building files and setting file structure."
 	echo

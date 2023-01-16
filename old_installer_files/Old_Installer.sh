@@ -87,7 +87,7 @@ echo
 term_art
 # Installing Nginx
 echo
-echo -e "$CYAN => Installing Nginx server $COL_RESET"
+echo -e "$MAGENTA => Installing Nginx server $COL_RESET"
 echo
 sleep 3
 
@@ -122,7 +122,7 @@ echo 'map $http_user_agent $blockedagent {
 # Installing Mariadb
 echo
 echo
-echo -e "$CYAN => Installing Mariadb Server $COL_RESET"
+echo -e "$MAGENTA => Installing Mariadb Server $COL_RESET"
 echo
 sleep 3
 
@@ -139,7 +139,7 @@ echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # Installing Installing php7.3
 echo
-echo -e "$CYAN => Installing php7.3  $COL_RESET"
+echo -e "$MAGENTA => Installing php7.3  $COL_RESET"
 echo
 sleep 3
 
@@ -258,7 +258,7 @@ echo -e "$GREEN <-- Done -->$COL_RESET"
 
 # Installing PhpMyAdmin
 echo
-echo -e "$CYAN => Installing phpMyAdmin $COL_RESET"
+echo -e "$MAGENTA => Installing phpMyAdmin $COL_RESET"
 echo
 sleep 3
 
