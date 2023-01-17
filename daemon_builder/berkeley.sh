@@ -114,7 +114,7 @@ cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 sudo rm -r db-18.1.40.tar.gz db-18.1.40
 echo -e "$GREEN => Berkeley 18 Completed <= $COL_RESET"
 echo
-echo -e "$MAGENTA => Building OpenSSL 1.0.2g$GREEN this may take several minutes <= $COL_RESET"
+echo -e "$MAGENTA => Building OpenSSL$GREEN 1.0.2g$MAGENTA this may take several minutes <= $COL_RESET"
 echo
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 hide_output sudo wget https://www.openssl.org/source/old/1.0.2/openssl-1.0.2g.tar.gz --no-check-certificate
