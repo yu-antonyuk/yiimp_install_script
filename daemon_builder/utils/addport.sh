@@ -66,7 +66,7 @@ else
 	export LC_TYPE=en_US.UTF-8
 	export NCURSES_NO_UTF8_ACS=1
 	
-	convertlistalgos=$(find ${PATH_STRATUM}/config/ -mindepth 1 -maxdepth 1 -type f -not -name '.*' -not -name '*.sh' -not -name '*.log' -not -name 'stratum.*' -not -name '*.*.*' -iname '*.conf' -execdir basename -s '.conf' {} +);
+	convertlistalgos=$(find $STORAGE_ROOT/config/ -mindepth 1 -maxdepth 1 -type f -not -name '.*' -not -name '*.sh' -not -name '*.log' -not -name 'stratum.*' -not -name '*.*.*' -iname '*.conf' -execdir basename -s '.conf' {} +);
 	optionslistalgos=$(echo -e "${convertlistalgos}" | awk '{ printf "%s on\n", $1}' | sort | uniq | grep [[:alnum:]])
 
 	DIALOGFORLISTALGOS=${DIALOGFORLISTALGOS=dialog}
@@ -112,7 +112,7 @@ coinalgo=${coinalgo}
 coinsymbol=${coinsymbol^^}
 
 # Make sure the stratum.symbol config doesnt exist and that the algo file does.
-if [ -f ${PATH_STRATUM}/config/stratum.${coinsymbollower} ]; then
+if [ -f $STORAGE_ROOT/config/stratum.${coinsymbollower} ]; then
 	echo
 	echo -e "$RED A file for ${coinsymbol} already exists. Are you sure you want to overwrite?"
 	read -r -e -p " A new port will be generated and you will need to update your coind.conf blocknotify line (y/n) :" overwrite
@@ -123,7 +123,7 @@ if [ -f ${PATH_STRATUM}/config/stratum.${coinsymbollower} ]; then
 		exit 0
 	fi
 if [ ! -f $PATH_STRATUM/config/$coinalgo.conf ]; then
-  echo -e "$YELLOW Sorry that algo config file doesn't exist in $RED ${PATH_STRATUM}/config/ $YELLOW please double check and try again. $COL_RESET"
+  echo -e "$YELLOW Sorry that algo config file doesn't exist in $RED $STORAGE_ROOT/config/ $YELLOW please double check and try again. $COL_RESET"
   exit 0
 fi
 fi
@@ -183,10 +183,13 @@ sleep 1
 # New coin stratum start file
 echo '#####################################################
 # Source code from https://codereview.stackexchange.com/questions/55077/small-bash-script-to-sta$
-# Updated by Afiniel for Daemon Coin use...
+# Updated by Afiniel for Yiimpool use...
 #####################################################
 
-STRATUM_DIR='""''"${PATH_STRATUM}"''""'
+source /etc/yiimpool.conf
+source $STORAGE_ROOT/yiimp/.yiimp.conf
+STRATUM_DIR=$STORAGE_ROOT/yiimp/site/stratum
+LOG_DIR=$STORAGE_ROOT/yiimp/site/log
 #!/usr/bin/env bash
 
 '""''"${coinsymbollower}"''""'="screen -dmS '""''"${coinsymbollower}"''""' bash $STRATUM_DIR/run.sh '""''"${coinsymbollower}"''""'.'""''"${coinalgo}"''""'"
@@ -222,11 +225,11 @@ for name; do
     '""''"${coinsymbollower}"''""') startstop_'""''"${coinsymbollower}"''""' $cmd ;;
     *) startstop_service $cmd $name ;;
     esac
-done ' | sudo -E tee ${PATH_STRATUM}/config/stratum.${coinsymbollower} >/dev/null 2>&1
-sudo chmod +x ${PATH_STRATUM}/config/stratum.${coinsymbollower}
+done ' | sudo -E tee $STORAGE_ROOT/yiimp/site/stratum/config/stratum.${coinsymbollower} >/dev/null 2>&1
+sudo chmod +x $STORAGE_ROOT/yiimp/site/stratum/config/stratum.${coinsymbollower}
 sleep 1
 
-sudo cp -r ${PATH_STRATUM}/config/stratum.${coinsymbollower} /usr/bin
+sudo cp -r $STORAGE_ROOT/config/stratum.${coinsymbollower} /usr/bin
 sudo ufw allow $coinport
 sleep 1
 

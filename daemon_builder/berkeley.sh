@@ -43,7 +43,7 @@ source /etc/functions.sh
 source /etc/yiimpool.conf
 
 # Set Stratum directory
-STRATUM_DIR="{$STORAGE_ROOT}/yiimp/site/stratum"
+STRATUM_DIR="$STORAGE_ROOT/yiimp/site/stratum"
 # Set Function file.
 FUNCTIONFILE=daemonbuilder.sh
 
@@ -171,8 +171,11 @@ echo -e "$MAGENTA => Installing daemonbuilder <=$COL_RESET"
 cd $HOME/yiimp_install_script/daemon_builder
 sudo mkdir -p conf
 sudo cp -r $HOME/yiimp_install_script/daemon_builder/utils/* $STORAGE_ROOT/daemon_builder
-# Rename utils to daemon_builder
+
 sudo cp -r $HOME/yiimp_install_script/daemon_builder/conf/daemonbuilder.sh /etc/
+# Copy addport.sh to /usr/bin
+hide_output sudo cp -r $HOME/yiimp_install_script/utils/addport.sh /usr/bin/addport
+hide_output sudo chmod +x /usr/bin/addport
 
 
 source /etc/daemonbuilder.sh
