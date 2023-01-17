@@ -127,6 +127,7 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 	sleep 0.5
 	ufw_allow https
 	echo -e "$YELLOW https port:$GREEN OPEN $COL_RESET"
+	echo
 	# ssh might be running on an alternate port. Use sshd -T to dump sshd's #NODOC
 	# settings, find the port it is supposedly running on, and open that port #NODOC
 	# too. #NODOC
