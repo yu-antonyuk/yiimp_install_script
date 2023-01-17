@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source /etc/yiimpool.conf
+source /etc/functions.sh
 source /etc/daemonbuilder.sh
 source $STORAGE_ROOT/daemon_builder/conf/info.sh
 
