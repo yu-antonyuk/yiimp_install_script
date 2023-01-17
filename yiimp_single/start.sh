@@ -94,7 +94,7 @@ if [[ ("$UsingDomain" == "yes") ]]; then
   echo -e "$YELLOW You can access your$GREEN ${AdminPanel} $YELLOW at,$BLUE http://${DomainName}/site/${AdminPanel} $COL_RESET"
   echo
   echo -e "$RED By default all stratum ports are blocked by the firewall.$YELLOW To allow a port through, from the command prompt type $GREEN sudo ufw allow port number.$COL_RESET"
-  echo -e "$GREEN Database user names and passwords$YELLOW can be found in$RED $STORAGE_ROOT/yiimp_setup/.my.cnf$COL_RESET"
+  echo -e "$GREEN Database user names and passwords$YELLOW can be found in$RED $STORAGE_ROOT/yiimp/.my.cnf$COL_RESET"
   exit 0
 else
   source /etc/yiimpool.conf
@@ -127,5 +127,5 @@ else
   echo -e "$YELLOW You can access your$GREEN $AdminPanel $YELLOW at,$BLUE http://${DomainName}/site/${AdminPanel} $COL_RESET"
   echo
   echo -e "$RED By default all stratum ports are blocked by the firewall.$YELLOW To allow a port through, from the command prompt type $GREEN sudo ufw allow port number.$COL_RESET"
-  echo -e "$GREEN Database user names and passwords$YELLOW can be found in$RED $STORAGE_ROOT/yiimp_setup/.my.cnf$COL_RESET"
+  echo -e "$GREEN Database user names and passwords$YELLOW can be found in$RED $STORAGE_ROOT/yiimp/.my.cnf$COL_RESET"
 fi
