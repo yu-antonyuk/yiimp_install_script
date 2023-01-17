@@ -223,7 +223,7 @@ done ' | sudo -E tee ${PATH_STRATUM}/config/stratum.${coinsymbollower} >/dev/nul
 sudo chmod +x $STORAGE_ROOT/yiimp/site/stratum/config/stratum.${coinsymbollower}
 sleep 1
 
-sudo cp -r $STORAGE_ROOT/config/stratum.${coinsymbollower} /usr/bin
+sudo cp -r $STORAGE_ROOT/yiimp/site/stratum/config/stratum.${coinsymbollower} /usr/bin
 sudo ufw allow $coinport
 sleep 1
 
