@@ -189,12 +189,10 @@ echo '#####################################################
 source /etc/yiimpool.conf
 source $STORAGE_ROOT/yiimp/.yiimp.conf
 STRATUM_DIR=$STORAGE_ROOT/yiimp/site/stratum
-LOG_DIR=$STORAGE_ROOT/yiimp/site/log
-#!/usr/bin/env bash
 
+#!/usr/bin/env bash
 '""''"${coinsymbollower}"''""'="screen -dmS '""''"${coinsymbollower}"''""' bash $STRATUM_DIR/run.sh '""''"${coinsymbollower}"''""'.'""''"${coinalgo}"''""'"
 '""''"${coinsymbollower}"''""'stop="'screen -X -S ${coinsymbollower} quit'"
-
 startstop_'""''"${coinsymbollower}"''""'() {
     cmd=$1
     case $cmd in
@@ -207,7 +205,6 @@ startstop_'""''"${coinsymbollower}"''""'() {
             ;;
     esac
 }
-
 case "$1" in
     start|stop|restart) cmd=$1 ;;
     *)
@@ -216,16 +213,13 @@ case "$1" in
         echo "usage: $0 [start|stop|restart] algo"
         exit 1
 esac
-
-
 shift
-
 for name; do
     case "$name" in
     '""''"${coinsymbollower}"''""') startstop_'""''"${coinsymbollower}"''""' $cmd ;;
     *) startstop_service $cmd $name ;;
     esac
-done ' | sudo -E tee $STORAGE_ROOT/yiimp/site/stratum/config/stratum.${coinsymbollower} >/dev/null 2>&1
+done ' | sudo -E tee ${PATH_STRATUM}/config/stratum.${coinsymbollower} >/dev/null 2>&1
 sudo chmod +x $STORAGE_ROOT/yiimp/site/stratum/config/stratum.${coinsymbollower}
 sleep 1
 
