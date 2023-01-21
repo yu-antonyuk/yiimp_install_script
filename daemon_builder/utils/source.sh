@@ -42,7 +42,7 @@ else
 	sudo rm -rf $STORAGE_ROOT/daemon_builder/temp_coin_builds/*
 	echo
 	echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-	echo -e "$GREEN   temp_coin_builds already exists.... Skipping 								$COL_RESET"
+	echo -e "$GREEN   temp_coin_builds already exists.... Skipping  								$COL_RESET"
 	echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
 fi
 # Just double checking folder permissions
@@ -199,7 +199,7 @@ if [[ ("$autogen" == "true") ]]; then
 	if [[ ("$berkeley" == "4.8") ]]; then
 		echo
 		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting Building coin $MAGENTA ${coin^^} $COL_RESET using Berkeley 4.8	$COL_RESET"
+		echo -e "$GREEN   Starting Building coin $MAGENTA ${coin^^} $MAGENTA using Berkeley 4.8	$COL_RESET"
 		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
 		echo
 		basedir=$(pwd)
@@ -239,7 +239,7 @@ if [[ ("$autogen" == "true") ]]; then
 		echo
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 2
+		sleep 0.5
 		./configure CPPFLAGS="-I$STORAGE_ROOT/daemon_builder/berkeley/db4/include -O2" LDFLAGS="-L$STORAGE_ROOT/daemon_builder/berkeley/db4/lib" --with-incompatible-bdb --without-gui --disable-tests
 		echo
 		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
@@ -302,7 +302,7 @@ if [[ ("$autogen" == "true") ]]; then
 		echo
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 2
+		sleep 0.5
 		./configure CPPFLAGS="-I$STORAGE_ROOT/daemon_builder/berkeley/db5/include -O2" LDFLAGS="-L$STORAGE_ROOT/daemon_builder/berkeley/db5/lib" --with-incompatible-bdb --without-gui --disable-tests
 		echo
 		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
@@ -365,7 +365,7 @@ if [[ ("$autogen" == "true") ]]; then
 		echo
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 2
+		sleep 0.5
 		./configure CPPFLAGS="-I$STORAGE_ROOT/daemon_builder/berkeley/db5.3/include -O2" LDFLAGS="-L$STORAGE_ROOT/daemon_builder/berkeley/db5.3/lib" --with-incompatible-bdb --without-gui --disable-tests
 		echo
 		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
@@ -428,7 +428,7 @@ if [[ ("$autogen" == "true") ]]; then
 		echo
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 2
+		sleep 0.5
 		./configure CPPFLAGS="-I$STORAGE_ROOT/daemon_builder/berkeley/db6.2/include -O2" LDFLAGS="-L$STORAGE_ROOT/daemon_builder/berkeley/db6.2/lib" --with-incompatible-bdb --without-gui --disable-tests
 		echo
 		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
