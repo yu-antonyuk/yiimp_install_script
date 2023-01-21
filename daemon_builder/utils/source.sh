@@ -1198,7 +1198,7 @@ fi
 
 clear
 echo
-figlet -f slant -w 100 "      DaemonBuilder 0.7.2"
+figlet -f slant -w 100 "    DaemonBuilder" | lolcat
 
 echo -e "$CYAN --------------------------------------------------------------------------- 	"
 echo -e "$CYAN    Starting ${coind::-1} $COL_RESET"
