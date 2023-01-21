@@ -22,7 +22,7 @@ if [[ ("${LATESTVER}" > "${VERSION}" && "${LATESTVER}" != "null") ]]; then
 
 	REPO="Afiniel/daemonbuilder"
 
-	temp_dir="$(mktemp -d)" && \
+	temp_dir="$(tempfile -d)" && \
 		git clone -q git@github.com:${REPO%.git} "${temp_dir}" && \
 			cd "${temp_dir}/" && \
 				git -c advice.detachedHead=false checkout -q tags/${TAG}

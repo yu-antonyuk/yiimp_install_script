@@ -62,8 +62,8 @@ cd $STORAGE_ROOT/daemon_builder/temp_coin_builds
 	optionslistalgos=$(echo -e "${convertlistalgos}" | awk '{ printf "%s on\n", $1}' | sort | uniq | grep [[:alnum:]])
 
 	DIALOGFORLISTALGOS=${DIALOGFORLISTALGOS=dialog}
-	mktemp=`mktemp 2>/dev/null` || mktemp=/tmp/test$$
-	trap "rm -f $mktemp" 0 1 2 5 15
+	tempfile=`tempfile 2>/dev/null` || tempfile=/tmp/test$$
+	trap "rm -f $tempfile" 0 1 2 5 15
 
 	$DIALOGFORLISTALGOS --colors --title "\Zb\Zr\Z7| Select the algorithm for coin: \Zn\ZR\ZB\Z0${coin^^}\Zn\Zb\Zr\Z7 |" --clear --colors --no-items --nocancel --shadow \
 			--radiolist "\n\
@@ -73,9 +73,9 @@ cd $STORAGE_ROOT/daemon_builder/temp_coin_builds
 	hotkey or number keys 1-9 to choose an option. \n\
 	Press SPACE to select an option.\Zn\n\n\
 		What is your algorithm? choose from the following..." \
-		55 60 47 $optionslistalgos 2> $mktemp
+		55 60 47 $optionslistalgos 2> $tempfile
 	retvalalgoselected=$?
-	ALGOSELECTED=`cat $mktemp`
+	ALGOSELECTED=`cat $tempfile`
 	case $retvalalgoselected in
 	  0)
 		coinalgo="${ALGOSELECTED}";;
@@ -250,7 +250,7 @@ if [[ ("$autogen" == "true") ]]; then
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
 		sleep 0.5
 		# make install
-		TMP=$(mktemp)
+		TMP=$(tempfile)
 		make -j${NPROC} 2>&1 | tee $TMP
 		OUTPUT=$(cat $TMP)
 		echo $OUTPUT
@@ -313,7 +313,7 @@ if [[ ("$autogen" == "true") ]]; then
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
 		sleep 0.5
 		# make install
-		TMP=$(mktemp)
+		TMP=$(tempfile)
 		make -j${NPROC} 2>&1 | tee $TMP
 		OUTPUT=$(cat $TMP)
 		echo $OUTPUT
@@ -376,7 +376,7 @@ if [[ ("$autogen" == "true") ]]; then
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
 		sleep 0.5
 		# make install
-		TMP=$(mktemp)
+		TMP=$(tempfile)
 		make -j${NPROC} 2>&1 | tee $TMP
 		OUTPUT=$(cat $TMP)
 		echo $OUTPUT
@@ -439,7 +439,7 @@ if [[ ("$autogen" == "true") ]]; then
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
 		sleep 0.5
 		# make install
-		TMP=$(mktemp)
+		TMP=$(tempfile)
 		make -j${NPROC} 2>&1 | tee $TMP
 		OUTPUT=$(cat $TMP)
 		echo $OUTPUT
@@ -519,7 +519,7 @@ else
 			cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/depends
 			if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
 			# make install
-			TMP=$(mktemp)
+			TMP=$(tempfile)
 			hide_output make -j${NPROC} 2>&1 | tee $TMP
 			OUTPUT=$(cat $TMP)
 			echo $OUTPUT
@@ -534,7 +534,7 @@ else
 			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
 			sleep 0.5
 			# make install
-			TMP=$(mktemp)
+			TMP=$(tempfile)
 			make -j${NPROC} 2>&1 | tee $TMP
 			OUTPUT=$(cat $TMP)
 			echo $OUTPUT
@@ -660,7 +660,7 @@ else
 			sleep 0.5
 			if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
 			# make install
-			TMP=$(mktemp)
+			TMP=$(tempfile)
 			hide_output make -j${NPROC} 2>&1 | tee $TMP
 			OUTPUT=$(cat $TMP)
 			echo $OUTPUT
@@ -675,7 +675,7 @@ else
 			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
 			sleep 0.5
 			# make install
-			TMP=$(mktemp)
+			TMP=$(tempfile)
 			make -j${NPROC} 2>&1 | tee $TMP
 			OUTPUT=$(cat $TMP)
 			echo $OUTPUT
@@ -702,7 +702,7 @@ else
 			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
 			sleep 0.5
 			# make install
-			TMP=$(mktemp)
+			TMP=$(tempfile)
 			make -j${NPROC} 2>&1 | tee $TMP
 			OUTPUT=$(cat $TMP)
 			echo $OUTPUT
@@ -764,7 +764,7 @@ else
 		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
 		sleep 0.5
 		# make install
-		TMP=$(mktemp)
+		TMP=$(tempfile)
 		make -j${NPROC} -f makefile.unix USE_UPNP=- 2>&1 | tee $TMP
 		OUTPUT=$(cat $TMP)
 		echo $OUTPUT

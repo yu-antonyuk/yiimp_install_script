@@ -180,7 +180,7 @@ function daemonbuiler_files {
 }
 
 function hide_output {
-	OUTPUT=$(mktemp)
+	OUTPUT=$(tempfile)
 	$@ &>$OUTPUT &
 	spinner
 	E=$?
