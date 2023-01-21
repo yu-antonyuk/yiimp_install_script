@@ -9,7 +9,7 @@ source $STORAGE_ROOT/yiimp/.yiimp.conf
 absolutepath=absolutepathserver
 installtoserver=installpath
 daemonname=daemonnameserver
-path_stratum=$STORAGE_ROOT/yiimp/site/stratum/config
+path_stratum=$STORAGE_ROOT/yiimp/site/stratum
 
 ESC_SEQ="\x1b["
 COL_RESET=$ESC_SEQ"39;49;00m"

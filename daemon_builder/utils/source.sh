@@ -1,21 +1,17 @@
 #!/usr/bin/env bash
-#####################################################
-# Created by Afiniel
-# Source to compile wallets
-#####################################################
+
+#############################
+# Created by Afiniel	    #
+# Source to compile wallets #
+#############################
 
 source /etc/daemonbuilder.sh
+source /etc/functions.sh
 source $STORAGE_ROOT/daemon_builder/conf/info.sh
 
 YIIMPOLL=/etc/yiimpool.conf
 if [[ -f "$YIIMPOLL" ]]; then
 	source /etc/yiimpool.conf
-	YIIMPCONF=true
-fi
-
-YIIMPSERVER=/etc/yiimpserver.conf
-if [[ -f "$YIIMPSERVER" ]]; then
-	source /etc/yiimpserver.conf
 	YIIMPCONF=true
 fi
 
