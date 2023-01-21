@@ -1,4 +1,4 @@
-<h1 align="center"> Yiimpool Yiimp Install Scrypt v0.7.2 With DaemonBuilder And Addport Support (update 2023-01-17) </h1>
+<h1 align="center"> Yiimpool Yiimp Install Scrypt v0.7.2 With DaemonBuilder And Addport Support (update 2023-01-21) </h1>
 
 <img alt="Discord" src="https://img.shields.io/discord/904564600354254898?label=Discord"><img alt="GitHub issues" src="https://img.shields.io/github/issues/afiniel/yiimp_install_script" ><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/afiniel/yiimp_install_script">
 
@@ -8,16 +8,24 @@
 </p>
 
 <h2 align="center"> Description </h2>
-This is the main page for Yiimpool Yiimp Install script. Here you find information all documentation about <b> Yiimpool Yiimp Installer.</b><p>The installer automatically install all requirements to get Yiimp installed correctly.</p><p><b> Yiimpool Yiimp Install script</b> is a Script that will install <b> Yiimp</b> Mining Pool on a clean <b>Ubuntu 18.04 VPS.</p>
+Yiimpool Yiimp Installer is a script that automates the process of installing the Yiimp mining pool software on a fresh Ubuntu 18.04 VPS. The script handles all the dependencies, configurations, and security settings required to get your mining pool up and running.
+
+With the installer, you can set up a fully functional mining pool with features such as:
+- Automatic coin daemon compilation with Daemonbuilder
+- Support for adding custom ports
+- Option to install SSL certificate from Let's Encrypt
+- Easy-to-use web interface for managing your mining pool
+
+The installer also includes a built-in daemon builder tool that allows you to easily compile and add new coins to your mining pool.
+
+This script is suitable for both new and experienced users looking to set up a mining pool. With clear installation instructions and detailed documentation, you can have your mining pool up and running in no time.
 
 More information will be added soon.
 
-<h2 align="left"> ⚙️ The installer requires the following </h2>
+<h2 align="left"> ⚙️ Requirements </h2>
 
-* Fresh Ubuntu Ubuntu 18.04
-* > Ubuntu 16.04 is supported but not recommended.
-* Minimum RAM 4GB.
-* > Recommended RAM 8GB or higher.
+- Fresh Ubuntu 18.04 VPS (16.04 is supported but not recommended)
+* Minimum 4GB of RAM (8GB or higher recommended).
 
 <h2 align="left">ℹ️ Daemonbuilder </h2>
 The script will install daemonbuilder. Daemonbuilder is a tool that will Download and compile the coin for you.
@@ -31,7 +39,7 @@ daemonbuilder
 in the terminal and Daemonbuilder will start.
 * > The compile time depends on the CPU power of your VPS.
 
-<h2 align="center"> 💾 How to start the installation. </h2></b>
+<h2 align="left"> 💾 Installation </h2></b>
 
 <h3 align="left"> The Installer will ask you the following questions. </h3><p>
 
@@ -60,7 +68,7 @@ curl https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/insta
 ```
 
 
-* > Installation will take approximately 25 minutes. The installer will let you know when the installation is complete.
+* > Installation will take approximately 15 minutes. The installer will let you know when the installation is complete.
 
  If you have any issues with the installation open issue here on github.
 
@@ -132,13 +140,6 @@ We also suggest that you type:
 ```
 yiimp
 ```
-If you have dedicated port installed.
-```
-addport
-```
-and get to know those commands as well!
-
-
 ## 🎁 Support
 
 If you find this script useful please consider donating to the following addresses:
