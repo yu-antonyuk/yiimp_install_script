@@ -177,7 +177,7 @@ sudo cp -r $HOME/yiimp_install_script/daemon_builder/utils/* $STORAGE_ROOT/daemo
 sudo cp -r $HOME/yiimp_install_script/daemon_builder/conf/daemonbuilder.sh /etc/
 
 # Copy addport to /usr/bin
-hide_output sudo cp -r $HOME/yiimp_install_script/daemon_builder/utils/addport /usr/bin/addport
+hide_output sudo cp -r $HOME/yiimp_install_script/daemon_builder/utils/addport.sh /usr/bin/addport
 hide_output sudo chmod +x /usr/bin/addport
 
 
