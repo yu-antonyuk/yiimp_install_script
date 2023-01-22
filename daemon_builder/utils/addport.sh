@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
 
-source /etc/yiimpool.conf
-source /etc/functions.sh
-source /etc/daemonbuilder.sh
-source $STORAGE_ROOT/daemon_builder/conf/info.sh
-
 #####################################################
 # Dedicated Port config generator
 # Created by afiniel for yiimpool
@@ -12,6 +7,12 @@ source $STORAGE_ROOT/daemon_builder/conf/info.sh
 # Create the new coin.algo.conf file
 # And update the stratum start file
 #####################################################
+
+source /etc/yiimpool.conf
+source /etc/functions.sh
+source /etc/daemonbuilder.sh
+source $STORAGE_ROOT/yiimp/.yiimp.conf
+source $STORAGE_ROOT/daemon_builder/conf/info.sh
 
 clear
 
@@ -150,25 +151,24 @@ exclude = '${coinsymbol}'' "$r"
 fi
 done
 fi
-sleep 2
+
 # Copy the default algo.conf to the new symbol.algo.conf
-  sudo cp -r $coinalgo.conf $coinsymbollower.$coinalgo.conf
-  sleep 1
+sudo cp -r $coinalgo.conf $coinsymbollower.$coinalgo.conf
+  
 # Insert the port in to the new symbol.algo.conf
-  sudo sed -i '/port/c\port = '${coinport}'' $coinsymbollower.$coinalgo.conf
-  sleep 1
+sudo sed -i '/port/c\port = '${coinport}'' $coinsymbollower.$coinalgo.conf
+  
 # If setting a nicehash value
 if [[ ("$nicehash" == "y" || "$nicehash" == "Y" || "$nicehash" == "yes" || "$nicehash" == "YES") ]]; then
   sudo sed -i -e '/difficulty =/a\
 nicehash = '${nicevalue}'' $coinsymbollower.$coinalgo.conf
 fi
-sleep 1
+
 # Insert the include in to the new symbol.algo.conf
   sudo sed -i -e '$a\
 [WALLETS]\
 include = '${coinsymbol}'' $coinsymbollower.$coinalgo.conf
 fi
-sleep 2
 
 #Again preventing asshat duplications...
 if ! grep -Fxq "exclude = ${coinsymbol}" "$coinalgo.conf"; then
@@ -180,19 +180,17 @@ else
   echo -e "$YELLOW ${coinsymbol} is already in $coinalgo.conf, skipping... Which means you are trying to run this multiple times for the same coin. $COL_RESET"
   echo
 fi
-sleep 1
 
 # New coin stratum start file
+
 echo '#####################################################
 # Source code from https://codereview.stackexchange.com/questions/55077/small-bash-script-to-sta$
 # Updated by Afiniel for Yiimpool use...
 #####################################################
-
 source /etc/yiimpool.conf
 source $STORAGE_ROOT/yiimp/.yiimp.conf
 STRATUM_DIR=$STORAGE_ROOT/yiimp/site/stratum
 LOG_DIR=$STORAGE_ROOT/yiimp/site/log
-
 #!/usr/bin/env bash
 '""''"${coinsymbollower}"''""'="screen -dmS '""''"${coinsymbollower}"''""' bash $STRATUM_DIR/run.sh '""''"${coinsymbollower}"''""'.'""''"${coinalgo}"''""'"
 '""''"${coinsymbollower}"''""'stop="'screen -X -S ${coinsymbollower} quit'"
@@ -222,13 +220,11 @@ for name; do
     '""''"${coinsymbollower}"''""') startstop_'""''"${coinsymbollower}"''""' $cmd ;;
     *) startstop_service $cmd $name ;;
     esac
-done ' | sudo -E tee ${PATH_STRATUM}/config/stratum.${coinsymbollower} >/dev/null 2>&1
+done ' | sudo -E tee $STORAGE_ROOT/yiimp/site/stratum/config/stratum.${coinsymbollower} >/dev/null 2>&1
 sudo chmod +x $STORAGE_ROOT/yiimp/site/stratum/config/stratum.${coinsymbollower}
-sleep 1
 
 sudo cp -r $STORAGE_ROOT/yiimp/site/stratum/config/stratum.${coinsymbollower} /usr/bin
 sudo ufw allow $coinport
-sleep 1
 
 echo
 echo "Adding stratum.${coinsymbollower} to crontab for autostart at system boot."
@@ -236,7 +232,6 @@ echo "Adding stratum.${coinsymbollower} to crontab for autostart at system boot.
 echo
 echo -e "$YELLOW Starting your new stratum...$COL_RESET"
 sudo bash stratum.${coinsymbollower} start ${coinsymbollower}
-sleep 1
 
 if [[("$CREATECOIN" == 'true')]]; then
 	echo '
