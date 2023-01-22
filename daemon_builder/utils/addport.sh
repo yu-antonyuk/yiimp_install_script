@@ -50,7 +50,7 @@ if [[ ("$CREATECOIN" == "true") ]]; then
 else
 	echo -e "$YELLOW Thanks for using the addport script by Afiniel. $COL_RESET"
 	echo
-	echo -e "$YELLOW It will also create a new symbol.algo.conf in $RED $PATH_STRATUM/config $COL_RESET"
+	echo -e "$YELLOW It will also create a new symbol.algo.conf in $RED $STORAGE_ROOT/yiimp/site/stratum/config $COL_RESET"
 	echo -e "$YELLOW and will create a new stratum.symbol run file in $RED /usr/bin. $COL_RESET"
 	echo
 	
@@ -69,7 +69,7 @@ else
 	export LC_TYPE=en_US.UTF-8
 	export NCURSES_NO_UTF8_ACS=1
 	
-	convertlistalgos=$(find $STORAGE_ROOT/config/ -mindepth 1 -maxdepth 1 -type f -not -name '.*' -not -name '*.sh' -not -name '*.log' -not -name 'stratum.*' -not -name '*.*.*' -iname '*.conf' -execdir basename -s '.conf' {} +);
+	convertlistalgos=$(find $STORAGE_ROOT/yiimp/site/stratum/config/ -mindepth 1 -maxdepth 1 -type f -not -name '.*' -not -name '*.sh' -not -name '*.log' -not -name 'stratum.*' -not -name '*.*.*' -iname '*.conf' -execdir basename -s '.conf' {} +);
 	optionslistalgos=$(echo -e "${convertlistalgos}" | awk '{ printf "%s on\n", $1}' | sort | uniq | grep [[:alnum:]])
 
 	DIALOGFORLISTALGOS=${DIALOGFORLISTALGOS=dialog}
@@ -115,7 +115,7 @@ coinalgo=${coinalgo}
 coinsymbol=${coinsymbol^^}
 
 # Make sure the stratum.symbol config doesnt exist and that the algo file does.
-if [ -f $STORAGE_ROOT/config/stratum.${coinsymbollower} ]; then
+if [ -f $STORAGE_ROOT/yiimp/site/stratum/config/stratum.${coinsymbollower} ]; then
 	echo
 	echo -e "$RED A file for ${coinsymbol} already exists. Are you sure you want to overwrite?"
 	read -r -e -p " A new port will be generated and you will need to update your coind.conf blocknotify line (y/n) :" overwrite
@@ -125,14 +125,14 @@ if [ -f $STORAGE_ROOT/config/stratum.${coinsymbollower} ]; then
 		echo
 		exit 0
 	fi
-if [ ! -f $PATH_STRATUM/config/$coinalgo.conf ]; then
-  echo -e "$YELLOW Sorry that algo config file doesn't exist in $RED $STORAGE_ROOT/config/ $YELLOW please double check and try again. $COL_RESET"
+if [ ! -f $STORAGE_ROOT/yiimp/site/stratum/config/$coinalgo.conf ]; then
+  echo -e "$YELLOW Sorry that algo config file doesn't exist in $RED $STORAGE_ROOT/yiimp/site/stratum/config/ $YELLOW please double check and try again. $COL_RESET"
   exit 0
 fi
 fi
 
 # Prevent duplications from people running addport multiple times for the same coin...Also known as asshats...
-if [ -f $PATH_STRATUM/config/$coinsymbollower.$coinalgo.conf ]; then
+if [ -f $STORAGE_ROOT/yiimp/site/stratum/config/$coinsymbollower.$coinalgo.conf ]; then
   if [[ ("$overwrite" == "y" || "$overwrite" == "Y" || "$overwrite" == "yes" || "$overwrite" == "YES") ]]; then
     # Insert the port in to the new symbol.algo.conf
     sudo sed -i '/port/c\port = '${coinport}'' $coinsymbollower.$coinalgo.conf
