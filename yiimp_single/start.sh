@@ -50,7 +50,7 @@ source nginx_upgrade.sh
 source web.sh
 sudo bash stratum.sh
 source compile_crypto.sh
-source daemon.sh
+#source daemon.sh
 
 # if [[ ("$UsingDomain" == "yes") ]]; then
 # source send_mail.sh
@@ -68,7 +68,7 @@ if [[ ("$UsingDomain" == "yes") ]]; then
   source /etc/functions.sh
   term_yiimpool
   echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
-  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.7.1 $YELLOW fork by Afiniel!     $COL_RESET"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.7.2 $YELLOW fork by Afiniel!     $COL_RESET"
   echo
   echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
   echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
@@ -94,14 +94,14 @@ if [[ ("$UsingDomain" == "yes") ]]; then
   echo -e "$YELLOW You can access your$GREEN ${AdminPanel} $YELLOW at,$BLUE http://${DomainName}/site/${AdminPanel} $COL_RESET"
   echo
   echo -e "$RED By default all stratum ports are blocked by the firewall.$YELLOW To allow a port through, from the command prompt type $GREEN sudo ufw allow port number.$COL_RESET"
-  echo -e "$GREEN Database user names and passwords$YELLOW can be found in$RED $STORAGE_ROOT/yiimp_setup/.my.cnf$COL_RESET"
+  echo -e "$GREEN Database user names and passwords$YELLOW can be found in$RED $STORAGE_ROOT/yiimp/.my.cnf$COL_RESET"
   exit 0
 else
   source /etc/yiimpool.conf
   source /etc/functions.sh
   term_yiimpool
   echo -e "$CYAN<----------------------------------------------------------------------------->   $COL_RESET"
-  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.7.1 $YELLOW fork by Afiniel! $COL_RESET"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.7.2 $YELLOW fork by Afiniel! $COL_RESET"
   echo
   echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool                  $COL_RESET"
   echo -e "$CYAN<----------------------------------------------------------------------------->   $COL_RESET"
@@ -127,5 +127,5 @@ else
   echo -e "$YELLOW You can access your$GREEN $AdminPanel $YELLOW at,$BLUE http://${DomainName}/site/${AdminPanel} $COL_RESET"
   echo
   echo -e "$RED By default all stratum ports are blocked by the firewall.$YELLOW To allow a port through, from the command prompt type $GREEN sudo ufw allow port number.$COL_RESET"
-  echo -e "$GREEN Database user names and passwords$YELLOW can be found in$RED $STORAGE_ROOT/yiimp_setup/.my.cnf$COL_RESET"
+  echo -e "$GREEN Database user names and passwords$YELLOW can be found in$RED $STORAGE_ROOT/yiimp/.my.cnf$COL_RESET"
 fi

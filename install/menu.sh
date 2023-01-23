@@ -7,7 +7,7 @@
 
 source /etc/functions.sh
 
-RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Menu v0.7.1" --menu "Choose one" -1 60 16 \
+RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Menu v0.7.2" --menu "Choose one" -1 60 16 \
 ' ' "- Install Yiimp  -" \
 1 "YiiMP Single Server" \
 ' ' "- Daemon Wallet Builder -" \

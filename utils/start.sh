@@ -11,7 +11,7 @@ else
 	source /etc/functionscoin.sh # load our functions
 fi
 
-cd $HOME/utils/daemon_builder
+cd $STORAGE_ROOT/daemon_builder
 # Ensure Python reads/writes files in UTF-8. If the machine
 # triggers some other locale in Python, like ASCII encoding,
 # Python may not be able to read/write files. This is also

@@ -29,6 +29,10 @@ fi
 
 (
     crontab -l 2>/dev/null
+    echo "@reboot sleep 20 && /etc/screen-scrypt-daemonbuilder.sh"
+) | crontab -
+(
+    crontab -l 2>/dev/null
     echo "@reboot source /etc/functions.sh"
 ) | crontab -
 (
@@ -39,7 +43,7 @@ sudo cp -r first_boot.sh $STORAGE_ROOT/yiimp/
 
 echo -e "$GREEN Crontab system complete$COL_RESET"
 echo
-echo -e "$YELLOW => Creating YiiMP Screens startup script <= $COL_RESET"
+echo -e "$MAGENTA => Creating YiiMP Screens startup script <= $COL_RESET"
 
 echo '#!/usr/bin/env bash
 source /etc/yiimpool.conf
@@ -73,7 +77,7 @@ screen -dmS debug tail -f $LOG_DIR/debug.log
 sudo chmod +x $STORAGE_ROOT/yiimp/starts/screens.start.sh
 
 echo
-echo -e "$YELLOW => Creating Stratum screens start script <= $COL_RESET"
+echo -e "$MAGENTA => Creating Stratum screens start script <= $COL_RESET"
 
 echo '#!/usr/bin/env bash
 source /etc/yiimpool.conf

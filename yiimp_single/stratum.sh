@@ -6,9 +6,10 @@
 
 source /etc/functions.sh
 source /etc/yiimpool.conf
-source /home/crypto-data/yiimp/.yiimp.conf
+source $STORAGE_ROOT/yiimp/.yiimp.conf
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
 
+echo
 term_art
 echo -e "$MAGENTA    <--------------------->$COL_RESET"
 echo -e "$YELLOW     <-- Compile Stratum -->$COL_RESET"
@@ -16,7 +17,8 @@ echo -e "$MAGENTA    <--------------------->$COL_RESET"
 cd /home/crypto-data/yiimp/yiimp_setup
 
 # Starting the build progress of the stratum
-echo -e "$YELLOW => Building blocknotify , iniparser , stratum... <= $COL_RESET"
+echo
+echo -e "$MAGENTA => Building$GREEN blocknotify$MAGENTA ,$GREEN iniparser$MAGENTA ,$GREEN stratum$MAGENTA ... <= $COL_RESET"
 
 # Generating Random Password for stratum
 blckntifypass=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`

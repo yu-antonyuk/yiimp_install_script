@@ -10,8 +10,8 @@ else
 	source /etc/functionscoin.sh
 fi
 
-source $HOME/utils/daemon_builder/.my.cnf
-cd $HOME/utils/daemon_builder
+source cd $STORAGE_ROOT/daemon_builder/.my.cnf
+cd $STORAGE_ROOT/daemon_builder
 
 # Set what we need
 now=$(date +"%m_%d_%Y")
@@ -26,7 +26,7 @@ fi
 # Just double checking folder permissions
 sudo setfacl -m u:$USER:rwx $HOME/utils/daemon_builder/temp_coin_builds
 
-cd $HOME/utils/daemon_builder/temp_coin_builds
+cd $STORAGE_ROOT/daemon_builder/temp_coin_builds
 
 # Get the github information
 read -r -e -p "Enter the name of the coin : " coin
@@ -144,7 +144,7 @@ if [[ ("$berkeley" == "6.2") ]]; then
   sh autogen.sh
   find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
   read -r -e -p "where is the folder that contains the BUILD.SH installation file, example xxutil :" reputil
-  cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/${reputil}
+  cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${reputil}
   echo $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/${reputil}
   spiner_output bash build.sh -j$(nproc)
   if [[ ! -e '$HOME/utils/daemon_builder/temp_coin_builds/${coindir}/${reputil}/fetch-params.sh' ]]; then
@@ -178,7 +178,7 @@ if [[ ("$cmake" == "true") ]]; then
 		echo -e "$YELLOW => executing make on depends directory...  <= $COL_RESET"
 		echo
 		sleep 3
-		cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/depends
+		cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/depends
 		if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
 		hide_output make -j$NPROC
 		else
@@ -186,14 +186,14 @@ if [[ ("$cmake" == "true") ]]; then
 		fi
 		echo
 		echo
-		echo -e "$GREEN <-- Done -->$COL_RESET"
+		echo -e "$GREEN Done$COL_RESET"
 
 		# Building autogen....
 		echo
 		echo -e "$YELLOW => Building autogen...  <= $COL_RESET"
 		echo
 		sleep 3
-		cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}
+		cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
 		if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
 		hide_output sh autogen.sh
 		else
@@ -201,7 +201,7 @@ if [[ ("$cmake" == "true") ]]; then
 		fi
 		echo
 		echo
-		echo -e "$GREEN <-- Done -->$COL_RESET"
+		echo -e "$GREEN Done$COL_RESET"
 
 		# Configure with your platform....
 		if [ -d "$DEPENDS/i686-pc-linux-gnu" ]; then
@@ -277,7 +277,7 @@ if [[ ("$cmake" == "true") ]]; then
 		fi
 		echo
 		echo
-		echo -e "$GREEN <-- Done -->$COL_RESET"
+		echo -e "$GREEN Done$COL_RESET"
 		
 		# Executing make to finalize....
 		echo
@@ -291,21 +291,21 @@ if [[ ("$cmake" == "true") ]]; then
 		fi
 		echo
 		echo
-		echo -e "$GREEN <-- Done -->$COL_RESET"
+		echo -e "$GREEN Done$COL_RESET"
 	else
 		echo
 		echo "Building using Cmake method..."
 		echo
 		echo
 		sleep 3
-		cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir} && git submodule init && git submodule update
+		cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir} && git submodule init && git submodule update
 		make -j$NPROC
 		sleep 3
 	fi
 fi
 	if [[ ("$unix" == "true") ]]; then
 		echo "Building using makefile.unix method..."
-		cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src
+		cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src
 		if [[ ! -e '$HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/obj' ]]; then
 			mkdir -p $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/obj
 		else
@@ -318,11 +318,11 @@ fi
 			echo  "Wow even the /src/obj/zerocoin is there! Good job developer!"
 		fi
 
-		cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/leveldb
+		cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb
 		sudo chmod +x build_detect_platform
 		sudo make clean
 		sudo make libleveldb.a libmemenv.a
-		cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src
+		cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src
 		sed -i '/USE_UPNP:=0/i BDB_LIB_PATH = /home/utils/berkeley/db4/lib\nBDB_INCLUDE_PATH = /home/utils/berkeley/db4/include\nOPENSSL_LIB_PATH = /home/utils/openssl/lib\nOPENSSL_INCLUDE_PATH = /home/utils/openssl/include' makefile.unix
 		sed -i '/USE_UPNP:=1/i BDB_LIB_PATH = /home/utils/berkeley/db4/lib\nBDB_INCLUDE_PATH = /home/utils/berkeley/db4/include\nOPENSSL_LIB_PATH = /home/utils/openssl/lib\nOPENSSL_INCLUDE_PATH = /home/utils/openssl/include' makefile.unix
 		make -j$NPROC -f makefile.unix USE_UPNP=-
@@ -350,7 +350,7 @@ clear
 # LS the SRC dir to have user input bitcoind and bitcoin-cli names
 if [[ ! ("$precompiled" == "true") ]]; then
 
-	cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/src/
+	cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/
 	
 	find . -maxdepth 1 -type f ! -name "*.*" \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
 	read -r -e -p "Please enter the coind name from the directory above, example bitcoind :" coind
@@ -386,7 +386,7 @@ clear
 
 # Strip and copy to /usr/bin
 if [[ ("$precompiled" == "true") ]]; then
-	cd $HOME/utils/daemon_builder/temp_coin_builds/${coindir}/${repzipcoin}/
+	cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repzipcoin}/
 	
 	COINDFIND=$(find ~+ -type f -name "*d")
 	COINCLIFIND=$(find ~+ -type f -name "*-cli")
@@ -447,14 +447,14 @@ echo "I am now going to open nano, please copy and paste the config from yiimp i
 read -n 1 -s -r -p "Press any key to continue"
 sudo nano $HOME/wallets/."${coind::-1}"/${coind::-1}.conf
 clear
-cd $HOME/utils/daemon_builder
+cd $STORAGE_ROOT/daemon_builder
 echo "Starting ${coind::-1}"
 "${coind}" -datadir=$HOME/wallets/."${coind::-1}" -conf="${coind::-1}.conf" -daemon -shrinkdebugfile
 
 # If we made it this far everything built fine removing last coin.conf and build directory
 sudo rm -r $HOME/utils/daemon_builder/temp_coin_builds/.lastcoin.conf
 sudo rm -r $HOME/utils/daemon_builder/temp_coin_builds/${coindir}
-sudo rm -r $HOME/utils/daemon_builder/.my.cnf
+sudo rm -r cd $STORAGE_ROOT/daemon_builder/.my.cnf
 
 
 clear

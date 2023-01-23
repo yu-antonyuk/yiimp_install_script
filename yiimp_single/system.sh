@@ -40,38 +40,38 @@ echo
 echo -e "$MAGENTA =>  Adding the required repsoitories <= $COL_RESET"
 if [ ! -f /usr/bin/add-apt-repository ]; then
 	echo
-	echo -e "$YELLOW =>  Installing add-apt-repository  <= $COL_RESET"
+	echo -e "$MAGENTA =>  Installing add-apt-repository  <= $COL_RESET"
 	hide_output sudo apt-get update
 	hide_output sudo apt-get -y install software-properties-common
 fi
 echo
 
 # PHP 7.3
-echo -e "$YELLOW =>  Installing Ondrej PHP PPA <= $COL_RESET"
+echo -e "$MAGENTA =>  Installing Ondrej PHP PPA <= $COL_RESET"
 if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
 	hide_output sudo add-apt-repository -y ppa:ondrej/php
 	hide_output sudo apt-get -y update
-	echo -e "$GREEN <-- Done -->$COL_RESET"
+	echo -e "$GREEN Done$COL_RESET"
 	# hide_output sudo apt-get -y install software-properties-common
 fi
 
 # CertBot
 echo
-echo -e "$YELLOW =>  Installing CertBot PPA <= $COL_RESET"
+echo -e "$MAGENTA =>  Installing CertBot PPA <= $COL_RESET"
 hide_output sudo add-apt-repository -y ppa:certbot/certbot
 hide_output sudo apt-get -y update
-echo -e "$GREEN <-- Done -->$COL_RESET"
+echo -e "$GREEN Done$COL_RESET"
 
 # MariaDB
 echo
-echo -e "$YELLOW =>  Installing MariaDB <= $COL_RESET"
+echo -e "$MAGENTA =>  Installing MariaDB <= $COL_RESET"
 hide_output sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 if [[ ("$DISTRO" == "18") ]]; then
 	sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu bionic main' >/dev/null 2>&1
 else
 	sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
 fi
-echo -e "$GREEN <-- Done -->$COL_RESET"
+echo -e "$GREEN Done$COL_RESET"
 
 # Upgrade System Files
 hide_output sudo apt-get update
@@ -99,12 +99,12 @@ apt_install python3 python3-dev python3-pip \
 	unattended-upgrades cron ntp fail2ban screen rsyslog lolcat
 
 # ### Seed /dev/urandom
-echo -e "$GREEN <-- Done -->$COL_RESET"
+echo -e "$GREEN Done$COL_RESET"
 echo
 echo -e "$YELLOW =>  Initializing system random number generator <= $COL_RESET"
 hide_output dd if=/dev/random of=/dev/urandom bs=1 count=32 2>/dev/null
 hide_output sudo pollinate -q -r
-echo -e "$GREEN <-- Done -->$COL_RESET"
+echo -e "$GREEN Done$COL_RESET"
 
 echo
 echo -e "$YELLOW =>  Initializing UFW Firewall <= $COL_RESET"
@@ -115,11 +115,10 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 	echo
 	echo -e "$YELLOW => Allow incoming connections to SSH <= $COL_RESET"
 	echo
-	echo -e "$YELLOW ssh port:$GREEN OPEN $COL_RESET"
 	echo
 	ufw_allow ssh
 	sleep 0.5
-	echo -e "$YELLOW http port:$GREEN OPEN $COL_RESET"
+	echo -e "$YELLOW ssh port:$GREEN OPEN $COL_RESET"
 	echo
 	sleep 0.5
 	ufw_allow http
@@ -128,6 +127,7 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 	sleep 0.5
 	ufw_allow https
 	echo -e "$YELLOW https port:$GREEN OPEN $COL_RESET"
+	echo
 	# ssh might be running on an alternate port. Use sshd -T to dump sshd's #NODOC
 	# settings, find the port it is supposedly running on, and open that port #NODOC
 	# too. #NODOC
@@ -137,7 +137,7 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 
 			echo -e "$YELLOW => Allow incoming connections to SSH <= $COL_RESET"
 			echo
-			echo -e $"YELLOW Opening alternate SSH port:$GREEN $SSH_PORT $COL_RESET"
+			echo -e "$YELLOW Opening alternate SSH port:$GREEN $SSH_PORT $COL_RESET"
 			echo
 			ufw_allow $SSH_PORT
 			sleep 0.5
@@ -154,10 +154,9 @@ if [ -z "${DISABLE_FIREWALL:-}" ]; then
 		fi
 	fi
 
-	sudo ufw --force enable
+	hide_output sudo ufw --force enable
 fi
 set -eu -o pipefail
-echo -e "$GREEN <-- Done -->$COL_RESET"
 echo
 echo -e "$MAGENTA =>  Installing YiiMP Required system packages <= $COL_RESET"
 if [ -f /usr/sbin/apache2 ]; then

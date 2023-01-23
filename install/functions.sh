@@ -1,11 +1,16 @@
 #!/bin/bash
-#####################################################
-# Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
-# Updated by Afiniel for crypto use...
-# Modified by Xavatar
-# Current Modified by Afiniel (2022-06-06)
-# Updated by Afiniel (2022-08-01)
-#####################################################
+
+##############################################
+#											 #
+# Current Modified by Afiniel (2022-06-06)   #
+# Updated by Afiniel (2022-08-01)			 #
+# 											 #
+##############################################
+
+absolutepath=absolutepathserver
+installtoserver=installpath
+daemonname=daemonnameserver
+DISTRO=distroserver
 
 ESC_SEQ="\x1b["
 COL_RESET=$ESC_SEQ"39;49;00m"
@@ -30,8 +35,19 @@ function spinner {
 	printf "    \b\b\b\b"
 }
 
-# Database functions
+function spinning_timer() {
+  animation=( ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ )
+  end=$((SECONDS+NUM))
+  while [ $SECONDS -lt $end ]; do
+    for i in "${animation[@]}"; do
+      echo -ne "${RED}\r$i ${CYAN}${MSG1}${NC}"
+      sleep 0.1
+    done
+  done
+  echo -e "${MSG2}"
+}
 
+# Database functions
 function database_import_sql {
 
 	# Import Database from SQL files
@@ -82,7 +98,7 @@ function install_end_message {
 	figlet -f slant -w 100 "Complete!"
 
 	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
-	echo -e "$YELLOW  | Version:$GREEN v0.7.1                                                 |				$COL_RESET"
+	echo -e "$YELLOW  | Version:$GREEN v0.7.2                                                 |				$COL_RESET"
 	echo -e "$YELLOW Yiimp Installer Script Fork By Afiniel https://github.com/afiniel/yiimp_install_script $COL_RESET"
 	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
 	echo -e "$YELLOW   Your mysql information (login/Password) is saved in:$RED ~/.my.cnf					$COL_RESET"
@@ -113,7 +129,7 @@ function term_art {
 	figlet -f slant -w 100 "YiimpooL" | lolcat
 	echo -e "$CYAN   ----------------------------------------------------------> 	  											$COL_RESET"
 	echo -e "$CYAN  |$YELLOW Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
-	echo -e "$CYAN  |$MAGENTA Version:$GREEN v0.7.1 														$COL_RESET"
+	echo -e "$CYAN  |$MAGENTA Version:$GREEN v0.7.2 														$COL_RESET"
 	echo -e "$CYAN   ----------------------------------------------------------------------> 	  			$COL_RESET"
 	echo -e "$CYAN  |$YELLOW This script will install all the dependencies and will install Yiimp.					$COL_RESET"
 	echo -e "$CYAN  |$YELLOW It will also install a MySQL database and a Web server.								$COL_RESET"
@@ -131,7 +147,7 @@ function term_yiimpool {
 	figlet -f slant -w 100 "YiimpooL" | lolcat
 	echo -e "$CYAN   -----------------|--------------------- 	  											$COL_RESET"
 	echo -e "$YELLOW  Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
-	echo -e "$YELLOW  Version:$COL_RESET $GREEN v0.7.1 											$COL_RESET"
+	echo -e "$YELLOW  Version:$COL_RESET $GREEN v0.7.2 											$COL_RESET"
 	echo -e "$CYAN   -----------------|--------------------- 	  			$COL_RESET"
 	echo
 
@@ -153,13 +169,13 @@ function daemonbuiler_files {
 	echo '
 	#!/usr/bin/env bash
 	source /etc/functions.sh # load our functions
-	cd $HOME/utils/daemon_builder
+	cd $STORAGE_ROOT/daemon_builder
 	bash start.sh
 	cd ~
 	' | sudo -E tee /usr/bin/daemonbuilder >/dev/null 2>&1
 	sudo chmod +x /usr/bin/daemonbuilder
 	echo
-	echo -e "$GREEN <-- Done -->$COL_RESET"
+	echo -e "$GREEN Done$COL_RESET"
 	sleep 2
 }
 
@@ -183,14 +199,14 @@ function hide_output {
 function last_words {
 	echo "<-------------------------------------|---------------------------------------->"
 	echo
-	echo -e "$YELLOW Thank you for using the Yiimpool Installer $GREEN v0.7.1             $COL_RESET"
+	echo -e "$YELLOW Thank you for using the Yiimpool Installer $GREEN v0.7.2             $COL_RESET"
 	echo
 	echo -e "$YELLOW To run this installer anytime simply type: $GREEN yiimpool            $COL_RESET"
 	echo -e "$YELLOW Donations for continued support of this script are welcomed at:       $COL_RESET"
 	echo "<-------------------------------------|--------------------------------------->"
 	echo -e "$YELLOW                     Donate Wallets:                                   $COL_RESET"
 	echo "<-------------------------------------|--------------------------------------->"
-	echo -e "$YELLOW Thank you for using Yiimp Install Script v0.7.1 fork by Afiniel!      $COL_RESET"
+	echo -e "$YELLOW Thank you for using Yiimp Install Script v0.7.2 fork by Afiniel!      $COL_RESET"
 	echo
 	echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
 	echo -e "$YELLOW =>  Do you want to support me? Feel free to use wallets below:        $COL_RESET"
@@ -207,7 +223,7 @@ function last_words {
 function package_compile_crypto {
 
 	# Installing Package to compile crypto currency
-	echo -e "$CYAN => Installing needed Package to compile crypto currency <= $COL_RESET"
+	echo -e "$MAGENTA => Installing needed Package to compile crypto currency <= $COL_RESET"
 
 	hide_output sudo apt -y install software-properties-common build-essential
 	hide_output sudo apt -y install libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev libseccomp-dev libcap-dev libminiupnpc-dev gettext
@@ -218,7 +234,8 @@ function package_compile_crypto {
 	hide_output sudo apt update
 	hide_output sudo apt -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
 	hide_output sudo apt -y install bison libbison-dev
-
+	hide_output sudo apt -y install libnatpmp-dev libnatpmp1 libqt5waylandclient5 libqt5waylandcompositor5 qtwayland5 systemtap-sdt-dev
+	
 	hide_output sudo apt-get -y install build-essential libzmq5 \
 	libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev \
 	libseccomp-dev libcap-dev libminiupnpc-dev gettext libminiupnpc10 libcanberra-gtk-module libqrencode-dev libzmq3-dev \
@@ -239,6 +256,22 @@ function apt_get_quiet {
 function apt_install {
 	PACKAGES=$@
 	apt_get_quiet install $PACKAGES
+}
+
+function apt_update {
+	sudo apt-get update
+}
+
+function apt_upgrade {
+	hide_output sudo apt-get upgrade -y
+}
+
+function apt_dist_upgrade {
+	hide_output sudo apt-get dist-upgrade -y
+}
+
+function apt_autoremove {
+	hide_output sudo apt-get autoremove -y
 }
 
 function ufw_allow {

@@ -55,13 +55,13 @@ if [[ ("$FIRST_TIME_SETUP" == "1") ]]; then
     echo -e "$YELLOW => Installing needed packages for setup to$GREEN continue$YELLOW  <= $COL_RESET"
     hide_output sudo apt-get -q -q update
     hide_output sudo apt-get install -y figlet
-    hide_output sudo apt-get install -y lolcat
+    hide_output sudo apt-get install -y lolcat jq
     apt_get_quiet install dialog python3 python3-pip acl nano git apt-transport-https || exit 1
 
     # Are we running as root?
     if [[ $EUID -ne 0 ]]; then
         # Welcome
-        message_box "Yiimpool Installer" \
+        message_box "Yiimpool Installer v0.7.2" \
         "Hello and thanks for using the Yiimpool Installer!
         \n\nInstallation for the most part is fully automated. In most cases any user responses that are needed are asked prior to the installation.
         \n\nNOTE: You should only install this on a brand new Ubuntu 18.04 or Ubuntu 16.04 installation."

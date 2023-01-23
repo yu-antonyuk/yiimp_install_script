@@ -1,17 +1,14 @@
-#!/usr/bin/env bash
-#####################################################
-# This is the entry point for configuring the system.
-# Updated by Afiniel for crypto use...
-#####################################################
-source /etc/yiimpool.conf
-FUNC=/etc/functionscoin.sh
-if [[ ! -f "$FUNC" ]]; then
-	source /etc/functions.sh # load our functions
-else
-	source /etc/functionscoin.sh # load our functions
-fi
+#!/bin/env bash
 
-cd $STORAGE_ROOT/daemon_builder
+##################################################################################
+# This is the entry point for configuring the system.                            #
+# Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox   #
+# Updated by Afiniel for yiimpool use...                                         #
+##################################################################################
+
+source /etc/functions.sh
+source /etc/yiimpool.conf
+
 # Ensure Python reads/writes files in UTF-8. If the machine
 # triggers some other locale in Python, like ASCII encoding,
 # Python may not be able to read/write files. This is also
@@ -27,22 +24,15 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export LC_TYPE=en_US.UTF-8
 
-# Fix so line drawing characters are shown correctly in Putty on Windows. See #744.
+# Fix so line drawing characters are shown correctly in Putty on Windows.
 export NCURSES_NO_UTF8_ACS=1
 
-# Create the temporary installation directory if it doesn't already exist.
-echo "$YELLOW => Creating the temporary build folder... <= $COL_RESET"
-if [ ! -d $STORAGE_ROOT/daemon_builder/temp_coin_builds ]; then
-sudo mkdir -p $STORAGE_ROOT/daemon_builder/temp_coin_builds
+# Create DaemonBuilder directory
+if [ ! -d $STORAGE_ROOT/daemon_builder ]; then
+sudo mkdir -p $STORAGE_ROOT/daemon_builder
 fi
-sudo setfacl -m u:$USER:rwx $STORAGE_ROOT/daemon_builder/temp_coin_builds
 
-message_box "DaemonBuilder" \
-"Warning! This version of the daemonBuilder only works with servers setup with the Yiimp install script - Afiniel fork!"
+cd $HOME/yiimp_install_script/daemon_builder
+source requirements.sh
 
-# Start the installation.
-source menu.sh
-
-clear
-echo -e " Installation of your coin daemon is $GREEN completed! $COL_RESET"
-echo -e " Type $YELLOW daemonbuilder $COL_RESET at anytime to install a new coin!"
+cd $HOME/yiimp_install_script/yiimp_single
