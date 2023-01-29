@@ -47,7 +47,7 @@ STRATUM_DIR="$STORAGE_ROOT/yiimp/site/stratum"
 # Set Function file.
 FUNCTIONFILE=daemonbuilder.sh
 # Set version tag
-TAG="v0.7.3"
+TAG="v0.7.4"
 
 sudo mkdir -p $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp

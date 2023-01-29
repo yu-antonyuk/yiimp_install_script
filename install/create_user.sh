@@ -11,13 +11,13 @@ cd ~/yiimp_install_script/install
 clear
 
 # Welcome
-message_box "Yiimpool Installer v0.7.3" \
+message_box "Yiimpool Installer v0.7.4" \
 "Hello and thanks for using the Yiimpool Installer!
 \n\nInstallation for the most part is fully automated. In most cases any user responses that are needed are asked prior to the installation.
 \n\nNOTE: You should only install this on a brand new Ubuntu 18.04 or Ubuntu 16.04 installation."
 
 # Root warning message box
-message_box "Yiimpool Installer v0.7.3" \
+message_box "Yiimpool Installer v0.7.4" \
 "WARNING: You are trying to install as the root user!
 \n\nRunning any program as root is not recommended and can pose serious security risks that you want to avoid.
 \n\nThe next step you will be asked to create a new user account, you can name it whatever you want."
