@@ -22,13 +22,13 @@ if [[ ("$wireguard" == "true") ]]; then
   source $STORAGE_ROOT/yiimp/.wireguard.conf
 fi
 
-echo -e "$MAGENTA    <----------------------------->$COL_RESET"
-echo -e "$YELLOW     <-- Installing MariaDB 10.4 -->$COL_RESET"
-echo -e "$MAGENTA    <----------------------------->$COL_RESET"
-
 # Define MariaDB version
 MARIADB_VERSION='10.4'
 
+echo -e "$MAGENTA    <----------------------------->$COL_RESET"
+echo -e "$YELLOW     <-- Installing MariaDB $MARIADB_VERSION -->$COL_RESET"
+echo -e "$MAGENTA    <----------------------------->$COL_RESET"
+echo
 # Set MariaDB root password for installation
 sudo debconf-set-selections <<<"maria-db-$MARIADB_VERSION mysql-server/root_password password $DBRootPassword"
 sudo debconf-set-selections <<<"maria-db-$MARIADB_VERSION mysql-server/root_password_again password $DBRootPassword"
@@ -42,7 +42,7 @@ echo
 
 # Display message for creating DB users
 echo -e "$MAGENTA => Creating DB users for YiiMP <= $COL_RESET"
-
+echo
 # Check if wireguard variable is set to false
 if [ "$wireguard" = "false" ]; then
   # Define SQL statements
@@ -65,6 +65,7 @@ else
   sudo mysql -u root -p"${DBRootPassword}" -e "$SQL"
 fi
 
+echo
 echo -e "$MAGENTA => Creating my.cnf <= $COL_RESET"
 
 if [[ ("$wireguard" == "false") ]]; then
@@ -102,6 +103,7 @@ fi
 
 sudo chmod 0600 $STORAGE_ROOT/yiimp/.my.cnf
 
+echo
 echo -e "$YELLOW => Importing YiiMP Default database values <= $COL_RESET"
 cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/sql
 
@@ -137,6 +139,7 @@ for file in "${SQL_FILES[@]}"; do
   sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force < "$file"
 done
 
+echo
 echo -e "$YELLOW <-- Datebase import $GREEN complete -->$COL_RESET"
 
 echo
