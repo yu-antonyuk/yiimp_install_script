@@ -68,7 +68,7 @@ fi
 echo
 echo -e "$MAGENTA => Creating my.cnf <= $COL_RESET"
 
-if [[ ("$wireguard" == "false") ]]; then
+if [[ ("$wireguard" == "true") ]]; then
   echo '[clienthost1]
 user='"${YiiMPPanelName}"'
 password='"${PanelUserDBPassword}"'
@@ -156,7 +156,7 @@ config_changes=(
 )
 
 # Add bind-address if wireguard is false
-if [[ "$wireguard" == "false" ]]; then
+if [[ "$wireguard" == "true" ]]; then
   config_changes+=('bind-address='"$DBInternalIP")
 fi
 
