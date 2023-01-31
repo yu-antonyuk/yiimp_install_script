@@ -68,7 +68,7 @@ fi
 echo
 echo -e "$MAGENTA => Creating my.cnf <= $COL_RESET"
 
-if [[ ("$wireguard" == "true") ]]; then
+if [[ ("$wireguard" == "false") ]]; then
   echo '[clienthost1]
 user='"${YiiMPPanelName}"'
 password='"${PanelUserDBPassword}"'
@@ -155,13 +155,13 @@ config_changes=(
   'max_allowed_packet = 64M'
 )
 
-# Add bind-address if wireguard is false
+# Add bind-address if wireguard is true.
 if [[ "$wireguard" == "true" ]]; then
   config_changes+=('bind-address='"$DBInternalIP")
 fi
 
 # Apply changes to MariaDB configuration
-sudo sed -i "/^\(\w\+\)\s\+\w\+/c\\1 $(echo "${config_changes[@]}" | tr ' ' '\n')" /etc/mysql/my.cnf
+sudo bash -c "echo '$(echo "${config_changes[@]}" | tr ' ' '\n')' >> /etc/mysql/my.cnf"
 
 
 # Restart MariaDB
