@@ -9,7 +9,7 @@ source $STORAGE_ROOT/daemon_builder/conf/info.sh
 cd $STORAGE_ROOT/daemon_builder
 
 #LATESTVER=$(curl -sL 'https://api.github.com/repos/Afiniel/yiimp_install_script/releases/latest' | jq -r ".tag_name")
-LATESTVER=v0.7.3
+LATESTVER=v0.7.4
 
 if [[ ("${LATESTVER}" > "${VERSION}" && "${LATESTVER}" != "null") ]]; then
 RESULT=$(dialog --backtitle " New version ${LATESTVER} available!! Please update to latest..." --stdout --nocancel --default-item 1 --title " Coin Setup ${VERSION} " --menu "Choose one" 13 60 8 \
