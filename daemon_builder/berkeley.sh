@@ -196,7 +196,7 @@ cd ~
 
 # Set permissions
 sudo chmod +x /usr/bin/daemonbuilder
-echo -e "$GREEN Done...$COL_RESET"
+echo -e "$GREEN Complete...$COL_RESET"
 
 #Check if conf directory exists
 if [ ! -d "$STORAGE_ROOT/daemon_builder/conf" ]; then

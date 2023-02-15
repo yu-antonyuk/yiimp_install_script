@@ -542,7 +542,7 @@ else
 			fi
 			echo
 			echo
-			echo -e "$GREEN Done...$COL_RESET"
+			echo -e "$GREEN Complete...$COL_RESET"
 
 			# Building autogen....
 			echo
@@ -559,7 +559,7 @@ else
 			fi
 			echo
 			echo
-			echo -e "$GREEN Done...$COL_RESET"
+			echo -e "$GREEN Complete...$COL_RESET"
 
 			# Configure with your platform....
 			if [ -d "$DEPENDS/i686-pc-linux-gnu" ]; then
@@ -649,7 +649,7 @@ else
 			fi
 			echo
 			echo
-			echo -e "$GREEN Done...$COL_RESET"
+			echo -e "$GREEN Complete...$COL_RESET"
 
 			# Executing make to finalize....
 			echo
@@ -683,7 +683,7 @@ else
 			fi
 			echo
 			echo
-			echo -e "$GREEN Done...$COL_RESET"
+			echo -e "$GREEN Complete...$COL_RESET"
 		else
 			echo
 			echo -e "$CYAN --------------------------------------------------------------------------- 	$COL_RESET"
@@ -776,13 +776,13 @@ if [[ ("$precompiled" == "true") ]]; then
 	COINTARGZ=$(find ~+ -type f -name "*.tar.gz")
 	COINZIP=$(find ~+ -type f -name "*.zip")
 	if [[ -f "$COINZIP" ]]; then
-		for i in $(ls -f *.zip); do coinzipped=${i%%}; done
+		for i in $(ls -f *.zip); do coinzipped=${i%%}; Complete
 		sudo unzip -q $coinzipped -d newcoin
-		for i in $(ls -d */); do repzipcoin=${i%%/}; done
+		for i in $(ls -d */); do repzipcoin=${i%%/}; Complete
 	elif [[ -f "$COINTARGZ" ]]; then
-		for i in $(ls -f *.tar.gz); do coinzipped=${i%%}; done
+		for i in $(ls -f *.tar.gz); do coinzipped=${i%%}; Complete
 		sudo tar xzvf $coinzipped
-		for i in $(ls -d */); do repzipcoin=${i%%/}; done
+		for i in $(ls -d */); do repzipcoin=${i%%/}; Complete
 	else
 		echo -e "$RED => This is a not valid file zipped $COL_RESET"
 	fi
@@ -878,9 +878,9 @@ if [[ ! ("$precompiled" == "true") ]]; then
 			   echo -ne "$GREEN	STOP THE DAEMON => $YELLOW${coind}$GREEN Sleep $CYAN$secstosleep$GREEN ...$COL_RESET\033[0K\r"
 			   sleep 1
 			   : $((secstosleep--))
-			done
+			Complete
 			echo -e "$CYAN --------------------------------------------------------------------------- $COL_RESET $GREEN"
-			echo -e "$GREEN Done... $COL_RESET$"
+			echo -e "$GREEN Complete... $COL_RESET$"
 			echo -e "$COL_RESET$CYAN --------------------------------------------------------------------------- $COL_RESET"
 			echo
 		fi
@@ -937,9 +937,9 @@ if [[ ("$precompiled" == "true") ]]; then
 				   echo -ne "$GREEN	STOP THE DAEMON => $YELLOW${coind}$GREEN Sleep $CYAN$secstosleep$GREEN ...$COL_RESET\033[0K\r"
 				   sleep 1
 				   : $((secstosleep--))
-				done
+				Complete
 				echo -e "$CYAN --------------------------------------------------------------------------- $COL_RESET $GREEN"
-				echo -e "$GREEN Done... $COL_RESET$"
+				echo -e "$GREEN Complete... $COL_RESET$"
 				echo -e "$COL_RESET$CYAN --------------------------------------------------------------------------- $COL_RESET"
 				echo
 			fi

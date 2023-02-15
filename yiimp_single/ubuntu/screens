@@ -93,4 +93,4 @@ for name; do
     debug) startstop_debug $cmd ;;
     *) startstop_service $cmd $name ;;
     esac
-done
+Complete

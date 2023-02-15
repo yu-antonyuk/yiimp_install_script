@@ -31,7 +31,7 @@ function spinner
 			local spinstr=$temp${spinstr%"$temp"}
 			sleep $delay
 			printf "\b\b\b\b\b\b"
-	done
+	Complete
 	printf "    \b\b\b\b"
 }
  
@@ -42,8 +42,8 @@ function spinner
     for i in "${animation[@]}"; do
       echo -ne "${RED}\r$i ${CYAN}${MSG1}${NC}"
       sleep 0.1
-    done
-  done
+    Complete
+  Complete
   echo -e "${MSG2}"
 }
 

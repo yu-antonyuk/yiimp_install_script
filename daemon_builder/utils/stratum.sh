@@ -98,12 +98,12 @@
 	while true; do
 	./stratum /home/crypto-data/yiimp/site/stratum/config/$1
 	sleep 2
-	done
+	Complete
 	exec bash
 	' | sudo -E tee /home/crypto-data/yiimp/site/stratum/config/run.sh >/dev/null 2>&1
 	sudo chmod +x /home/crypto-data/yiimp/site/stratum/config/run.sh
 
-	echo -e "$GREEN Done...$COL_RESET"
+	echo -e "$GREEN Complete...$COL_RESET"
 	sleep 3
 
 	# Update Timezone
@@ -120,7 +120,7 @@
 	fi
 	sudo systemctl status rsyslog | sed -n "1,3p"
 	echo
-	echo -e "$GREEN Done...$COL_RESET"
+	echo -e "$GREEN Complete...$COL_RESET"
 	sleep 3
 
 	# Updating stratum config files with database connection info
@@ -138,7 +138,7 @@
 	sudo sed -i 's/username = root/username = '$MYSQL_USER'/g' *.conf
 	sudo sed -i 's/password = patofpaq/password = '$MYSQL_PASSWORD'/g' *.conf
 	cd ~
-	echo -e "$GREEN Done...$COL_RESET"
+	echo -e "$GREEN Complete...$COL_RESET"
 
 	# Final Directory permissions
 	echo
@@ -155,7 +155,7 @@
 	sudo mv $HOME/stratum/ $HOME/stratum-install-finish
 
 	echo
-	echo -e "$GREEN Done...$COL_RESET"
+	echo -e "$GREEN Complete...$COL_RESET"
 	sleep 3
 
 	echo

@@ -52,7 +52,7 @@ apt_install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
 fi
 
 hide_output sudo apt -y install libdb5.3 libdb5.3++
-echo -e "$GREEN => Done <=$COL_RESET"
+echo -e "$GREEN => Complete <=$COL_RESET"
 
 echo
 echo -e "$MAGENTA => Installing additional system files required for daemons <= $COL_RESET"

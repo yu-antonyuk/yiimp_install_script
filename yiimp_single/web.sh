@@ -63,7 +63,7 @@ source yiimp_confs/yiimpserverconfig.sh
 source yiimp_confs/main.sh
 source yiimp_confs/loop2.sh
 source yiimp_confs/blocks.sh
-echo -e "$GREEN Done$COL_RESET"
+echo -e "$GREEN Complete$COL_RESET"
 
 echo
 echo -e "$YELLOW => Setting correct folder permissions <= $COL_RESET"
@@ -78,7 +78,7 @@ sudo find $STORAGE_ROOT/yiimp/site/ -type f -exec chmod 664 {} +
 
 sudo chgrp www-data $STORAGE_ROOT -R
 sudo chmod g+w $STORAGE_ROOT -R
-echo -e "$GREEN Done$COL_RESET"
+echo -e "$GREEN Complete$COL_RESET"
 
 cd $HOME/yiimp_install_script/yiimp_single
 

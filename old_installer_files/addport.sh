@@ -24,7 +24,7 @@ function EPHYMERAL_PORT(){
             echo $MPORT;
             return 0;
         fi
-    done
+    Complete
 }
 
 coinport=$(EPHYMERAL_PORT)
@@ -146,7 +146,7 @@ for r in *.$coinalgo.conf; do
 [WALLETS]\
 exclude = '${coinsymbol}'' "$r"
 fi
-done
+Complete
 fi
 sleep 2
 # Copy the default algo.conf to the new symbol.algo.conf
@@ -219,7 +219,7 @@ for name; do
     '""''"${coinsymbollower}"''""') startstop_'""''"${coinsymbollower}"''""' $cmd ;;
     *) startstop_service $cmd $name ;;
     esac
-done ' | sudo -E tee ${PATH_STRATUM}/config/stratum.${coinsymbollower} >/dev/null 2>&1
+Complete ' | sudo -E tee ${PATH_STRATUM}/config/stratum.${coinsymbollower} >/dev/null 2>&1
 sudo chmod +x $STORAGE_ROOT/yiimp/site/stratum/config/stratum.${coinsymbollower}
 sleep 1
 
