@@ -24,6 +24,8 @@
 # Updated by Afiniel for Yiimpool use...
 #-------------------------------------------------------------------------------
 
+source /etc/yiimpoolversion.conf
+
 clear
 
 [ -r /etc/lsb-release ] && . /etc/lsb-release
@@ -36,5 +38,5 @@ fi
 figlet -f slant -w 100 "YiimpooL" | lolcat -f
 printf "\n"
 
-printf "Welcome to %s (%s).\n" "$DISTRIB_DESCRIPTION" "YiimPool Version v0.7.5"
+printf "Welcome to %s (%s).\n" "$DISTRIB_DESCRIPTION" "YiimPool Version $VERSION"
 printf "\n"

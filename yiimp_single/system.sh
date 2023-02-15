@@ -26,9 +26,9 @@ echo -e "$MAGENTA    <-------------------------->$COL_RESET"
 echo -e "$YELLOW     <-- System Configuration -->$COL_RESET"
 echo -e "$MAGENTA    <-------------------------->$COL_RESET"
 
-# Set timezone
+# Set timezone to UTC
 echo
-echo -e "$YELLOW =>  Setting TimeZone to UTC <= $COL_RESET"
+echo -e "$YELLOW =>  Setting TimeZone to$GREEN UTC <= $COL_RESET"
 if [ ! -f /etc/timezone ]; then
 	echo "Setting timezone to UTC."
 	echo "Etc/UTC" /etc/timezone >sudo
@@ -47,20 +47,20 @@ fi
 echo
 
 # PHP 7.3
-echo -e "$MAGENTA =>  Installing Ondrej PHP PPA <= $COL_RESET"
+echo -e "$MAGENTA => Installing Ondrej PHP PPA <= $COL_RESET"
 if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
 	hide_output sudo add-apt-repository -y ppa:ondrej/php
 	hide_output sudo apt-get -y update
-	echo -e "$GREEN Done$COL_RESET"
+	echo -e "$GREEN Complete$COL_RESET"
 	# hide_output sudo apt-get -y install software-properties-common
 fi
 
 # CertBot
 echo
-echo -e "$MAGENTA =>  Installing CertBot PPA <= $COL_RESET"
+echo -e "$MAGENTA => Installing CertBot PPA <= $COL_RESET"
 hide_output sudo add-apt-repository -y ppa:certbot/certbot
 hide_output sudo apt-get -y update
-echo -e "$GREEN Done$COL_RESET"
+echo -e "$GREEN Complete$COL_RESET"
 
 # MariaDB
 echo
@@ -71,13 +71,11 @@ if [[ ("$DISTRO" == "18") ]]; then
 else
 	sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
 fi
-echo -e "$GREEN Done$COL_RESET"
+echo -e "$GREEN Complete$COL_RESET"
 
 # Upgrade System Files
 hide_output sudo apt-get update
 
-echo
-echo -e "$YELLOW =>  Upgrading system packages <= $COL_RESET"
 if [ ! -f /boot/grub/menu.lst ]; then
 	apt_get_quiet upgrade
 else
@@ -92,29 +90,28 @@ apt_get_quiet dist-upgrade
 apt_get_quiet autoremove
 
 echo
-echo -e "$MAGENTA =>  Installing Base system packages <= $COL_RESET"
+echo -e "$MAGENTA => Installing Base system packages <= $COL_RESET"
 apt_install python3 python3-dev python3-pip \
 	wget curl git sudo coreutils bc \
 	haveged pollinate unzip \
 	unattended-upgrades cron ntp fail2ban screen rsyslog lolcat
 
 # ### Seed /dev/urandom
-echo -e "$GREEN Done$COL_RESET"
+echo -e "$GREEN Complete$COL_RESET"
 echo
-echo -e "$YELLOW =>  Initializing system random number generator <= $COL_RESET"
+echo -e "$YELLOW => Initializing system random number generator <= $COL_RESET"
 hide_output dd if=/dev/random of=/dev/urandom bs=1 count=32 2>/dev/null
 hide_output sudo pollinate -q -r
-echo -e "$GREEN Done$COL_RESET"
+echo -e "$GREEN Complete$COL_RESET"
 
 echo
-echo -e "$YELLOW =>  Initializing UFW Firewall <= $COL_RESET"
+echo -e "$YELLOW => Initializing UFW Firewall <= $COL_RESET"
 set +eu +o pipefail
 if [ -z "${DISABLE_FIREWALL:-}" ]; then
 	# Install `ufw` which provides a simple firewall configuration.
 	apt_install ufw
-	echo
+	echo 
 	echo -e "$YELLOW => Allow incoming connections to SSH <= $COL_RESET"
-	echo
 	echo
 	ufw_allow ssh
 	sleep 0.5
@@ -215,7 +212,7 @@ sudo update-alternatives --set php /usr/bin/php7.3
 echo
 
 echo
-echo -e "$CYAN =>  Clone Kudaraidee Yiimp Repo <= $COL_RESET"
+echo -e "$CYAN =>  Clone Yiimp Repo <= $COL_RESET"
 hide_output sudo git clone ${YiiMPRepo} $STORAGE_ROOT/yiimp/yiimp_setup/yiimp
 if [[ ("$CoinPort" == "yes") ]]; then
 	cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp

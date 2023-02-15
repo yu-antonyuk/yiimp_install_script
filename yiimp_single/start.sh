@@ -6,6 +6,7 @@
 # Updated by Afiniel for yiimpool use...                                         #
 ##################################################################################
 
+source /etc/yiimpoolversion.conf
 source /etc/functions.sh
 source /etc/yiimpool.conf
 
@@ -65,10 +66,11 @@ clear
 
 if [[ ("$UsingDomain" == "yes") ]]; then
   source /etc/yiimpool.conf
+  source /etc/yiimpoolversion.conf
   source /etc/functions.sh
   term_yiimpool
   echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
-  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.7.5 $YELLOW fork by Afiniel!     $COL_RESET"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN $VERSION $YELLOW fork by Afiniel!     $COL_RESET"
   echo
   echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
   echo -e "$CYAN<-----------------------------------------------------------------------------> $COL_RESET"
@@ -101,7 +103,7 @@ else
   source /etc/functions.sh
   term_yiimpool
   echo -e "$CYAN<----------------------------------------------------------------------------->   $COL_RESET"
-  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN v0.7.5 $YELLOW fork by Afiniel! $COL_RESET"
+  echo -e "$YELLOW Thank you for using Yiimp Install Script$GREEN $VERSION $YELLOW fork by Afiniel! $COL_RESET"
   echo
   echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool                  $COL_RESET"
   echo -e "$CYAN<----------------------------------------------------------------------------->   $COL_RESET"

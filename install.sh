@@ -5,13 +5,14 @@
 # This script is intended to be run like this:
 #
 # curl https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/install.sh | bash
-# 
 #
 #########################################################
+
 if [ -z "${TAG}" ]; then
 	TAG=v0.7.5
 fi
 
+echo 'VERSION='"${TAG}"'' | sudo -E tee /etc/yiimpoolversion.conf >/dev/null 2>&1
 
 # Clone the Yiimp Install Script repository if it doesn't exist.
 if [ ! -d $HOME/yiimp_install_script ]; then

@@ -4,21 +4,18 @@
 # Updated by finiel for yiimpool use...
 #####################################################
 
+source /etc/yiimpoolversion.conf
 source /etc/functions.sh
 cd ~/yiimpool/install
 clear
 
-# Yiimpool version tag.
-echo 'YIIMPOOL_VERSION="v0.4.2"' | sudo -E tee /etc/yiimpoolversion.conf >/dev/null 2>&1
-source /etc/yiimpoolversion.conf
-
 # Welcome
-message_box "Yiimp Installer v0.7.5" \
+message_box "Yiimp Installer $VERSION" \
   "Hello and thanks for using the Yiimpool Installer!
 \n\nInstallation for the most part is fully automated. In most cases any user responses that are needed are asked prior to the installation.
 \n\nNOTE: You should only install this on a brand new Ubuntu 16.04 or Ubuntu 18.04 installation."
 # Root warning message box
-message_box "Yiimp Installer v0.7.5" \
+message_box "Yiimp Installer $VERSION" \
   "WARNING: You are trying to install as the root user!
 \n\nRunning any program as root is not recommended and can pose serious security risks that you want to avoid.
 \n\nThe next step you will be asked to create a new user account, you can name it whatever you want."

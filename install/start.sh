@@ -13,6 +13,7 @@ if [ -f /etc/yiimpool.conf ]; then
     cat /etc/yiimpool.conf | sed s/^/DEFAULT_/ >/tmp/yiimpool.prev.conf
     source /tmp/yiimpool.prev.conf
     source /etc/yiimpooldonate.conf
+    source /etc/yiimpoolversion.conf
     rm -f /tmp/yiimpool.prev.conf
 else
     FIRST_TIME_SETUP=1
@@ -61,7 +62,7 @@ if [[ ("$FIRST_TIME_SETUP" == "1") ]]; then
     # Are we running as root?
     if [[ $EUID -ne 0 ]]; then
         # Welcome
-        message_box "Yiimpool Installer v0.7.5" \
+        message_box "Yiimpool Installer $VERSION" \
         "Hello and thanks for using the Yiimpool Installer!
         \n\nInstallation for the most part is fully automated. In most cases any user responses that are needed are asked prior to the installation.
         \n\nNOTE: You should only install this on a brand new Ubuntu 18.04 or Ubuntu 16.04 installation."
