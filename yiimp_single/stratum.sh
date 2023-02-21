@@ -28,7 +28,7 @@ cd /home/crypto-data/yiimp/yiimp_setup/yiimp/blocknotify
 sudo sed -i 's/tu8tu5/'$blckntifypass'/' blocknotify.cpp
 hide_output make -j$((`nproc`+1))
 
-# Compil Stratum
+# Compil Stratum TODO
 cd /home/crypto-data/yiimp/yiimp_setup/yiimp/stratum
 hide_output git submodule init && hide_output git submodule update
 hide_output sudo make -C algos
