@@ -5,6 +5,7 @@
 #####################################################
 
 source /etc/functions.sh
+source /etc/yiimpoolversion.conf
 source /etc/yiimpool.conf
 source $STORAGE_ROOT/yiimp/.yiimp.conf
 source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
