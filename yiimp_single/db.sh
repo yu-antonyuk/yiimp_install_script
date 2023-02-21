@@ -138,7 +138,7 @@ SQL_FILES=(
 
 for file in "${SQL_FILES[@]}"; do
   sudo mysql -u root -p"${DBRootPassword}" "${YiiMPDBName}" --force < "$file"
-Complete
+echo -e "$GREEN Complete$COL_RESET"
 
 echo
 echo -e "$YELLOW <-- Datebase import $GREEN complete -->$COL_RESET"
