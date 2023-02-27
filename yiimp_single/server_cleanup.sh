@@ -92,11 +92,9 @@ source /etc/functions.sh
 # BTC Donation: $BTCDON                                                        #
 #                                                                              #
 ################################################################################
-
 source $STORAGE_ROOT/yiimp/.yiimp.conf
 STRATUM_DIR=$STORAGE_ROOT/yiimp/site/stratum
 LOG_DIR=$STORAGE_ROOT/yiimp/site/log
-
 screen -dmS 0x10 bash $STRATUM_DIR/run.sh 0x10
 screen -dmS a5a bash $STRATUM_DIR/run.sh a5a
 screen -dmS aergo bash $STRATUM_DIR/run.sh aergo
