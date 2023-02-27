@@ -166,7 +166,7 @@ function daemonbuiler_files {
 	' | sudo -E tee /usr/bin/daemonbuilder >/dev/null 2>&1
 	sudo chmod +x /usr/bin/daemonbuilder
 	echo
-	echo -e "$GREEN Complete$COL_RESET"
+	echo -e "$GREEN => Complete$COL_RESET"
 	sleep 2
 }
 

@@ -28,7 +28,7 @@ echo -e "$MAGENTA    <-------------------------->$COL_RESET"
 
 # Set timezone to UTC
 echo
-echo -e "$YELLOW =>  Setting TimeZone to$GREEN UTC <= $COL_RESET"
+# echo -e "$YELLOW =>  Setting TimeZone to$GREEN UTC <= $COL_RESET"
 if [ ! -f /etc/timezone ]; then
 	echo "Setting timezone to UTC."
 	echo "Etc/UTC" /etc/timezone >sudo
@@ -51,7 +51,7 @@ echo -e "$MAGENTA => Installing Ondrej PHP PPA <= $COL_RESET"
 if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
 	hide_output sudo add-apt-repository -y ppa:ondrej/php
 	hide_output sudo apt-get -y update
-	echo -e "$GREEN Complete$COL_RESET"
+	echo -e "$GREEN => Complete$COL_RESET"
 	# hide_output sudo apt-get -y install software-properties-common
 fi
 
@@ -60,7 +60,7 @@ echo
 echo -e "$MAGENTA => Installing CertBot PPA <= $COL_RESET"
 hide_output sudo add-apt-repository -y ppa:certbot/certbot
 hide_output sudo apt-get -y update
-echo -e "$GREEN Complete$COL_RESET"
+echo -e "$GREEN => Complete$COL_RESET"
 
 # MariaDB
 echo
@@ -71,7 +71,7 @@ if [[ ("$DISTRO" == "18") ]]; then
 else
 	sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
 fi
-echo -e "$GREEN Complete$COL_RESET"
+echo -e "$GREEN => Complete$COL_RESET"
 
 # Upgrade System Files
 hide_output sudo apt-get update
@@ -97,12 +97,12 @@ apt_install python3 python3-dev python3-pip \
 	unattended-upgrades cron ntp fail2ban screen rsyslog lolcat
 
 # ### Seed /dev/urandom
-echo -e "$GREEN Complete$COL_RESET"
+echo -e "$GREEN => Complete$COL_RESET"
 echo
 echo -e "$YELLOW => Initializing system random number generator <= $COL_RESET"
 hide_output dd if=/dev/random of=/dev/urandom bs=1 count=32 2>/dev/null
 hide_output sudo pollinate -q -r
-echo -e "$GREEN Complete$COL_RESET"
+echo -e "$GREEN => Complete$COL_RESET"
 
 echo
 echo -e "$YELLOW => Initializing UFW Firewall <= $COL_RESET"
