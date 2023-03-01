@@ -33,7 +33,7 @@ fi
 if [ $RESULT = 3 ]
 then
 clear;
-echo The Yiimp upgrader is not completed yet.
+echo "The Yiimp upgrader is not completed yet."
 exit;
 fi
 

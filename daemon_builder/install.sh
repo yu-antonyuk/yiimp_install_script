@@ -209,7 +209,7 @@ else
 		hide_output sudo apt -y autoremove
 		hide_output sudo apt-get install -y software-properties-common
 		hide_output sudo apt install -y dialog python3 python3-pip acl nano apt-transport-https figlet jq
-		echo -e "$GREEN Complete...$COL_RESET"
+		echo -e "$GREEN Done...$COL_RESET"
 
 		sleep 3
 
@@ -270,7 +270,7 @@ else
 		hide_output sudo apt-get -y install dialog acl libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev libkrb5-dev libldap2-dev libidn11-dev gnutls-dev \
 		librtmp-dev sendmail mutt screen git make
 		hide_output sudo apt -y install pwgen unzip
-		echo -e "$GREEN Complete...$COL_RESET"
+		echo -e "$GREEN Done...$COL_RESET"
 		sleep 3
 
 		# Installing Package to compile crypto currency
@@ -290,7 +290,7 @@ else
 		fi
 		hide_output sudo apt -y install libdb5.3 libdb5.3++
 
-		echo -e "$GREEN Complete...$COL_RESET"
+		echo -e "$GREEN Done...$COL_RESET"
 
 		# Installing Package to compile crypto currency
 		echo
@@ -360,7 +360,7 @@ else
 			cd ${absolutepath}/daemon_setup/tmp/
 			sudo rm -r db-4.8.30.NC.tar.gz db-4.8.30.NC
 			echo -e "$GREEN Berkeley 4.8 Completed...$COL_RESET"
-			CompleteINST=true
+			DONEINST=true
 		fi
 
 		if [[ ! -d "$STORAGE_ROOT/daemon_builder/berkeley/db5" ]]; then
@@ -378,7 +378,7 @@ else
 			cd ${absolutepath}/daemon_setup/tmp
 			sudo rm -r db-5.1.29.tar.gz db-5.1.29
 			echo -e "$GREEN Berkeley 5.1 Completed...$COL_RESET"
-			CompleteINST=true
+			DONEINST=true
 		fi
 
 		if [[ ! -d "$STORAGE_ROOT/daemon_builder/berkeley/db5.3" ]]; then
@@ -396,7 +396,7 @@ else
 			cd ${absolutepath}/daemon_setup/tmp/
 			sudo rm -r db-5.3.28.tar.gz db-5.3.28
 			echo -e "$GREEN Berkeley 5.3 Completed...$COL_RESET"
-			CompleteINST=true
+			DONEINST=true
 		fi
 
 		if [[ ! -d "$STORAGE_ROOT/daemon_builder/berkeley/db6.2" ]]; then
@@ -413,7 +413,7 @@ else
 			cd ${absolutepath}/daemon_setup/tmp/
 			sudo rm -r db-6.2.23.tar.gz db-6.2.23
 			echo -e "$GREEN Berkeley 6.2 Completed...$COL_RESET"
-			CompleteINST=true
+			DONEINST=true
 		fi
 
 		if [[ ! -d "$STORAGE_ROOT/daemon_builder/berkeley/db18" ]]; then
@@ -430,7 +430,7 @@ else
 			cd ${absolutepath}/daemon_setup/tmp/
 			sudo rm -r db-18.1.40.tar.gz db-18.1.40
 			echo -e "$GREEN Berkeley 18.xx Completed...$COL_RESET"
-			CompleteINST=true
+			DONEINST=true
 		fi
 
 		if [[ ! -d "$STORAGE_ROOT/daemon_builder/openssl" ]]; then
@@ -447,7 +447,7 @@ else
 			cd ${absolutepath}/daemon_setup/tmp/
 			sudo rm -r openssl-1.0.2g.tar.gz openssl-1.0.2g
 			echo -e "$GREEN OpenSSL 1.0.2g Completed...$COL_RESET"
-			CompleteINST=true
+			DONEINST=true
 		fi
 
 		if [[ "${INSTVERSION}" == "$TAG" ]]; then
@@ -463,10 +463,10 @@ else
 			cd ${absolutepath}/daemon_setup/tmp/
 			sudo rm -r v20181101.zip bls-signatures-20181101
 			echo -e "$GREEN bls-signatures Completed...$COL_RESET"
-			CompleteINST=true
+			DONEINST=true
 		fi
 
-		if [[ ("${CompleteINST}" == "true") ]]; then
+		if [[ ("${DONEINST}" == "true") ]]; then
 			echo
 		fi
 
@@ -480,7 +480,7 @@ else
 				sudo systemctl restart rsyslog >/dev/null 2>&1
 			fi
 			sudo systemctl status rsyslog | sed -n "1,3p" >/dev/null 2>&1
-			echo -e "$GREEN Complete...$COL_RESET"
+			echo -e "$GREEN Done...$COL_RESET"
 			sleep 3
 		fi
 
@@ -516,7 +516,7 @@ else
 			hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/menu4.sh
 			hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/source.sh
 			sleep 3
-			echo -e "$GREEN Complete...$COL_RESET"
+			echo -e "$GREEN Done...$COL_RESET"
 
 			if [[ "${NEWVERSION}" == "$TAG" ]]; then
 				# Updating Addport
@@ -542,7 +542,7 @@ else
 				hide_output sudo chmod +x /usr/bin/${daemonname}
 			fi
 
-			echo -e "$GREEN Complete...$COL_RESET"
+			echo -e "$GREEN Done...$COL_RESET"
 			sleep 5
 		fi
 
@@ -555,7 +555,7 @@ else
 			#Restart service
 			hide_output sudo systemctl restart cron.service
 
-			echo -e "$GREEN Complete...$COL_RESET"
+			echo -e "$GREEN Done...$COL_RESET"
 			sleep 5
 		fi
 
@@ -586,7 +586,7 @@ else
 					DOGEDEP='"${DOGEDEP}"''| sudo -E tee $STORAGE_ROOT/daemon_builder/conf/info.sh >/dev/null 2>&1
 					hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/conf/info.sh
 				fi
-				echo -e "$GREEN Complete...$COL_RESET"
+				echo -e "$GREEN Done...$COL_RESET"
 				sleep 5
 			fi
 		else
@@ -602,7 +602,7 @@ else
 			ETHDEP='"${ETHDEP}"'
 			DOGEDEP='"${DOGEDEP}"'' | sudo -E tee $STORAGE_ROOT/daemon_builder/conf/info.sh >/dev/null 2>&1
 			hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/conf/info.sh
-			echo -e "$GREEN Complete...$COL_RESET"
+			echo -e "$GREEN Done...$COL_RESET"
 			sleep 5
 		fi
 

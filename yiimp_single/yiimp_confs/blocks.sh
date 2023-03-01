@@ -20,7 +20,7 @@ echo started in ${DIR}
 while true; do
 ${PHP_CLI} runconsole.php cronjob/runBlocks
 sleep 20
-Complete
+done
 exec bash' | sudo -E tee $STORAGE_ROOT/yiimp/site/crons/blocks.sh >/dev/null 2>&1
 sudo chmod +x $STORAGE_ROOT/yiimp/site/crons/blocks.sh
 

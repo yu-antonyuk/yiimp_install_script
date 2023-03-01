@@ -1,11 +1,16 @@
 #!/bin/bash
-#####################################################
-# Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox
-# Updated by afiniel for crypto use...
-# Modified by Xavatar
-# Current Modified by Afiniel (2022-06-06)
-# Updated by Afiniel (2022-08-01)
-#####################################################
+
+##############################################
+#											 #
+# Current Modified by Afiniel (2022-06-06)   #
+# Updated by Afiniel (2022-08-01)			 #
+# 											 #
+##############################################
+
+absolutepath=absolutepathserver
+installtoserver=installpath
+daemonname=daemonnameserver
+DISTRO=distroserver
 
 ESC_SEQ="\x1b["
 COL_RESET=$ESC_SEQ"39;49;00m"
@@ -26,12 +31,23 @@ function spinner {
 		local spinstr=$temp${spinstr%"$temp"}
 		sleep $delay
 		printf "\b\b\b\b\b\b"
-	Complete
+	done
 	printf "    \b\b\b\b"
 }
 
-# Database functions
+function spinning_timer() {
+  animation=( ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ )
+  end=$((SECONDS+NUM))
+  while [ $SECONDS -lt $end ]; do
+    for i in "${animation[@]}"; do
+      echo -ne "${RED}\r$i ${CYAN}${MSG1}${NC}"
+      sleep 0.1
+    done
+  done
+  echo -e "${MSG2}"
+}
 
+# Database functions
 function database_import_sql {
 
 	# Import Database from SQL files
@@ -46,26 +62,28 @@ function database_import_sql {
 	sudo zcat 2020-11-10-yaamp.sql.gz | sudo mysql --defaults-group-suffix=host1
 
 	# Rest of the SQL files import (if any)
-	sudo mysql --defaults-group-suffix=host1 --force <2016-04-24-market_history.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2016-04-27-settings.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2016-05-11-coins.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2016-05-15-benchmarks.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2016-05-23-bookmarks.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2016-06-01-notifications.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2016-06-04-bench_chips.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2016-11-23-coins.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2017-02-05-benchmarks.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2017-03-31-earnings_index.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2017-05-accounts_case_swaptime.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2017-06-payouts_coinid_memo.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2017-09-notifications.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2017-10-bookmarks.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2018-09-22-workers.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2017-11-segwit.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2018-01-stratums_ports.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2018-02-coins_getinfo.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2019-03-coins_thepool_life.sql
-	sudo mysql --defaults-group-suffix=host1 --force <2020-06-03-blocks.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-04-24-market_history.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-04-27-settings.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-05-11-coins.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-05-15-benchmarks.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-05-23-bookmarks.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-06-01-notifications.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-06-04-bench_chips.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2016-11-23-coins.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-02-05-benchmarks.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-03-31-earnings_index.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2020-06-03-blocks.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-05-accounts_case_swaptime.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-06-payouts_coinid_memo.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-09-notifications.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-10-bookmarks.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2018-09-22-workers.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2017-11-segwit.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2018-01-stratums_ports.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2018-02-coins_getinfo.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2019-03-coins_thepool_life.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2022-10-14-shares_solo.sql
+    sudo mysql --defaults-group-suffix=host1 --force < 2022-10-29-blocks_effort.sql
 
 	echo -e "$GREEN Database imported successfully!$COL_RESET"
 
@@ -80,7 +98,7 @@ function install_end_message {
 	figlet -f slant -w 100 "Complete!"
 
 	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
-	echo -e "$YELLOW  | Version:$GREEN $VERSION                                                 |				$COL_RESET"
+	echo -e "$YELLOW  | Version:$GREEN v0.7.5                                                 |				$COL_RESET"
 	echo -e "$YELLOW Yiimp Installer Script Fork By Afiniel https://github.com/afiniel/yiimp_install_script $COL_RESET"
 	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
 	echo -e "$YELLOW   Your mysql information (login/Password) is saved in:$RED ~/.my.cnf					$COL_RESET"
@@ -104,41 +122,32 @@ function install_end_message {
 
 # terminal art start screen.
 function term_art {
-	source /etc/yiimpoolversion.conf
 	clear
+	source /etc/functions.sh
+	source /etc/yiimpool.conf
 	echo
-	echo "██╗   ██╗██╗██╗███╗   ███╗██████╗  ██████╗  ██████╗ ██╗      "
-	echo "╚██╗ ██╔╝██║██║████╗ ████║██╔══██╗██╔═══██╗██╔═══██╗██║      "
-	echo " ╚████╔╝ ██║██║██╔████╔██║██████╔╝██║   ██║██║   ██║██║      "
-	echo "  ╚██╔╝  ██║██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║   ██║██║      "
-	echo "   ██║   ██║██║██║ ╚═╝ ██║██║     ╚██████╔╝╚██████╔╝███████╗ "
-	echo "   ╚═╝   ╚═╝╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝  ╚═════╝ ╚══════╝ "
-	echo -e "$CYAN   ---------------|----------------------- 	  											$COL_RESET"
-	echo -e "$YELLOW  Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
-	echo -e "$YELLOW  Version:$COL_RESET $GREEN $VERSION 														$COL_RESET"
-	echo -e "$CYAN   -----------------|---------------------------------------------------- 	  			$COL_RESET"
-	echo -e "$YELLOW  This script will install all the dependencies and will install Yiimp.					$COL_RESET"
-	echo -e "$YELLOW  It will also install a MySQL database and a Web server.								$COL_RESET"
-	echo -e "$YELLOW  MariaDB is used for the database.														$COL_RESET"
-	echo -e "$YELLOW  Nginx is used for the Web server, PHP 7.3 is also installed.							$COL_RESET"
-	echo -e "$CYAN   -----------------|---------------------------------------------------- 	  			$COL_RESET"
+	figlet -f slant -w 100 "YiimpooL" | lolcat
+	echo -e "$CYAN   ----------------------------------------------------------> 	  											$COL_RESET"
+	echo -e "$CYAN  |$YELLOW Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
+	echo -e "$CYAN  |$MAGENTA Version:$GREEN v0.7.5 														$COL_RESET"
+	echo -e "$CYAN   ----------------------------------------------------------------------> 	  			$COL_RESET"
+	echo -e "$CYAN  |$YELLOW This script will install all the dependencies and will install Yiimp.					$COL_RESET"
+	echo -e "$CYAN  |$YELLOW It will also install a MySQL database and a Web server.								$COL_RESET"
+	echo -e "$CYAN  |$YELLOW MariaDB is used for the database.														$COL_RESET"
+	echo -e "$CYAN  |$YELLOW Nginx is used for the Web server, PHP 7.3 is also installed.							$COL_RESET"
+	echo -e "$CYAN   ----------------------------------------------------------------------> 	  			$COL_RESET"
 	echo
 
 }
 
 function term_yiimpool {
-	source /etc/yiimpoolversion.conf
 	clear
-	echo
-	echo "██╗   ██╗██╗██╗███╗   ███╗██████╗  ██████╗  ██████╗ ██╗      "
-	echo "╚██╗ ██╔╝██║██║████╗ ████║██╔══██╗██╔═══██╗██╔═══██╗██║      "
-	echo " ╚████╔╝ ██║██║██╔████╔██║██████╔╝██║   ██║██║   ██║██║      "
-	echo "  ╚██╔╝  ██║██║██║╚██╔╝██║██╔═══╝ ██║   ██║██║   ██║██║      "
-	echo "   ██║   ██║██║██║ ╚═╝ ██║██║     ╚██████╔╝╚██████╔╝███████╗ "
-	echo "   ╚═╝   ╚═╝╚═╝╚═╝     ╚═╝╚═╝      ╚═════╝  ╚═════╝ ╚══════╝ "
+	source /etc/functions.sh
+	source /etc/yiimpool.conf
+	figlet -f slant -w 100 "YiimpooL" | lolcat
 	echo -e "$CYAN   -----------------|--------------------- 	  											$COL_RESET"
 	echo -e "$YELLOW  Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
-	echo -e "$YELLOW  Version:$COL_RESET $GREEN $VERSION 											$COL_RESET"
+	echo -e "$YELLOW  Version:$COL_RESET $GREEN v0.7.5 											$COL_RESET"
 	echo -e "$CYAN   -----------------|--------------------- 	  			$COL_RESET"
 	echo
 
@@ -166,7 +175,7 @@ function daemonbuiler_files {
 	' | sudo -E tee /usr/bin/daemonbuilder >/dev/null 2>&1
 	sudo chmod +x /usr/bin/daemonbuilder
 	echo
-	echo -e "$GREEN => Complete$COL_RESET"
+	echo -e "$GREEN Done$COL_RESET"
 	sleep 2
 }
 
@@ -190,14 +199,14 @@ function hide_output {
 function last_words {
 	echo "<-------------------------------------|---------------------------------------->"
 	echo
-	echo -e "$YELLOW Thank you for using the Yiimpool Installer $GREEN $VERSION!             $COL_RESET"
+	echo -e "$YELLOW Thank you for using the Yiimpool Installer $GREEN v0.7.5             $COL_RESET"
 	echo
 	echo -e "$YELLOW To run this installer anytime simply type: $GREEN yiimpool            $COL_RESET"
 	echo -e "$YELLOW Donations for continued support of this script are welcomed at:       $COL_RESET"
 	echo "<-------------------------------------|--------------------------------------->"
 	echo -e "$YELLOW                     Donate Wallets:                                   $COL_RESET"
 	echo "<-------------------------------------|--------------------------------------->"
-	echo -e "$YELLOW Thank you for using Yiimp Install Script $VERSION fork by Afiniel!      $COL_RESET"
+	echo -e "$YELLOW Thank you for using Yiimp Install Script v0.7.5 fork by Afiniel!      $COL_RESET"
 	echo
 	echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
 	echo -e "$YELLOW =>  Do you want to support me? Feel free to use wallets below:        $COL_RESET"
@@ -222,19 +231,22 @@ function package_compile_crypto {
 	hide_output sudo apt -y install libcanberra-gtk-module libqrencode-dev libzmq3-dev
 	hide_output sudo apt -y install libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
 	hide_output sudo add-apt-repository -y ppa:bitcoin/bitcoin
-	hide_output sudo apt -y update
+	hide_output sudo apt update
 	hide_output sudo apt -y install libdb4.8-dev libdb4.8++-dev libdb5.3 libdb5.3++
-
+	hide_output sudo apt -y install bison libbison-dev
+	hide_output sudo apt -y install libnatpmp-dev libnatpmp1 libqt5waylandclient5 libqt5waylandcompositor5 qtwayland5 systemtap-sdt-dev
+	
 	hide_output sudo apt-get -y install build-essential libzmq5 \
-		libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev \
-		libseccomp-dev libcap-dev libminiupnpc-dev gettext libminiupnpc10 libcanberra-gtk-module libqrencode-dev libzmq3-dev \
-		libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
-	hide_output sudo apt -y update && sudo apt -y upgrade
+	libtool autotools-dev automake pkg-config libssl-dev libevent-dev bsdmainutils git cmake libboost-all-dev zlib1g-dev libz-dev \
+	libseccomp-dev libcap-dev libminiupnpc-dev gettext libminiupnpc10 libcanberra-gtk-module libqrencode-dev libzmq3-dev \
+	libqt5gui5 libqt5core5a libqt5webkit5-dev libqt5dbus5 qttools5-dev qttools5-dev-tools libprotobuf-dev protobuf-compiler
+	hide_output sudo apt update
+	hide_output sudo apt -y upgrade
 
 	hide_output sudo apt -y install libgmp-dev libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libreadline6-dev libldns-dev libexpat1-dev \
-		libpgm-dev libhidapi-dev libusb-1.0-0-dev libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev \
-		libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev \
-		python3 ccache doxygen graphviz default-libmysqlclient-dev libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev
+	libpgm-dev libhidapi-dev libusb-1.0-0-dev libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev \
+	libboost-locale-dev libboost-program-options-dev libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev \
+	python3 ccache doxygen graphviz default-libmysqlclient-dev libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev
 }
 
 function apt_get_quiet {
@@ -244,6 +256,22 @@ function apt_get_quiet {
 function apt_install {
 	PACKAGES=$@
 	apt_get_quiet install $PACKAGES
+}
+
+function apt_update {
+	sudo apt-get update
+}
+
+function apt_upgrade {
+	hide_output sudo apt-get upgrade -y
+}
+
+function apt_dist_upgrade {
+	hide_output sudo apt-get dist-upgrade -y
+}
+
+function apt_autoremove {
+	hide_output sudo apt-get autoremove -y
 }
 
 function ufw_allow {

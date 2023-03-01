@@ -18,5 +18,5 @@ cd $STORAGE_ROOT/yiimp/yiimp_setup/yiimp/web/yaamp/core/functions/
 
 cp -r yaamp.php $STORAGE_ROOT/yiimp/site/web/yaamp/core/functions
 
-echo Web upgrade complete...
+echo "Web upgrade complete..."
 cd $HOME/yiimp_install_script/yiimp_upgrade

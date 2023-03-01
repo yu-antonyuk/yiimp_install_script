@@ -60,7 +60,7 @@ cd '""''"${STORAGE_ROOT}"''""'/yiimp/site/stratum
 while true; do
 ./stratum config/$1
 sleep 2
-Complete
+done
 exec bash' | sudo -E tee $STORAGE_ROOT/yiimp/site/stratum/config/run.sh >/dev/null 2>&1
 sudo chmod +x $STORAGE_ROOT/yiimp/site/stratum/config/run.sh
 

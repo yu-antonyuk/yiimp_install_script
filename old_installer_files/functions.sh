@@ -7,8 +7,6 @@
 # 											 #
 ##############################################
 
-source /etc/yiimpoolversion.conf
-
 absolutepath=absolutepathserver
 installtoserver=installpath
 daemonname=daemonnameserver
@@ -23,15 +21,29 @@ BLUE=$ESC_SEQ"34;01m"
 MAGENTA=$ESC_SEQ"35;01m"
 CYAN=$ESC_SEQ"36;01m"
 
-function spinner() {
+function spinner {
+	local pid=$!
+	local delay=0.35
+	local spinstr='|/-\'
+	while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+		local temp=${spinstr#?}
+		printf " [%c]  " "$spinstr"
+		local spinstr=$temp${spinstr%"$temp"}
+		sleep $delay
+		printf "\b\b\b\b\b\b"
+	done
+	printf "    \b\b\b\b"
+}
+
+function spinning_timer() {
   animation=( ⠋ ⠙ ⠹ ⠸ ⠼ ⠴ ⠦ ⠧ ⠇ ⠏ )
   end=$((SECONDS+NUM))
   while [ $SECONDS -lt $end ]; do
     for i in "${animation[@]}"; do
       echo -ne "${RED}\r$i ${CYAN}${MSG1}${NC}"
       sleep 0.1
-    Complete
-  Complete
+    done
+  done
   echo -e "${MSG2}"
 }
 
@@ -86,7 +98,7 @@ function install_end_message {
 	figlet -f slant -w 100 "Complete!"
 
 	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
-	echo -e "$YELLOW  | Version:$GREEN $VERSION                                                 |				$COL_RESET"
+	echo -e "$YELLOW  | Version:$GREEN v0.7.5                                                 |				$COL_RESET"
 	echo -e "$YELLOW Yiimp Installer Script Fork By Afiniel https://github.com/afiniel/yiimp_install_script $COL_RESET"
 	echo -e "$CYAN  --------------------------------------------------------------------------- 	  		$COL_RESET"
 	echo -e "$YELLOW   Your mysql information (login/Password) is saved in:$RED ~/.my.cnf					$COL_RESET"
@@ -117,7 +129,7 @@ function term_art {
 	figlet -f slant -w 100 "YiimpooL" | lolcat
 	echo -e "$CYAN   ----------------------------------------------------------> 	  											$COL_RESET"
 	echo -e "$CYAN  |$YELLOW Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
-	echo -e "$CYAN  |$MAGENTA Version:$GREEN $VERSION 														$COL_RESET"
+	echo -e "$CYAN  |$MAGENTA Version:$GREEN v0.7.5 														$COL_RESET"
 	echo -e "$CYAN   ----------------------------------------------------------------------> 	  			$COL_RESET"
 	echo -e "$CYAN  |$YELLOW This script will install all the dependencies and will install Yiimp.					$COL_RESET"
 	echo -e "$CYAN  |$YELLOW It will also install a MySQL database and a Web server.								$COL_RESET"
@@ -135,7 +147,7 @@ function term_yiimpool {
 	figlet -f slant -w 100 "YiimpooL" | lolcat
 	echo -e "$CYAN   -----------------|--------------------- 	  											$COL_RESET"
 	echo -e "$YELLOW  Yiimp Installer Script Fork By Afiniel!												$COL_RESET"
-	echo -e "$YELLOW  Version:$COL_RESET $GREEN $VERSION 											$COL_RESET"
+	echo -e "$YELLOW  Version:$COL_RESET $GREEN v0.7.5 											$COL_RESET"
 	echo -e "$CYAN   -----------------|--------------------- 	  			$COL_RESET"
 	echo
 
@@ -163,7 +175,7 @@ function daemonbuiler_files {
 	' | sudo -E tee /usr/bin/daemonbuilder >/dev/null 2>&1
 	sudo chmod +x /usr/bin/daemonbuilder
 	echo
-	echo -e "$GREEN => Complete$COL_RESET"
+	echo -e "$GREEN Done$COL_RESET"
 	sleep 2
 }
 
@@ -187,14 +199,14 @@ function hide_output {
 function last_words {
 	echo "<-------------------------------------|---------------------------------------->"
 	echo
-	echo -e "$YELLOW Thank you for using the Yiimpool Installer $GREEN $VERSION             $COL_RESET"
+	echo -e "$YELLOW Thank you for using the Yiimpool Installer $GREEN v0.7.5             $COL_RESET"
 	echo
 	echo -e "$YELLOW To run this installer anytime simply type: $GREEN yiimpool            $COL_RESET"
 	echo -e "$YELLOW Donations for continued support of this script are welcomed at:       $COL_RESET"
 	echo "<-------------------------------------|--------------------------------------->"
 	echo -e "$YELLOW                     Donate Wallets:                                   $COL_RESET"
 	echo "<-------------------------------------|--------------------------------------->"
-	echo -e "$YELLOW Thank you for using Yiimp Install Script $VERSION fork by Afiniel!      $COL_RESET"
+	echo -e "$YELLOW Thank you for using Yiimp Install Script v0.7.5 fork by Afiniel!      $COL_RESET"
 	echo
 	echo -e "$YELLOW =>  To run this installer anytime simply type:$GREEN yiimpool         $COL_RESET"
 	echo -e "$YELLOW =>  Do you want to support me? Feel free to use wallets below:        $COL_RESET"

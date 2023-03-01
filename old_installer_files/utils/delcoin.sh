@@ -11,4 +11,4 @@
 
 for line in $(cat coin.list); do
 yiimp coin "$line" delete;
-Complete
+done

@@ -542,7 +542,7 @@ else
 			fi
 			echo
 			echo
-			echo -e "$GREEN Complete...$COL_RESET"
+			echo -e "$GREEN Done...$COL_RESET"
 
 			# Building autogen....
 			echo
@@ -559,7 +559,7 @@ else
 			fi
 			echo
 			echo
-			echo -e "$GREEN Complete...$COL_RESET"
+			echo -e "$GREEN Done...$COL_RESET"
 
 			# Configure with your platform....
 			if [ -d "$DEPENDS/i686-pc-linux-gnu" ]; then
@@ -649,7 +649,7 @@ else
 			fi
 			echo
 			echo
-			echo -e "$GREEN Complete...$COL_RESET"
+			echo -e "$GREEN Done...$COL_RESET"
 
 			# Executing make to finalize....
 			echo
@@ -683,7 +683,7 @@ else
 			fi
 			echo
 			echo
-			echo -e "$GREEN Complete...$COL_RESET"
+			echo -e "$GREEN Done...$COL_RESET"
 		else
 			echo
 			echo -e "$CYAN --------------------------------------------------------------------------- 	$COL_RESET"
@@ -776,13 +776,13 @@ if [[ ("$precompiled" == "true") ]]; then
 	COINTARGZ=$(find ~+ -type f -name "*.tar.gz")
 	COINZIP=$(find ~+ -type f -name "*.zip")
 	if [[ -f "$COINZIP" ]]; then
-		for i in $(ls -f *.zip); do coinzipped=${i%%}; Complete
+		for i in $(ls -f *.zip); do coinzipped=${i%%}; done
 		sudo unzip -q $coinzipped -d newcoin
-		for i in $(ls -d */); do repzipcoin=${i%%/}; Complete
+		for i in $(ls -d */); do repzipcoin=${i%%/}; done
 	elif [[ -f "$COINTARGZ" ]]; then
-		for i in $(ls -f *.tar.gz); do coinzipped=${i%%}; Complete
+		for i in $(ls -f *.tar.gz); do coinzipped=${i%%}; done
 		sudo tar xzvf $coinzipped
-		for i in $(ls -d */); do repzipcoin=${i%%/}; Complete
+		for i in $(ls -d */); do repzipcoin=${i%%/}; done
 	else
 		echo -e "$RED => This is a not valid file zipped $COL_RESET"
 	fi
@@ -878,9 +878,9 @@ if [[ ! ("$precompiled" == "true") ]]; then
 			   echo -ne "$GREEN	STOP THE DAEMON => $YELLOW${coind}$GREEN Sleep $CYAN$secstosleep$GREEN ...$COL_RESET\033[0K\r"
 			   sleep 1
 			   : $((secstosleep--))
-			Complete
+			done
 			echo -e "$CYAN --------------------------------------------------------------------------- $COL_RESET $GREEN"
-			echo -e "$GREEN Complete... $COL_RESET$"
+			echo -e "$GREEN Done... $COL_RESET$"
 			echo -e "$COL_RESET$CYAN --------------------------------------------------------------------------- $COL_RESET"
 			echo
 		fi
@@ -937,9 +937,9 @@ if [[ ("$precompiled" == "true") ]]; then
 				   echo -ne "$GREEN	STOP THE DAEMON => $YELLOW${coind}$GREEN Sleep $CYAN$secstosleep$GREEN ...$COL_RESET\033[0K\r"
 				   sleep 1
 				   : $((secstosleep--))
-				Complete
+				done
 				echo -e "$CYAN --------------------------------------------------------------------------- $COL_RESET $GREEN"
-				echo -e "$GREEN Complete... $COL_RESET$"
+				echo -e "$GREEN Done... $COL_RESET$"
 				echo -e "$COL_RESET$CYAN --------------------------------------------------------------------------- $COL_RESET"
 				echo
 			fi
@@ -1163,7 +1163,6 @@ if [[("$DAEMOND" != 'true')]]; then
 			# Your coin algo is = '""''"${COINALGO}"''""'
 			# Your dedicated port is = '""''"${COINPORT}"''""'
 			# Please adding dedicated port in line blocknotify= replace :XXXX to '""''"${COINPORT}"''""'
-
 			' | sudo -E tee $STORAGE_ROOT/wallets/."${coind::-1}"/${coind::-1}.conf >/dev/null 2>&1;
 		else
 			echo '
@@ -1171,7 +1170,6 @@ if [[("$DAEMOND" != 'true')]]; then
 			# Your coin algo is = '""''"${COINALGO}"''""'
 			# Your dedicated port is = '""''"${COINPORT}"''""'
 			# Please adding dedicated port in line blocknotify= replace :XXXX to '""''"${COINPORT}"''""'
-
 			' | sudo -E tee ${absolutepath}/wallets/."${coind::-1}"/${coind::-1}.conf >/dev/null 2>&1;
 		fi
 
