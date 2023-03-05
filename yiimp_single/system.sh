@@ -23,7 +23,7 @@ trap print_error ERR
 
 term_art
 echo -e "$MAGENTA    <-------------------------->$COL_RESET"
-echo -e "$YELLOW     <-- System Configuration -->$COL_RESET"
+echo -e "$MAGENTA     <--$YELLOW System Configuration$MAGENTA -->$COL_RESET"
 echo -e "$MAGENTA    <-------------------------->$COL_RESET"
 
 # Set timezone to UTC

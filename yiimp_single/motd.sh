@@ -7,9 +7,6 @@
 source /etc/functions.sh # load our functions
 source /etc/yiimpool.conf
 
-echo
-echo -e "$YELLOW <-- Update Motd -->$COL_RESET"
-
 apt_install lsb-release figlet update-motd \
     landscape-common update-notifier-common
 cd $HOME/yiimp_install_script/yiimp_single/ubuntu/etc/update-motd.d

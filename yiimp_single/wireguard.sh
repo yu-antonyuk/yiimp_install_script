@@ -11,7 +11,7 @@ source /etc/yiimpool.conf
 
 term_art
 echo -e "$MAGENTA    <-------------------------->$COL_RESET"
-echo -e "$YELLOW     <-- Installing WireGuard -->$COL_RESET"
+echo -e "$MAGENTA     <--$YELLOW Installing WireGuard$MAGENTA -->$COL_RESET"
 echo -e "$MAGENTA    <-------------------------->$COL_RESET"
 sudo add-apt-repository ppa:wireguard/wireguard -y
 sudo apt-get update -y

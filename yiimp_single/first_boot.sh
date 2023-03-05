@@ -6,6 +6,7 @@
 # Needs to be ran after the first reboot of the system after permissions are set
 #####################################################
 
+source /etc/yiimpool.conf
 source /etc/functions.sh
 
 sleep 5
