@@ -13,8 +13,8 @@ RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Menu $VER
 1 "YiiMP Single Server" \
 ' ' "- Daemon Wallet Builder -" \
 2 "Daemonbuilder" \
-' ' "- Upgrade stratum server -" \
-3 "Yiimp stratum update NOT completed" \
+' ' "- Update Yiimp stratum -" \
+3 "Start yiimp stratum upgrade" \
 4 Exit)
 if [ $RESULT = 1 ]
 then
@@ -33,8 +33,8 @@ fi
 if [ $RESULT = 3 ]
 then
 clear;
-echo "The Yiimp upgrader is not completed yet."
-exit;
+cd $HOME/yiimp_install_script/yiimp_upgrade
+source start.sh;
 fi
 
 if [ $RESULT = 4 ]

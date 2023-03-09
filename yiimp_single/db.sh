@@ -27,7 +27,7 @@ fi
 MARIADB_VERSION='10.4'
 
 echo -e "$MAGENTA    <----------------------------->$COL_RESET"
-echo -e "$YELLOW     <-- Installing MariaDB $MARIADB_VERSION -->$COL_RESET"
+echo -e "$MAGENTA     <--$YELLOW Installing MariaDB$MAGENTA $MARIADB_VERSION -->$COL_RESET"
 echo -e "$MAGENTA    <----------------------------->$COL_RESET"
 echo
 # Set MariaDB root password for installation

@@ -24,7 +24,7 @@ if [[ ("$wireguard" == "true") ]]; then
 fi
 
 echo -e "$MAGENTA    <--------------------------------------------------->$COL_RESET"
-echo -e "$YELLOW     <-- Building web file structure and copying files -->$COL_RESET"
+echo -e "$MAGENTA     <--$YELLOW Building web file structure and copying files$MAGENTA -->$COL_RESET"
 echo -e "$MAGENTA    <--------------------------------------------------->$COL_RESET"
 echo
 echo -e "$CYAN => Building web file structure and copying files <= $COL_RESET"

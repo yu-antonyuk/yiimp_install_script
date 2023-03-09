@@ -11,7 +11,7 @@ cd $HOME/yiimp_install_script/yiimp_single
 
 term_art
 echo -e "$MAGENTA    <----------------------------->$COL_RESET"
-echo -e "$YELLOW     <-- Starting Server Cleanup -->$COL_RESET"
+echo -e "$MAGENTA     <--$YELLOW Starting Server Cleanup$MAGENTA -->$COL_RESET"
 echo -e "$MAGENTA    <----------------------------->$COL_RESET"
 echo
 echo -e "$YELLOW => Installing cron screens to crontab <= $COL_RESET"

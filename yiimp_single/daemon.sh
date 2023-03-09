@@ -19,7 +19,7 @@ function print_error {
 trap print_error ERR
 term_art
 echo -e "$MAGENTA    <----------------------------------------------------->$COL_RESET"
-echo -e "$YELLOW     <-- Installing Berkeley , openssl , bls-signatures   -->$COL_RESET"
+echo -e "$MAGENTA     <--$YELLOW Installing Berkeley , openssl , bls-signatures$MAGENTA -->$COL_RESET"
 echo -e "$MAGENTA    <----------------------------------------------------->$COL_RESET"
 echo
 

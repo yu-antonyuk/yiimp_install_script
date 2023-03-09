@@ -19,7 +19,7 @@ function print_error {
 trap print_error ERR
 term_art
 echo -e "$MAGENTA    <---------------------------------------->$COL_RESET"
-echo -e "$YELLOW     <-- Install DaemonBuilder Requirements -->$COL_RESET"
+echo -e "$MAGENTA     <--$YELLOW Install DaemonBuilder Requirements$MAGENTA -->$COL_RESET"
 echo -e "$MAGENTA    <---------------------------------------->$COL_RESET"
 
 cd $HOME/yiimp_install_script/daemon_builder

@@ -7,9 +7,9 @@ source /etc/functions.sh
 cd $HOME/yiimp_install_script/yiimp_upgrade
 
 RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool YiiMP Updater" --menu "Choose one" -1 65 7 \
-' ' "- Upgrade Stratum and YiiMP Single Server Installation -" \
-1 "Start YiiMP Updater Installation" \
-' ' "- Exit -" \
+' ' "- Yiimp Stratum Update -" \
+1 "Start YiiMP Updater" \
+' ' "- Quit The Installer -" \
 2 Exit)
 if [ $RESULT = ]
 then
