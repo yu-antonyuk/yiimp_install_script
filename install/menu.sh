@@ -11,7 +11,7 @@
 source /etc/yiimpooldonate.conf
 source /etc/functions.sh
 
-RESULT=$(dialog --stdout --nocancel --default-item 1 --title "YiimPool Menu" --menu "Choose an option" -1 55 7 \
+RESULT=$(dialog --stdout --nocancel --default-item 1 --title "YiimPool Menu $VERSION" --menu "Choose an option" -1 55 7 \
     ' ' "- Install Yiimp -" \
     1 "Yiimp Single Server" \
     ' ' "- Upgrade Yiimp Stratum -" \
