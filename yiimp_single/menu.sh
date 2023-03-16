@@ -1,39 +1,37 @@
 #!/bin/env bash
 
-#####################################################
-# Source code https://github.com/end222/pacmenu     #
-# Updated by Afiniel for yiimpool use...            #
-#####################################################
+#
+# This is the main menu
+#
+# Author: Afiniel
+#
+# Updated: 2023-03-16
+#
 
-source /etc/yiimpoolversion.conf
+source /etc/yiimpooldonate.conf
 source /etc/functions.sh
 
-RESULT=$(dialog --stdout --default-item 1 --title "Yiimpool Yiimp installer $VERSION" --menu "Choose one" -1 60 6 \
-' ' "- Do want to install yiimp with wireguard?  -" \
-1 "No" \
-2 "Yes" \
-3 Exit)
-if [ $RESULT = 1 ]
-then
-clear;
-echo '
-wireguard=false
-' | sudo -E tee $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf >/dev/null 2>&1;
-fi
+RESULT=$(dialog --stdout --default-item 1 --title "YiimPool Yiimp Installer $VERSION" --menu "choose an option" -1 55 7 \
+    ' ' "- Do you want to install Yiimp with whireguard? -" \
+    1 "Yes" \
+    2 "No" \
+    3 exit)
 
-if [ $RESULT = 2 ]
-then
-clear;
-echo '
-wireguard=true
-' | sudo -E tee $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf >/dev/null 2>&1;
-echo 'server_type='db'
-DBInternalIP='10.0.0.2'
-' | sudo -E tee $STORAGE_ROOT/yiimp/.wireguard.conf >/dev/null 2>&1;
-fi
+if [ "$RESULT" = "1" ]; then
+    clear;
+    echo '
+    wireguard=true
+    ' | sudo -E tee "$HOME"/yiimp_install_script/yiimp_single/.wireguard.install.cnf >/dev/null 2>&1;
+    
 
-if [ $RESULT = 3 ]
-then
-clear;
-exit;
+elif [ "$RESULT" = "2" ]; then
+    clear;
+    echo '
+    wireguard=false
+    ' | sudo -E tee "$HOME"/yiimp_install_script/yiimp_single/.wireguard.install.cnf >/dev/null 2>&1;
+    
+
+elif [ "$RESULT" = "3" ]; then
+    clear;
+    exit;
 fi
