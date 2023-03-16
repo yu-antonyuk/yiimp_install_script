@@ -1,44 +1,34 @@
 #!/bin/env bash
 
-#####################################################
-# Source code https://github.com/end222/pacmenu
-# Updated by Afiniel for yiimpool use...
-#####################################################
+#
+# This is the main menu
+#
+# Author: Afiniel
+#
+# Updated: 2023-03-16
+#
 
 source /etc/yiimpooldonate.conf
 source /etc/functions.sh
 
-RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool Menu $VERSION" --menu "Choose one" -1 60 16 \
-' ' "- Install Yiimp  -" \
-1 "YiiMP Single Server" \
-' ' "- Daemon Wallet Builder -" \
-2 "Daemonbuilder" \
-' ' "- Update Yiimp stratum -" \
-3 "Start yiimp stratum upgrade" \
-4 Exit)
-if [ $RESULT = 1 ]
-then
-clear;
-cd $HOME/yiimp_install_script/yiimp_single
-source start.sh;
-fi
+RESULT=$(dialog --stdout --nocancel --default-item 1 --title "YiimPool Menu $VERSION" --menu "Choose an option" -1 55 7 \
+    ' ' "- Install Yiimp -" \
+    1 "Yiimp Single Server" \
+    ' ' "- Upgrade Yiimp Stratum -" \
+    2 "Upgrade Stratum" \
+    3 exit)
 
-if [ $RESULT = 2 ]
-then
-clear;
-cd $HOME/yiimp_install_script/daemon_builder
-source start.sh;
-fi
+if [ "$RESULT" = "1" ]; then
+    clear;
+    cd $HOME/yiimp_install_script/yiimp_single
+    source start.sh
 
-if [ $RESULT = 3 ]
-then
-clear;
-cd $HOME/yiimp_install_script/yiimp_upgrade
-source start.sh;
-fi
+elif [ "$RESULT" = "2" ]; then
+    clear;
+    cd $HOME/yiimp_install_script/yiimp_upgrade
+    source start.sh
 
-if [ $RESULT = 4 ]
-then
-clear;
-exit;
+elif [ "$RESULT" = "3" ]; then
+    clear;
+    exit;
 fi

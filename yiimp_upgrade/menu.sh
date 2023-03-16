@@ -1,30 +1,28 @@
-#####################################################
-# Source code https://github.com/end222/pacmenu
-# Updated by afiniel for crypto use...
-#####################################################
+#!/bin/env bash
 
+#
+# This is the main menu
+#
+# Author: Afiniel
+#
+# Updated: 2023-03-16
+#
+
+source /etc/yiimpooldonate.conf
 source /etc/functions.sh
-cd $HOME/yiimp_install_script/yiimp_upgrade
 
-RESULT=$(dialog --stdout --nocancel --default-item 1 --title "Yiimpool YiiMP Updater" --menu "Choose one" -1 65 7 \
-' ' "- Yiimp Stratum Update -" \
-1 "Start YiiMP Updater" \
-' ' "- Quit The Installer -" \
-2 Exit)
-if [ $RESULT = ]
-then
-bash $(basename $0) && exit;
-fi
+RESULT=$(dialog --stdout --default-item 1 --title "YiimPool Yiimp Upgrader $VERSION" --menu "choose an option" -1 55 7 \
+    ' ' "- Do you want to upgrade Yiimp Stratum? -" \
+    1 "Yes" \
+    2 exit)
 
-if [ $RESULT = 1 ]
-then
-clear;
-cd $HOME/yiimp_install_script/yiimp_upgrade
-source single.sh;
-fi
+if [ "$RESULT" = "1" ]; then
+    clear;
+    cd $HOME/yiimp_install_script/yiimp_upgrade
+    source single.sh
 
-if [ $RESULT = 2 ]
-then
-clear;
-exit;
+elif [ "$RESULT" = "2" ]; then
+    clear;
+    echo "You have chosen to exit the Yiimp Upgrader. Type: yiimpool anytime to start the menu again.";
+    exit;
 fi
