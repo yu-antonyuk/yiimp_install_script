@@ -25,7 +25,7 @@ if [ "$RESULT" = "1" ]; then
 
 elif [ "$RESULT" = "2" ]; then
     clear;
-    cd $HOME/yiimp_install_script/daemon_builder
+    cd $HOME/yiimp_install_script/yiimp_upgrade
     source start.sh
 
 elif [ "$RESULT" = "3" ]; then
