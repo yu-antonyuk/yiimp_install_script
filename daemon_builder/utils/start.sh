@@ -42,7 +42,7 @@ if (( $EUID == 0 )); then
 	exit;
 else
 	message_box " Daemon Installer " \
-	"Warning! This Scrypt only works with servers setup with the Yiimp!
+	"Warning! This Scrypt only works with servers setup with the Yiimpool installer!
 	\n\nSetup for the most part is fully automated. Very little user input is required."
 
 	# Start the installation.
