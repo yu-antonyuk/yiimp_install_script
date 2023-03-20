@@ -1,69 +1,48 @@
-#!/usr/bin/env bash
-#####################################################
-# Updated by Afiniel
-#####################################################
+#!/bin/env bash
 
+#
+# This is the main menu For Daemon Builder
+#
+# Author: Afiniel
+#
+# Updated: 2023-03-20
+#
+
+source /etc/yiimpoolversion.conf
 source /etc/daemonbuilder.sh
 source $STORAGE_ROOT/daemon_builder/conf/info.sh
 
 cd $STORAGE_ROOT/daemon_builder
 
-#LATESTVER=$(curl -sL 'https://api.github.com/repos/Afiniel/yiimp_install_script/releases/latest' | jq -r ".tag_name")
-LATESTVER=v0.7.7
+# LATESTVER=$VERSION
+LATESTVER=$(curl -sL 'https://api.github.com/repos/Afhttps://api.github.com/repos/Afiniel/yiimp_install_script/releases/latest')
 
-if [[ ("${LATESTVER}" > "${VERSION}" && "${LATESTVER}" != "null") ]]; then
-RESULT=$(dialog --backtitle " New version ${LATESTVER} available!! Please update to latest..." --stdout --nocancel --default-item 1 --title " Coin Setup ${VERSION} " --menu "Choose one" 13 60 8 \
-1 "Build New Coin Daemon from Source Code" \
-2 "Add Coin to Dedicated Port and run stratum" \
-3 "Update new Stratum" \
-' ' "- Upgrade an Existing new Version of this Srypt -" \
-4 "Upgrade this scrypt" \
-5 Exit)
-else
-RESULT=$(dialog --stdout --nocancel --default-item 1 --title " Coin Setup ${VERSION} " --menu "Choose one" 13 60 8 \
-1 "Build New Coin Daemon from Source Code" \
-2 "Add Coin to Dedicated Port and run stratum" \
-3 "Update new Stratum" \
-' ' "- Upgrade an Existing new Version of this Srypt -" \
-4 "Upgrade this scrypt" \
-5 Exit)
-fi
+if [[ ("{$LATESTVER}" > "{$VERSION}" && "${LATESTVER}" != "null") ]]; then
+    echo "New version available: ${LATESTVER}"
+    echo "Your version: ${VERSION}"
+    echo "Do you want to update? (y/n)"
+    read -r UPDATE
+    if [[ ("${UPDATE}" == "y" || "${UPDATE}" == "Y") ]]; then
+        echo "Updating..."
+        cd $HOME/yiimp_install_script
+        git pull
+        echo "Update complete!"
+        exit 0
+    fi
+    else
+        RESULT=$(dialog --stdout --title "DaemonBuilder $VERSION" --menu "Choose an option" 13 60 8 \
+        1 "Build Coin Daemon From Source Code" \
+        2 exit)
 
-if [ $RESULT = ]
-then
-bash $(basename $0) && exit;
-fi
+        if [ "$RESULT" = "1" ]; then
+            clear;
+            cd $STORAGE_ROOT/daemon_builder
+            source menu1.sh
+        fi
 
-if [ $RESULT = 1 ]
-then
-clear;
-cd $STORAGE_ROOT/daemon_builder
-source menu1.sh;
-fi
-
-if [ $RESULT = 2 ]
-then
-clear;
-cd $STORAGE_ROOT/daemon_builder
-source menu2.sh;
-fi
-
-if [ $RESULT = 3 ]
-then
-clear;
-cd $STORAGE_ROOT/daemon_builder
-source menu3.sh;
-fi
-
-if [ $RESULT = 4 ]
-then
-clear;
-cd $STORAGE_ROOT/daemon_builder
-source menu4.sh;
-fi
-
-if [ $RESULT = 5 ]
-then
-clear;
-exit;
+        if [ "$RESULT" = "2" ]; then
+            clear;
+            echo "You have chosen to exit the Daemon Builder. Type: daemonbuilder anytime to start the menu again.";
+            exit;
+        fi
 fi
