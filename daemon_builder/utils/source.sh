@@ -7,6 +7,7 @@
 
 source /etc/daemonbuilder.sh
 source /etc/functions.sh
+source $STORAGE_ROOT/daemon_builder/.daemon_builder.my.cnf
 source $STORAGE_ROOT/daemon_builder/conf/info.sh
 
 YIIMPOLL=/etc/yiimpool.conf
