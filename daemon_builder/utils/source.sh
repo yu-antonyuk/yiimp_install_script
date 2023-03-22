@@ -35,7 +35,7 @@ echo -e "$CYAN -----------------------------------------------------------------
 echo -e "$YELLOW   Creating the temporary build folder... 									$COL_RESET"
 echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
 
-source $STORAGE_ROOT/daemon_builder/.my.cnf
+source $STORAGE_ROOT/daemon_builder/.daemon_builder.my.cnf
 
 if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds" ]]; then
 	sudo mkdir -p $STORAGE_ROOT/daemon_builder/temp_coin_builds
@@ -968,7 +968,7 @@ if [[ ("$precompiled" == "true") ]]; then
 
 		sudo rm -r $STORAGE_ROOT/daemon_builder/temp_coin_builds/.lastcoin.conf
 		sudo rm -r $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
-		sudo rm -r $STORAGE_ROOT/daemon_builder/.my.cnf
+		sudo rm -r source $STORAGE_ROOT/daemon_builder/.daemon_builder.my.cnf
 
 		exit;
 	fi
@@ -1274,7 +1274,7 @@ echo
 # If we made it this far everything built fine removing last coin.conf and build directory
 sudo rm -r $STORAGE_ROOT/daemon_builder/temp_coin_builds/.lastcoin.conf
 sudo rm -r $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
-sudo rm -r $STORAGE_ROOT/daemon_builder/.my.cnf
+sudo rm -r source $STORAGE_ROOT/daemon_builder/.daemon_builder.my.cnf
 if [[ -f "$ADDPORTCONF" ]]; then
 	sudo rm -r $STORAGE_ROOT/daemon_builder/.addport.cnf
 fi
