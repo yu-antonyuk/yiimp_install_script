@@ -1,38 +1,58 @@
 #!/usr/bin/env bash
 
-#############################
-# Created by Afiniel	    #
-# Source to compile wallets #
-#############################
+#
+# This is the source file that compiles coin daemon.
+#
+# Author: Afiniel
+#
+# It uses:
+#  Berkeley 4.8 with autogen.sh file.
+#  Berkeley 5.1 with autogen.sh file.
+#  Berkeley 5.3 with autogen.sh file.
+#  Berkeley 6.2 with autogen.sh file.
+#  makefile.unix file.
+#  CMake file.
+#  UTIL folder contains BULD.sh file.
+#  precompiled coin. NEED TO BE LINUX Version!
+#
+# Updated: 2021-03-30
+#
+# Continue line 540
 
 source /etc/daemonbuilder.sh
 source /etc/functions.sh
-source $STORAGE_ROOT/daemon_builder/.daemon_builder.my.cnf
+source $STORAGE_ROOT/daemon_builder/daemon_builder.my.cnf
 source $STORAGE_ROOT/daemon_builder/conf/info.sh
 
 YIIMPOLL=/etc/yiimpool.conf
+
 if [[ -f "$YIIMPOLL" ]]; then
-	source /etc/yiimpool.conf
-	YIIMPCONF=true
+    source /etc/yiimpool.conf
+    YIIMPCONF=true
 fi
 
 CREATECOIN=true
 
 # Set what we need
 now=$(date +"%m_%d_%Y")
-#set -e
-# old numbers of all cpu = NPROC=$(nproc) // use all if problem to compile new command use all -1
-NPROCPU=$(nproc)
 
-if [[ ("${NPROCPU}" -le "3") ]]; then
-        NPROC="1"
-else
-	NPROC="$((NPROCPU-"2"))"
+# sets the number of CPU cores to be used for compiling sets the number of CPU cores to be used for compiling.
+MIN_CPUS_FOR_COMPILATION=3
+
+if ! NPROC=$(nproc); then
+  echo "Error: nproc command not found or failed to run" >&2
+  exit 1
 fi
+
+if [[ "$NPROC" -le "$MIN_CPUS_FOR_COMPILATION" ]]; then
+  NPROC=1
+else
+  NPROC=$((NPROC-2))
+fi
+
 # Create the temporary installation directory if it doesn't already exist.
-echo
 echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-echo -e "$YELLOW   Creating the temporary build folder... 									$COL_RESET"
+echo -e "$CYAN Creating temporary installation directory if it doesn't already exist. $COL_RESET"
 echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
 
 source $STORAGE_ROOT/daemon_builder/.daemon_builder.my.cnf
@@ -41,25 +61,24 @@ if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds" ]]; then
 	sudo mkdir -p $STORAGE_ROOT/daemon_builder/temp_coin_builds
 else
 	sudo rm -rf $STORAGE_ROOT/daemon_builder/temp_coin_builds/*
-	echo
-	echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-	echo -e "$GREEN   temp_coin_builds already exists.... Skipping  								$COL_RESET"
-	echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+    echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+    echo -e "$CYAN Removing old temporary installation directory. $COL_RESET"
+    echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
 fi
+
 # Just double checking folder permissions
 sudo setfacl -m u:${USERSERVER}:rwx $STORAGE_ROOT/daemon_builder/temp_coin_builds
 cd $STORAGE_ROOT/daemon_builder/temp_coin_builds
 
-# Get the github information
-	input_box " COIN NAME " \
-	"Enter the SIYMBOL of coin.
-	\n\nExample: BTC
-	\n\n*Paste press CTRL and right bottom Mouse.
-	\n\nCoin name:" \
-	"" \
-	coin
-	
-	convertlistalgos=$(find ${PATH_STRATUM}/config/ -mindepth 1 -maxdepth 1 -type f -not -name '.*' -not -name '*.sh' -not -name '*.log' -not -name 'stratum.*' -not -name '*.*.*' -iname '*.conf' -execdir basename -s '.conf' {} +);
+# Gitcoin coin information.
+input_box "Coin Information" \
+"Please enter the Coin Symbol. Example: BTC
+\n\n*Paste press CTRL+RIGHT mouse button.
+\n\nCoin Name:" \
+"" \
+coin
+
+convertlistalgos=$(find ${PATH_STRATUM}/config/ -mindepth 1 -maxdepth 1 -type f -not -name '.*' -not -name '*.sh' -not -name '*.log' -not -name 'stratum.*' -not -name '*.*.*' -iname '*.conf' -execdir basename -s '.conf' {} +);
 	optionslistalgos=$(echo -e "${convertlistalgos}" | awk '{ printf "%s on\n", $1}' | sort | uniq | grep [[:alnum:]])
 
 	DIALOGFORLISTALGOS=${DIALOGFORLISTALGOS=dialog}
@@ -81,135 +100,139 @@ cd $STORAGE_ROOT/daemon_builder/temp_coin_builds
 	  0)
 		coinalgo="${ALGOSELECTED}";;
 	  1)
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Cancel pressed STOP of installation! use daemonbuilder to new start!				$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		exit;;
-	  255)
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   ESC pressed STOP of installation! use daemonbuilder to new start!				$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		exit;;
-	esac
+        echo -e "$RED ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$RED You have cancel the installation. $COL_RESET"
+        echo -e "$RED ------------------------------------------------------------------------------- 	$COL_RESET"
+        exit;;
+      255)
+        echo -e "$RED ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$RED You have cancel the installation. $COL_RESET"
+        echo -e "$RED ------------------------------------------------------------------------------- 	$COL_RESET"
+        exit;;
+    esac
 
-if [[ ("${precompiled}" == "true") ]]; then
-	input_box " PRECOMPILED COIN " \
-	"Paste url coin precompiled file format compressed!
-	\n\nFormat *.tar.gz OR *.zip
-	\n\nCoin url link:" \
-	"" \
-	coin_precompiled
+if  [[ ("${precompiled}" == "true") ]]; then
+    input_box "precompiled Coin Information" \
+    "Please enter the precompiled file format compressed! 
+    \n\nExample: bitcoin-0.16.3-x86_64-linux-gnu.tar.gz
+    \n\n .zip format is also supported.
+    \n\n*Paste press CTRL+RIGHT mouse button.
+    \n\nprecompiled Coin URL Link:" \
+    "" \
+    coin_precompiled
 else
-	input_box " GITHUB LINK " \
-	"Paste url coin link from github. USE: ctrl shift right click
-	\n\nhttps://github.com/example-repo-name/coin-wallet.git
-	\n\nCoin url link:" \
-	"" \
-	git_hub
+    input_box "Github Repo link" \
+    "Please enter the Github Repo link.
+    \n\nExample: https://github.com/example-repo-name/coin-wallet.git
+    \n\n*Paste press CTRL+RIGHT mouse button.
+    \n\nGithub Repo link:" \
+    "" \
+    git_hub
 
-	dialog --title " Switch To develeppement " \
-	--yesno "Switch from main repo git in to develop ?
-	Selecting Yes use Git develeppements." 6 50
-	response=$?
-	case $response in
-	   0) swithdevelop=yes;;
-	   1) swithdevelop=no;;
-	   255) echo "[ESC] key pressed.";;
-	esac
+    dialog --title "Switch To Development" \
+    --yesno "Do you want to switch from main repo to development ?
+    Selecting Yes will switch to development branch." 6 50
+    response=$?
+    case $response in
+        0) switchdevelop=yes;;
+        1) switchdevelop=no;;
+        255) echo "[ESC] key pressed.";;
+    esac
 
-	if [[ ("${swithdevelop}" == "no") ]]; then
+    if [[ ("${switchdevelop}" == "no"=) ]]; then
 
-		dialog --title " Use a specific branch " \
-		--yesno "Do you need to use a specific github branch of the coin?
-		Selecting Yes use a selected version Git." 7 60
-		response=$?
-		case $response in
-		   0) branch_git_hub=yes;;
-		   1) branch_git_hub=no;;
-		   255) echo "[ESC] key pressed.";;
-		esac
+        input_box "Use a specific branch" \
+        --yesno "Do you want to use a specific branch ?
+        Selecting Yes will use a specific branch." 7 60
+        response=$?
+        case $response in
+            0) branch_git_hub=yes;;
+            1) branch_git_hub=no;;
+            255) echo "[ESC] key pressed.";;
+        esac
 
-		if [[ ("${branch_git_hub}" == "yes") ]]; then
-
-			input_box " Branch Version " \
-			"Please enter the branch name exactly as in github
-			\n\nExample v2.5.1
-			\n\nBranch version:" \
-			"" \
-			branch_git_hub_ver
-		fi
-	fi
+        if [[ ("${branch_git_hub}" == "yes") ]]; then
+            input_box "Branch Name" \
+            "Please enter the Branch Name.
+            \n\nExample: master
+            \n\n*Paste press CTRL+RIGHT mouse button.
+            \n\nBranch Name:" \
+            "" \
+            branch_git_hub_ver
+        fi
+    fi
 fi
 
 set -e
-clear
+clear;
+
 echo
 echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-echo -e "$GREEN   Starting installation coin : ${coin^^}							$COL_RESET"
+echo -e "$CYAN Starting the installation of the coin: ${coin^^} $COL_RESET"
 echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
 
 coindir=$coin$now
 
-# save last coin information in case coin build fails
+# Save last coin information in case coin build fails.
 echo '
 lastcoin='"${coindir}"'
 ' | sudo -E tee $STORAGE_ROOT/daemon_builder/temp_coin_builds/.lastcoin.conf >/dev/null 2>&1
 
-# Clone the coin
+#  Clone the coin repo.
 if [[ ! -e $coindir ]]; then
-	if [[ ("$precompiled" == "true") ]]; then
-		mkdir $coindir
-		cd "${coindir}"
-		sudo wget $coin_precompiled
-	else
-		git clone $git_hub $coindir
-		cd "${coindir}"
-	fi
+    if [[ ("${precompiled}" == "true") ]]; then
+        mkdir $coindir
+        cd "${coindir}"
+        sudo wget $coin_precompiled
+    else
+        git clone $git_hub $coindir
+        cd "${coindir}"
+    fi
 
-	if [[ ("${branch_git_hub}" == "yes") ]]; then
-	  git fetch
-	  git checkout "$branch_git_hub_ver"
-	fi
+    if [[ ("${branch_git_hub}" == "yes") ]]; then
+        git fetch
+        git checkout $branch_git_hub_ver
+    fi
 
-	if [[ ("${swithdevelop}" == "yes") ]]; then
-	  git checkout develop
-	fi
-	errorexist="false"
+    if [[ ("${switchdevelop}" == "yes") ]]; then
+        git checkout development
+    fi
+    errorexist="false"
 else
-echo
-	message_box " Coin already exist temp folder " \
-	"${coindir} already exists.... in temp folder Skipping Installation!
-	\n\nIf there was an error in the build use the build error options on the installer."
-
-	errorexist="true"
-	exit 0
+    echo -e "$RED ------------------------------------------------------------------------------- 	$COL_RESET"
+    echo -e "$RED The coin already exist. $COL_RESET"
+    echo -e "$RED ------------------------------------------------------------------------------- 	$COL_RESET"
+    errorexist="true"
+    exit 0
 fi
 
-if [[("${errorexist}" == "false")]]; then
-	sudo chmod -R 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
-	sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
-	sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
+if [[ ("${errorexist}" == "false") ]]; then
+    sudo chmod -R 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir
+    sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir -type d -exec chmod 777 {} \;
+    sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir -type f -exec chmod 777 {} \;
 fi
 
-# Build the coin under the proper configuration
+# Build the coin under the proper configuration.
+
 if [[ ("$autogen" == "true") ]]; then
 
-	# Build the coin under berkeley 4.8
-	if [[ ("$berkeley" == "4.8") ]]; then
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting Building coin $MAGENTA ${coin^^} $MAGENTA using Berkeley 4.8	$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		basedir=$(pwd)
+    # Build the coin with berkeley 4.8
 
-		FILEAUTOGEN=$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/autogen.sh
-		if [[ ! -f "$FILEAUTOGEN" ]]; then
-			echo -e "$YELLOW"
-			find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
-			echo -e "$COL_RESET$MAGENTA"
+    if [[ ("$berkeley" == "4.8") ]]; then
+        clear;
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$CYAN Building the coin with berkeley 4.8 $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
+
+        basedir=$(pwd)
+        FILEAUTOGEN=$STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir/autogen.sh
+        
+        if [[ ! -f "$FILEAUTOGEN" ]]; then
+            echo
+            echo -e "$YELLOW"
+            find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
+            echo -e "$COL_RESET$MAGENTA"
 			read -r -e -p "Where is the folder that contains the installation ${coin^^}, example bitcoin :" repotherinstall
 			echo -e "$COL_RESET"
 			echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
@@ -217,286 +240,310 @@ if [[ ("$autogen" == "true") ]]; then
 			echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
 			echo
 
-			sudo mv $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repotherinstall}/* $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
-			sleep 0.5
-		fi
+            sudo mv $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repotherinstall}/* $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
+        fi
+        sh autogen.sh
 
-		sh autogen.sh
+        if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh" ]]; then
+		    echo -e "$RED genbuild.sh not found skipping $COL_RESET"
+        else
+            sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh
 
-		if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh" ]]; then
-		  echo "genbuild.sh not found skipping"
-		else
-			sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh
-		fi
-		if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform" ]]; then
+        fi
+
+        if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform" ]]; then
 		  echo "build_detect_platform not found skipping"
 		else
 		sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform
 		fi
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting configure coin...													$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
+		
+        echo
+        clear;
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$CYAN Configure coin $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 0.5
+
 		./configure CPPFLAGS="-I$STORAGE_ROOT/daemon_builder/berkeley/db4/include -O2" LDFLAGS="-L$STORAGE_ROOT/daemon_builder/berkeley/db4/lib" --with-incompatible-bdb --without-gui --disable-tests
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting make coin...															$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
+		
+        clear;
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$GREEN Start Building coin $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
+
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 0.5
-		# make install
+		
 		TMP=$(tempfile)
-		make -j${NPROC} 2>&1 | tee $TMP
+        make -j${NPROC} 2>&1 | tee $TMP
 		OUTPUT=$(cat $TMP)
 		echo $OUTPUT
 		rm $TMP
-	fi
+    fi
 
-	# Build the coin under berkeley 5.1
-	if [[ ("$berkeley" == "5.1") ]]; then
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting Building coin $MAGENTA ${coin^^} $COL_RESET using Berkeley 5.1	$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		basedir=$(pwd)
+    # Build the coin with berkeley 5.1
 
-		FILEAUTOGEN=$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/autogen.sh
-		if [[ ! -f "$FILEAUTOGEN" ]]; then
-			echo -e "$YELLOW"
-			find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
-			echo -e "$COL_RESET$MAGENTA"
-			read -r -e -p "Where is the folder that contains the installation ${coin^^}, example bitcoin :" repotherinstall
-			echo -e "$COL_RESET"
-			echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-			echo -e "$GREEN   Moving files and Starting Building coin $MAGENTA ${coin^^} 					$COL_RESET"
-			echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-			echo
+    if [[ ("$berkeley" == "5.1") ]]; then
+        clear;
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$CYAN Building the coin with berkeley 5.1 $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
 
-			sudo mv $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repotherinstall}/* $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
-			sleep 0.5
-		fi
+        basedir=$(pwd)
+        FILEAUTOGEN=$STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir/autogen.sh
+        
+        if [[ ! -f "$FILEAUTOGEN" ]]; then
+            echo
+            echo -e "$YELLOW"
+            find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
+            echo -e "$COL_RESET$MAGENTA"
+            read -r -e -p "Where is the folder that contains the installation ${coin^^}, example bitcoin :" repotherinstall
+            echo -e "$COL_RESET"
+            echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+            echo -e "$GREEN   Moving files and Starting Building coin $MAGENTA ${coin^^} 					$COL_RESET"
+            echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+            echo
 
-		sh autogen.sh
+            sudo mv $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repotherinstall}/* $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
+        fi
 
-		if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh" ]]; then
-			echo "genbuild.sh not found skipping"
-		else
-			sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh
-		fi
+        sh autogen.sh
 
-		if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform" ]]; then
-			echo "build_detect_platform not found skipping"
-		else
-			sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform
-		fi
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting configure coin...													$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 0.5
-		./configure CPPFLAGS="-I$STORAGE_ROOT/daemon_builder/berkeley/db5/include -O2" LDFLAGS="-L$STORAGE_ROOT/daemon_builder/berkeley/db5/lib" --with-incompatible-bdb --without-gui --disable-tests
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting make coin...															$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 0.5
-		# make install
-		TMP=$(tempfile)
-		make -j${NPROC} 2>&1 | tee $TMP
-		OUTPUT=$(cat $TMP)
-		echo $OUTPUT
-		rm $TMP
-	fi
+        if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh" ]]; then
+            echo -e "$RED genbuild.sh not found skipping $COL_RESET"
+        else
+            sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh
 
-	# Build the coin under berkeley 5.3
-	if [[ ("$berkeley" == "5.3") ]]; then
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting Building coin $MAGENTA ${coin^^} $COL_RESET using Berkeley 5.3	$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		basedir=$(pwd)
+        fi
 
-		FILEAUTOGEN=$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/autogen.sh
-		if [[ ! -f "$FILEAUTOGEN" ]]; then
-			echo -e "$YELLOW"
-			find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
-			echo -e "$COL_RESET$MAGENTA"
-			read -r -e -p "Where is the folder that contains the installation ${coin^^}, example bitcoin :" repotherinstall
-			echo -e "$COL_RESET"
-			echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-			echo -e "$GREEN   Moving files and Starting Building coin $MAGENTA ${coin^^} 					$COL_RESET"
-			echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-			echo
+        if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform" ]]; then
+          echo "build_detect_platform not found skipping"
+        else
 
-			sudo mv $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repotherinstall}/* $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
-			sleep 0.5
-		fi
+        sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform
+        fi
 
-		sh autogen.sh
+        echo
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$CYAN Configure coin $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \;
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
 
-		if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh" ]]; then
-			echo "genbuild.sh not found skipping"
-		else
-			sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh
-		fi
+        ./configure CPPFLAGS="-I$STORAGE_ROOT/daemon_builder/berkeley/db5/include -O2" LDFLAGS="-L$STORAGE_ROOT/daemon_builder/berkeley/db5/lib" --with-incompatible-bdb --without-gui --disable-tests
 
-		if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform" ]]; then
-			echo "build_detect_platform not found skipping"
-		else
-			sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform
-		fi
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting configure coin...													$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 0.5
-		./configure CPPFLAGS="-I$STORAGE_ROOT/daemon_builder/berkeley/db5.3/include -O2" LDFLAGS="-L$STORAGE_ROOT/daemon_builder/berkeley/db5.3/lib" --with-incompatible-bdb --without-gui --disable-tests
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting make coin...															$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 0.5
-		# make install
-		TMP=$(tempfile)
-		make -j${NPROC} 2>&1 | tee $TMP
-		OUTPUT=$(cat $TMP)
-		echo $OUTPUT
-		rm $TMP
-	fi
+        clear;
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$GREEN Start Building coin $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
 
-	# Build the coin under berkeley 6.2
-	if [[ ("$berkeley" == "6.2") ]]; then
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting Building coin $MAGENTA ${coin^^} $COL_RESET using Berkeley 6.2	$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		basedir=$(pwd)
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \;
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
 
-		FILEAUTOGEN=$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/autogen.sh
-		if [[ ! -f "$FILEAUTOGEN" ]]; then
-			echo -e "$YELLOW"
-			find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
-			echo -e "$COL_RESET$MAGENTA"
-			read -r -e -p "Where is the folder that contains the installation ${coin^^}, example bitcoin :" repotherinstall
-			echo -e "$COL_RESET"
-			echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-			echo -e "$GREEN   Moving files and Starting Building coin $MAGENTA ${coin^^} 					$COL_RESET"
-			echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-			echo
+        TMP=$(tempfile)
+        make -j${NPROC} 2>&1 | tee $TMP
+        OUTPUT=$(cat $TMP)
+        echo $OUTPUT
+        rm $TMP
+    fi
 
-			sudo mv $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repotherinstall}/* $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
-			sleep 0.5
-		fi
+    # Build the coin with berkeley 5.3
 
-		sh autogen.sh
+    if [[ ("$berkeley" == "5.3") ]]; then
+        clear;
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$CYAN Building the coin with berkeley 5.3 $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
 
-		if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh" ]]; then
-			echo "genbuild.sh not found skipping"
-		else
-			sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh
-		fi
+        basedir=$(pwd)
+        FILEAUTOGEN=$STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir/autogen.sh
+        
+        if [[ ! -f "$FILEAUTOGEN" ]]; then
+            echo
+            echo -e "$YELLOW"
+            find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
+            echo -e "$COL_RESET$MAGENTA"
+            read -r -e -p "Where is the folder that contains the installation ${coin^^}, example bitcoin :" repotherinstall
+            echo -e "$COL_RESET"
+            echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+            echo -e "$GREEN   Moving files and Starting Building coin $MAGENTA ${coin^^} 					$COL_RESET"
+            echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+            echo
 
-		if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform" ]]; then
-			echo "build_detect_platform not found skipping"
-		else
-			sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform
-		fi
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting configure coin...													$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 0.5
-		./configure CPPFLAGS="-I$STORAGE_ROOT/daemon_builder/berkeley/db6.2/include -O2" LDFLAGS="-L$STORAGE_ROOT/daemon_builder/berkeley/db6.2/lib" --with-incompatible-bdb --without-gui --disable-tests
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting make coin...															$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
-		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 0.5
-		# make install
-		TMP=$(tempfile)
-		make -j${NPROC} 2>&1 | tee $TMP
-		OUTPUT=$(cat $TMP)
-		echo $OUTPUT
-		rm $TMP
-	fi
+            sudo mv $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repotherinstall}/* $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
+        fi
 
-	# Build the coin under UTIL directory with BUILD.SH file
-	if [[ ("$buildutil" == "true") ]]; then
-		echo
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo -e "$GREEN   Starting Building $MAGENTA ${coin^^} $COL_RESET using UTIL directory contains BUILD.SH	$COL_RESET"
-		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		echo
-		basedir=$(pwd)
+        sh autogen.sh
 
-		FILEAUTOGEN=$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/autogen.sh
-		if [[ ! -f "$FILEAUTOGEN" ]]; then
-			echo -e "$YELLOW"
-			find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
-			echo -e "$COL_RESET$MAGENTA"
-			read -r -e -p "Where is the folder that contains the installation ${coin^^}, example bitcoin :" repotherinstall
-			echo -e "$COL_RESET"
-			echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-			echo -e "$GREEN   Moving files and Starting Building coin $MAGENTA ${coin^^} 					$COL_RESET"
-			echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-			echo
+        if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh" ]]; then
+            echo -e "$RED genbuild.sh not found skipping $COL_RESET"
+        else
+            sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh
 
-			sudo mv $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repotherinstall}/* $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
-			sleep 0.5
-		fi
+        fi
 
-		sh autogen.sh
+        if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform" ]]; then
+          echo "build_detect_platform not found skipping"
+        else
 
-		find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
+        sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform
+        fi
+
+        echo
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$CYAN Configure coin $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \;
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
+
+        ./configure CPPFLAGS="-I$STORAGE_ROOT/daemon_builder/berkeley/db5.3/include -O2" LDFLAGS="-L$STORAGE_ROOT/daemon_builder/berkeley/db5.3/lib" --with-incompatible-bdb --without-gui --disable-tests
+
+        clear;
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$GREEN Start Building coin $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
+
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \;
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
+
+        TMP=$(tempfile)
+        make -j${NPROC} 2>&1 | tee $TMP
+        OUTPUT=$(cat $TMP)
+        echo $OUTPUT
+        rm $TMP
+    fi
+    
+    # Build the coin with berkeley 6.2
+
+    if [[ ("$berkeley" == "6.2") ]]; then
+        clear;
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$CYAN Building the coin with berkeley 6.2 $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
+
+        basedir=$(pwd)
+        FILEAUTOGEN=$STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir/autogen.sh
+        
+        if [[ ! -f "$FILEAUTOGEN" ]]; then
+            echo
+            echo -e "$YELLOW"
+            find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
+            echo -e "$COL_RESET$MAGENTA"
+            read -r -e -p "Where is the folder that contains the installation ${coin^^}, example bitcoin :" repotherinstall
+            echo -e "$COL_RESET"
+            echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+            echo -e "$GREEN   Moving files and Starting Building coin $MAGENTA ${coin^^} 					$COL_RESET"
+            echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+            echo
+
+            sudo mv $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repotherinstall}/* $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
+        fi
+
+        sh autogen.sh
+
+        if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh" ]]; then
+            echo -e "$RED genbuild.sh not found skipping $COL_RESET"
+        else
+            sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/share/genbuild.sh
+
+        fi
+
+        if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform" ]]; then
+          echo "build_detect_platform not found skipping"
+        else
+
+        sudo chmod 777 $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/leveldb/build_detect_platform
+        fi
+
+        echo
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$CYAN Configure coin $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \;
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
+
+        ./configure CPPFLAGS="-I$STORAGE_ROOT/daemon_builder/berkeley/db6.2/include -O2" LDFLAGS="-L$STORAGE_ROOT/daemon_builder/berkeley/db6.2/lib" --with-incompatible-bdb --without-gui --disable-tests
+
+        clear;
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$GREEN Start Building coin $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
+
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \;
+        sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
+
+        TMP=$(tempfile)
+        make -j${NPROC} 2>&1 | tee $TMP
+        OUTPUT=$(cat $TMP)
+        echo $OUTPUT
+        rm $TMP
+    fi
+
+    # Build the coin under UTIL directory with BUILD.SH file
+
+    if [[ ("${buildutil}" == "true") ]]; then
+        echo
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo -e "$CYAN Building the coin under UTIL directory with BUILD.SH file $COL_RESET"
+        echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+        echo
+
+        basedir=$(pwd)
+        FILEAUTOGEN=$STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir/autogen.sh
+
+        if [[ ! -f "$FILEAUTOGEN" ]]; then
+            echo
+            echo -e "$YELLOW"
+            find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
+            echo -e "$COL_RESET$MAGENTA"
+            read -r -e -p "Where is the folder that contains the installation ${coin^^}, example bitcoin :" repotherinstall
+            echo -e "$COL_RESET"
+            echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+            echo -e "$GREEN   Moving files and Starting Building coin $MAGENTA ${coin^^} 					$COL_RESET"
+            echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
+            echo
+
+            sudo mv $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repotherinstall}/* $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
+        fi
+
+        sh autogen.sh
+        
+        find . -maxdepth 1 -type d \( -perm -1 -o \( -perm -10 -o -perm -100 \) \) -printf "%f\n"
 		read -r -e -p "where is the folder that contains the BUILD.SH installation file, example xxutil :" reputil
 		cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${reputil}
 		echo $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${reputil}
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 0.5
+		
 		bash build.sh -j$(nproc)
 
-		if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${reputil}/fetch-params.sh" ]]; then
-			echo "fetch-params.sh not found skipping"
-		else
-			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
+        if [[ ! -e "$STORAGE_ROOT/daemon_builder/temp_coin_builds/$coindir/$fetch-params.sh" ]]; then
+            echo -e "$RED fetch-params.sh not found skipping $COL_RESET"
+        else
+            sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
 			sh fetch-params.sh
-		fi
-	fi
-
+        fi
+    fi
 else
-
-	# Build the coin under cmake
-	if [[ ("$cmake" == "true") ]]; then
-		clear
+    # TODO FINNISH REST OF THE CODE FROM HERE.
+    # OLD CODE FROM HERE
+    
+    # Build the coin under cmake
+	if [[ ("${cmake}" == "true") ]]; then
+		clear;
 		DEPENDS="$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/depends"
 
 		# Build the coin under depends present
@@ -505,7 +552,7 @@ else
 			echo
 			echo -e "$CYAN => Building using cmake with DEPENDS directory... $COL_RESET"
 			echo
-			sleep 0.5
+			
 
 			echo
 			echo
@@ -516,9 +563,9 @@ else
 			echo
 			echo -e "$YELLOW => executing make on depends directory... $COL_RESET"
 			echo
-			sleep 0.5
+			
 			cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/depends
-			if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
+			if [[ ("${ifhidework}" == "y" || "$ifhidework}" == "Y") ]]; then
 			# make install
 			TMP=$(tempfile)
 			hide_output make -j${NPROC} 2>&1 | tee $TMP
@@ -533,7 +580,7 @@ else
 			echo
 			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-			sleep 0.5
+			
 			# make install
 			TMP=$(tempfile)
 			make -j${NPROC} 2>&1 | tee $TMP
@@ -551,9 +598,9 @@ else
 			echo -e "$GREEN   Starting Building coin $MAGENTA ${coin^^} $COL_RESET using autogen...		$COL_RESET"
 			echo -e "$CYAN --------------------------------------------------------------------------- 	$COL_RESET"
 			echo
-			sleep 0.5
+			
 			cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
-			if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
+			if [[ ("${ifhidework}" == "y" || "$ifhidework}" == "Y") ]]; then
 			hide_output sh autogen.sh
 			else
 			sh autogen.sh
@@ -569,8 +616,8 @@ else
 				echo
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-				sleep 0.5
-				if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
+				
+				if [[ ("${ifhidework}" == "y" || "$ifhidework}" == "Y") ]]; then
 				hide_output ./configure --with-incompatible-bdb --prefix=`pwd`/depends/i686-pc-linux-gnu
 				else
 				./configure --with-incompatible-bdb --prefix=`pwd`/depends/i686-pc-linux-gnu
@@ -581,8 +628,8 @@ else
 				echo
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-				sleep 0.5
-				if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
+				
+				if [[ ("${ifhidework}" == "y" || "$ifhidework}" == "Y") ]]; then
 				hide_output ./configure --with-incompatible-bdb --prefix=`pwd`/depends/x86_64-pc-linux-gnu
 				else
 				./configure --with-incompatible-bdb --prefix=`pwd`/depends/x86_64-pc-linux-gnu
@@ -593,8 +640,8 @@ else
 				echo
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-				sleep 0.5
-				if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
+				
+				if [[ ("${ifhidework}" == "y" || "$ifhidework}" == "Y") ]]; then
 				hide_output ./configure --with-incompatible-bdb --prefix=`pwd`/depends/i686-w64-mingw32
 				else
 				./configure --with-incompatible-bdb --prefix=`pwd`/depends/i686-w64-mingw32
@@ -605,8 +652,8 @@ else
 				echo
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-				sleep 0.5
-				if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
+				
+				if [[ ("${ifhidework}" == "y" || "$ifhidework}" == "Y") ]]; then
 				hide_output ./configure --with-incompatible-bdb --prefix=`pwd`/depends/x86_64-w64-mingw32
 				else
 				./configure --with-incompatible-bdb --prefix=`pwd`/depends/x86_64-w64-mingw32
@@ -617,8 +664,8 @@ else
 				echo
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-				sleep 0.5
-				if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
+				
+				if [[ ("${ifhidework}" == "y" || "$ifhidework}" == "Y") ]]; then
 				hide_output ./configure --with-incompatible-bdb --prefix=`pwd`/depends/x86_64-apple-darwin14
 				else
 				./configure --with-incompatible-bdb --prefix=`pwd`/depends/x86_64-apple-darwin14
@@ -629,8 +676,8 @@ else
 				echo
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-				sleep 0.5
-				if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
+				
+				if [[ ("${ifhidework}" == "y" || "$ifhidework}" == "Y") ]]; then
 				hide_output ./configure --with-incompatible-bdb --prefix=`pwd`/depends/arm-linux-gnueabihf
 				else
 				./configure --with-incompatible-bdb --prefix=`pwd`/depends/arm-linux-gnueabihf
@@ -641,8 +688,8 @@ else
 				echo
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 				sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-				sleep 0.5
-				if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
+				
+				if [[ ("${ifhidework}" == "y" || "$ifhidework}" == "Y") ]]; then
 				hide_output ./configure --with-incompatible-bdb --prefix=`pwd`/depends/aarch64-linux-gnu
 				else
 				./configure --with-incompatible-bdb --prefix=`pwd`/depends/aarch64-linux-gnu
@@ -658,8 +705,8 @@ else
 			echo
 			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-			sleep 0.5
-			if [[ ("$ifhidework" == "y" || "$ifhidework" == "Y") ]]; then
+			
+			if [[ ("${ifhidework}" == "y" || "$ifhidework}" == "Y") ]]; then
 			# make install
 			TMP=$(tempfile)
 			hide_output make -j${NPROC} 2>&1 | tee $TMP
@@ -674,7 +721,7 @@ else
 			echo
 			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-			sleep 0.5
+			
 			# make install
 			TMP=$(tempfile)
 			make -j${NPROC} 2>&1 | tee $TMP
@@ -691,7 +738,7 @@ else
 			echo -e "$GREEN   Starting Building coin $MAGENTA ${coin^^} $COL_RESET using Cmake method	$COL_RESET"
 			echo -e "$CYAN --------------------------------------------------------------------------- 	$COL_RESET"
 			echo
-			sleep 0.5
+			
 			cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir} && git submodule init && git submodule update
 
 			echo
@@ -701,19 +748,19 @@ else
 			echo
 			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 			sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-			sleep 0.5
+			
 			# make install
 			TMP=$(tempfile)
 			make -j${NPROC} 2>&1 | tee $TMP
 			OUTPUT=$(cat $TMP)
 			echo $OUTPUT
 			rm $TMP
-			sleep 0.5
+			
 		fi
 	fi
 
 	# Build the coin under unix
-	if [[ ("$unix" == "true") ]]; then
+	if [[ ("${unix}" == "true") ]]; then
 		echo
 		echo -e "$CYAN ----------------------------------------------------------------------------------- 	$COL_RESET"
 		echo -e "$GREEN   Starting Building coin $MAGENTA ${coin^^} $COL_RESET	using makefile.unix method	$COL_RESET"
@@ -742,7 +789,7 @@ else
 		echo
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 0.5
+		
 		sudo make clean
 		echo
 		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
@@ -751,19 +798,19 @@ else
 		echo
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 0.5
+		
 		sudo make libleveldb.a libmemenv.a
 		cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type d -exec chmod 777 {} \; 
 		sudo find $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/ -type f -exec chmod 777 {} \;
-		sleep 0.5
+		
 		sed -i '/USE_UPNP:=0/i BDB_LIB_PATH = '${absolutepath}'/'${installtoserver}'/berkeley/db4/lib\nBDB_INCLUDE_PATH = '${absolutepath}'/'${installtoserver}'/berkeley/db4/include\nOPENSSL_LIB_PATH = '${absolutepath}'/'${installtoserver}'/openssl/lib\nOPENSSL_INCLUDE_PATH = '${absolutepath}'/'${installtoserver}'/openssl/include' makefile.unix
 		sed -i '/USE_UPNP:=1/i BDB_LIB_PATH = '${absolutepath}'/'${installtoserver}'/berkeley/db4/lib\nBDB_INCLUDE_PATH = '${absolutepath}'/'${installtoserver}'/berkeley/db4/include\nOPENSSL_LIB_PATH = '${absolutepath}'/'${installtoserver}'/openssl/lib\nOPENSSL_INCLUDE_PATH = '${absolutepath}'/'${installtoserver}'/openssl/include' makefile.unix
 		echo
 		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
 		echo -e "$GREEN   Starting compiling with makefile.unix											$COL_RESET"
 		echo -e "$CYAN ------------------------------------------------------------------------------- 	$COL_RESET"
-		sleep 0.5
+		
 		# make install
 		TMP=$(tempfile)
 		make -j${NPROC} -f makefile.unix USE_UPNP=- 2>&1 | tee $TMP
@@ -773,7 +820,7 @@ else
 	fi
 fi
 
-if [[ ("$precompiled" == "true") ]]; then
+if [[ ("${precompiled}" == "true") ]]; then
 	COINTARGZ=$(find ~+ -type f -name "*.tar.gz")
 	COINZIP=$(find ~+ -type f -name "*.zip")
 	if [[ -f "$COINZIP" ]]; then
@@ -789,12 +836,19 @@ if [[ ("$precompiled" == "true") ]]; then
 	fi
 fi
 
-clear
+clear;
 
 # LS the SRC dir to have user input bitcoind and bitcoin-cli names
-if [[ ! ("$precompiled" == "true") ]]; then
+if [[ ! ("$precompiled}" == "true") ]]; then
 
-	cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/
+    #cd "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/"
+
+    #for dir in */; do
+    #    mv "$dir" src/
+    #done
+
+    cd "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repzipcoin}/"
+
 	echo
 	echo -e "$CYAN --------------------------------------------------------------------------------------- 	$COL_RESET"
 	echo -e "$GREEN   List os avalible daemons: $COL_RESET"
@@ -810,44 +864,44 @@ if [[ ! ("$precompiled" == "true") ]]; then
 		
 	echo
 	read -r -e -p "Is there a coin-cli, example bitcoin-cli [y/N] :" ifcoincli
-	if [[ ("$ifcoincli" == "y" || "$ifcoincli" == "Y") ]]; then
+	if [[ ("${ifcoincli}" == "y" || "$ifcoincli}" == "Y") ]]; then
 		read -r -e -p "Please enter the coin-cli name :" coincli
 	fi
 
 	echo
 	read -r -e -p "Is there a coin-tx, example bitcoin-tx [y/N] :" ifcointx
-	if [[ ("$ifcointx" == "y" || "$ifcointx" == "Y") ]]; then
+	if [[ ("${ifcointx}" == "y" || "$ifcointx}" == "Y") ]]; then
 		read -r -e -p "Please enter the coin-tx name :" cointx
 	fi
 	
 	echo
 	read -r -e -p "Is there a coin-util, example bitcoin-util [y/N] :" ifcoinutil
-	if [[ ("$ifcoinutil" == "y" || "$ifcoinutil" == "Y") ]]; then
+	if [[ ("${ifcoinutil}" == "y" || "$ifcoinutil}" == "Y") ]]; then
 		read -r -e -p "Please enter the coin-util name :" coinutil
 	fi
 
 	echo
 	read -r -e -p "Is there a coin-hash, example bitcoin-hash [y/N] :" ifcoinhash
-	if [[ ("$ifcoinhash" == "y" || "$ifcoinhash" == "Y") ]]; then
+	if [[ ("${ifcoinhash}" == "y" || "$ifcoinhash}" == "Y") ]]; then
 		read -r -e -p "Please enter the coin-hash name :" coinhash
 	fi
 
 	echo
 	read -r -e -p "Is there a coin-wallet, example bitcoin-wallet [y/N] :" ifcoinwallet
-	if [[ ("$ifcoinwallet" == "y" || "$ifcoinwallet" == "Y") ]]; then
+	if [[ ("${ifcoinwallet}" == "y" || "$ifcoinwallet}" == "Y") ]]; then
 		read -r -e -p "Please enter the coin-wallet name :" coinwallet
 	fi
 
-	if [[ ("$buildutil" == "true" || "$precompiled" == "true") ]]; then
+	if [[ ("${buildutil}" == "true" || "$precompiled}" == "true") ]]; then
 		echo
 		read -r -e -p "Is there a coin-tools, example bitcoin-wallet-tools [y/N] :" ifcointools
-		if [[ ("$ifcointools" == "y" || "$ifcointools" == "Y") ]]; then
+		if [[ ("${ifcointools}" == "y" || "$ifcointools}" == "Y") ]]; then
 			read -r -e -p "Please enter the coin-tools name :" cointools
 		fi
 
 		echo
 		read -r -e -p "Is there a coin-gtest, example bitcoin-gtest [y/N] :" ifcoingtest
-		if [[ ("$ifcoingtest" == "y" || "$ifcoingtest" == "Y") ]]; then
+		if [[ ("${ifcoingtest}" == "y" || "$ifcoingtest}" == "Y") ]]; then
 			read -r -e -p "Please enter the coin-gtest name :" coingtest
 		fi
 	fi
@@ -861,13 +915,13 @@ if [[ ! ("$precompiled" == "true") ]]; then
 		SERVICE="${coind}"
 		if pgrep -x "$SERVICE" >/dev/null; then
 			if [[ ("${YIIMPCONF}" == "true") ]]; then
-				if [[ ("$ifcoincli" == "y" || "$ifcoincli" == "Y") ]]; then
+				if [[ ("${ifcoincli}" == "y" || "$ifcoincli}" == "Y") ]]; then
 					"${coincli}" -datadir=$STORAGE_ROOT/wallets/."${coind::-1}" -conf="${coind::-1}".conf stop
 				else
 					"${coind}" -datadir=$STORAGE_ROOT/wallets/."${coind::-1}" -conf="${coind::-1}".conf stop
 				fi
 			else
-				if [[ ("$ifcoincli" == "y" || "$ifcoincli" == "Y") ]]; then
+				if [[ ("${ifcoincli}" == "y" || "$ifcoincli}" == "Y") ]]; then
 					"${coincli}" -datadir=${absolutepath}/wallets/."${coind::-1}" -conf="${coind::-1}".conf stop
 				else
 					"${coind}" -datadir=${absolutepath}/wallets/."${coind::-1}" -conf="${coind::-1}".conf stop
@@ -888,24 +942,24 @@ if [[ ! ("$precompiled" == "true") ]]; then
 	fi
 fi
 
-clear
+clear;
 
 # Strip and copy to /usr/bin
-if [[ ("$precompiled" == "true") ]]; then
+if [[ ("${precompiled}" == "true") ]]; then
 	cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repzipcoin}/
 
 	COINDFIND=$(find ~+ -type f -name "*d")
-	sleep 1
+	sleep 0.5
 	COINCLIFIND=$(find ~+ -type f -name "*-cli")
-	sleep 1
+	sleep 0.5
 	COINTXFIND=$(find ~+ -type f -name "*-tx")
-	sleep 1
+	sleep 0.5
 	COINUTILFIND=$(find ~+ -type f -name "*-util")
-	sleep 1
+	sleep 0.5
 	COINHASHFIND=$(find ~+ -type f -name "*-hash")
-	sleep 1
+	sleep 0.5
 	COINWALLETFIND=$(find ~+ -type f -name "*-wallet")
-	sleep 1
+	sleep 0.5
 
 	if [[ -f "$COINDFIND" ]]; then
 		coind=$(basename $COINDFIND)
@@ -947,7 +1001,7 @@ if [[ ("$precompiled" == "true") ]]; then
 		fi
 
 		sudo strip $COINDFIND
-		sleep 0.5
+		
 		sudo cp $COINDFIND /usr/bin
 		sudo chmod +x /usr/bin/${coind}
 		coindmv=true
@@ -956,9 +1010,9 @@ if [[ ("$precompiled" == "true") ]]; then
 		echo -e "$CYAN ----------------------------------------------------------------------------------- $COL_RESET"
 		echo
 		echo -e "$GREEN  Coind moving to => /usr/bin/$COL_RESET$YELLOW${coind} $COL_RESET"
-		sleep 0.5
+		
 	else
-		clear
+		clear;
 
 		echo -e "$CYAN --------------------------------------------------------------------------- 	$COL_RESET"
 		echo -e "$RED    ERROR																		$COL_RESET"
@@ -968,68 +1022,68 @@ if [[ ("$precompiled" == "true") ]]; then
 
 		sudo rm -r $STORAGE_ROOT/daemon_builder/temp_coin_builds/.lastcoin.conf
 		sudo rm -r $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
-		sudo rm -r source $STORAGE_ROOT/daemon_builder/.daemon_builder.my.cnf
+		sudo rm -r $STORAGE_ROOT/daemon_builder/.daemon_builder.my.cnf
 
 		exit;
 	fi
 
 	if [[ -f "$COINCLIFIND" ]]; then
 		sudo strip $COINCLIFIND
-		sleep 0.5
+		
 		sudo cp $COINCLIFIND /usr/bin
 		sudo chmod +x /usr/bin/${coincli}
 		coinclimv=true
 
 		echo -e "$GREEN  Coin-cli moving to => /usr/bin/$COL_RESET$YELLOW${coincli} $COL_RESET"
-		sleep 0.5
+		
 	fi
 
 	if [[ -f "$COINTXFIND" ]]; then
 		cointx=$(basename $COINTXFIND)
 		sudo strip $COINTXFIND
-		sleep 0.5
+		
 		sudo cp $COINTXFIND /usr/bin
 		sudo chmod +x /usr/bin/${cointx}
 		cointxmv=true
 
 		echo -e "$GREEN  Coin-tx moving to => /usr/bin/$COL_RESET$YELLOW${cointx} $COL_RESET"
-		sleep 0.5
+		
 	fi
 
 	if [[ -f "$COINUTILFIND" ]]; then
 		coinutil=$(basename $COINUTILFIND)
 		sudo strip $COINUTILFIND
-		sleep 0.5
+		
 		sudo cp $COINUTILFIND /usr/bin
 		sudo chmod +x /usr/bin/${coinutil}
 		coinutilmv=true
 
 		echo -e "$GREEN  Coin-tx moving to => /usr/bin/$COL_RESET$YELLOW${coinutil} $COL_RESET"
-		sleep 0.5
+		
 	fi
 
 	if [[ -f "$COINHASHFIND" ]]; then
 		coinhash=$(basename $COINHASHFIND)
 		sudo strip $COINHASHFIND
-		sleep 0.5
+		
 		sudo cp $COINHASHFIND /usr/bin
 		sudo chmod +x /usr/bin/${coinhash}
 		coinhashmv=true
 
 		echo -e "$GREEN  Coin-hash moving to => /usr/bin/$COL_RESET$YELLOW${coinwallet} $COL_RESET"
-		sleep 0.5
+		
 	fi
 
 	if [[ -f "$COINWALLETFIND" ]]; then
 		coinwallet=$(basename $COINWALLETFIND)
 		sudo strip $COINWALLETFIND
-		sleep 0.5
+		
 		sudo cp $COINWALLETFIND /usr/bin
 		sudo chmod +x /usr/bin/${coinwallet}
 		coinwalletmv=true
 
 		echo -e "$GREEN  Coin-wallet moving to => /usr/bin/$COL_RESET$YELLOW${coinwallet} $COL_RESET"
-		sleep 0.5
+		
 	fi
 	echo
 	echo -e "$CYAN --------------------------------------------------------------------------------------- $COL_RESET"
@@ -1039,62 +1093,62 @@ else
 	echo -e "$CYAN --------------------------------------------------------------------------------------- $COL_RESET"
 	echo
 	echo -e "$GREEN  Coin-tx moving to => /usr/bin/$COL_RESET$YELLOW${coind} $COL_RESET"
-	sleep 0.5
+	
 	sudo cp $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/${coind} /usr/bin
 	sudo strip /usr/bin/${coind}
 	coindmv=true
 
-	if [[ ("$ifcoincli" == "y" || "$ifcoincli" == "Y") ]]; then
+	if [[ ("${ifcoincli}" == "y" || "$ifcoincli}" == "Y") ]]; then
 		echo -e "$GREEN  Coin-tx moving to => /usr/bin/$COL_RESET$YELLOW${coincli} $COL_RESET"
-		sleep 0.5
+		
 		sudo cp $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/${coincli} /usr/bin
 		sudo strip /usr/bin/${coincli}
 		coinclimv=true
 	fi
 
-	if [[ ("$ifcointx" == "y" || "$ifcointx" == "Y") ]]; then
+	if [[ ("${ifcointx}" == "y" || "$ifcointx}" == "Y") ]]; then
 		echo -e "$GREEN  Coin-tx moving to => /usr/bin/$COL_RESET$YELLOW${cointx} $COL_RESET"
-		sleep 0.5
+		
 		sudo cp $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/${cointx} /usr/bin
 		sudo strip /usr/bin/${cointx}
 		cointxmv=true
 	fi
 
-	if [[ ("$ifcoinutil" == "y" || "$ifcoinutil" == "Y") ]]; then
+	if [[ ("${ifcoinutil}" == "y" || "$ifcoinutil}" == "Y") ]]; then
 		echo -e "$GREEN  Coin-tx moving to => /usr/bin/$COL_RESET$YELLOW${coinutil} $COL_RESET"
-		sleep 0.5
+		
 		sudo cp $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/${coinutil} /usr/bin
 		sudo strip /usr/bin/${coinutil}
 		coinutilmv=true
 	fi
 
-	if [[ ("$ifcoingtest" == "y" || "$ifcoingtest" == "Y") ]]; then
+	if [[ ("${ifcoingtest}" == "y" || "$ifcoingtest}" == "Y") ]]; then
 		echo -e "$GREEN  Coin-tx moving to => /usr/bin/$COL_RESET$YELLOW${coingtest} $COL_RESET"
-		sleep 0.5
+		
 		sudo cp $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/${coingtest} /usr/bin
 		sudo strip /usr/bin/${coingtest}
 		coingtestmv=true
 	fi
 
-	if [[ ("$ifcointools" == "y" || "$ifcointools" == "Y") ]]; then
+	if [[ ("${ifcointools}" == "y" || "$ifcointools}" == "Y") ]]; then
 		echo -e "$GREEN  Coin-tx moving to => /usr/bin/$COL_RESET$YELLOW${cointools} $COL_RESET"
-		sleep 0.5
+		
 		sudo cp $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/${cointools} /usr/bin
 		sudo strip /usr/bin/${cointools}
 		cointoolsmv=true
 	fi
 
-	if [[ ("$ifcoinhash" == "y" || "$ifcoinhash" == "Y") ]]; then
+	if [[ ("${ifcoinhash}" == "y" || "$ifcoinhash}" == "Y") ]]; then
 		echo -e "$GREEN  Coin-hash moving to => /usr/bin/$COL_RESET$YELLOW${coinhash} $COL_RESET"
-		sleep 0.5
+		
 		sudo cp $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/${coinhash} /usr/bin
 		sudo strip /usr/bin/${coinhash}
 		coinhashmv=true
 	fi
 
-	if [[ ("$ifcoinwallet" == "y" || "$ifcoinwallet" == "Y") ]]; then
+	if [[ ("${ifcoinwallet}" == "y" || "$ifcoinwallet}" == "Y") ]]; then
 		echo -e "$GREEN  Coin-wallet moving to => /usr/bin/$COL_RESET$YELLOW${coinwallet} $COL_RESET"
-		sleep 0.5
+		
 		sudo cp $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/${coinwallet} /usr/bin
 		sudo strip /usr/bin/${coinwallet}
 		coinwalletmv=true
@@ -1112,17 +1166,17 @@ if [[ "${YIIMPCONF}" == "true" ]]; then
 
 	sudo setfacl -m u:${USERSERVER}:rwx $STORAGE_ROOT/wallets
 	mkdir -p $STORAGE_ROOT/wallets/."${coind::-1}"
-	sleep 0.5
-	if [[ "$coinwalletmv" == "true" ]] ; then
+	
+	if [[ "$coinwalletmv}" == "true" ]] ; then
 		echo
 		echo -e "$CYAN ----------------------------------------------------------------------------------- 	$COL_RESET"
 		echo -e "$GREEN   Creating WALLET.DAT to => $STORAGE_ROOT/wallets/.${coind::-1}/wallet.dat $COL_RESET"
 		echo -e "$CYAN ----------------------------------------------------------------------------------- 	$COL_RESET"
 		echo
 		"${coinwallet}" -datadir=$STORAGE_ROOT/wallets/."${coind::-1}" -wallet=. create
-		sleep 0.5
+		
 	fi
-	sleep 0.5
+	
 else
 	# Make the new wallet folder have user paste the coin.conf and finally start the daemon
 	if [[ ! -e "${absolutepath}/wallets" ]]; then
@@ -1131,15 +1185,15 @@ else
 
 	sudo setfacl -m u:${USERSERVER}:rwx ${absolutepath}/wallets
 	mkdir -p ${absolutepath}/wallets/."${coind::-1}"
-	sleep 0.5
-	if [[ "$coinwalletmv" == "true" ]] ; then
+	
+	if [[ "$coinwalletmv}" == "true" ]] ; then
 		echo
 		echo -e "$CYAN ----------------------------------------------------------------------------------- 	$COL_RESET"
 		echo -e "$GREEN   Creating WALLET.DAT to => ${absolutepath}/wallets/.${coind::-1}/wallet.dat $COL_RESET"
 		echo -e "$CYAN ----------------------------------------------------------------------------------- 	$COL_RESET"
 		echo
 		"${coinwallet}" -datadir="${absolutepath}"/wallets/."${coind::-1}" -wallet=. create
-		sleep 0.5
+		
 	fi
 fi
 
@@ -1149,7 +1203,7 @@ if [[("$DAEMOND" != 'true')]]; then
 	echo -e "$GREEN   Adding dedicated port to ${coin^^}$COL_RESET"
 	echo -e "$CYAN --------------------------------------------------------------------------------------- 	$COL_RESET"
 	echo
-	sleep 0.5
+	
 
 	addport "CREATECOIN" "${coin^^}" "${coinalgo}"
 	
@@ -1191,64 +1245,64 @@ if [[("$DAEMOND" != 'true')]]; then
 		sudo nano ${absolutepath}/wallets/."${coind::-1}"/${coind::-1}.conf
 	fi
 
-	clear
+	clear;
 	cd $STORAGE_ROOT/daemon_builder
 fi
 
-clear
+clear;
 echo
 figlet -f slant -w 100 "    DaemonBuilder" | lolcat
 
 echo -e "$CYAN --------------------------------------------------------------------------- 	"
 echo -e "$CYAN    Starting ${coind::-1} $COL_RESET"
 
-if [[("$DAEMOND" == 'true')]]; then
+if [[("$DAEMOND}" == 'true')]]; then
 	echo -e "$COL_RESET$GREEN    UPDATE of ${coind::-1} is completed and running. $COL_RESET"
 else
 	echo -e "$COL_RESET$GREEN    Installation of ${coind::-1} is completed and running. $COL_RESET"
 fi
 
-if [[ "$coindmv" == "true" ]] ; then
+if [[ "$coindmv}" == "true" ]] ; then
 echo
 echo -e "$GREEN    Name of COIND :$COL_RESET $MAGENTA ${coind} $COL_RESET"
 echo -e "$GREEN    path in : $COL_RESET$YELLOW/usr/bin/${coind} $COL_RESET"
 fi
-if [[ "$coinclimv" == "true" ]] ; then
+if [[ "$coinclimv}" == "true" ]] ; then
 echo
 echo -e "$GREEN    Name of COIN-CLI :$COL_RESET $MAGENTA ${coincli} $COL_RESET"
 echo -e "$GREEN    path in : $COL_RESET$YELLOW/usr/bin/${coincli} $COL_RESET"
 fi
-if [[ "$cointxmv" == "true" ]] ; then
+if [[ "$cointxmv}" == "true" ]] ; then
 echo
 echo -e "$GREEN    Name of COIN-TX :$COL_RESET $MAGENTA ${cointx} $COL_RESET"
 echo -e "$GREEN    path in : $COL_RESET$YELLOW/usr/bin/${cointx} $COL_RESET"
 fi
-if [[ "$coingtestmv" == "true" ]] ; then
+if [[ "$coingtestmv}" == "true" ]] ; then
 echo
 echo -e "$GREEN    Name of COIN-TX :$COL_RESET $MAGENTA ${coingtest} $COL_RESET"
 echo -e "$GREEN    path in : $COL_RESET$YELLOW/usr/bin/${coingtest} $COL_RESET"
 fi
-if [[ "$coingtestmv" == "true" ]] ; then
+if [[ "$coingtestmv}" == "true" ]] ; then
 echo
 echo -e "$GREEN    Name of COIN-TX :$COL_RESET $MAGENTA ${coingtest} $COL_RESET"
 echo -e "$GREEN    path in : $COL_RESET$YELLOW/usr/bin/${coingtest} $COL_RESET"
 fi
-if [[ "$coinutilmv" == "true" ]] ; then
+if [[ "$coinutilmv}" == "true" ]] ; then
 echo
 echo -e "$GREEN    Name of COIN-TX :$COL_RESET $MAGENTA ${coinutil} $COL_RESET"
 echo -e "$GREEN    path in : $COL_RESET$YELLOW/usr/bin/${coinutil} $COL_RESET"
 fi
-if [[ "$cointoolsmv" == "true" ]] ; then
+if [[ "$cointoolsmv}" == "true" ]] ; then
 echo
 echo -e "$GREEN    Name of COIN-TX :$COL_RESET $MAGENTA ${cointools} $COL_RESET"
 echo -e "$GREEN    path in : $COL_RESET$YELLOW/usr/bin/${cointools} $COL_RESET"
 fi
-if [[ "$coinhashmv" == "true" ]] ; then
+if [[ "$coinhashmv}" == "true" ]] ; then
 echo
 echo -e "$GREEN    Name of COIN-HASH :$COL_RESET $MAGENTA ${coinhash} $COL_RESET"
 echo -e "$GREEN    path in : $COL_RESET$YELLOW/usr/bin/${coinhash} $COL_RESET"
 fi
-if [[ "$coinwalletmv" == "true" ]] ; then
+if [[ "$coinwalletmv}" == "true" ]] ; then
 echo
 echo -e "$GREEN    Name of COIN-WALLET :$COL_RESET $MAGENTA ${coinwallet} $COL_RESET"
 echo -e "$GREEN    path in : $COL_RESET$YELLOW/usr/bin/${coinwallet} $COL_RESET"
@@ -1274,7 +1328,7 @@ echo
 # If we made it this far everything built fine removing last coin.conf and build directory
 sudo rm -r $STORAGE_ROOT/daemon_builder/temp_coin_builds/.lastcoin.conf
 sudo rm -r $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}
-sudo rm -r source $STORAGE_ROOT/daemon_builder/.daemon_builder.my.cnf
+sudo rm -r $STORAGE_ROOT/daemon_builder/.daemon_builder.my.cnf
 if [[ -f "$ADDPORTCONF" ]]; then
 	sudo rm -r $STORAGE_ROOT/daemon_builder/.addport.cnf
 fi
