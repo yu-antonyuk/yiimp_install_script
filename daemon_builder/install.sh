@@ -5,12 +5,12 @@
 # web: https://afiniel.xyz
 # Program:
 #   Install Daemon Coin on Ubuntu 18.04/20.04
-#   v0.8.2 (2023-01-04)
+#   v0.8.3 (2023-01-04)
 #
 ################################################################################
 
 if [ -z "${TAG}" ]; then
-	TAG=v0.8.2
+	TAG=v0.8.3
 fi
 
 clear
