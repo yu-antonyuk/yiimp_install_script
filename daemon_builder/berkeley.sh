@@ -39,7 +39,7 @@ sleep 1
 sudo sed -i 's#distroserver#'$DISTRO'#' conf/daemonbuilder.sh
 sleep 1
 
-source /etc/yiimpooldonation.conf
+source /etc/yiimpoolversion.conf
 source /etc/functions.sh
 source /etc/yiimpool.conf
 
@@ -48,7 +48,7 @@ STRATUM_DIR="$STORAGE_ROOT/yiimp/site/stratum"
 # Set Function file.
 FUNCTIONFILE=daemonbuilder.sh
 # Set version tag
-TAG="$VERSION
+TAG="$VERSION"
 
 sudo mkdir -p $STORAGE_ROOT/yiimp/yiimp_setup/tmp
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
