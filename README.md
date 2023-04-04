@@ -137,7 +137,8 @@ yiimp
 <ul>
   <li>BTC: bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y</li>
   <li>BCH: qzz0aff2k0xnwyzg7k9fcxlndtaj4wa65uxteqe84m</li>
-  <li>DOGE: DSzcmyCRi7JeN4XUiV2qYhRQAydNv7A1Yb</li>
+  <li>DOGE: DH6Fg8m9okqf9vZmyVCR4rYf1rRb2r4afj</li>
   <li>LTC: ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw</li>
-  <li>ETH: 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB</li>
+  <li>BEP20-BNB: 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB</li>
+  <li>KASPA: kaspa:qrmlud0fs4kxq6yynuxwmrqy8zjhvl6c6rtdv4hkze6qx69cysdjw79uep0mt</li>
 </ul>
