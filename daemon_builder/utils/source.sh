@@ -792,8 +792,7 @@ fi
 clear
 
 # LS the SRC dir to have user input bitcoind and bitcoin-cli names
-if [[ ! ("$precompiled}" == "true") ]]; then
-    cd "$STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/${repzipcoin}/"
+if [[ ! ("$precompiled" == "true") ]]; then
 
 	cd $STORAGE_ROOT/daemon_builder/temp_coin_builds/${coindir}/src/
 	echo
