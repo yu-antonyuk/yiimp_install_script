@@ -19,7 +19,7 @@
 <p>Designed for both new and experienced users with clear installation instructions and comprehensive documentation.</p>
 <h2 align="left">⚙️ Requirements</h2>
 <ul>
-  <li>Fresh Ubuntu 18.04 VPS (16.04 supported, but not recommended)</li>
+  <li>Fresh Ubuntu 18.04 VPS</li>
   <li>Minimum 4GB RAM (8GB or higher recommended)</li>
 </ul>
 <h2 align="left">ℹ️ DaemonBuilder</h2>
