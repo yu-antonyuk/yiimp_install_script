@@ -9,7 +9,7 @@
 #########################################################
 
 if [ -z "${TAG}" ]; then
-	TAG=v0.8.6
+	TAG=v0.8.7
 fi
 
 echo 'VERSION='"${TAG}"'' | sudo -E tee /etc/yiimpoolversion.conf >/dev/null 2>&1
