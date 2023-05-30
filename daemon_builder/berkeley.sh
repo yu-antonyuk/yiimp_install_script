@@ -133,7 +133,7 @@ echo
 
 echo -e "$MAGENTA => Building bls-signatures$GREEN <= $COL_RESET"
 cd $STORAGE_ROOT/yiimp/yiimp_setup/tmp
-hide_output sudo wget 'https://github.com/codablock/bls-signatures/archive/v20181101.zip'
+hide_output sudo wget 'https://github.com/dashpay/bls-signatures/archive/v20181101.zip'
 hide_output sudo unzip v20181101.zip
 cd bls-signatures-20181101
 hide_output sudo cmake .
