@@ -216,5 +216,4 @@ ETHDEP='"${ETHDEP}"'
 DOGEDEP='"${DOGEDEP}"''| sudo -E tee $STORAGE_ROOT/daemon_builder/conf/info.sh >/dev/null 2>&1
 hide_output sudo chmod +x $STORAGE_ROOT/daemon_builder/conf/info.sh
 
-
 cd $HOME/yiimp_install_script/yiimp_single

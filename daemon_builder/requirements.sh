@@ -64,7 +64,7 @@ libgmp-dev cmake libunbound-dev libsodium-dev libunwind8-dev liblzma-dev libread
 libusb-1.0-0-dev libudev-dev libboost-chrono-dev libboost-date-time-dev libboost-filesystem-dev libboost-locale-dev libboost-program-options-dev \
 libboost-regex-dev libboost-serialization-dev libboost-system-dev libboost-thread-dev python3 ccache doxygen graphviz default-libmysqlclient-dev \
 libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libnatpmp-dev systemtap-sdt-dev qtwayland5 libdb++-dev qt5-default \
-bzip2-doc libbz2-dev librsvg2-bin libtiff-tools bzip2-doc libtiff-opengl
+bzip2-doc libbz2-dev librsvg2-bin libtiff-tools bzip2-doc libtiff-opengl \
 make curl g++-multilib binutils-gold bsdmainutils patch bison
 
 
