@@ -825,35 +825,26 @@ else
 fi
 
 if [[ "$precompiled" == "true" ]]; then
-    COIN_FILES=("*.tar.gz" "*.zip" "*.7z")
-    COIN_FILE=""
+    COINTARGZ=$(find ~+ -type f -name "*.tar.gz")
+    COINZIP=$(find ~+ -type f -name "*.zip")
+    COIN7Z=$(find ~+ -type f -name "*.7z")
 
-    for COIN_PATTERN in "${COIN_FILES[@]}"; do
-        COIN_FILES_FOUND=($(find ~+ -type f -name "$COIN_PATTERN" 2>/dev/null))
-        if [[ ${#COIN_FILES_FOUND[@]} -gt 0 ]]; then
-            COIN_FILE="${COIN_FILES_FOUND[0]}"
-            break
-        fi
-    done
-
-    if [[ -n "$COIN_FILE" ]]; then
-        case "$COIN_FILE" in
-            *.tar.gz)
-                sudo tar xzvf "$COIN_FILE" -C newcoin
-                ;;
-            *.zip)
-                sudo unzip -q "$COIN_FILE" -d newcoin
-                ;;
-            *.7z)
-                sudo 7z x "$COIN_FILE" -o"newcoin"
-                ;;
-        esac
+    if [[ -f "$COINZIP" ]]; then
+        for i in $(ls -f *.zip); do coinzipped=${i%%}; done
+        sudo unzip -q "$coinzipped" -d newcoin
+        for i in $(ls -d */); do repzipcoin=${i%%/}; done
+    elif [[ -f "$COINTARGZ" ]]; then
+        for i in $(ls -f *.tar.gz); do coinzipped=${i%%}; done
+        sudo tar xzvf "$coinzipped"
+        for i in $(ls -d */); do repzipcoin=${i%%/}; done
+    elif [[ -f "$COIN7Z" ]]; then
+        for i in $(ls -f *.7z); do coinzipped=${i%%}; done
+        sudo 7z x "$coinzipped" -o"newcoin"
+        for i in $(ls -d */); do repzipcoin=${i%%/}; done
     else
-        echo -e "$RED => No valid zipped file found.$COL_RESET"
+        echo -e "$RED => This is not a valid zipped file.$COL_RESET"
     fi
 fi
-
-
 
 clear
 
