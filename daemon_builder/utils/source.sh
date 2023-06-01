@@ -844,6 +844,9 @@ if [[ "$precompiled" == "true" ]]; then
     else
         echo -e "$RED => This is not a valid zipped file.$COL_RESET"
     fi
+
+    # Change ownership of the newcoin directory to the current user
+    sudo chown -R $USER:$USER newcoin
 fi
 
 clear
