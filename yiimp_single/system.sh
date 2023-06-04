@@ -59,22 +59,23 @@ fi
 echo
 echo -e "$MAGENTA => Installing CertBot PPA <= $COL_RESET"
 hide_output sudo add-apt-repository -y ppa:certbot/certbot
-hide_output sudo apt-get -y update
+hide_output sudo apt-get update
 echo -e "$GREEN => Complete$COL_RESET"
 
 # MariaDB
-echo
-echo -e "$MAGENTA =>  Installing MariaDB <= $COL_RESET"
-hide_output sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-if [[ ("$DISTRO" == "18") ]]; then
+#echo
+#echo -e "$MAGENTA =>  Installing MariaDB <= $COL_RESET"
+#hide_output sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+#if [[ ("$DISTRO" == "18") ]]; then
 	sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu bionic main' >/dev/null 2>&1
-else
+#else
 	sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
-fi
-echo -e "$GREEN => Complete$COL_RESET"
+#fi
+#echo -e "$GREEN => Complete$COL_RESET"
 
 # Upgrade System Files
 hide_output sudo apt-get update
+hide_output sudo apt-get upgrade -y
 
 if [ ! -f /boot/grub/menu.lst ]; then
 	apt_get_quiet upgrade
@@ -194,6 +195,16 @@ build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainut
 libpsl-dev libnghttp2-dev automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev \
 libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached \
 php8.1-mysql
+fi
+
+if [[ ("$DISTRO" == "20") ]]; then
+		apt_install php8.2-fpm php8.2-opcache php8.2 php8.2-common php8.2-gd php8.2-mysql php8.2-imap php8.2-cli \
+		php8.2-cgi php8.2-curl php8.2-intl php8.2-pspell \
+		php8.2-sqlite3 php8.2-tidy php8.2-xmlrpc php8.2-xsl php8.2-zip \
+		php8.2-mbstring php8.2-memcache php8.2-memcached
+		# sleep 2
+		# hide_output sudo systemctl start php8.2-fpm
+		# sudo systemctl status php8.2-fpm | sed -n "1,3p"
 fi
 
 # Suppress Upgrade Prompts
