@@ -31,7 +31,7 @@ echo
 # echo -e "$YELLOW =>  Setting TimeZone to$GREEN UTC <= $COL_RESET"
 if [ ! -f /etc/timezone ]; then
 	echo "Setting timezone to UTC."
-	echo "Etc/UTC" /etc/timezone >sudo
+	sudo echo "Etc/UTC" > /etc/timezone
 	restart_service rsyslog
 fi
 echo
