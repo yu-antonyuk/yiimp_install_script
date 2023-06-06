@@ -39,22 +39,50 @@ echo
 sudo apt-get install -y software-properties-common build-essential
 
 # CertBot
-echo
-echo -e "$MAGENTA => Installing CertBot PPA <= $COL_RESET"
-sudo add-apt-repository -y ppa:certbot/certbot
-sudo apt-get update
-echo -e "$GREEN => Complete$COL_RESET"
+if [[ ("$DISTRO" == "16") ]]; then
+	echo
+	echo -e "$MAGENTA => Installing CertBot PPA <= $COL_RESET"
+	sudo add-apt-repository -y ppa:certbot/certbot
+	sudo apt-get update
+	echo -e "$GREEN => Complete$COL_RESET"
+fi
 
+if [[ ("$DISTRO" == "18") ]]; then
+	echo
+	echo -e "$MAGENTA => Installing CertBot PPA <= $COL_RESET"
+	sudo add-apt-repository -y ppa:certbot/certbot
+	sudo apt-get update
+	echo -e "$GREEN => Complete$COL_RESET"
+fi
+
+if [[ ("$DISTRO" == "20") ]]; then
+	echo
+	echo -e "$MAGENTA => Installing CertBot PPA <= $COL_RESET"
+	sudo apt install -y snapd
+	sudo snap install core; sudo snap refresh core
+	sudo snap install --classic certbot
+	sudo ln -s /snap/bin/certbot /usr/bin/certbot
+
+	echo -e "$GREEN => Complete$COL_RESET"
+fi
 # MariaDB
-#echo
-#echo -e "$MAGENTA =>  Installing MariaDB <= $COL_RESET"
-# sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
-#if [[ ("$DISTRO" == "18") ]]; then
-#	sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu bionic main' >/dev/null 2>&1
-#else
-#	sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
-#fi
-#echo -e "$GREEN => Complete$COL_RESET"
+echo
+echo -e "$MAGENTA =>  Installing MariaDB <= $COL_RESET"
+sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
+
+if [[ "$DISTRO" == "18" ]]; then
+    sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu bionic main' >/dev/null 2>&1
+fi
+
+if [[ "$DISTRO" == "20" ]]; then
+    sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu focal main' >/dev/null 2>&1
+fi
+
+if [[ "$DISTRO" == "16" ]]; then
+    sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
+fi
+
+echo -e "$GREEN => Complete$COL_RESET"
 
 # Upgrade System Files
 sudo apt-get update
@@ -78,7 +106,7 @@ echo -e "$MAGENTA => Installing Base system packages <= $COL_RESET"
 sudo apt-get install -y python3 python3-dev python3-pip \
 	wget curl git sudo coreutils bc \
 	haveged pollinate unzip \
-	unattended-upgrades cron ntp fail2ban screen rsyslog lolcat
+	unattended-upgrades cron ntp fail2ban screen rsyslog lolcat nginx
 
 # ### Seed /dev/urandom
 echo -e "$GREEN => Complete$COL_RESET"
