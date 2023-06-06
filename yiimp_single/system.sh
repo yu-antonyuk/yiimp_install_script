@@ -239,7 +239,7 @@ if [[ ("$CoinPort" == "yes") ]]; then
 	sudo git checkout dev >/dev/null 2>&1
 fi
 
-service nginx restart
+hide_output service nginx restart
 
 set +eu +o pipefail
 cd $HOME/yiimp_install_script/yiimp_single
