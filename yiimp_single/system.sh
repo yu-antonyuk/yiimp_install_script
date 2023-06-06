@@ -62,6 +62,7 @@ if [[ ("$DISTRO" == "20") ]]; then
 	hide_output sudo snap install core; sudo snap refresh core
 	hide_output sudo snap install --classic certbot
 	sudo ln -s /snap/bin/certbot /usr/bin/certbot
+	sleep 0.5
 	hide_output sudo apt install certbot -y
 
 	echo -e "$GREEN => Complete$COL_RESET"
