@@ -185,7 +185,7 @@ sleep 3
 hide_output sudo apt -y update
 
 if [ ! -f /etc/apt/sources.list.d/ondrej-php-bionic.list ]; then
-	sudo add-apt-repository -y ppa:ondrej/php
+	hide_output sudo add-apt-repository -y ppa:ondrej/php
 fi
 hide_output sudo apt -y update
 
