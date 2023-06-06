@@ -5,35 +5,21 @@
 # Source https://mailinabox.email/ https://github.com/mail-in-a-box/mailinabox   #
 # Updated by Afiniel for yiimpool use...                                         #
 ##################################################################################
-
-if [ "`lsb_release -d | sed 's/.*:\s*//' | sed 's/18\.04\.[0-9]/18.04/' `" == "Ubuntu 18.04 LTS" ]; then
-  DISTRO=18
-  sudo chmod g-w /etc /etc/default /usr
-elif [ "`lsb_release -d | sed 's/.*:\s*//' | sed 's/20\.04\.[0-9]/20.04/' `" == "Ubuntu 20.04 LTS" ]; then
+if [ "$(lsb_release -d | sed 's/.*:\s*//' | sed 's/20\.04\.[0-9]/20.04/')" == "Ubuntu 20.04 LTS" ]; then
   DISTRO=20
   sudo chmod g-w /etc /etc/default /usr
-elif [ "`lsb_release -d | sed 's/.*:\s*//' | sed 's/16\.04\.[0-9]/16.04/' `" == "Ubuntu 16.04 LTS" ]; then
+
+elif [ "$(lsb_release -d | sed 's/.*:\s*//' | sed 's/18\.04\.[0-9]/18.04/')" == "Ubuntu 18.04 LTS" ]; then
+  DISTRO=18
+  sudo chmod g-w /etc /etc/default /usr
+
+elif [ "$(lsb_release -d | sed 's/.*:\s*//' | sed 's/16\.04\.[0-9]/16.04/')" == "Ubuntu 16.04 LTS" ]; then
   DISTRO=16
   sudo chmod g-w /etc /etc/default /usr
+
 else
   echo "This script only supports Ubuntu 16.04 LTS, 18.04 LTS, and 20.04 LTS."
   exit
-fi
-
-TOTAL_PHYSICAL_MEM=$(head -n 1 /proc/meminfo | awk '{print $2}')
-if [ $TOTAL_PHYSICAL_MEM -lt 1436000 ]; then
-  if [ ! -d /vagrant ]; then
-    TOTAL_PHYSICAL_MEM=$(expr \( \( $TOTAL_PHYSICAL_MEM \* 1024 \) / 1000 \) / 1000)
-    echo "Your Crypto-Pool Server needs more memory (RAM) to function properly."
-    echo "Please provision a machine with at least 1536 GB, 6 GB recommended."
-    echo "This machine has $TOTAL_PHYSICAL_MEM MB memory."
-    exit
-  fi
-fi
-
-if [ $TOTAL_PHYSICAL_MEM -lt 1436000 ]; then
-  echo "WARNING: Your Crypto-Pool Server has less than 1.5 GB of memory."
-  echo " It might run unreliably when under heavy load."
 fi
 
 # Check if swap is needed.
@@ -45,11 +31,11 @@ TOTAL_PHYSICAL_MEM=$(head -n 1 /proc/meminfo | awk '{print $2}')
 AVAILABLE_DISK_SPACE=$(df / --output=avail | tail -n 1)
 if
   [ -z "$SWAP_MOUNTED" ] &&
-  [ -z "$SWAP_IN_FSTAB" ] &&
-  [ ! -e /swapfile ] &&
-  [ -z "$ROOT_IS_BTRFS" ] &&
-  [ $TOTAL_PHYSICAL_MEM -lt 1536000 ] &&
-  [ $AVAILABLE_DISK_SPACE -gt 5242880 ]
+    [ -z "$SWAP_IN_FSTAB" ] &&
+    [ ! -e /swapfile ] &&
+    [ -z "$ROOT_IS_BTRFS" ] &&
+    [ $TOTAL_PHYSICAL_MEM -lt 1536000 ] &&
+    [ $AVAILABLE_DISK_SPACE -gt 5242880 ]
 then
   echo "Adding a swap file to the system..."
 
