@@ -164,7 +164,7 @@ hide_output sudo apt-get update
 
 # Installing Installing php7.3
 echo
-echo -e "$CYAN => Installing php7.3 : $COL_RESET"
+echo -e "$CYAN => Installing php7.3 $COL_RESET"
 sleep 3
 
 hide_output sudo apt -y update
