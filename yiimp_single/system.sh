@@ -221,7 +221,7 @@ if [[ ("$DISTRO" == "20") ]]; then
 fi
 
 # Suppress Upgrade Prompts
-# When Ubuntu 20 comes out, we don't want users to be prompted to upgrade,
+# When Ubuntu 22 comes out, we don't want users to be prompted to upgrade,
 # because we don't yet support it.
 if [ -f /etc/update-manager/release-upgrades ]; then
 	sudo editconf.py /etc/update-manager/release-upgrades Prompt=never
