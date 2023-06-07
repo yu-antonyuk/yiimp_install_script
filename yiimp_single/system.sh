@@ -56,8 +56,6 @@ elif [[ "$DISTRO" == "20" ]]; then
 fi
 
 # MariaDB
-echo
-echo -e "$MAGENTA =>  Installing MariaDB <= $COL_RESET"
 hide_output sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 
 if [[ "$DISTRO" == "18" ]]; then
@@ -71,8 +69,6 @@ fi
 if [[ "$DISTRO" == "16" ]]; then
     sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
 fi
-
-echo -e "$GREEN => Complete$COL_RESET"
 
 # Upgrade System Files
 hide_output sudo apt-get update
@@ -180,36 +176,37 @@ hide_output sudo apt -y update
 
 
 if [[ ("$DISTRO" == "18") ]]; then
-apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd \
-php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi \
-php-pear php-auth-sasl mcrypt imagemagick libruby \
-php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3 \
-php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache \
-php-imagick php-gettext php7.3-zip php7.3-mbstring \
-fail2ban ntpdate python3 python3-dev python3-pip \
-curl git sudo coreutils pollinate unzip unattended-upgrades cron \
-pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev \
-libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev \
-build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev \
-automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev \
-libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached \
-php8.1-mysql
+apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd
+apt_install php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi
+apt_install php-pear php-auth-sasl mcrypt imagemagick libruby
+apt_install php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3
+apt_install php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache
+apt_install php-imagick php-gettext php7.3-zip php7.3-mbstring
+apt_install fail2ban ntpdate python3 python3-dev python3-pip
+apt_install curl git sudo coreutils pollinate unzip unattended-upgrades cron
+apt_install pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev
+apt_install libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev
+apt_install build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev
+apt_install automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev
+apt_install libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached
+apt_install php8.1-mysql
 else
-apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd \
-php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi \
-php-pear php-auth-sasl mcrypt imagemagick libruby \
-php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3 \
-php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache \
-php-imagick php-gettext php7.3-zip php7.3-mbstring \
-fail2ban ntpdate python3 python3-dev python3-pip \
-curl git sudo coreutils pollinate unzip unattended-upgrades cron \
-pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev \
-libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev \
-build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev \
-libpsl-dev libnghttp2-dev automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev \
-libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached \
-php8.1-mysql
+apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd
+apt_install php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi
+apt_install php-pear php-auth-sasl mcrypt imagemagick libruby
+apt_install php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3
+apt_install php7.3-tidy php7.3-xmlrpc php7.3-xsl memcached php-memcache
+apt_install php-imagick php-gettext php7.3-zip php7.3-mbstring
+apt_install fail2ban ntpdate python3 python3-dev python3-pip
+apt_install curl git sudo coreutils pollinate unzip unattended-upgrades cron
+apt_install pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev
+apt_install libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev
+apt_install build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev
+apt_install libpsl-dev libnghttp2-dev automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev
+apt_install libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached
+apt_install php8.1-mysql
 fi
+
 if [[ ("$DISTRO" == "20") ]]; then
 	apt_install php8.2-fpm php8.2-opcache php8.2 php8.2-common php8.2-gd php8.2-mysql php8.2-imap php8.2-cli
 	apt_install php8.2-cgi php8.2-curl php8.2-intl php8.2-pspell
