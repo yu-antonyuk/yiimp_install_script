@@ -19,7 +19,7 @@
 <h2 align="left">⚙️ Requirements</h2>
 <ul>
   <li>Fresh Ubuntu 18.04 or 20.04 VPS</li>
-  <li>Minimum 4GB RAM (8GB or higher recommended)</li>
+  <li>Minimum 8GB RAM</li>
 </ul>
 <h2 align="left">ℹ️ DaemonBuilder</h2>
 <p>A tool that downloads and compiles coins. To use, type "daemonbuilder" in terminal. Compile time depends on VPS CPU power.</p>
