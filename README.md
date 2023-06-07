@@ -8,7 +8,7 @@
   <img src="./.assets/motd.png" alt="motd" width="500" height="450">
 </p>
 <h2 align="center">Description</h2>
-<p>Yiimpool Yiimp Installer is an automated script that sets up a fully functional Yiimp mining pool on an Ubuntu 18.04 VPS. The script includes necessary dependencies, configurations, and security settings to get your pool up and running. Features include:</p>
+<p>Yiimpool Yiimp Installer is an automated script that sets up a fully functional Yiimp mining pool on an Ubuntu 18.04 or 20.04 VPS. The script includes necessary dependencies, configurations, and security settings to get your pool up and running. Features include:</p>
 <ul>
   <li>Automatic coin daemon compilation using DaemonBuilder</li>
   <li>Support for custom ports</li>
@@ -19,7 +19,7 @@
 <p>Designed for both new and experienced users with clear installation instructions and comprehensive documentation.</p>
 <h2 align="left">⚙️ Requirements</h2>
 <ul>
-  <li>Fresh Ubuntu 18.04 VPS</li>
+  <li>Fresh Ubuntu 18.04 or 20.04 VPS</li>
   <li>Minimum 4GB RAM (8GB or higher recommended)</li>
 </ul>
 <h2 align="left">ℹ️ DaemonBuilder</h2>
