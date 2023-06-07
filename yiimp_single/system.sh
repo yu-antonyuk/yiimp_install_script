@@ -190,6 +190,7 @@ apt_install build-essential libtool autotools-dev automake pkg-config libevent-d
 apt_install automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev
 apt_install libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached
 apt_install php8.1-mysql
+apt_install libssh-dev libbrotli-dev
 else
 apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd
 apt_install php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi
@@ -205,6 +206,7 @@ apt_install build-essential libtool autotools-dev automake pkg-config libevent-d
 apt_install libpsl-dev libnghttp2-dev automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev
 apt_install libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached
 apt_install php8.1-mysql
+apt_install libssh-dev libbrotli-dev
 fi
 
 if [[ ("$DISTRO" == "20") ]]; then
@@ -212,6 +214,7 @@ if [[ ("$DISTRO" == "20") ]]; then
 	apt_install php8.2-cgi php8.2-curl php8.2-intl php8.2-pspell
 	apt_install php8.2-sqlite3 php8.2-tidy php8.2-xmlrpc php8.2-xsl php8.2-zip
 	apt_install php8.2-mbstring php8.2-memcache php8.2-memcached certbot
+	apt_install libssh-dev libbrotli-dev
 	# sleep 2
 	#  sudo systemctl start php8.2-fpm
 	# sudo systemctl status php8.2-fpm | sed -n "1,3p"
