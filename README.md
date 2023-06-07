@@ -26,7 +26,7 @@
 <h2 align="left">💾 Installation</h2>
 <h3 align="left">Installer will ask:</h3>
 <ul>
-  <li>Using domain name?</li>
+  <li>Using domain name</li>
   <li>Using sub-domain as main domain?</li>
   <li>Domain Name</li>
   <li>Stratum Domain</li>
@@ -37,6 +37,7 @@
   <li>DB Panel User Password</li>
   <li>DB Stratum Password</li>
   <li>Admin Portal Access Location</li>
+  <li>Stratum to be built with autoexchange enable</li>
 </ul>
 <h4 align="left">To install:</h4>
 
