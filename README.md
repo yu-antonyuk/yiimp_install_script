@@ -14,7 +14,6 @@
   <li>Support for custom ports</li>
   <li>SSL certificate installation from Let's Encrypt</li>
   <li>Intuitive web interface for managing your pool</li>
-  <li>Built-in DaemonBuilder tool for compiling and adding new coins</li>
 </ul>
 <p>Designed for both new and experienced users with clear installation instructions and comprehensive documentation.</p>
 <h2 align="left">⚙️ Requirements</h2>
