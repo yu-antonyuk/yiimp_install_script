@@ -39,32 +39,22 @@ echo
 hide_output sudo apt-get install -y software-properties-common build-essential
 
 # CertBot
-if [[ ("$DISTRO" == "16") ]]; then
-	echo
-	echo -e "$MAGENTA => Installing CertBot PPA <= $COL_RESET"
-	hide_output sudo add-apt-repository -y ppa:certbot/certbot
-	hide_output sudo apt-get update
-	echo -e "$GREEN => Complete$COL_RESET"
+echo
+
+if [[ "$DISTRO" == "16" || "$DISTRO" == "18" ]]; then
+    echo -e "$MAGENTA => Installing CertBot PPA <= $COL_RESET"
+    hide_output sudo add-apt-repository -y ppa:certbot/certbot
+    hide_output sudo apt-get update
+    echo -e "$GREEN => Complete$COL_RESET"
+elif [[ "$DISTRO" == "20" ]]; then
+    echo -e "$MAGENTA => Installing CertBot PPA <= $COL_RESET"
+    hide_output sudo apt install -y snapd
+    hide_output sudo snap install core; sudo snap refresh core
+    hide_output sudo snap install --classic certbot
+    sudo ln -s /snap/bin/certbot /usr/bin/certbot
+    echo -e "$GREEN => Complete$COL_RESET"
 fi
 
-if [[ ("$DISTRO" == "18") ]]; then
-	echo
-	echo -e "$MAGENTA => Installing CertBot PPA <= $COL_RESET"
-	hide_output sudo add-apt-repository -y ppa:certbot/certbot
-	hide_output sudo apt-get update
-	echo -e "$GREEN => Complete$COL_RESET"
-fi
-
-if [[ ("$DISTRO" == "20") ]]; then
-	echo
-	echo -e "$MAGENTA => Installing CertBot PPA <= $COL_RESET"
-	hide_output sudo apt install -y snapd
-	hide_output sudo snap install core; sudo snap refresh core
-	hide_output sudo snap install --classic certbot
-	sudo ln -s /snap/bin/certbot /usr/bin/certbot
-
-	echo -e "$GREEN => Complete$COL_RESET"
-fi
 # MariaDB
 echo
 echo -e "$MAGENTA =>  Installing MariaDB <= $COL_RESET"
