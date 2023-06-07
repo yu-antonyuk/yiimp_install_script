@@ -158,12 +158,14 @@ config_changes=(
 
 # Add bind-address if wireguard is true.
 if [[ "$wireguard" == "true" ]]; then
-  config_changes+=('bind-address='"$DBInternalIP")
+  config_changes+=("bind-address=$DBInternalIP")
 fi
 
-# Apply changes to MariaDB configuration
-sudo bash -c "echo '$(echo "${config_changes[@]}" | tr ' ' '\n')' >> /etc/mysql/my.cnf"
+# Prepare the configuration changes as a string with each option on a separate line
+config_string=$(printf "%s\n" "${config_changes[@]}")
 
+# Apply changes to MariaDB configuration
+sudo bash -c "echo \"$config_string\" >> /etc/mysql/my.cnf"
 
 # Restart MariaDB
 restart_service mysql
