@@ -133,12 +133,14 @@ yiimp
 
 <!-- 🎁 Support -->
 <h3>Support</h3>
-<p>If you find this script useful, please consider donating to the following addresses:</p>
+<p>If you want to support our project, you can make a donation to any of the following addresses:</p>
 <ul>
-  <li>BTC: bc1q582gdvyp09038hp9n5sfdtp0plkx5x3yrhq05y</li>
-  <li>BCH: qzz0aff2k0xnwyzg7k9fcxlndtaj4wa65uxteqe84m</li>
-  <li>DOGE: DH6Fg8m9okqf9vZmyVCR4rYf1rRb2r4afj</li>
-  <li>LTC: ltc1qqw7cv4snx9ctmpcf25x26lphqluly4w6m073qw</li>
-  <li>BEP20-BNB: 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB</li>
-  <li>KASPA: kaspa:qrmlud0fs4kxq6yynuxwmrqy8zjhvl6c6rtdv4hkze6qx69cysdjw79uep0mt</li>
+  <li>BTC: bc1q3k7ag4tf45x60swzuk3djvkelw3xdfkgpjxjm0</li>
+  <li>ETH: 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB</li>
+  <li>DOGE: D7bjqNwyevTYK9JDZbJPQJXbd1b7PosPDT</li>
+  <li>KASPA: kaspa:qqdwrqfn6n0hf0gsycrqqmv8z7x6s0wgh4x6kat6nzgyksf525w0ups70mrz0</li>
+  <li>BEP-20: 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB</li>
+  <li>Polygon: 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB</li>
 </ul>
+<p>We appreciate your generosity and support. Thank you!</p>
+
