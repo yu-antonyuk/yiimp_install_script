@@ -58,21 +58,20 @@ fi
 # MariaDB
 hide_output sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 
-if [[ "$DISTRO" == "18" ]]; then
-    sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu bionic main' >/dev/null 2>&1
-fi
-
-if [[ "$DISTRO" == "20" ]]; then
-    sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu focal main' >/dev/null 2>&1
-fi
-
-if [[ "$DISTRO" == "16" ]]; then
-    sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
-fi
+case "$DISTRO" in
+    "18")
+        sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu bionic main' >/dev/null 2>&1
+        ;;
+    "20")
+        sudo add-apt-repository 'deb [arch=amd64,arm64,ppc64el,s390x] http://mirror.one.com/mariadb/repo/10.4/ubuntu focal main' >/dev/null 2>&1
+        ;;
+    "16")
+        sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
+        ;;
+esac
 
 # Upgrade System Files
 hide_output sudo apt-get update
-hide_output sudo apt-get upgrade -y
 
 if [ ! -f /boot/grub/menu.lst ]; then
 	apt_get_quiet upgrade
@@ -175,8 +174,8 @@ fi
 hide_output sudo apt -y update
 
 
-if [[ ("$DISTRO" == "18") ]]; then
-apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd
+if [[ "$DISTRO" == "16" || "$DISTRO" == "18" ]]; then
+apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd
 apt_install php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi
 apt_install php-pear php-auth-sasl mcrypt imagemagick libruby
 apt_install php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3
@@ -192,7 +191,7 @@ apt_install libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libi
 apt_install php8.1-mysql
 apt_install libssh-dev libbrotli-dev
 else
-apt_install php7.3-fpm php7.3-opcache php7.3-fpm php7.3 php7.3-common php7.3-gd
+apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd
 apt_install php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi
 apt_install php-pear php-auth-sasl mcrypt imagemagick libruby
 apt_install php7.3-curl php7.3-intl php7.3-pspell php7.3-recode php7.3-sqlite3
@@ -203,7 +202,7 @@ apt_install curl git sudo coreutils pollinate unzip unattended-upgrades cron
 apt_install pwgen libgmp3-dev libmysqlclient-dev libcurl4-gnutls-dev
 apt_install libkrb5-dev libldap2-dev libidn11-dev gnutls-dev librtmp-dev
 apt_install build-essential libtool autotools-dev automake pkg-config libevent-dev bsdmainutils libssl-dev
-apt_install libpsl-dev libnghttp2-dev automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev
+apt_install automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev
 apt_install libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached
 apt_install php8.1-mysql
 apt_install libssh-dev libbrotli-dev
@@ -215,9 +214,9 @@ if [[ ("$DISTRO" == "20") ]]; then
 	apt_install php8.2-sqlite3 php8.2-tidy php8.2-xmlrpc php8.2-xsl php8.2-zip
 	apt_install php8.2-mbstring php8.2-memcache php8.2-memcached certbot
 	apt_install libssh-dev libbrotli-dev
-	# sleep 2
-	#  sudo systemctl start php8.2-fpm
-	# sudo systemctl status php8.2-fpm | sed -n "1,3p"
+	sleep 2
+	sudo systemctl start php8.2-fpm
+	 sudo systemctl status php8.2-fpm | sed -n "1,3p"
 fi
 
 # Suppress Upgrade Prompts
@@ -229,11 +228,14 @@ if [ -f /etc/update-manager/release-upgrades ]; then
 fi
 
 # fix CDbConnection failed to open the DB connection.
-# echo
-echo -e "$CYAN => Fixing DBconnection issue $COL_RESET"
-# sudo apt-get install -y php8.1-mysql
+if [[ "$DISTRO" == "16" || "$DISTRO" == "18" ]]; then
+echo -e "$CYAN => Fixing DBconnection issue... $COL_RESET"
 sudo update-alternatives --set php /usr/bin/php7.3
-echo
+
+elif [[ "$DISTRO" == "20" ]]; then
+echo -e "$CYAN => Fixing DBconnection issue... $COL_RESET"
+sudo update-alternatives --set php /usr/bin/php7.3
+fi
 
 echo
 echo -e "$CYAN =>  Clone Yiimp Repo <= $COL_RESET"
@@ -245,6 +247,7 @@ if [[ ("$CoinPort" == "yes") ]]; then
 fi
 
 hide_output sudo service nginx restart
+sleep 0.5
 
 set +eu +o pipefail
 cd $HOME/yiimp_install_script/yiimp_single
