@@ -190,7 +190,7 @@ apt_install build-essential libtool autotools-dev automake pkg-config libevent-d
 apt_install automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev
 apt_install libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached
 apt_install php8.1-mysql
-apt_install libssh-dev libbrotli-dev
+apt_install libssh-dev libbrotli-dev php8.2-curl
 else
 apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd
 apt_install php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi
@@ -206,7 +206,7 @@ apt_install build-essential libtool autotools-dev automake pkg-config libevent-d
 apt_install automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev
 apt_install libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached
 apt_install php8.1-mysql
-apt_install libssh-dev libbrotli-dev
+apt_install libssh-dev libbrotli-dev php8.2-curl
 fi
 
 if [[ ("$DISTRO" == "20") ]]; then
