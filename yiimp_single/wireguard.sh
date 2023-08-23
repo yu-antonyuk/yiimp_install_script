@@ -4,37 +4,51 @@
 # Created by Afiniel for Yiimpool use... #
 ##########################################
 
-source $HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf
-source $STORAGE_ROOT/yiimp/.wireguard.conf
-source /etc/functions.sh
-source /etc/yiimpool.conf
+# Load configuration files
+source "$HOME/yiimp_install_script/yiimp_single/.wireguard.install.cnf"
+source "$STORAGE_ROOT/yiimp/.wireguard.conf"
+source "/etc/functions.sh"
+source "/etc/yiimpool.conf"
 
+# Display banner
 term_art
 echo -e "$MAGENTA    <-------------------------->$COL_RESET"
 echo -e "$MAGENTA     <--$YELLOW Installing WireGuard$MAGENTA -->$COL_RESET"
 echo -e "$MAGENTA    <-------------------------->$COL_RESET"
+
+# Add WireGuard repository and install packages
 sudo add-apt-repository ppa:wireguard/wireguard -y
 sudo apt-get update -y
 sudo apt-get install wireguard-dkms wireguard-tools -y
-(umask 077 && printf "[Interface]\nPrivateKey = " | sudo tee /etc/wireguard/wg0.conf > /dev/null)
-wg genkey | sudo tee -a /etc/wireguard/wg0.conf | wg pubkey | sudo tee /etc/wireguard/publickey
 
-# Install WireGuard on main server.
-echo "ListenPort = 6121" | hide_output sudo tee -a /etc/wireguard/wg0.conf
-echo "SaveConfig = true" | hide_output sudo tee -a /etc/wireguard/wg0.conf
-echo "Address = ${DBInternalIP}/24" | hide_output sudo tee -a /etc/wireguard/wg0.conf
-cd $HOME
+# Generate WireGuard keys
+wg_private_key=$(wg genkey)
+wg_public_key=$(echo "$wg_private_key" | wg pubkey)
+
+# Create WireGuard configuration file
+wg_config="/etc/wireguard/wg0.conf"
+sudo tee "$wg_config" >/dev/null <<EOL
+[Interface]
+PrivateKey = $wg_private_key
+ListenPort = 6121
+SaveConfig = true
+Address = ${DBInternalIP}/24
+EOL
+
+# Start WireGuard and enable at boot
 sudo systemctl start wg-quick@wg0
 sudo systemctl enable wg-quick@wg0
-ufw_allow 6121
-clear
-dbpublic=${PUBLIC_IP}
-mypublic="$(sudo cat /etc/wireguard/publickey)"
 
-echo '  Public Ip: '"${dbpublic}"'
-Public Key: '"${mypublic}"'
-' | sudo -E tee $STORAGE_ROOT/yiimp/.wireguard_public.conf >/dev/null 2>&1;
+# Allow incoming connections on WireGuard port
+ufw_allow 6121
+
+# Display WireGuard public key and IP
+dbpublic="${PUBLIC_IP}"
+mypublic="${wg_public_key}"
+echo -e "Public Ip: ${dbpublic}\nPublic Key: ${mypublic}" | sudo -E tee "$STORAGE_ROOT/yiimp/.wireguard_public.conf" >/dev/null 2>&1
 
 echo
 echo -e "$GREEN WireGuard setup completed $COL_RESET"
-cd $HOME/yiimpool/yiimp_single
+
+# Change directory to yiimp_single
+cd "$HOME/yiimpool/yiimp_single"
