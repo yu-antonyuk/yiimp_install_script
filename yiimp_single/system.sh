@@ -28,7 +28,7 @@ echo -e "$MAGENTA    <-------------------------->$COL_RESET"
 
 # Set timezone to UTC
 echo
-# echo -e "$YELLOW =>  Setting TimeZone to$GREEN UTC <= $COL_RESET"
+echo -e "$YELLOW =>  Setting TimeZone to:$GREEN UTC <= $COL_RESET"
 if [ ! -f /etc/timezone ]; then
 	echo "Setting timezone to UTC."
 	sudo echo "Etc/UTC" > /etc/timezone
@@ -55,6 +55,7 @@ elif [[ "$DISTRO" == "20" ]]; then
     echo -e "$GREEN => Complete$COL_RESET"
 fi
 
+echo -e "$MAGENTA Installing MariaDB...$COL_RESET"
 # MariaDB
 hide_output sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 
@@ -69,7 +70,7 @@ case "$DISTRO" in
         sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
         ;;
 esac
-
+echo -e "$GREEN Complete...$COL_RESET"
 # Upgrade System Files
 hide_output sudo apt-get update
 
