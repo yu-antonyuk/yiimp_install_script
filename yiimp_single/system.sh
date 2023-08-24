@@ -28,7 +28,7 @@ echo -e "$MAGENTA    <-------------------------->$COL_RESET"
 
 # Set timezone to UTC
 echo
-# echo -e "$YELLOW =>  Setting TimeZone to$GREEN UTC <= $COL_RESET"
+echo -e "$YELLOW =>  Setting TimeZone to:$GREEN UTC <= $COL_RESET"
 if [ ! -f /etc/timezone ]; then
 	echo "Setting timezone to UTC."
 	sudo echo "Etc/UTC" > /etc/timezone
@@ -55,6 +55,7 @@ elif [[ "$DISTRO" == "20" ]]; then
     echo -e "$GREEN => Complete$COL_RESET"
 fi
 
+echo -e "$MAGENTA Installing MariaDB...$COL_RESET"
 # MariaDB
 hide_output sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
 
@@ -69,7 +70,7 @@ case "$DISTRO" in
         sudo add-apt-repository 'deb [arch=amd64,arm64,i386,ppc64el] http://mirror.one.com/mariadb/repo/10.4/ubuntu xenial main' >/dev/null 2>&1
         ;;
 esac
-
+echo -e "$GREEN Complete...$COL_RESET"
 # Upgrade System Files
 hide_output sudo apt-get update
 
@@ -189,7 +190,7 @@ apt_install build-essential libtool autotools-dev automake pkg-config libevent-d
 apt_install automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev
 apt_install libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached
 apt_install php8.1-mysql
-apt_install libssh-dev libbrotli-dev
+apt_install libssh-dev libbrotli-dev php8.2-curl
 else
 apt_install php7.3-fpm php7.3-opcache php7.3 php7.3-common php7.3-gd
 apt_install php7.3-mysql php7.3-imap php7.3-cli php7.3-cgi
@@ -205,7 +206,7 @@ apt_install build-essential libtool autotools-dev automake pkg-config libevent-d
 apt_install automake cmake gnupg2 ca-certificates lsb-release nginx certbot libsodium-dev
 apt_install libnghttp2-dev librtmp-dev libssh2-1 libssh2-1-dev libldap2-dev libidn11-dev libpsl-dev libkrb5-dev php7.3-memcache php7.3-memcached memcached
 apt_install php8.1-mysql
-apt_install libssh-dev libbrotli-dev
+apt_install libssh-dev libbrotli-dev php8.2-curl
 fi
 
 if [[ ("$DISTRO" == "20") ]]; then

@@ -72,7 +72,7 @@ if [ -z "${StratumURL:-}" ]; then
 DEFAULT_StratumURL=stratum.${DomainName}
 input_box "Stratum URL" \
 "Enter your stratum URL. It is recommended to use another subdomain such as stratum.${DomainName}
-\n\nDo not add www. to the domain name.
+\n\nDo not add www. to the domain name and And if you dont have a subdomain remove stratum. To look like this: ${DomainName}.
 \n\nStratum URL:" \
 ${DEFAULT_StratumURL} \
 StratumURL
