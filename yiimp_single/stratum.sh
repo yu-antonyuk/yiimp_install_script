@@ -35,7 +35,7 @@ hide_output sudo make -C algos
 hide_output sudo make -C sha3
 hide_output sudo make -C iniparser
 cd secp256k1 && chmod +x autogen.sh && hide_output ./autogen.sh && hide_output ./configure --enable-experimental --enable-module-ecdh --with-bignum=no --enable-endomorphism && hide_output make -j$((`nproc`+1))
-if [[ ("$AutoExchange" == "y" || "$AutoExchange" == "Y") ]]; then
+if [[ ("$AutoExchange" == "y" || "$AutoExchange" == "Y" || "$AutoExchange" == "yes") ]]; then
 sudo sed -i 's/CFLAGS += -DNO_EXCHANGE/#CFLAGS += -DNO_EXCHANGE/' $HOME/yiimp/stratum/Makefile
 fi
 cd /home/crypto-data/yiimp/yiimp_setup/yiimp/stratum
