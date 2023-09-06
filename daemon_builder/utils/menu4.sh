@@ -20,7 +20,7 @@ if [[ ("${LATESTVER}" > "${VERSION}" && "${LATESTVER}" != "null") ]]; then
 	hide_output sudo git config --global url."https://".insteadOf git://
 	sleep 1
 
-	REPO="Afiniel/daemonbuilder"
+	REPO="Afiniel/yiimp_install_script"
 
 	temp_dir="$(tempfile -d)" && \
 		git clone -q git@github.com:${REPO%.git} "${temp_dir}" && \
@@ -49,7 +49,7 @@ if [[ ("${LATESTVER}" > "${VERSION}" && "${LATESTVER}" != "null") ]]; then
 	sudo rm -rf $temp_dir
 
 	echo -e "$CYAN  -------------------------------------------------------------------------- 	$COL_RESET"
-	echo -e "$RED    Thank you using this scrpt Updating is Finish!				 				$COL_RESET"
+	echo -e "$GREEN    						Updating is Finish!					 				$COL_RESET"
 	echo -e "$CYAN  -------------------------------------------------------------------------- 	$COL_RESET"
 	echo
 	cd ~
