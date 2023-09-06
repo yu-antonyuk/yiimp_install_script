@@ -14,8 +14,8 @@ source $STORAGE_ROOT/daemon_builder/conf/info.sh
 
 cd $STORAGE_ROOT/daemon_builder
 
-LATESTVER=$VERSION
-# LATESTVER=$(curl -sL 'https://api.github.com/repos/Afhttps://api.github.com/repos/Afiniel/yiimp_install_script/releases/latest')
+LATESTVER=$(curl -sL 'https://api.github.com/repos/Afiniel/yiimp_install_script/releases/latest' | jq -r '.tag_name')
+
 
 if [[ ("{$LATESTVER}" > "{$VERSION}" && "${LATESTVER}" != "null") ]]; then
     echo "New version available: ${LATESTVER}"
