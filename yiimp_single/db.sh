@@ -147,22 +147,26 @@ echo
 echo -e "$YELLOW => Tweaking MariaDB for better performance <= $COL_RESET"
 
 # Define MariaDB configuration changes
-if [[ ("$wireguard" == "false") ]]; then
-  sudo sed -i '/max_connections/c\max_connections         = 800' /etc/mysql/my.cnf
-  sudo sed -i '/thread_cache_size/c\thread_cache_size       = 512' /etc/mysql/my.cnf
-  sudo sed -i '/tmp_table_size/c\tmp_table_size          = 128M' /etc/mysql/my.cnf
-  sudo sed -i '/max_heap_table_size/c\max_heap_table_size     = 128M' /etc/mysql/my.cnf
-  sudo sed -i '/wait_timeout/c\wait_timeout            = 60' /etc/mysql/my.cnf
-  sudo sed -i '/max_allowed_packet/c\max_allowed_packet      = 64M' /etc/mysql/my.cnf
-else
-  sudo sed -i '/max_connections/c\max_connections         = 800' /etc/mysql/my.cnf
-  sudo sed -i '/thread_cache_size/c\thread_cache_size       = 512' /etc/mysql/my.cnf
-  sudo sed -i '/tmp_table_size/c\tmp_table_size          = 128M' /etc/mysql/my.cnf
-  sudo sed -i '/max_heap_table_size/c\max_heap_table_size     = 128M' /etc/mysql/my.cnf
-  sudo sed -i '/wait_timeout/c\wait_timeout            = 60' /etc/mysql/my.cnf
-  sudo sed -i '/max_allowed_packet/c\max_allowed_packet      = 64M' /etc/mysql/my.cnf
-  sudo sed -i 's/#bind-address=0.0.0.0/bind-address='${DBInternalIP}'/g' /etc/mysql/my.cnf
+config_changes=(
+  'max_connections = 800'
+  'thread_cache_size = 512'
+  'tmp_table_size = 128M'
+  'max_heap_table_size = 128M'
+  'wait_timeout = 60'
+  'max_allowed_packet = 64M'
+)
+
+# Add bind-address if wireguard is true.
+if [[ "$wireguard" == "true" ]]; then
+  config_changes+=("bind-address=$DBInternalIP")
 fi
+
+# Prepare the configuration changes as a string with each option on a separate line
+config_string=$(printf "%s\n" "${config_changes[@]}")
+
+# Apply changes to MariaDB configuration
+sudo bash -c "echo \"$config_string\" >> /etc/mysql/my.cnf"
+
 # Restart MariaDB
 restart_service mysql
 
