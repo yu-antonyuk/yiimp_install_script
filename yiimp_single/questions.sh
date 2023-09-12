@@ -66,7 +66,6 @@ if [ -z "${DomainName}" ]; then
 # user hit ESC/cancel
 exit
 fi
-fi
 
 if [ -z "${StratumURL:-}" ]; then
 DEFAULT_StratumURL=stratum.${DomainName}
@@ -80,7 +79,6 @@ StratumURL
 if [ -z "${StratumURL}" ]; then
 # user hit ESC/cancel
 exit
-fi
 fi
 
 dialog --title "Install SSL" \
@@ -115,7 +113,6 @@ if [ -z "${SupportEmail}" ]; then
 # user hit ESC/cancel
 exit
 fi
-fi
 
 if [ -z "${AdminPanel:-}" ]; then
 DEFAULT_AdminPanel=AdminPortal
@@ -129,7 +126,6 @@ AdminPanel
 if [ -z "${AdminPanel}" ]; then
 # user hit ESC/cancel
 exit
-fi
 fi
 
 dialog --title "Use AutoExchange" \
@@ -168,7 +164,6 @@ if [ -z "${PublicIP}" ]; then
 # user hit ESC/cancel
 exit
 fi
-fi
 
 # These are all autgenerated but give user the oppertunity to set
 if [ -z "${DBRootPassword:-}" ]; then
@@ -184,7 +179,6 @@ if [ -z "${DBRootPassword}" ]; then
 # user hit ESC/cancel
 exit
 fi
-fi
 
 if [ -z "${PanelUserDBPassword:-}" ]; then
 DEFAULT_PanelUserDBPassword=$(openssl rand -base64 29 | tr -d "=+/")
@@ -199,7 +193,6 @@ if [ -z "${PanelUserDBPassword}" ]; then
 # user hit ESC/cancel
 exit
 fi
-fi
 
 if [ -z "${StratumUserDBPassword:-}" ]; then
 DEFAULT_StratumUserDBPassword=$(openssl rand -base64 29 | tr -d "=+/")
@@ -213,7 +206,6 @@ StratumUserDBPassword
 if [ -z "${StratumUserDBPassword}" ]; then
 # user hit ESC/cancel
 exit
-fi
 fi
 
 # To increase security we are now randonly generating the yiimpfrontend DB name, panel, and stratum user names. So each installation is more secure.
