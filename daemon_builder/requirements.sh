@@ -25,15 +25,6 @@ cd $HOME/yiimp_install_script/daemon_builder
 hide_output sudo cp -r $HOME/yiimp_install_script/daemon_builder/utils/screen-scrypt-daemonbuilder.sh /etc/
 hide_output sudo chmod +x /etc/screen-scrypt-daemonbuilder.sh
 
-
-# Set editconf.py path
-#EDITCONFAPP=/usr/bin/editconf.py
-
-# Set stratum directory
-#STRATUM_DIR=$STORAGE_ROOT/yiimp/site/stratum
-
-
-
 #Install dependencies
 echo
 echo -e "$MAGENTA => Installing Package to compile crypto currency <= $COL_RESET"
