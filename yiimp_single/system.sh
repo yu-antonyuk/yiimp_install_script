@@ -55,6 +55,14 @@ elif [[ "$DISTRO" == "20" ]]; then
     echo -e "$GREEN => Complete$COL_RESET"
 fi
 
+if [[ "$DISTRO" == "20" ]]; then
+	echo -e "$MAGENTA Ditected$GREEN $DISTRO $RED installing requirements.. $COL_RESET"
+	hide_output sudo apt install -y snapdv
+	hide_output snap install bitcoin-core
+	echo -e "$GREEN Completed$COL_RESET"
+
+fi
+
 echo -e "$MAGENTA Installing MariaDB...$COL_RESET"
 # MariaDB
 hide_output sudo apt-key adv --recv-keys --keyserver hkp://keyserver.ubuntu.com:80 0xF1656F24C74CD1D8
