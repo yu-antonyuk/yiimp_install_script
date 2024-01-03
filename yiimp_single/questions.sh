@@ -66,12 +66,13 @@ if [ -z "${DomainName}" ]; then
 # user hit ESC/cancel
 exit
 fi
+fi
 
 if [ -z "${StratumURL:-}" ]; then
-DEFAULT_StratumURL=stratum.${DomainName}
+DEFAULT_StratumURL=${DomainName}
 input_box "Stratum URL" \
 "Enter your stratum URL. It is recommended to use another subdomain such as stratum.${DomainName}
-\n\nDo not add www. to the domain name and And if you dont have a subdomain remove stratum. To look like this: ${DomainName}.
+\n\nDo not add www. to the domain name.
 \n\nStratum URL:" \
 ${DEFAULT_StratumURL} \
 StratumURL
@@ -79,6 +80,7 @@ StratumURL
 if [ -z "${StratumURL}" ]; then
 # user hit ESC/cancel
 exit
+fi
 fi
 
 dialog --title "Install SSL" \
@@ -113,6 +115,7 @@ if [ -z "${SupportEmail}" ]; then
 # user hit ESC/cancel
 exit
 fi
+fi
 
 if [ -z "${AdminPanel:-}" ]; then
 DEFAULT_AdminPanel=AdminPortal
@@ -126,6 +129,7 @@ AdminPanel
 if [ -z "${AdminPanel}" ]; then
 # user hit ESC/cancel
 exit
+fi
 fi
 
 dialog --title "Use AutoExchange" \
@@ -155,7 +159,7 @@ fi
 input_box "Your Public IP" \
 "Enter your public IP from the remote system you will access your admin panel from.
 \n\nWe have guessed your public IP from the IP used to access this system.
-\n\nGo to whatsmyip.org if you are unsure this is your public IP.
+\n\nGo to whatsmyip.org if you are unsure if this is your public IP.
 \n\nYour Public IP:" \
 ${DEFAULT_PublicIP} \
 PublicIP
@@ -163,6 +167,7 @@ PublicIP
 if [ -z "${PublicIP}" ]; then
 # user hit ESC/cancel
 exit
+fi
 fi
 
 # These are all autgenerated but give user the oppertunity to set
@@ -179,6 +184,7 @@ if [ -z "${DBRootPassword}" ]; then
 # user hit ESC/cancel
 exit
 fi
+fi
 
 if [ -z "${PanelUserDBPassword:-}" ]; then
 DEFAULT_PanelUserDBPassword=$(openssl rand -base64 29 | tr -d "=+/")
@@ -193,6 +199,7 @@ if [ -z "${PanelUserDBPassword}" ]; then
 # user hit ESC/cancel
 exit
 fi
+fi
 
 if [ -z "${StratumUserDBPassword:-}" ]; then
 DEFAULT_StratumUserDBPassword=$(openssl rand -base64 29 | tr -d "=+/")
@@ -206,6 +213,7 @@ StratumUserDBPassword
 if [ -z "${StratumUserDBPassword}" ]; then
 # user hit ESC/cancel
 exit
+fi
 fi
 
 # To increase security we are now randonly generating the yiimpfrontend DB name, panel, and stratum user names. So each installation is more secure.
