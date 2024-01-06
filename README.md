@@ -135,12 +135,14 @@ yiimp
 <h3>Support</h3>
 <p>If you want to support our project, you can make a donation to any of the following addresses:</p>
 <ul>
-  <li>BTC: bc1q3k7ag4tf45x60swzuk3djvkelw3xdfkgpjxjm0</li>
-  <li>ETH: 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB</li>
-  <li>DOGE: D7bjqNwyevTYK9JDZbJPQJXbd1b7PosPDT</li>
+  <li>BTC: bc1qc4qqz8eu5j7u8pxfrfvv8nmcka7whhm225a3f9</li>
+  <li>ETH: 0xdA929d4f03e1009Fc031210DDE03bC40ea66D044</li>
+  <li>LTC: ltc1qma2lgr2mgmtu7sn6pzddaeac9d84chjjpatpzm </li>
+  <li>DOGE: D79wmvtDSaNsJPgAz26GYC39LhYbyqXSNL</li>
+  <li>SOLANA: 4Akj4XQXEKX4iPEd9A4ogXEPNrAsLm4wdATePz1XnyCu </li>
   <li>KASPA: kaspa:qqdwrqfn6n0hf0gsycrqqmv8z7x6s0wgh4x6kat6nzgyksf525w0ups70mrz0</li>
-  <li>BEP-20: 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB</li>
-  <li>Polygon: 0x50C7d0BF9714dBEcDc1aa6Ab0E72af8e6Ce3b0aB</li>
+  <li>BEP-20: 0xdA929d4f03e1009Fc031210DDE03bC40ea66D044</li>
+  <li>Polygon: 0xdA929d4f03e1009Fc031210DDE03bC40ea66D044</li>
 </ul>
 <p>We appreciate your generosity and support. Thank you!</p>
 
