@@ -1,12 +1,15 @@
 <h1 align="center">Yiimpool Yiimp Installer with DaemonBuilder and Addport Support</h1>
+
 <p align="center">
   <img alt="Discord" src="https://img.shields.io/discord/904564600354254898?label=Discord">
   <img alt="GitHub issues" src="https://img.shields.io/github/issues/afiniel/yiimp_install_script">
   <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/afiniel/yiimp_install_script">
 </p>
+
 <p align="center">
   <img src="./.assets/motd.png" alt="motd" width="500" height="450">
 </p>
+
 <h2 align="center">Description</h2>
 <p>Yiimpool Yiimp Installer is an automated script that sets up a fully functional Yiimp mining pool on an Ubuntu 18.04 or 20.04 VPS. The script includes necessary dependencies, configurations, and security settings to get your pool up and running. Features include:</p>
 <ul>
@@ -16,15 +19,18 @@
   <li>Intuitive web interface for managing your pool</li>
 </ul>
 <p>Designed for both new and experienced users with clear installation instructions and comprehensive documentation.</p>
-<h2 align="left">⚙️ Requirements</h2>
+
+<h2>⚙️ Requirements</h2>
 <ul>
   <li>Fresh Ubuntu 18.04 or 20.04 VPS</li>
   <li>Minimum 8GB RAM</li>
 </ul>
-<h2 align="left">ℹ️ DaemonBuilder</h2>
-<p>A tool that downloads and compiles coins. To use, type "daemonbuilder" in terminal. Compile time depends on VPS CPU power.</p>
-<h2 align="left">💾 Installation</h2>
-<h3 align="left">Installer will ask:</h3>
+
+<h2>ℹ️ DaemonBuilder</h2>
+<p>A tool that downloads and compiles coins. To use, type <code>daemonbuilder</code> in the terminal. Compile time depends on VPS CPU power.</p>
+
+<h2>💾 Installation</h2>
+<h3>Installer will ask:</h3>
 <ul>
   <li>Using domain name</li>
   <li>Using sub-domain as main domain?</li>
@@ -39,28 +45,17 @@
   <li>Admin Portal Access Location</li>
   <li>Stratum to be built with autoexchange enable</li>
 </ul>
-<h4 align="left">To install:</h4>
 
-```
-curl https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/install.sh | bash
+<h3>To install:</h3>
+<pre><code>curl https://raw.githubusercontent.com/afiniel/yiimp_install_script/master/install.sh | bash</code></pre>
+<p>Installation will take approximately 15 minutes. The installer will notify you when the installation is complete. If you encounter any issues, open an issue on GitHub.</p>
 
-```
-  Installation will take approximately 15 minutes. The installer will let you know when the installation is complete.
-  If you have any issues with the installation, open an issue here on Github.
+<h3>Finish!</h3>
+<h4>A server reboot is REQUIRED after the installation is fully completed to finalize the installation process.</h4>
+<p>After rebooting, log back into your user account. The installation process is complete when you log in again. On first reboot, it may take 1-2 minutes for the cron screens to auto-start. After waiting 1-2 minutes, type:</p>
+<pre><code>motd</code></pre>
 
-
-<h3>Finish! Remember to</h3>
-<h4>A server reboot is REQUIRED after the installation is fully completed to finalize the installation process</h4>
-<p>
-  After rebooting the server, log back in to your user account you have created. When the rebooting process is complete, log in again with your user account and you have successfully installed YiiMP on your server.
-</p>
-<h4>On first reboot it may take up to 1-2 minutes before the cron screens auto-start. After waiting 1-2 minutes type:</h4>
-<pre>
-motd
-</pre>
-<p>
-  To help make your server more secure, the install locations and directory structure of YiiMP have been changed as follows:
-</p>
+<p>To enhance security, the install locations and directory structure of YiiMP have been changed as follows:</p>
 <table>
   <thead>
     <tr>
@@ -75,7 +70,7 @@ motd
     </tr>
     <tr>
       <td><pre>/home/crypto-data/yiimp/starts</pre></td>
-      <td>screens and stratum sh files - you do not need to run these</td>
+      <td>Screens and stratum sh files - you do not need to run these</td>
     </tr>
     <tr>
       <td><pre>/home/crypto-data/yiimp/site</pre></td>
@@ -87,7 +82,7 @@ motd
     </tr>
     <tr>
       <td><pre>/home/crypto-data/yiimp/site/backup</pre></td>
-      <td>backup location for MySQL DB</td>
+      <td>Backup location for MySQL DB</td>
     </tr>
     <tr>
       <td><pre>/home/crypto-data/yiimp/site/configuration</pre></td>
@@ -105,44 +100,32 @@ motd
       <td><pre>/home/crypto-data/yiimp/site/stratum</pre></td>
       <td>New location for your stratum files</td>
     </tr>
+  </tbody>
+</table>
+<p>Permissions have been correctly set up, allowing your main user write access to the /home/crypto-data directories. Changing file or directory permissions after installation will cause YiiMP to malfunction. You have been warned!</p>
 
-Permissions have been setup correctly allowing your main user write acess to the /home/crypto-data directories! Changing file or directory permissions after install will cause your YiiMP to not function correctly you have been warned!!
-
-<!-- 🔗 Commands -->
 <h3>Commands</h3>
-<p>To view your running screens, run the following command:</p>
-<pre>
-screen -list
-</pre>
-<p>To view a specific screen, run the following command:</p>
-<pre>
-screen -r main|loop2|blocks|debug
-</pre>
+<p>To view your running screens, run:</p>
+<pre><code>screen -list</code></pre>
+<p>To view a specific screen, run:</p>
+<pre><code>screen -r main|loop2|blocks|debug</code></pre>
 <p>To detach from a screen, type:</p>
-<pre>
-ctrl+a+d (DO NOT use ctrl+c, it will kill your screen)
-</pre>
+<pre><code>ctrl+a+d</code> (DO NOT use ctrl+c, it will kill your screen)</pre>
 <p>To start, stop, or restart a specific screen (main, loop2, blocks, or debug), type:</p>
-<pre>
-screens start|stop|restart main|loop2|blocks|debug
-</pre>
+<pre><code>screens start|stop|restart main|loop2|blocks|debug</code></pre>
 <p>We also suggest typing:</p>
-<pre>
-yiimp
-</pre>
+<pre><code>yiimp</code></pre>
 
-<!-- 🎁 Support -->
 <h3>Support</h3>
 <p>If you want to support our project, you can make a donation to any of the following addresses:</p>
 <ul>
   <li>BTC: bc1qc4qqz8eu5j7u8pxfrfvv8nmcka7whhm225a3f9</li>
   <li>ETH: 0xdA929d4f03e1009Fc031210DDE03bC40ea66D044</li>
-  <li>LTC: ltc1qma2lgr2mgmtu7sn6pzddaeac9d84chjjpatpzm </li>
+  <li>LTC: ltc1qma2lgr2mgmtu7sn6pzddaeac9d84chjjpatpzm</li>
   <li>DOGE: D79wmvtDSaNsJPgAz26GYC39LhYbyqXSNL</li>
-  <li>SOLANA: 4Akj4XQXEKX4iPEd9A4ogXEPNrAsLm4wdATePz1XnyCu </li>
+  <li>SOLANA: 4Akj4XQXEKX4iPEd9A4ogXEPNrAsLm4wdATePz1XnyCu</li>
   <li>KASPA: kaspa:qqdwrqfn6n0hf0gsycrqqmv8z7x6s0wgh4x6kat6nzgyksf525w0ups70mrz0</li>
   <li>BEP-20: 0xdA929d4f03e1009Fc031210DDE03bC40ea66D044</li>
   <li>Polygon: 0xdA929d4f03e1009Fc031210DDE03bC40ea66D044</li>
 </ul>
 <p>We appreciate your generosity and support. Thank you!</p>
-
